@@ -19,11 +19,16 @@ public class LoginPresenter implements LoginContract.Presenter {
 
         try {
             view.showProgress(true);
-            user.login(new BaseCallback<Void>() {
+            user.login(new BaseCallback<User>() {
                 @Override
-                public void onSuccessful(Void v) {
-                    view.showProgress(false);
-                    view.navigateToHome();
+                public void onSuccessful(User u) {
+                    if(u.isAdmin()){
+                        view.navigateToHome("Foi para admin");
+                        view.showProgress(false);
+                    } else {
+                        view.navigateToHome("Foi para padrão");
+                        view.showProgress(false);
+                    }
                 }
 
                 @Override

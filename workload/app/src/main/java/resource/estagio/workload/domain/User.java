@@ -42,7 +42,7 @@ public class User {
         return isAdmin;
     }
 
-    public void login(final BaseCallback<Void> listener)
+    public void login(final BaseCallback<User> listener)
             throws Exception {
 
         if (repository == null)
@@ -61,7 +61,7 @@ public class User {
             @Override
             public void onSuccessful(User user) {
                 //ARMAZENAR O TOKEN
-                listener.onSuccessful(null);
+                listener.onSuccessful(user);
             }
 
             @Override
