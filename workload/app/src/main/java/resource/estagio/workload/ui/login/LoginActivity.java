@@ -2,11 +2,13 @@ package resource.estagio.workload.ui.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +20,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private EditText usernameView;
     private EditText passwordView;
     private View progressView;
-    private View loginFormView;
+    //private View loginFormView;
     private Button signInButton;
+    private TextView text_view_lacamento_login;
 
     private LoginContract.Presenter presenter;
 
@@ -32,14 +35,16 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         loadUI();
         loadActions();
+        setFonts();
     }
 
     private void loadUI() {
         usernameView = findViewById(R.id.username);
         passwordView = findViewById(R.id.password);
-        loginFormView = findViewById(R.id.login_form);
+        //loginFormView = findViewById(R.id.login_form);
         progressView = findViewById(R.id.login_progress);
         signInButton = findViewById(R.id.sign_in_button);
+        text_view_lacamento_login = findViewById(R.id.text_view_lacamento_login);
     }
 
     private void loadActions() {
@@ -64,14 +69,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         // the progress spinner.
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-        loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        loginFormView.animate().setDuration(shortAnimTime).alpha(
-                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            }
-        });
+//        loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+//        loginFormView.animate().setDuration(shortAnimTime).alpha(
+//                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+//            }
+//        });
 
         progressView.setVisibility(show ? View.VISIBLE : View.GONE);
         progressView.animate().setDuration(shortAnimTime).alpha(
@@ -89,9 +94,15 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     }
 
     @Override
-    public void navigateToHome() {
-        //REMOVE
-        Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show();
+    public void navigateToHome(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void setFonts(){
+        Typeface medium = Typeface.createFromAsset(getAssets(),
+                "BwModelica-Medium.otf");
+
+        text_view_lacamento_login.setTypeface(medium);
     }
 }
 
