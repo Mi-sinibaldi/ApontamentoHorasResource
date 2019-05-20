@@ -60,6 +60,7 @@
         android:layout_marginStart="37dp"
         android:layout_marginEnd="37dp"
         android:background="@drawable/spinner_custom"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -86,6 +87,7 @@
         android:layout_marginStart="37dp"
         android:layout_marginEnd="37dp"
         android:background="@drawable/spinner_custom"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -96,6 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="37dp"
         android:layout_marginTop="37dp"
+        android:layout_marginEnd="2dp"
         android:text="Data"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
@@ -105,36 +108,39 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner_project_point" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/edit_text_date_point"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
+        android:layout_marginStart="35dp"
+        android:backgroundTint="@color/colorWhite"
         android:ems="10"
         android:inputType="date"
         android:textColor="@color/colorWhite"
-        android:backgroundTint="@color/colorWhite"
         android:theme="@style/StyledTilEditTextTheme"
         app:layout_constraintEnd_toStartOf="@+id/textViewInvisiblePoint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/edit_text_hour_point"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="37dp"
-        android:ems="10"
-        android:inputType="time"
+        android:layout_marginEnd="35dp"
         android:backgroundTint="@color/colorWhite"
+        android:maxLength="1"
+        android:inputType="numberSigned"
+        android:textColor="@color/colorWhite"
         android:theme="@style/StyledTilEditTextTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewInvisiblePoint"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="37dp"
         android:layout_marginEnd="37dp"
         android:text="Horas"
@@ -157,11 +163,11 @@
         android:textColorHint="@color/colorWhiteTransparent"
         android:gravity="start|top"
         android:hint="Motivo"
+        android:textColor="@color/colorWhite"
         android:inputType="textMultiLine"
-        android:theme="@style/StyledTilEditTextTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_date_point"
         tools:targetApi="lollipop" />
 
     <Button
@@ -172,7 +178,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="37dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorWhite"
+        android:background="@drawable/button_custom_radius"
         android:text="Adicionar"
         android:textColor="#4050D5"
         android:textStyle="bold"
