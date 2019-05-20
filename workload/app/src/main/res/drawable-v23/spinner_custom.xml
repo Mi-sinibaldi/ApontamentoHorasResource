@@ -8,8 +8,7 @@
                     <stroke  android:width="3px" android:color="#FFFFFF" />
                 </shape>
             </item>
-            <item android:gravity="top|right" android:drawable="@drawable/ic_expand_more_white">
-
+            <item android:gravity="top|right" android:width="36dp" android:height="36dp" android:drawable="@drawable/ic_expand_more_white">
             </item>
         </layer-list>
     </item>
