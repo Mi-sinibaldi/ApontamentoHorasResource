@@ -10,7 +10,6 @@ public class TEsteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teste);
-        getSupportActionBar().hide();
 
         getSupportFragmentManager()
                 .beginTransaction()

@@ -63,7 +63,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="47dp"
-        android:textColorHint="@color/colorAccent"
+        android:textColorHint="@color/colorWhite"
         app:layout_constraintBottom_toTopOf="@+id/switch1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -74,16 +74,16 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorWhite"
             android:hint="@string/prompt_password"
             android:imeActionId="6"
             android:imeActionLabel="@string/action_sign_in"
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:backgroundTint="@color/colorAccent"
             android:singleLine="true"
-            android:textColor="@color/colorAccent"
-            android:textColorHint="@color/colorAccent" />
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,10 +109,10 @@
             android:hint="@string/prompt_username"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:backgroundTint="@color/colorAccent"
+            android:backgroundTint="@color/colorWhite"
             android:singleLine="true"
-            android:textColor="@color/colorAccent"
-            android:textColorHint="@color/colorAccent" />
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -153,7 +153,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="47dp"
         android:layout_marginBottom="8dp"
-        android:thumbTint="@color/colorAccent"
+        android:thumbTint="@color/colorWhite"
         android:trackTint="@drawable/switch_selector"
         android:fontFamily="@font/open_sans_regular"
         android:text="Lembrar senha?   "

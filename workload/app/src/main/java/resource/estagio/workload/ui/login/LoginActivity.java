@@ -2,6 +2,8 @@ package resource.estagio.workload.ui.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.TEsteActivity;
-import resource.estagio.workload.TimelineFragment;
+import resource.estagio.workload.domain.User;
+import resource.estagio.workload.ui.home.HomeActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View{
 
@@ -51,27 +53,18 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     }
 
     private void loadActions() {
-//        passwordView.setOnEditorActionListener((textView, id, keyEvent) -> {
-//            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-//                presenter.login(
-//                        usernameView.getText().toString(), passwordView.getText().toString());
-//                return true;
-//            }
-//            return false;
-//        });
-//
-//
-//        signInButton.setOnClickListener(view -> presenter.login(
-//                usernameView.getText().toString(), passwordView.getText().toString()));
-
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(LoginActivity.this, TEsteActivity.class);
-                startActivity(intent);
+        passwordView.setOnEditorActionListener((textView, id, keyEvent) -> {
+            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                presenter.login(
+                        usernameView.getText().toString(), passwordView.getText().toString());
+                return true;
             }
+            return false;
         });
+
+
+        signInButton.setOnClickListener(view -> presenter.login(
+                usernameView.getText().toString(), passwordView.getText().toString()));
 
     }
 
@@ -107,8 +100,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     }
 
     @Override
-    public void navigateToHome(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void navigateToHome(User user) {
+        if(user.isAdmin()){
+
+        } else {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void setFonts(){

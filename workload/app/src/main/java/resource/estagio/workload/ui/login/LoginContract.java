@@ -1,5 +1,7 @@
 package resource.estagio.workload.ui.login;
 
+import resource.estagio.workload.domain.User;
+
 class LoginContract {
 
     interface View {
@@ -7,7 +9,7 @@ class LoginContract {
 
         void showError(String error);
 
-        void navigateToHome(String message);
+        void navigateToHome(User user);
     }
 
     interface Presenter {

@@ -1,8 +1,12 @@
 package resource.estagio.workload.ui.login;
 
+import android.app.Activity;
+
+import resource.estagio.workload.TEsteActivity;
 import resource.estagio.workload.data.repository.AuthRepository;
 import resource.estagio.workload.domain.User;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.ui.home.HomeActivity;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
@@ -22,13 +26,8 @@ public class LoginPresenter implements LoginContract.Presenter {
             user.login(new BaseCallback<User>() {
                 @Override
                 public void onSuccessful(User u) {
-                    if(u.isAdmin()){
-                        view.navigateToHome("Foi para admin");
-                        view.showProgress(false);
-                    } else {
-                        view.navigateToHome("Foi para padrão");
-                        view.showProgress(false);
-                    }
+                    view.navigateToHome(u);
+                    view.showProgress(false);
                 }
 
                 @Override
