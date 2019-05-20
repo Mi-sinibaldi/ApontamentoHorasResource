@@ -7,7 +7,7 @@ class LoginContract {
 
         void showError(String error);
 
-        void navigateToHome();
+        void navigateToHome(String message);
     }
 
     interface Presenter {
