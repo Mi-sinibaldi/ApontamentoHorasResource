@@ -36,10 +36,10 @@ import resource.estagio.workload.DialogActivity;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
-import resource.estagio.workload.TimelineFragment;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
 import resource.estagio.workload.ui.login.LoginActivity;
+import resource.estagio.workload.ui.timeline.TimelineFragment;
 
 public class PointFragment extends Fragment implements PointContract.View,
         DatePickerDialog.OnDateSetListener {
@@ -81,19 +81,10 @@ public class PointFragment extends Fragment implements PointContract.View,
         loadDateHourSave();
         presenter.getCustumers();
         saveAddPoint();
-        buttonPointConfirm.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-        } );
-
-
     }
 
     private void saveAddPoint() {
-        Button buttonAddPoint = view.findViewById(R.id.button_add_point);
-        buttonAddPoint.setOnClickListener(v -> presenter.setPoint(
+        buttonPointConfirm.setOnClickListener(v -> presenter.setPoint(
                 editTextDatePoint.getText().toString(), editTextHourPoint.getText().toString(),
                 customerName, customerId, projectName, projectId, demandNumber,
                 editTextReasonPoint.getText().toString()));

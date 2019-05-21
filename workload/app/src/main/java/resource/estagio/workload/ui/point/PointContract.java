@@ -17,6 +17,8 @@ public class PointContract {
         void loadSpinnerCustomer(List<CustomerModel> customerModels);
 
         void loadSpinnerActivity(List<ActivityModel> activityModels);
+
+        void showDialog();
     }
 
     interface Presenter {

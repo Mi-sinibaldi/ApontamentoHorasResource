@@ -31,7 +31,7 @@ public class PointPresenter implements PointContract.Presenter{
             employee.postEntry(App.getUser().getAccessToken(), new BaseCallback<Void>() {
                 @Override
                 public void onSuccessful(Void value) {
-                    view.notification("Apontamento inserido");
+                    view.showDialog();
                 }
 
                 @Override
