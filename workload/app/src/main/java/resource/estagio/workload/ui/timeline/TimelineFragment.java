@@ -26,11 +26,12 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
     private View view;
     private RecyclerView recyclerViewTimeline;
     private List<TimeEntryModel> list = new ArrayList<>();
+    private List<TimeEntryModel> listWorkLoad;
     private TextView textViewMonth;
     private TextView textViewYear;
     private ImageView imageViewMonthLeft;
     private ImageView imageViewMonthRight;
-    private Calendar calendar = Calendar.getInstance();
+    private Calendar calendar;
     private TimeLineContract.Presenter presenter;
     private int month;
     private int year;
@@ -43,20 +44,19 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_timeline, container, false);
-
+        presenter = new TimeLinePresenter(this);
+        calendar = Calendar.getInstance();
         loadUI();
         setTextDate();
-        LoadList();
+        //LoadList();
 
-        presenter = new TimeLinePresenter(this);
+
 
         imageViewMonthLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 calendar.add(Calendar.MONTH, -1);
                 setTextDate();
-
-
             }
         });
 
@@ -69,7 +69,6 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
         });
 
         return view;
-
     }
 
     private void setTextDate() {
@@ -80,7 +79,7 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
         month = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
 
-        presenter.getTimeline(month, year);
+        presenter.getTimeline(5, 2019);
     }
 
     private void loadUI() {
@@ -120,7 +119,7 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
 
     @Override
     public void showListTimeline(List<TimeEntryModel> list) {
-        list = list;
+        listWorkLoad = list;
         configAdapter();
     }
 
@@ -129,7 +128,7 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
         recyclerViewTimeline.setLayoutManager(layoutManager);
         recyclerViewTimeline.setHasFixedSize(true);
 
-        adapterTimeline = new AdapterTimeline(list);
+        adapterTimeline = new AdapterTimeline(listWorkLoad);
         recyclerViewTimeline.setAdapter(adapterTimeline);
     }
 
@@ -147,6 +146,5 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
     public void showSucessMessage(String text) {
 
     }
-
 
 }

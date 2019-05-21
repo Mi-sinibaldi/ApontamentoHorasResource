@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,9 +16,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.TEsteActivity;
 import resource.estagio.workload.domain.User;
 import resource.estagio.workload.ui.home.HomeActivity;
+import resource.estagio.workload.ui.timeline.TEsteActivity;
+import resource.estagio.workload.ui.timeline.TimelineFragment;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View{
 
@@ -52,20 +54,29 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     }
 
     private void loadActions() {
-        passwordView.setOnEditorActionListener((textView, id, keyEvent) -> {
-            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                presenter.login(
-                        usernameView.getText().toString(), passwordView.getText().toString());
-                return true;
+//        passwordView.setOnEditorActionListener((textView, id, keyEvent) -> {
+//            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+//                presenter.login(
+//                        usernameView.getText().toString(), passwordView.getText().toString());
+//                return true;
+//            }
+//            return false;
+//        });
+//
+//
+//        signInButton.setOnClickListener(view -> presenter.login(
+//                usernameView.getText().toString(), passwordView.getText().toString()));
+
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,TEsteActivity.class);
+                startActivity(intent);
             }
-            return false;
+
         });
-
-
-        signInButton.setOnClickListener(view -> presenter.login(
-                usernameView.getText().toString(), passwordView.getText().toString()));
-
-    }
+}
 
     @Override
     public void showProgress(final boolean show) {
