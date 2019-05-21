@@ -8,8 +8,11 @@ import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,8 +23,10 @@ import androidx.fragment.app.Fragment;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
 
@@ -29,12 +34,17 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
 
     DecimalFormat f = new DecimalFormat("##00");
 
+    private PointContract.Presenter presenter;
+
     private Context context;
     private View view;
     private EditText editTextDatePoint;
     private EditText editTextHourPoint;
+    private Spinner spinnerCustomerPoint;
 
     private Calendar date;
+    private int customerId;
+    private String customerName;
 
 
     // Construtor Vazio
@@ -54,6 +64,7 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
         this.view = view;
         loadUI();
         loadDateHourSave();
+        presenter.getCustumers();
     }
 
     private void loadDateHourSave() {
@@ -69,6 +80,7 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
         editTextDatePoint = view.findViewById(R.id.edit_text_date_point);
         editTextHourPoint = view.findViewById(R.id.edit_text_hour_point);
         editTextHourPoint.setFilters(new InputFilter[]{new InputFilterMinMax(1,8)});
+        spinnerCustomerPoint = view.findViewById(R.id.spinner_customer_point);
     }
 
     @Override
@@ -95,5 +107,26 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
     @Override
     public void notification(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void loadSpinnerCustomer(List<CustomerModel> customerModels) {
+        ArrayAdapter<CustomerModel> adapterCustomer = new ArrayAdapter<>(context,
+                android.R.layout.simple_spinner_item, customerModels);
+        adapterCustomer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCustomerPoint.setAdapter(adapterCustomer);
+        spinnerCustomerPoint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CustomerModel customerModel = (CustomerModel) parent.getItemAtPosition(position);
+                customerId = customerModel.getId();
+                customerName = customerModel.getName();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }

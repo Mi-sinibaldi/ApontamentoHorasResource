@@ -3,6 +3,9 @@ package resource.estagio.workload.ui.point;
 import android.content.Context;
 
 import java.util.Calendar;
+import java.util.List;
+
+import resource.estagio.workload.data.remote.model.CustomerModel;
 
 public class PointContract {
 
@@ -10,6 +13,8 @@ public class PointContract {
         void notification(String message);
 
         Context getContext();
+
+        void loadSpinnerCustomer(List<CustomerModel> customerModels);
     }
 
     interface Presenter {
