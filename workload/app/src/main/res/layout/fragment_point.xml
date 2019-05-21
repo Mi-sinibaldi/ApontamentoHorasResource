@@ -114,6 +114,7 @@
         android:layout_marginStart="35dp"
         android:backgroundTint="@color/colorWhite"
         android:ems="10"
+        android:focusable="false"
         android:inputType="date"
         android:textColor="@color/colorWhite"
         android:theme="@style/StyledTilEditTextTheme"

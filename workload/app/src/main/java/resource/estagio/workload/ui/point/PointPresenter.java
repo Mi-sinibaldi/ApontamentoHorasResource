@@ -20,7 +20,7 @@ public class PointPresenter implements PointContract.Presenter{
     @Override
     public void setPoint(String date, String time, String customerName, int customerId,
                          String projectName, int projectId, String demandNumber, String reason) {
-
+        view.notification("Deu certo");
     }
 
     @Override
