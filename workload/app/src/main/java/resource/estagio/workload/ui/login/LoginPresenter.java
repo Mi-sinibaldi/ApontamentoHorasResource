@@ -5,6 +5,7 @@ import android.app.Activity;
 import resource.estagio.workload.TEsteActivity;
 import resource.estagio.workload.data.repository.AuthRepository;
 import resource.estagio.workload.domain.User;
+import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
 import resource.estagio.workload.ui.home.HomeActivity;
 
@@ -26,6 +27,7 @@ public class LoginPresenter implements LoginContract.Presenter {
             user.login(new BaseCallback<User>() {
                 @Override
                 public void onSuccessful(User u) {
+                    App.setUser(u);
                     view.navigateToHome(u);
                     view.showProgress(false);
                 }
