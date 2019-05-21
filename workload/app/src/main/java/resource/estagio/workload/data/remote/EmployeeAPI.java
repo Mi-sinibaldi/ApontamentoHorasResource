@@ -16,6 +16,9 @@ public interface EmployeeAPI {
     Call<List<TimeEntryModel>> getWorkList(@Query("month") int month,
                                            @Query("year") int year,
                                            @Header("Authorization") String token);
+    @POST("employee/entry")
+    Call<Void> postEntry(@Body TimeEntryModel timeEntryModel,
+                         @Header("Authorization") String token);
 
 
 }
