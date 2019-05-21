@@ -1,0 +1,13 @@
+package resource.estagio.workload.domain.employee;
+
+import java.util.List;
+
+import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.infra.BaseCallback;
+
+public class EmployeeContract {
+
+    public interface IRepository{
+        void getWorkList(int month, int year, BaseCallback<List<TimeEntryModel>> onResult);
+    }
+}

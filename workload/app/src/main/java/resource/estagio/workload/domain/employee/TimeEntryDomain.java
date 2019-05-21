@@ -1,11 +1,7 @@
-package resource.estagio.workload.domain;
+package resource.estagio.workload.domain.employee;
 
-public class Entry {
+public class TimeEntryDomain {
 
-    public EntryContract.IRepository repository;
-
-    private String name;
-    private String username;
     private int activityId;
     private String activityName;
     private int customerId;
@@ -14,16 +10,10 @@ public class Entry {
     private int hours;
     private String date;
     private String reason;
+    public EmployeeContract.IRepository repository;
 
-    public Entry() {
-    }
-
-    public Entry(String name, String username, int activityId, String activityName, int customerId,
-                 String customerName, String demandNumber, int hours, String date, String reason) {
-
-        this.repository = repository;
-        this.name = name;
-        this.username = username;
+    public TimeEntryDomain(int activityId, String activityName, int customerId, String customerName,
+                          String demandNumber, int hours, String date, String reason) {
         this.activityId = activityId;
         this.activityName = activityName;
         this.customerId = customerId;
@@ -32,22 +22,6 @@ public class Entry {
         this.hours = hours;
         this.date = date;
         this.reason = reason;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public int getActivityId() {
@@ -114,6 +88,5 @@ public class Entry {
         this.reason = reason;
     }
 }
-
 
 
