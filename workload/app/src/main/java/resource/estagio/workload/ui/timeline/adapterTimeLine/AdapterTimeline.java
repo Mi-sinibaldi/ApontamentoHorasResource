@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
 import java.util.List;
 
 import resource.estagio.workload.R;
@@ -20,8 +21,8 @@ public class AdapterTimeline extends RecyclerView.Adapter<AdapterTimeline.MyView
 
     public AdapterTimeline(List<TimeEntryModel> listTimeline) {
         this.listTimeline = listTimeline;
+        Collections.reverse(listTimeline);
         sizeList = listTimeline.size() - 1;
-        //Collections.reverse(listTimeline);
     }
 
     @NonNull

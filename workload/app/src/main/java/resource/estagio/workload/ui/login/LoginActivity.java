@@ -2,7 +2,6 @@ package resource.estagio.workload.ui.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -18,8 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import resource.estagio.workload.R;
 import resource.estagio.workload.domain.User;
 import resource.estagio.workload.ui.home.HomeActivity;
-import resource.estagio.workload.ui.timeline.TEsteActivity;
-import resource.estagio.workload.ui.timeline.TimelineFragment;
+import resource.estagio.workload.ui.timeline.TsteActivityTimeLine;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View{
 
@@ -66,6 +64,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         signInButton.setOnClickListener(view -> presenter.login(
                 usernameView.getText().toString(), passwordView.getText().toString()));
+
+
 }
 
     @Override
@@ -104,9 +104,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         if(user.isAdmin()){
 
         } else {
-            Intent intent = new Intent(this, HomeActivity.class);
+//            Intent intent = new Intent(this, HomeActivity.class);
+//            startActivity(intent);
+//            finish();
+
+            Intent intent = new Intent(this, TsteActivityTimeLine.class);
             startActivity(intent);
-            finish();
         }
     }
 

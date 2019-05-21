@@ -49,25 +49,46 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
         view = inflater.inflate(R.layout.fragment_timeline, container, false);
         presenter = new TimeLinePresenter(this);
         calendar = Calendar.getInstance();
+
         loadUI();
         setTextDate();
+        final int thisMonth = calendar.get(Calendar.MONTH);
         //LoadList();
-
-
 
         imageViewMonthLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calendar.add(Calendar.MONTH, -1);
-                setTextDate();
+
+                if( month >= thisMonth-2) {
+                    calendar.add(Calendar.MONTH, -1);
+                    setTextDate();
+                    imageViewMonthLeft.setVisibility(View.VISIBLE);
+                    imageViewMonthRight.setVisibility(View.VISIBLE);
+                }else{
+                    imageViewMonthLeft.setVisibility(View.INVISIBLE);
+                }
+                if( month == thisMonth-2) {
+                    imageViewMonthLeft.setVisibility(View.INVISIBLE);
+                }
             }
         });
+
 
         imageViewMonthRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calendar.add(Calendar.MONTH, +1);
-                setTextDate();
+
+                if( month <= thisMonth) {
+                    calendar.add(Calendar.MONTH, +1);
+                    setTextDate();
+                    imageViewMonthRight.setVisibility(View.VISIBLE);
+                    imageViewMonthLeft.setVisibility(View.VISIBLE);
+                }else{
+                    imageViewMonthRight.setVisibility(View.INVISIBLE);
+                }
+                if( month == thisMonth+1) {
+                    imageViewMonthRight.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
