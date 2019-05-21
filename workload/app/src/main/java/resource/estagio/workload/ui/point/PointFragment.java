@@ -90,7 +90,7 @@ public class PointFragment extends Fragment implements PointContract.View,
                 editTextReasonPoint.getText().toString()));
     }
 
-    private void showDialog(){
+    public void showDialog(){
         dialog = new Dialog( getActivity(), R.style.CustomAlertDialog );
         dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
         dialog.setContentView( R.layout.activity_check );
