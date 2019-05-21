@@ -39,8 +39,10 @@ public class PointPresenter implements PointContract.Presenter{
                     view.notification(error);
                 }
             });
+        }catch (NumberFormatException e){
+            view.notification("Numero de horas esta vazia");
         } catch (Exception e) {
-            e.printStackTrace();
+            view.notification(e.getMessage());
         }
     }
 
