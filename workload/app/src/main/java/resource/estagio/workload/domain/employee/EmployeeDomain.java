@@ -38,6 +38,10 @@ public class EmployeeDomain {
         this.reason = reason;
     }
 
+    public EmployeeDomain() {
+
+    }
+
     public EmployeeContract.IRepository getIrepository() {
         return irepository;
     }
