@@ -16,7 +16,7 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
 
     @Override
     public void getWorkList(int month, int year, BaseCallback<List<TimeEntryModel>> onResult) {
-        super.data.restApi(EmployeeAPI.class).getWorkList(month, year, "token")
+        super.data.restApi(EmployeeAPI.class).getWorkList(month, year, "bearer DrdHZtH-ilLpZSpQVeKRRSTdn7AZCjW-ySgdmkwIUKOh4hvy1w65FQnVLN6mBG5JqTk96Gsf0ID3p3alRf4X67pn5fC3aMYJ8IBTnRFzk3EDsLaIbT2WlcIGFNl1xswOlWAxB5pDSG2EDZ_TDyaGBVxeNGWilCooUdX5nljBmZMYLeOETCIJmFsn-GmS5PXAutGEOFkChPE4XYQBFF1Vk_D00Hjc7DwLpQ2PRl91wZrJo-D-cjJQVCoVDTl3SZAa4tmQQgf3PFBj1j75y-tpVA")
                 .enqueue(new Callback<List<TimeEntryModel>>() {
 
             @Override

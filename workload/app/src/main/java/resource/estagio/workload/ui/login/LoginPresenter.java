@@ -2,7 +2,6 @@ package resource.estagio.workload.ui.login;
 
 import android.app.Activity;
 
-import resource.estagio.workload.TEsteActivity;
 import resource.estagio.workload.data.repository.AuthRepository;
 import resource.estagio.workload.domain.User;
 import resource.estagio.workload.infra.BaseCallback;
