@@ -1,8 +1,10 @@
-package resource.estagio.workload;
+package resource.estagio.workload.ui.timeline;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import resource.estagio.workload.R;
 
 public class TEsteActivity extends AppCompatActivity {
 

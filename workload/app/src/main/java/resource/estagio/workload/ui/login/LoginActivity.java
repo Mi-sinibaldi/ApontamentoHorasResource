@@ -5,17 +5,14 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.TEsteActivity;
-import resource.estagio.workload.TimelineFragment;
+import resource.estagio.workload.ui.timeline.TEsteActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View{
 
