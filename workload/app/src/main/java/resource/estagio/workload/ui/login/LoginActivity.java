@@ -104,12 +104,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         if(user.isAdmin()){
 
         } else {
-//            Intent intent = new Intent(this, HomeActivity.class);
-//            startActivity(intent);
-//            finish();
-
-            Intent intent = new Intent(this, TsteActivityTimeLine.class);
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
+            finish();
+
+//            Intent intent = new Intent(this, TsteActivityTimeLine.class);
+//            startActivity(intent);
         }
     }
 
