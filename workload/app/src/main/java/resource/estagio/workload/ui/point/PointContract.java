@@ -22,8 +22,8 @@ public class PointContract {
 
     interface Presenter {
 
-        void setPoint(String date, String hour, String customerName, int customerId,
-                      String projectName, int projectId, String demandNumber, String reason);
+        void setPoint(Calendar date, Calendar time, String customer, int customerId,
+                      String project, int projectId, String demandNumber, String reason);
         void getCustumers();
 
         void getActivities(int id);

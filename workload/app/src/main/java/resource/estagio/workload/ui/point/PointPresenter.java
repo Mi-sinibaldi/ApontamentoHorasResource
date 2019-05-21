@@ -18,8 +18,8 @@ public class PointPresenter implements PointContract.Presenter{
     }
 
     @Override
-    public void setPoint(String date, String time, String customerName, int customerId,
-                         String projectName, int projectId, String demandNumber, String reason) {
+    public void setPoint(Calendar date, Calendar time, String customer, int customerId,
+                         String project, int projectId, String demandNumber, String reason) {
 
     }
 
