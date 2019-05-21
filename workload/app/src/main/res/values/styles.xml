@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@drawable/dialog_corner</item>
+    </style>
+
     <style name="StyledTilEditTextTheme">
         <item name="colorControlNormal">#ffffff</item> // Cor padrão da linha
         <item name="android:colorAccent" tools:targetApi="lollipop">#ffffff</item>
