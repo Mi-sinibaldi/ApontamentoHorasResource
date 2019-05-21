@@ -54,28 +54,18 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     }
 
     private void loadActions() {
-//        passwordView.setOnEditorActionListener((textView, id, keyEvent) -> {
-//            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-//                presenter.login(
-//                        usernameView.getText().toString(), passwordView.getText().toString());
-//                return true;
-//            }
-//            return false;
-//        });
-//
-//
-//        signInButton.setOnClickListener(view -> presenter.login(
-//                usernameView.getText().toString(), passwordView.getText().toString()));
-
-
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,TEsteActivity.class);
-                startActivity(intent);
+        passwordView.setOnEditorActionListener((textView, id, keyEvent) -> {
+            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                presenter.login(
+                        usernameView.getText().toString(), passwordView.getText().toString());
+                return true;
             }
-
+            return false;
         });
+
+
+        signInButton.setOnClickListener(view -> presenter.login(
+                usernameView.getText().toString(), passwordView.getText().toString()));
 }
 
     @Override

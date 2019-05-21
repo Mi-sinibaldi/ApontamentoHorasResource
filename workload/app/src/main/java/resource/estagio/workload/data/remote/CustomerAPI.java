@@ -10,6 +10,6 @@ import retrofit2.http.Header;
 public interface CustomerAPI {
 
     @GET("customer")
-    Call<List<CustomerModel>> getCustomer(@Header("Authotization") String token);
+    Call<List<CustomerModel>> getCustomer(@Header("Authorization") String token);
 
 }

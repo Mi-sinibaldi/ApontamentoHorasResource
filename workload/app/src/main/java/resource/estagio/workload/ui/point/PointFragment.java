@@ -45,7 +45,6 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
     private EditText editTextReasonPoint;
     private Spinner spinnerCustomerPoint;
     private Spinner spinnerProjectPoint;
-    private Button buttonAddPoint;
 
     private Calendar date;
     private int customerId;
@@ -75,6 +74,7 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
     }
 
     private void saveAddPoint() {
+        Button buttonAddPoint = view.findViewById(R.id.button_add_point);
         buttonAddPoint.setOnClickListener(v -> presenter.setPoint(
                 editTextDatePoint.getText().toString(), editTextHourPoint.getText().toString(),
                 customerName, customerId, projectName, projectId, demandNumber,
@@ -97,7 +97,6 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
         editTextReasonPoint = view.findViewById(R.id.edit_text_reason_point);
         spinnerCustomerPoint = view.findViewById(R.id.spinner_customer_point);
         spinnerProjectPoint = view.findViewById(R.id.spinner_project_point);
-        buttonAddPoint = view.findViewById(R.id.button_add_point);
         presenter = new PointPresenter(this);
     }
 

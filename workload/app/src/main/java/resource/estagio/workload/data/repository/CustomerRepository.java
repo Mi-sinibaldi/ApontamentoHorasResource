@@ -16,7 +16,7 @@ public class CustomerRepository extends Repository implements CustomerContract.I
     @Override
     public void getCustomers(String token, BaseCallback<List<CustomerModel>> onResult) {
         super.data.restApi(CustomerAPI.class)
-                .getCustomer("bearer "+ token)
+                .getCustomer("bearer "+token)
                 .enqueue(new Callback<List<CustomerModel>>() {
                     @Override
                     public void onResponse(Call<List<CustomerModel>> call, Response<List<CustomerModel>> response) {
