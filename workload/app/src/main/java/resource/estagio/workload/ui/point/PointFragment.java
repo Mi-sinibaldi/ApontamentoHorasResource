@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -43,12 +44,15 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
     private EditText editTextHourPoint;
     private Spinner spinnerCustomerPoint;
     private Spinner spinnerProjectPoint;
+    private EditText editTextReasonPoint;
+    private Button buttonAddPoint;
 
     private Calendar date;
     private int customerId;
     private String customerName;
-    private  int projectId;
-    private  String projectName;
+    private int projectId;
+    private String projectName;
+    private String demandNumber;
 
 
     // Construtor Vazio
@@ -69,6 +73,14 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
         loadUI();
         loadDateHourSave();
         presenter.getCustumers();
+        saveAddPoint();
+    }
+
+    private void saveAddPoint() {
+        buttonAddPoint.setOnClickListener( v -> presenter.setPoint(
+                editTextDatePoint.getText().toString(), editTextHourPoint.getText().toString(),
+                customerName, customerId, projectName, projectId, demandNumber,
+                editTextReasonPoint.getText().toString()));
     }
 
     private void loadDateHourSave() {
@@ -86,6 +98,8 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
         editTextHourPoint.setFilters(new InputFilter[]{new InputFilterMinMax(1,8)});
         spinnerCustomerPoint = view.findViewById(R.id.spinner_customer_point);
         spinnerProjectPoint = view.findViewById(R.id.spinner_project_point);
+        editTextReasonPoint = view.findViewById(R.id.edit_text_reason_point);
+        buttonAddPoint = view.findViewById(R.id.button_add_point);
         presenter = new PointPresenter(this);
     }
 
@@ -149,6 +163,7 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
                 ActivityModel activityModel = (ActivityModel) parent.getItemAtPosition(position);
                 projectId = activityModel.getId();
                 projectName = activityModel.getName();
+                demandNumber = activityModel.getDemandNumber();
             }
 
             @Override
