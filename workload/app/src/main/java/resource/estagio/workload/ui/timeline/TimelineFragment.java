@@ -1,4 +1,4 @@
-package resource.estagio.workload;
+package resource.estagio.workload.ui.timeline;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
+import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
-import resource.estagio.workload.ui.TimeLineContract;
-import resource.estagio.workload.ui.TimeLinePresenter;
 
 public class TimelineFragment extends Fragment implements TimeLineContract.View {
 
