@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -160,11 +162,12 @@ public class PointFragment extends Fragment implements PointContract.View,
     public void loadSpinnerCustomer(List<CustomerModel> customerModels) {
         ArrayAdapter<CustomerModel> adapterCustomer = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item, customerModels);
-        adapterCustomer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterCustomer.setDropDownViewResource(R.layout.spinner_custom_dropdown);
         spinnerCustomerPoint.setAdapter(adapterCustomer);
         spinnerCustomerPoint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
                 CustomerModel customerModel = (CustomerModel) parent.getItemAtPosition(position);
                 customerId = customerModel.getId();
                 customerName = customerModel.getName();
@@ -181,12 +184,13 @@ public class PointFragment extends Fragment implements PointContract.View,
     @Override
     public void loadSpinnerActivity(List<ActivityModel> activityModels) {
         ArrayAdapter<ActivityModel> adapterActivity = new ArrayAdapter<>(context,
-                android.R.layout.simple_spinner_item, activityModels);
-        adapterActivity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+               android.R.layout.simple_spinner_item, activityModels);
+        adapterActivity.setDropDownViewResource(R.layout.spinner_custom_dropdown);
         spinnerProjectPoint.setAdapter(adapterActivity);
         spinnerProjectPoint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
                 ActivityModel activityModel = (ActivityModel) parent.getItemAtPosition(position);
                 projectId = activityModel.getId();
                 projectName = activityModel.getName();
