@@ -2,12 +2,17 @@ package resource.estagio.workload.ui.point;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,12 +25,17 @@ import androidx.fragment.app.Fragment;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
+import resource.estagio.workload.DialogActivity;
 import resource.estagio.workload.R;
+import resource.estagio.workload.TimelineFragment;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
+import resource.estagio.workload.ui.login.LoginActivity;
 
-public class PointFragment extends Fragment implements PointContract.View, DatePickerDialog.OnDateSetListener {
+public class PointFragment extends Fragment implements PointContract.View,
+        DatePickerDialog.OnDateSetListener {
 
     DecimalFormat f = new DecimalFormat("##00");
 
@@ -33,8 +43,11 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
     private View view;
     private EditText editTextDatePoint;
     private EditText editTextHourPoint;
-
+    private Button buttonPointConfirm;
+    private Button buttonConfirmCheck;
     private Calendar date;
+    private Dialog dialog;
+
 
 
     // Construtor Vazio
@@ -43,22 +56,44 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
         loadUI();
         loadDateHourSave();
+        buttonPointConfirm.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        } );
+
+
+    }
+
+    private void showDialog(){
+        dialog = new Dialog( getActivity(), R.style.CustomAlertDialog );
+        dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
+        dialog.setContentView( R.layout.activity_check );
+        dialog.setCancelable( false );
+        dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN );
+        dialog.show();
+
+        buttonConfirmCheck = dialog.findViewById( R.id.button_dialog_check );
+        buttonConfirmCheck.setOnClickListener( v -> {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_layout_home, new TimelineFragment()).commit();
+            dialog.dismiss();
+//            getActivity().finish();
+        } );
+
     }
 
     private void loadDateHourSave() {
         Calendar c = Calendar.getInstance();
-        setDateEditTextPoint(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        setDateEditTextPoint(c.get(Calendar.YEAR), c.get(Calendar.MONTH),
+                c.get(Calendar.DAY_OF_MONTH));
         editTextDatePoint.setOnClickListener(v -> {
             DialogFragment datePicker = new DateDialog(this);
             datePicker.show(getChildFragmentManager(), "Escolha o dia");
@@ -69,6 +104,7 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
         editTextDatePoint = view.findViewById(R.id.edit_text_date_point);
         editTextHourPoint = view.findViewById(R.id.edit_text_hour_point);
         editTextHourPoint.setFilters(new InputFilter[]{new InputFilterMinMax(1,8)});
+        buttonPointConfirm=view.findViewById( R.id.button_point_confirm );
     }
 
     @Override

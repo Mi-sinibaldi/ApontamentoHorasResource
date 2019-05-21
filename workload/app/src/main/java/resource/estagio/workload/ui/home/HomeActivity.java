@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import resource.estagio.workload.DialogActivity;
 import resource.estagio.workload.R;
 import resource.estagio.workload.ui.point.PointFragment;
 
@@ -17,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home);;
 
         loadUi();
         loadFragment(new PointFragment(this));
