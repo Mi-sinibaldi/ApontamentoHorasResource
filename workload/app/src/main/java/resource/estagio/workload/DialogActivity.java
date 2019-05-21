@@ -23,9 +23,6 @@ public class DialogActivity extends AppCompatActivity {
 
         buttonConfirm = findViewById( R.id.button_point_confirm );
         buttonChooser = findViewById( R.id.button_escolher );
-
-//        buttonConfirm.setOnClickListener( v -> showDialogConfirm() );
-
         buttonChooser.setOnClickListener( v -> showDialogChooser() );
     }
 

@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="251dp"
     android:layout_height="211dp">
 
@@ -14,7 +13,7 @@
         android:layout_marginTop="63dp"
         android:layout_marginEnd="57dp"
         android:layout_marginBottom="104dp"
-        android:text="Tem certeza que \n      deseja sair"
+        android:text="Tem certeza que  \n      deseja sair?"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,8 +31,8 @@
         android:layout_marginEnd="129dp"
         android:layout_marginBottom="11dp"
         android:background="@drawable/button_coner"
-        android:text="Sim"
-        android:textColor="#FFFFFF"
+        android:text="@string/sim"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,8 +51,8 @@
         android:layout_marginEnd="11dp"
         android:layout_marginBottom="11dp"
         android:background="@drawable/button_corner_white"
-        android:text="Não"
-        android:textColor="#00CED9"
+        android:text="@string/n_o"
+        android:textColor="@color/colorSwitch"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

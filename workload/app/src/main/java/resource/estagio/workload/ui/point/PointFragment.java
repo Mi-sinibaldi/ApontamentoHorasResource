@@ -132,4 +132,6 @@ public class PointFragment extends Fragment implements PointContract.View,
     public void notification(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
+
+
 }
