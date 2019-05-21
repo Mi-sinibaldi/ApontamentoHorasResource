@@ -60,7 +60,6 @@
         android:background="@drawable/spinner_custom"
         android:focusableInTouchMode="false"
         android:textAlignment="center"
-        android:popupBackground="@color/colorWhiteTransparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_cliente_point" />

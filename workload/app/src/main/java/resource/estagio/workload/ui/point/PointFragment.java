@@ -162,7 +162,7 @@ public class PointFragment extends Fragment implements PointContract.View,
     public void loadSpinnerCustomer(List<CustomerModel> customerModels) {
         ArrayAdapter<CustomerModel> adapterCustomer = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item, customerModels);
-        adapterCustomer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterCustomer.setDropDownViewResource(R.layout.spinner_custom_dropdown);
         spinnerCustomerPoint.setAdapter(adapterCustomer);
         spinnerCustomerPoint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -184,7 +184,7 @@ public class PointFragment extends Fragment implements PointContract.View,
     @Override
     public void loadSpinnerActivity(List<ActivityModel> activityModels) {
         ArrayAdapter<ActivityModel> adapterActivity = new ArrayAdapter<>(context,
-               R.layout.spinner_custom_dropdown, activityModels);
+               android.R.layout.simple_spinner_item, activityModels);
         adapterActivity.setDropDownViewResource(R.layout.spinner_custom_dropdown);
         spinnerProjectPoint.setAdapter(adapterActivity);
         spinnerProjectPoint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

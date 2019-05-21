@@ -2,7 +2,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/colorWhite"
-    android:background="@color/colorLogin"
+    android:layout_height="60dp"
+    android:textColor="@color/colorLogin"
+    android:textAlignment="center"
+    android:background="@color/colorWhite"
     />
