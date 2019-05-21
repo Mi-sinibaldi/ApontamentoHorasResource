@@ -1,11 +1,13 @@
 package resource.estagio.workload.ui.timeline;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +35,7 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
     private ImageView imageViewMonthRight;
     private Calendar calendar;
     private TimeLineContract.Presenter presenter;
+    private ProgressDialog pd;
     private int month;
     private int year;
 
@@ -76,13 +79,15 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
         textViewMonth.setText(new SimpleDateFormat("MMM").format(calendar.getTime()));
         textViewYear.setText("" + calendar.get(Calendar.YEAR));
 
-        month = calendar.get(Calendar.MONTH);
+        month = calendar.get(Calendar.MONTH)+1;
         year = calendar.get(Calendar.YEAR);
 
-        presenter.getTimeline(5, 2019);
+        presenter.getTimeline(month, year);
     }
 
     private void loadUI() {
+        pd = new ProgressDialog(getActivity());
+        pd.setCancelable(false);
         recyclerViewTimeline = view.findViewById(R.id.id_recyclerview_timeline);
         textViewMonth = view.findViewById(R.id.text_view_month);
         textViewYear = view.findViewById(R.id.text_view_year);
@@ -114,7 +119,12 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
 
     @Override
     public void dialog(boolean Key) {
-
+        pd.setMessage("Carregando...");
+        if(Key){
+            pd.show();
+        }else{
+            pd.dismiss();
+        }
     }
 
     @Override
@@ -139,7 +149,7 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
 
     @Override
     public void showErrorMessage(String text) {
-
+        Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
