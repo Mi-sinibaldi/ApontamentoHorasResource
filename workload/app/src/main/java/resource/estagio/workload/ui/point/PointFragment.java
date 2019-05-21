@@ -2,7 +2,9 @@ package resource.estagio.workload.ui.point;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
@@ -10,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -25,14 +30,19 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
+import resource.estagio.workload.DialogActivity;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
+import resource.estagio.workload.TimelineFragment;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
+import resource.estagio.workload.ui.login.LoginActivity;
 
-public class PointFragment extends Fragment implements PointContract.View, DatePickerDialog.OnDateSetListener {
+public class PointFragment extends Fragment implements PointContract.View,
+        DatePickerDialog.OnDateSetListener {
 
     DecimalFormat f = new DecimalFormat("##00");
 
@@ -47,21 +57,21 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
     private Spinner spinnerProjectPoint;
     private Button buttonAddPoint;
 
+    private Button buttonPointConfirm;
+    private Button buttonConfirmCheck;
     private Calendar date;
     private int customerId;
     private String customerName;
     private int projectId;
     private String projectName;
     private String demandNumber;
+    private Dialog dialog;
 
+
+
+    // Construtor Vazio
     public PointFragment(Context context) {
         this.context = context;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -72,6 +82,14 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
         loadDateHourSave();
         presenter.getCustumers();
         saveAddPoint();
+        buttonPointConfirm.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        } );
+
+
     }
 
     private void saveAddPoint() {
@@ -81,9 +99,29 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
                 editTextReasonPoint.getText().toString()));
     }
 
+    private void showDialog(){
+        dialog = new Dialog( getActivity(), R.style.CustomAlertDialog );
+        dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
+        dialog.setContentView( R.layout.activity_check );
+        dialog.setCancelable( false );
+        dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN );
+        dialog.show();
+
+        buttonConfirmCheck = dialog.findViewById( R.id.button_dialog_check );
+        buttonConfirmCheck.setOnClickListener( v -> {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_layout_home, new TimelineFragment()).commit();
+            dialog.dismiss();
+//            getActivity().finish();
+        } );
+
+    }
+
     private void loadDateHourSave() {
         Calendar c = Calendar.getInstance();
-        setDateEditTextPoint(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        setDateEditTextPoint(c.get(Calendar.YEAR), c.get(Calendar.MONTH),
+                c.get(Calendar.DAY_OF_MONTH));
         editTextDatePoint.setOnClickListener(v -> {
             DialogFragment datePicker = new DateDialog(this);
             datePicker.show(getChildFragmentManager(), "Escolha o dia");
@@ -99,6 +137,7 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
         spinnerProjectPoint = view.findViewById(R.id.spinner_project_point);
         buttonAddPoint = view.findViewById(R.id.button_add_point);
         presenter = new PointPresenter(this);
+        buttonPointConfirm=view.findViewById( R.id.button_point_confirm );
     }
 
     @Override
@@ -170,4 +209,6 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
             }
         });
     }
+
+
 }

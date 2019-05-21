@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Workload</string>
+    <string name="app_name">Apontamentos</string>
 
     <!-- Strings related to login -->
     <string name="prompt_username">Login</string>
@@ -8,5 +8,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ok">OK</string>
+    <!--<string name="apontamentos_feito_n_com_sucesso">Apontamentos feito \n   com sucesso</string>-->
+    <!--<string name="tem_certeza_que_n_deseja_sair">Tem certeza que   deseja sair</string>-->
+    <string name="sim">Sim</string>
+    <string name="n_o">Não</string>
+    <string name="lan_amento">Lançamento</string>
+    <string name="apontamento_de_horas_em_projeto">Apontamento de horas em projeto</string>
+    <string name="cliente">Cliente</string>
+    <string name="projeto">Projeto</string>
+    <string name="data">Data</string>
+    <string name="horas">Horas</string>
+    <string name="adicionar">Adicionar</string>
 
 </resources>

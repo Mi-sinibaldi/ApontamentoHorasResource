@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,7 +15,7 @@
         android:layout_marginStart="37dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="37dp"
-        android:text="Lançamento"
+        android:text="@string/lan_amento"
         android:textColor="@color/colorWhite"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -32,7 +30,7 @@
         android:layout_marginStart="37dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="37dp"
-        android:text="Apontamento de horas em projeto"
+        android:text="@string/apontamento_de_horas_em_projeto"
         android:textColor="@color/colorWhite"
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +44,7 @@
         android:layout_marginStart="37dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="37dp"
-        android:text="Cliente"
+        android:text="@string/cliente"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +70,7 @@
         android:layout_marginStart="37dp"
         android:layout_marginTop="37dp"
         android:layout_marginEnd="37dp"
-        android:text="Projeto"
+        android:text="@string/projeto"
         android:textColor="@color/colorWhite"
         android:textSize="14dp"
         android:textStyle="bold"
@@ -99,7 +97,7 @@
         android:layout_marginStart="37dp"
         android:layout_marginTop="37dp"
         android:layout_marginEnd="2dp"
-        android:text="Data"
+        android:text="@string/data"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/text_vew_invisible_point"
@@ -144,7 +142,7 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="37dp"
         android:layout_marginEnd="37dp"
-        android:text="Horas"
+        android:text="@string/horas"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:theme="@style/StyledTilEditTextTheme"
@@ -172,7 +170,7 @@
         tools:targetApi="lollipop" />
 
     <Button
-        android:id="@+id/button_add_point"
+        android:id="@+id/button_point_confirm"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="37dp"
@@ -180,7 +178,7 @@
         android:layout_marginEnd="37dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_custom_radius"
-        android:text="Adicionar"
+        android:text="@string/adicionar"
         android:textColor="#4050D5"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
