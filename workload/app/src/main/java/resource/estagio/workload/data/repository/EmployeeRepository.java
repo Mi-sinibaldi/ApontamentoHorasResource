@@ -5,6 +5,7 @@ import java.util.List;
 import resource.estagio.workload.data.remote.EmployeeAPI;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.domain.employee.EmployeeContract;
+import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
 import resource.estagio.workload.infra.Repository;
 import retrofit2.Call;
@@ -16,7 +17,7 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
 
     @Override
     public void getWorkList(int month, int year, BaseCallback<List<TimeEntryModel>> onResult) {
-        super.data.restApi(EmployeeAPI.class).getWorkList(month, year, "bearer DrdHZtH-ilLpZSpQVeKRRSTdn7AZCjW-ySgdmkwIUKOh4hvy1w65FQnVLN6mBG5JqTk96Gsf0ID3p3alRf4X67pn5fC3aMYJ8IBTnRFzk3EDsLaIbT2WlcIGFNl1xswOlWAxB5pDSG2EDZ_TDyaGBVxeNGWilCooUdX5nljBmZMYLeOETCIJmFsn-GmS5PXAutGEOFkChPE4XYQBFF1Vk_D00Hjc7DwLpQ2PRl91wZrJo-D-cjJQVCoVDTl3SZAa4tmQQgf3PFBj1j75y-tpVA")
+        super.data.restApi(EmployeeAPI.class).getWorkList(month, year, "bearer "+ App.getUser().getAccessToken())
                 .enqueue(new Callback<List<TimeEntryModel>>() {
 
             @Override
