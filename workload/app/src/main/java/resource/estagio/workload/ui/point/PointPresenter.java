@@ -7,6 +7,8 @@ import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.data.repository.ActivityRepository;
 import resource.estagio.workload.data.repository.CustomerRepository;
+import resource.estagio.workload.data.repository.EmployeeRepository;
+import resource.estagio.workload.domain.employee.EmployeeDomain;
 import resource.estagio.workload.infra.BaseCallback;
 
 public class PointPresenter implements PointContract.Presenter{
@@ -18,9 +20,27 @@ public class PointPresenter implements PointContract.Presenter{
     }
 
     @Override
-    public void setPoint(String date, String time, String customerName, int customerId,
+    public void setPoint(String date, String hour, String customerName, int customerId,
                          String projectName, int projectId, String demandNumber, String reason) {
-        view.notification("Deu certo");
+        try{
+            EmployeeDomain employee = new EmployeeDomain(view.getContext(), projectId, projectName,
+                customerId, customerName, demandNumber, Integer.parseInt(hour), date, reason);
+            employee.irepository = new EmployeeRepository();
+
+            employee.postEntry(" ", new BaseCallback<Void>() {
+                @Override
+                public void onSuccessful(Void value) {
+                    view.notification("Apontamento inserido");
+                }
+
+                @Override
+                public void onUnsuccessful(String error) {
+                    view.notification(error);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

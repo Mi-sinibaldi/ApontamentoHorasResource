@@ -9,5 +9,7 @@ public class EmployeeContract {
 
     public interface IRepository{
         void getWorkList(int month, int year, BaseCallback<List<TimeEntryModel>> onResult);
+
+        void postEntry(TimeEntryModel timeEntryModel, String token, BaseCallback<Void> onResult);
     }
 }
