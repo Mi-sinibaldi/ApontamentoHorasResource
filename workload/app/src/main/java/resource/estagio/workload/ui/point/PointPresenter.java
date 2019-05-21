@@ -9,6 +9,7 @@ import resource.estagio.workload.data.repository.ActivityRepository;
 import resource.estagio.workload.data.repository.CustomerRepository;
 import resource.estagio.workload.data.repository.EmployeeRepository;
 import resource.estagio.workload.domain.employee.EmployeeDomain;
+import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
 
 public class PointPresenter implements PointContract.Presenter{
@@ -27,7 +28,7 @@ public class PointPresenter implements PointContract.Presenter{
                 customerId, customerName, demandNumber, Integer.parseInt(hour), date, reason);
             employee.irepository = new EmployeeRepository();
 
-            employee.postEntry(" ", new BaseCallback<Void>() {
+            employee.postEntry(App.getUser().getAccessToken(), new BaseCallback<Void>() {
                 @Override
                 public void onSuccessful(Void value) {
                     view.notification("Apontamento inserido");
@@ -46,7 +47,7 @@ public class PointPresenter implements PointContract.Presenter{
     @Override
     public void getCustumers() {
         CustomerRepository repository = new CustomerRepository();
-    repository.getCustomers(" ", new BaseCallback<List<CustomerModel>>() {
+    repository.getCustomers(App.getUser().getAccessToken(), new BaseCallback<List<CustomerModel>>() {
         @Override
         public void onSuccessful(List<CustomerModel> value) {
             view.loadSpinnerCustomer(value);
@@ -63,7 +64,7 @@ public class PointPresenter implements PointContract.Presenter{
     @Override
     public void getActivities(int id) {
         ActivityRepository repository = new ActivityRepository();
-        repository.getActivity(id, "", new BaseCallback<List<ActivityModel>>() {
+        repository.getActivity(id, App.getUser().getAccessToken(), new BaseCallback<List<ActivityModel>>() {
             @Override
             public void onSuccessful(List<ActivityModel> value) {
                 view.loadSpinnerActivity(value);
