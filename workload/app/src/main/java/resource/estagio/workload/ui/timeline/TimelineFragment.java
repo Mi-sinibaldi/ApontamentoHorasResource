@@ -67,7 +67,7 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
                 }else{
                     imageViewMonthLeft.setVisibility(View.INVISIBLE);
                 }
-                if( month == thisMonth-2) {
+                if( month == thisMonth-6) {
                     imageViewMonthLeft.setVisibility(View.INVISIBLE);
                 }
             }
@@ -107,6 +107,7 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
     }
 
     private void loadUI() {
+
         pd = new ProgressDialog(getActivity());
         pd.setCancelable(false);
         recyclerViewTimeline = view.findViewById(R.id.id_recyclerview_timeline);
@@ -114,6 +115,7 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
         textViewYear = view.findViewById(R.id.text_view_year);
         imageViewMonthLeft = view.findViewById(R.id.image_view_month_left);
         imageViewMonthRight = view.findViewById(R.id.image_view_month_right);
+        imageViewMonthRight.setVisibility(View.INVISIBLE);
     }
 
 
