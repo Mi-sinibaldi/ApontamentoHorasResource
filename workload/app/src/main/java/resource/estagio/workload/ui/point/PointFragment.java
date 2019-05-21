@@ -26,6 +26,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
@@ -41,10 +42,13 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
     private EditText editTextDatePoint;
     private EditText editTextHourPoint;
     private Spinner spinnerCustomerPoint;
+    private Spinner spinnerProjectPoint;
 
     private Calendar date;
     private int customerId;
     private String customerName;
+    private  int projectId;
+    private  String projectName;
 
 
     // Construtor Vazio
@@ -81,6 +85,8 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
         editTextHourPoint = view.findViewById(R.id.edit_text_hour_point);
         editTextHourPoint.setFilters(new InputFilter[]{new InputFilterMinMax(1,8)});
         spinnerCustomerPoint = view.findViewById(R.id.spinner_customer_point);
+        spinnerProjectPoint = view.findViewById(R.id.spinner_project_point);
+        presenter = new PointPresenter(this);
     }
 
     @Override
@@ -121,6 +127,28 @@ public class PointFragment extends Fragment implements PointContract.View, DateP
                 CustomerModel customerModel = (CustomerModel) parent.getItemAtPosition(position);
                 customerId = customerModel.getId();
                 customerName = customerModel.getName();
+                presenter.getActivities(customerId);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    @Override
+    public void loadSpinnerActivity(List<ActivityModel> activityModels) {
+        ArrayAdapter<ActivityModel> adapterActivity = new ArrayAdapter<>(context,
+                android.R.layout.simple_spinner_item, activityModels);
+        adapterActivity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProjectPoint.setAdapter(adapterActivity);
+        spinnerProjectPoint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ActivityModel activityModel = (ActivityModel) parent.getItemAtPosition(position);
+                projectId = activityModel.getId();
+                projectName = activityModel.getName();
             }
 
             @Override

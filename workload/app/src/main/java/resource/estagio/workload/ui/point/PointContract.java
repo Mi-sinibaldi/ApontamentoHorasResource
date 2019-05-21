@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.Calendar;
 import java.util.List;
 
+import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 
 public class PointContract {
@@ -15,6 +16,8 @@ public class PointContract {
         Context getContext();
 
         void loadSpinnerCustomer(List<CustomerModel> customerModels);
+
+        void loadSpinnerActivity(List<ActivityModel> activityModels);
     }
 
     interface Presenter {
@@ -23,6 +26,6 @@ public class PointContract {
                       String project, int projectId, String demandNumber, String reason);
         void getCustumers();
 
-        void getActivities(long id);
+        void getActivities(int id);
     }
 }
