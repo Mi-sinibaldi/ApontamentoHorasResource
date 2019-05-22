@@ -20,10 +20,6 @@ public class PointContract {
 
         void disableSpinnerActivity();
 
-        void setRedHour(boolean condicional);
-
-        void setRedReason(boolean condicional);
-
         void showDialog();
 
         void showProgressCustomer(final boolean show);
@@ -33,6 +29,12 @@ public class PointContract {
         void showProgressAdd(final boolean show);
 
         void setClearFields();
+
+        void setErrorReasonField(String message);
+
+        void setErrorHourField(String message);
+
+        void setErrorProjectField(String message);
     }
 
     interface Presenter {

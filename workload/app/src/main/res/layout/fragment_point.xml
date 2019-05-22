@@ -147,19 +147,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_date_point" />
 
-    <EditText
-        android:id="@+id/edit_text_hour_point"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_hour_point"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="35dp"
-        android:backgroundTint="@color/colorWhite"
-        android:inputType="numberSigned"
-        android:maxLength="1"
-        android:textColor="@color/colorWhite"
-        android:theme="@style/StyledTilEditTextTheme"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:hintAnimationEnabled="false"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/text_vew_invisible_point"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_hour_point" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_hour_point">
+
+        <EditText
+            android:id="@+id/edit_text_hour_point"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/colorWhite"
+            android:inputType="numberSigned"
+            android:maxLength="1"
+            android:textColor="@color/colorWhite"
+            android:theme="@style/StyledTilEditTextTheme"
+            tools:layout_editor_absoluteY="11dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 
     <TextView
@@ -177,33 +188,43 @@
         app:layout_constraintStart_toEndOf="@+id/text_vew_invisible_point"
         app:layout_constraintTop_toBottomOf="@+id/spinner_project_point" />
 
-    <EditText
-        android:id="@+id/edit_text_reason_point"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_reason_point"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="37dp"
         android:layout_marginTop="37dp"
         android:layout_marginEnd="37dp"
         android:backgroundTint="#4050D5"
-        android:ems="10"
-        android:textColorHint="@color/colorWhiteTransparent"
-        android:gravity="start|top"
-        android:hint="Motivo"
-        android:textColor="@color/colorWhite"
-        android:inputType="textMultiLine"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_date_point"
-        tools:targetApi="lollipop" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_date_point">
+
+        <EditText
+            android:id="@+id/edit_text_reason_point"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#4050D5"
+            android:foregroundTint="#4050D5"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Motivo"
+            android:inputType="textMultiLine"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhiteTransparent"
+            tools:targetApi="lollipop" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/button_point_confirm"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="37dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="37dp"
         android:layout_marginEnd="37dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="37dp"
         android:background="@drawable/button_custom_radius"
         android:text="@string/adicionar"
         android:textColor="#4050D5"
@@ -211,7 +232,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_reason_point" />
+        app:layout_constraintTop_toBottomOf="@+id/input_layout_reason_point" />
 
     <ProgressBar
         android:id="@+id/progress_add_point"
