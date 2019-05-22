@@ -23,6 +23,9 @@ public class PointPresenter implements PointContract.Presenter{
     @Override
     public void setPoint(String date, String hour, String customerName, int customerId,
                          String projectName, int projectId, String demandNumber, String reason) {
+        validateHour(hour);
+        validateReason(reason);
+
         try{
             EmployeeDomain employee = new EmployeeDomain(view.getContext(), projectId, projectName,
                 customerId, customerName, demandNumber, Integer.parseInt(hour), date, reason);
@@ -43,6 +46,24 @@ public class PointPresenter implements PointContract.Presenter{
             view.notification("Numero de horas esta vazia");
         } catch (Exception e) {
             view.notification(e.getMessage());
+        }
+    }
+
+    private void validateReason(String reason) {
+        if(reason.isEmpty())
+            view.setRedReason(true);
+        else
+            view.setRedReason(false);
+    }
+
+    private void validateHour(String hour) {
+        try{
+            if(Integer.parseInt(hour) == 0)
+                view.setRedHour(true);
+            else
+                view.setRedHour(false);
+        }catch (NumberFormatException e){
+            view.setRedHour(true);
         }
     }
 

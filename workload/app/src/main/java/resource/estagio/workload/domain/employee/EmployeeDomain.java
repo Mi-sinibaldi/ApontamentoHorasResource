@@ -133,20 +133,14 @@ public class EmployeeDomain {
     public void postEntry(String token, final BaseCallback<Void> listener) throws Exception {
         if(getIrepository() == null)
             throw new Exception("Repositório Vazio");
-        if(activityId == 0)
-            throw new Exception("Id Activity vazio.");
-        if(activityName.isEmpty())
-            throw new Exception("Nome Activity está Vazio.");
-        if(customerId == 0)
-            throw new Exception("Id Customer está Vazio.");
-        if(customerName.isEmpty())
-            throw new Exception("Nome do Cliente Vazio");
-        if(demandNumber.isEmpty())
-            throw new Exception("Número de Demanda Vazio");
+        if(activityId == 0 || activityName.isEmpty() || demandNumber.isEmpty())
+            throw new Exception("Cliente sem Projeto");
+        if(customerId == 0 || customerName.isEmpty())
+            throw new Exception("Cliente não encontrado");
         if(hours == 0)
             throw new Exception("É necessário apontamento de no minimo uma hora");
         if(date == null)
-            throw  new Exception("Data invalida.");
+            throw  new Exception("Data inválida");
         if(reason.isEmpty())
             throw new Exception("É necessário ter descrição da atividade");
 

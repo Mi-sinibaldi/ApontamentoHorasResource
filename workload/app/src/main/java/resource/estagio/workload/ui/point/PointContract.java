@@ -20,6 +20,10 @@ public class PointContract {
 
         void disableSpinnerActivity();
 
+        void setRedHour(boolean condicional);
+
+        void setRedReason(boolean condicional);
+
         void showDialog();
     }
 

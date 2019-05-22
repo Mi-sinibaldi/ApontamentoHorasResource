@@ -32,15 +32,11 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
-
-import resource.estagio.workload.DialogActivity;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
-import resource.estagio.workload.ui.login.LoginActivity;
 import resource.estagio.workload.ui.timeline.TimelineFragment;
 
 public class PointFragment extends Fragment implements PointContract.View,
@@ -211,5 +207,23 @@ public class PointFragment extends Fragment implements PointContract.View,
     public void disableSpinnerActivity() {
         customerId = 0; customerName = null; projectId = 0; projectName = null; demandNumber = null;
         spinnerProjectPoint.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void setRedHour(boolean condicional) {
+        if(condicional)
+            editTextHourPoint.setTextAppearance(context, R.style.StyledTilEditTextThemeFalse);
+        else
+            editTextHourPoint.setTextAppearance(context, R.style.StyledTilEditTextTheme);
+    }
+
+    @SuppressLint("ResourceType")
+    @Override
+    public void setRedReason(boolean condicional) {
+        if(condicional)
+            editTextReasonPoint.setHint(R.color.errorColor);
+        else
+            editTextReasonPoint.setHint(R.color.colorWhiteTransparent);
+
     }
 }
