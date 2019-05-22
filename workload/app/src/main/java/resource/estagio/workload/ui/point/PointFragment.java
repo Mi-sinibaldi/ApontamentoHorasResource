@@ -131,8 +131,7 @@ public class PointFragment extends Fragment implements PointContract.View,
         presenter = new PointPresenter(this);
         buttonPointConfirm=view.findViewById( R.id.button_point_confirm );
 
-        editTextHourPoint.setFocusable(false);
-        editTextReasonPoint.setFocusable(false);
+
     }
 
     @Override
