@@ -7,4 +7,5 @@
     <color name="colorWhiteTransparent">#8AFFFFFF</color>
     <color name="colorLogin">#4050D5</color>
     <color name="colorSwitch">#00CED9</color>
+    <color name="errorColor">#F44336</color>
 </resources>

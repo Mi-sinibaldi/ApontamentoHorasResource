@@ -18,7 +18,21 @@ public class PointContract {
 
         void loadSpinnerActivity(List<ActivityModel> activityModels);
 
+        void disableSpinnerActivity();
+
+        void setRedHour(boolean condicional);
+
+        void setRedReason(boolean condicional);
+
         void showDialog();
+
+        void showProgressCustomer(final boolean show);
+
+        void showProgressProject(final boolean show);
+
+        void showProgressAdd(final boolean show);
+
+        void setClearFields();
     }
 
     interface Presenter {

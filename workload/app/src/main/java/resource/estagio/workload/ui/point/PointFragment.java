@@ -1,5 +1,7 @@
 package resource.estagio.workload.ui.point;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -19,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,15 +35,11 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
-
-import resource.estagio.workload.DialogActivity;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
-import resource.estagio.workload.ui.login.LoginActivity;
 import resource.estagio.workload.ui.timeline.TimelineFragment;
 
 public class PointFragment extends Fragment implements PointContract.View,
@@ -67,6 +66,9 @@ public class PointFragment extends Fragment implements PointContract.View,
     private String projectName;
     private String demandNumber;
     private Dialog dialog;
+    private ProgressBar progressCustomerPoint;
+    private ProgressBar progressProjectPoint;
+    private ProgressBar progressAddPoint;
 
 
 
@@ -130,8 +132,9 @@ public class PointFragment extends Fragment implements PointContract.View,
         spinnerProjectPoint = view.findViewById(R.id.spinner_project_point);
         presenter = new PointPresenter(this);
         buttonPointConfirm=view.findViewById( R.id.button_point_confirm );
-
-
+        progressCustomerPoint = view.findViewById(R.id.progress_customer_point);
+        progressProjectPoint = view.findViewById(R.id.progress_project_point);
+        progressAddPoint = view.findViewById(R.id.progress_add_point);
     }
 
     @Override
@@ -172,8 +175,7 @@ public class PointFragment extends Fragment implements PointContract.View,
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
                 CustomerModel customerModel = (CustomerModel) parent.getItemAtPosition(position);
                 customerId = customerModel.getId();
-                customerName = customerModel.getName();
-                presenter.getActivities(customerId);
+                presenter.getActivities(customerModel.getId());
             }
 
             @Override
@@ -194,6 +196,7 @@ public class PointFragment extends Fragment implements PointContract.View,
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
                 ActivityModel activityModel = (ActivityModel) parent.getItemAtPosition(position);
+                customerName = activityModel.getCustomerName();
                 projectId = activityModel.getId();
                 projectName = activityModel.getName();
                 demandNumber = activityModel.getDemandNumber();
@@ -206,5 +209,82 @@ public class PointFragment extends Fragment implements PointContract.View,
         });
     }
 
+    @Override
+    public void disableSpinnerActivity() {
+        customerName = null; projectId = 0; projectName = null; demandNumber = null;
+        spinnerProjectPoint.setVisibility(View.INVISIBLE);
+    }
 
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public void setRedHour(boolean condicional) {
+        if(condicional)
+            editTextHourPoint.setBackgroundColor(R.color.errorColor);
+        else
+            editTextHourPoint.setBackgroundColor(R.color.colorLogin);
+    }
+
+    @SuppressLint("ResourceType")
+    @Override
+    public void setRedReason(boolean condicional) {
+        if(condicional)
+            editTextReasonPoint.setHintTextColor
+                    (R.color.errorColor);
+        else
+            editTextReasonPoint.setHintTextColor(R.color.colorWhiteTransparent);
+
+    }
+
+    @Override
+    public void showProgressCustomer(final boolean show) {
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+        spinnerCustomerPoint.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        progressCustomerPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+        progressCustomerPoint.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressCustomerPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
+
+    }
+
+    @Override
+    public void showProgressProject(final boolean show) {
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+        spinnerProjectPoint.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        progressProjectPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+        progressProjectPoint.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressProjectPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
+
+    }
+
+    @Override
+    public void showProgressAdd(final boolean show) {
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+        buttonPointConfirm.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        progressAddPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+        progressAddPoint.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressAddPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
+    }
+
+    @Override
+    public void setClearFields() {
+        editTextHourPoint.setText("");
+        editTextReasonPoint.setText("");
+    }
 }
