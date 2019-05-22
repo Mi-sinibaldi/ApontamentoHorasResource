@@ -11,6 +11,8 @@ public class HomeContract {
         void showFragment(Fragment fragment);
 
         Context Context();
+
+        void exitDialog();
     }
 
     public interface Presenter{
