@@ -59,14 +59,10 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_timeline, container, false);
-        presenter = new TimeLinePresenter(this);
-        buttonConfirm = view.findViewById( R.id.button_point_confirm );
-
-
-        calendar = Calendar.getInstance();
-
         loadUI();
+        calendar = Calendar.getInstance();
         setTextDate();
         final int thisMonth = calendar.get(Calendar.MONTH);
 
@@ -117,6 +113,9 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
 
     private void loadUI() {
 
+        presenter = new TimeLinePresenter(this);
+        buttonConfirm = view.findViewById(R.id.button_point_confirm);
+
         recyclerViewTimeline = view.findViewById(R.id.id_recyclerview_timeline);
         textViewMonth = view.findViewById(R.id.text_view_month_timeline);
         textViewYear = view.findViewById(R.id.text_view_year_timeline);
@@ -157,20 +156,21 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
         adapterTimeline = new AdapterTimeline(listWorkLoad);
         recyclerViewTimeline.setAdapter(adapterTimeline);
     }
-    public void showDialogError(String text){
-        dialog = new Dialog( getActivity(), R.style.CustomAlertDialog );
-        dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
-        dialog.setContentView( R.layout.acativity_dialog_error );
-        dialog.setCancelable( false );
+
+    public void showDialogError(String text) {
+        dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.acativity_dialog_error);
+        dialog.setCancelable(false);
 
         text_dialog_error = dialog.findViewById(R.id.text_dialog_error);
         text_dialog_error.setText(text);
 
-        dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN );
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         dialog.show();
-        buttonError = dialog.findViewById( R.id.button_dialog_error );
-        buttonError.setOnClickListener( v -> dialog.dismiss() );
+        buttonError = dialog.findViewById(R.id.button_dialog_error);
+        buttonError.setOnClickListener(v -> dialog.dismiss());
     }
 
     @Override
@@ -180,7 +180,6 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
 
     @Override
     public void showErrorMessage(String text) {
-        Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
         showDialogError(text);
     }
 
