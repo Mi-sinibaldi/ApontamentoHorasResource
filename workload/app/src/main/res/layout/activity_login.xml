@@ -83,7 +83,10 @@
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorWhite" />
+            android:textColorHighlight="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
+            android:textCursorDrawable="@color/colorWhite" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,7 +98,6 @@
         android:layout_marginTop="75dp"
         android:layout_marginEnd="47dp"
         android:textColorHint="@android:color/white"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -106,13 +108,15 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorWhite"
             android:hint="@string/prompt_username"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:backgroundTint="@color/colorWhite"
             android:singleLine="true"
             android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorWhite" />
+            android:textColorHighlight="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:textColorLink="@color/colorWhite" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -153,12 +157,12 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="47dp"
         android:layout_marginBottom="8dp"
-        android:thumbTint="@color/colorWhite"
-        android:trackTint="@drawable/switch_selector"
         android:fontFamily="@font/open_sans_regular"
         android:text="Lembrar senha?   "
         android:textColor="@android:color/white"
         android:textSize="12sp"
+        android:thumbTint="@color/colorWhite"
+        android:track="@drawable/switch_selector"
         app:layout_constraintBottom_toTopOf="@+id/curvedLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />

@@ -2,7 +2,6 @@ package resource.estagio.workload.ui.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,9 +15,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.TEsteActivity;
 import resource.estagio.workload.domain.User;
 import resource.estagio.workload.ui.home.HomeActivity;
+import resource.estagio.workload.ui.timeline.TsteActivityTimeLine;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View{
 
@@ -66,7 +65,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         signInButton.setOnClickListener(view -> presenter.login(
                 usernameView.getText().toString(), passwordView.getText().toString()));
 
-    }
+
+}
 
     @Override
     public void showProgress(final boolean show) {
@@ -106,7 +106,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         } else {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.botton_in,R.anim.top_out);
             finish();
+
+//            Intent intent = new Intent(this, TsteActivityTimeLine.class);
+//            startActivity(intent);
         }
     }
 

@@ -1,20 +1,31 @@
 package resource.estagio.workload.ui.point;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputFilter;
+import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,31 +33,48 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
-
-import resource.estagio.workload.DialogActivity;
+import java.util.List;
 import resource.estagio.workload.R;
-import resource.estagio.workload.TimelineFragment;
+import resource.estagio.workload.data.remote.model.ActivityModel;
+import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
-import resource.estagio.workload.ui.login.LoginActivity;
+import resource.estagio.workload.ui.timeline.TimelineFragment;
 
 public class PointFragment extends Fragment implements PointContract.View,
         DatePickerDialog.OnDateSetListener {
 
     DecimalFormat f = new DecimalFormat("##00");
 
+    private PointContract.Presenter presenter;
+
     private Context context;
     private View view;
     private EditText editTextDatePoint;
     private EditText editTextHourPoint;
+    private EditText editTextReasonPoint;
+    private Spinner spinnerCustomerPoint;
+    private Spinner spinnerProjectPoint;
+
     private Button buttonPointConfirm;
     private Button buttonConfirmCheck;
     private Calendar date;
+    private int customerId;
+    private String customerName;
+    private int projectId;
+    private String projectName;
+    private String demandNumber;
     private Dialog dialog;
+    private ProgressBar progressCustomerPoint;
+    private ProgressBar progressProjectPoint;
+    private ProgressBar progressAddPoint;
+    private TextInputLayout inputLayoutHourPoint;
+    private TextInputLayout inputLayoutReasonPoint;
 
 
 
@@ -61,17 +89,18 @@ public class PointFragment extends Fragment implements PointContract.View,
         this.view = view;
         loadUI();
         loadDateHourSave();
-        buttonPointConfirm.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-        } );
-
-
+        presenter.getCustumers();
+        saveAddPoint();
     }
 
-    private void showDialog(){
+    private void saveAddPoint() {
+        buttonPointConfirm.setOnClickListener(v -> presenter.setPoint(
+                editTextDatePoint.getText().toString(), editTextHourPoint.getText().toString(),
+                customerName, customerId, projectName, projectId, demandNumber,
+                editTextReasonPoint.getText().toString()));
+    }
+
+    public void showDialog(){
         dialog = new Dialog( getActivity(), R.style.CustomAlertDialog );
         dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
         dialog.setContentView( R.layout.activity_check );
@@ -80,7 +109,7 @@ public class PointFragment extends Fragment implements PointContract.View,
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN );
         dialog.show();
 
-        buttonConfirmCheck = dialog.findViewById( R.id.button_dialog_check );
+        buttonConfirmCheck = dialog.findViewById( R.id.button_dialog_error );
         buttonConfirmCheck.setOnClickListener( v -> {
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_layout_home, new TimelineFragment()).commit();
@@ -104,7 +133,16 @@ public class PointFragment extends Fragment implements PointContract.View,
         editTextDatePoint = view.findViewById(R.id.edit_text_date_point);
         editTextHourPoint = view.findViewById(R.id.edit_text_hour_point);
         editTextHourPoint.setFilters(new InputFilter[]{new InputFilterMinMax(1,8)});
+        editTextReasonPoint = view.findViewById(R.id.edit_text_reason_point);
+        spinnerCustomerPoint = view.findViewById(R.id.spinner_customer_point);
+        spinnerProjectPoint = view.findViewById(R.id.spinner_project_point);
+        presenter = new PointPresenter(this);
         buttonPointConfirm=view.findViewById( R.id.button_point_confirm );
+        progressCustomerPoint = view.findViewById(R.id.progress_customer_point);
+        progressProjectPoint = view.findViewById(R.id.progress_project_point);
+        progressAddPoint = view.findViewById(R.id.progress_add_point);
+        inputLayoutHourPoint = view.findViewById(R.id.input_layout_hour_point);
+        inputLayoutReasonPoint = view.findViewById(R.id.input_layout_reason_point);
     }
 
     @Override
@@ -133,5 +171,139 @@ public class PointFragment extends Fragment implements PointContract.View,
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void loadSpinnerCustomer(List<CustomerModel> customerModels) {
+        ArrayAdapter<CustomerModel> adapterCustomer = new ArrayAdapter<>(context,
+                android.R.layout.simple_spinner_item, customerModels);
+        adapterCustomer.setDropDownViewResource(R.layout.spinner_custom_dropdown);
+        spinnerCustomerPoint.setAdapter(adapterCustomer);
+        spinnerCustomerPoint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
+                CustomerModel customerModel = (CustomerModel) parent.getItemAtPosition(position);
+                customerId = customerModel.getId();
+                presenter.getActivities(customerModel.getId());
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    @Override
+    public void loadSpinnerActivity(List<ActivityModel> activityModels) {
+        ArrayAdapter<ActivityModel> adapterActivity = new ArrayAdapter<>(context,
+               android.R.layout.simple_spinner_item, activityModels);
+        adapterActivity.setDropDownViewResource(R.layout.spinner_custom_dropdown);
+        spinnerProjectPoint.setAdapter(adapterActivity);
+        spinnerProjectPoint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
+                ActivityModel activityModel = (ActivityModel) parent.getItemAtPosition(position);
+                customerName = activityModel.getCustomerName();
+                projectId = activityModel.getId();
+                projectName = activityModel.getName();
+                demandNumber = activityModel.getDemandNumber();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    @Override
+    public void disableSpinnerActivity() {
+        customerName = null; projectId = 0; projectName = null; demandNumber = null;
+        spinnerProjectPoint.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showProgressCustomer(final boolean show) {
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+        spinnerCustomerPoint.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        progressCustomerPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+        progressCustomerPoint.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressCustomerPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
+
+    }
+
+    @Override
+    public void showProgressProject(final boolean show) {
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+        spinnerProjectPoint.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        progressProjectPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+        progressProjectPoint.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressProjectPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
+
+    }
+
+    @Override
+    public void showProgressAdd(final boolean show) {
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+        buttonPointConfirm.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        progressAddPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+        progressAddPoint.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressAddPoint.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
+    }
+
+    @Override
+    public void setClearFields() {
+        editTextHourPoint.setText("");
+        editTextReasonPoint.setText("");
+    }
+
+    @Override
+    public void setErrorHourField(String message) {
+
+        setErrorMessage(editTextHourPoint, inputLayoutHourPoint, message);
+    }
+
+    @Override
+    public void setErrorReasonField(String message) {
+       setErrorMessage(editTextReasonPoint, inputLayoutReasonPoint, message);
+    }
+
+    @Override
+    public void setErrorProjectField(String message) {
+
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void setErrorMessage(EditText editText, TextInputLayout textInputLayout, String message){
+        textInputLayout.setErrorEnabled(true);
+        textInputLayout.setError(message);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textInputLayout.setErrorEnabled(false);
+            }
+            @Override
+            public void afterTextChanged(Editable s) { }});
+    }
 }

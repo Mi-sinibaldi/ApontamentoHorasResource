@@ -4,10 +4,13 @@ import android.app.Application;
 
 import androidx.room.Room;
 
+import resource.estagio.workload.domain.User;
+
 public class App extends Application {
     private static App instance;
     private static RestClient restClient;
     private static AppDatabase db;
+    private static User user;
 
     @Override
     public void onCreate() {
@@ -28,5 +31,13 @@ public class App extends Application {
 
     public static AppDatabase getDb() {
         return db;
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        App.user = user;
     }
 }

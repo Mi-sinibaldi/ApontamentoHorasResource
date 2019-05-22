@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_dialog_check"
+        android:id="@+id/button_dialog_error"
         android:layout_width="222dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"

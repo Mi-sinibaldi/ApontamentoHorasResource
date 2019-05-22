@@ -1,4 +1,4 @@
-package resource.estagio.workload;
+package resource.estagio.workload.ui.timeline.adapterTimeLine;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Collections;
 import java.util.List;
 
+import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 
 public class AdapterTimeline extends RecyclerView.Adapter<AdapterTimeline.MyViewHolder> {
@@ -20,8 +21,8 @@ public class AdapterTimeline extends RecyclerView.Adapter<AdapterTimeline.MyView
 
     public AdapterTimeline(List<TimeEntryModel> listTimeline) {
         this.listTimeline = listTimeline;
+        Collections.reverse(listTimeline);
         sizeList = listTimeline.size() - 1;
-        //Collections.reverse(listTimeline);
     }
 
     @NonNull
