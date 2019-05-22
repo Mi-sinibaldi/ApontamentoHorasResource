@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -18,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -103,7 +101,7 @@ public class PointFragment extends Fragment implements PointContract.View,
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN );
         dialog.show();
 
-        buttonConfirmCheck = dialog.findViewById( R.id.button_dialog_check );
+        buttonConfirmCheck = dialog.findViewById( R.id.button_dialog_error );
         buttonConfirmCheck.setOnClickListener( v -> {
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_layout_home, new TimelineFragment()).commit();

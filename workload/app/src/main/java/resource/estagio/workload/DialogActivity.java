@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class DialogActivity extends AppCompatActivity {
 
     private Button buttonConfirm, buttonChooser, buttonChosserYes,
-            buttonChosserNo, buttonConfirmCheck;
+            buttonChosserNo, buttonConfirmCheck, buttonError;
 
     Dialog dialog;
 
@@ -57,5 +57,17 @@ public class DialogActivity extends AppCompatActivity {
 //                startActivity( intent );
         } );
         buttonChosserNo.setOnClickListener( v -> dialog.dismiss() );
+    }
+
+    public void showDialogError(){
+        dialog = new Dialog( this, R.style.CustomAlertDialog );
+        dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
+        dialog.setContentView( R.layout.acativity_dialog_error );
+        dialog.setCancelable( false );
+        dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN );
+        dialog.show();
+        buttonError = dialog.findViewById( R.id.button_dialog_error );
+        buttonError.setOnClickListener( v -> dialog.dismiss() );
     }
 }
