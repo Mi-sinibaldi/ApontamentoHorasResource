@@ -171,9 +171,7 @@ public class PointFragment extends Fragment implements PointContract.View,
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
                 CustomerModel customerModel = (CustomerModel) parent.getItemAtPosition(position);
-                customerId = customerModel.getId();
-                customerName = customerModel.getName();
-                presenter.getActivities(customerId);
+                presenter.getActivities(customerModel.getId());
             }
 
             @Override
@@ -185,6 +183,7 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     @Override
     public void loadSpinnerActivity(List<ActivityModel> activityModels) {
+        spinnerProjectPoint.setVisibility(View.VISIBLE);
         ArrayAdapter<ActivityModel> adapterActivity = new ArrayAdapter<>(context,
                android.R.layout.simple_spinner_item, activityModels);
         adapterActivity.setDropDownViewResource(R.layout.spinner_custom_dropdown);
@@ -194,6 +193,8 @@ public class PointFragment extends Fragment implements PointContract.View,
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
                 ActivityModel activityModel = (ActivityModel) parent.getItemAtPosition(position);
+                customerId = activityModel.getCustomerId();
+                customerName = activityModel.getCustomerName();
                 projectId = activityModel.getId();
                 projectName = activityModel.getName();
                 demandNumber = activityModel.getDemandNumber();
@@ -206,5 +207,9 @@ public class PointFragment extends Fragment implements PointContract.View,
         });
     }
 
-
+    @Override
+    public void disableSpinnerActivity() {
+        customerId = 0; customerName = null; projectId = 0; projectName = null; demandNumber = null;
+        spinnerProjectPoint.setVisibility(View.INVISIBLE);
+    }
 }

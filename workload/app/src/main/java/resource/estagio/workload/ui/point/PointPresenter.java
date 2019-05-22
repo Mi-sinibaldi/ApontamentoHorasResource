@@ -69,7 +69,11 @@ public class PointPresenter implements PointContract.Presenter{
         repository.getActivity(id, App.getUser().getAccessToken(), new BaseCallback<List<ActivityModel>>() {
             @Override
             public void onSuccessful(List<ActivityModel> value) {
-                view.loadSpinnerActivity(value);
+                if(value.isEmpty()){
+                    view.disableSpinnerActivity();
+                    view.notification("Lista vazia");
+                }else
+                    view.loadSpinnerActivity(value);
             }
 
             @Override

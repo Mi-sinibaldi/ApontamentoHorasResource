@@ -18,6 +18,8 @@ public class PointContract {
 
         void loadSpinnerActivity(List<ActivityModel> activityModels);
 
+        void disableSpinnerActivity();
+
         void showDialog();
     }
 
