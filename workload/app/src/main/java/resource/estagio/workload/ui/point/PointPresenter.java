@@ -22,8 +22,8 @@ public class PointPresenter implements PointContract.Presenter{
     @Override
     public void setPoint(String date, String hour, String customerName, int customerId,
                          String projectName, int projectId, String demandNumber, String reason) {
-      //  validateHour(hour);
-      //  validateReason(reason);
+        if(validateFilds(reason, hour)) return;
+
         view.showProgressAdd(true);
 
         try{
@@ -54,22 +54,15 @@ public class PointPresenter implements PointContract.Presenter{
         }
     }
 
-    private void validateReason(String reason) {
-        if(reason.isEmpty())
-            view.setRedReason(true);
-        else
-            view.setRedReason(false);
-    }
-
-    private void validateHour(String hour) {
-        try{
-            if(Integer.parseInt(hour) == 0)
-                view.setRedHour(true);
-            else
-                view.setRedHour(false);
+    private boolean validateFilds(String reason, String hour) {
+        boolean error = false;
+        if(reason.isEmpty()){ view.setErrorReasonField("Coloque um motivo"); error = true; }
+        try {
+            if(Integer.parseInt(hour) == 0){ view.setErrorHourField("Coloque suas horas"); error = true; }
         }catch (NumberFormatException e){
-            view.setRedHour(true);
+            view.setErrorHourField("Coloque suas horas"); error = true;
         }
+        return error;
     }
 
     @Override

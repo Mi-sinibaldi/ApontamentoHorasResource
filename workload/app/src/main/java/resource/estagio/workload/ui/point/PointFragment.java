@@ -9,7 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputFilter;
+import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +34,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -69,6 +75,8 @@ public class PointFragment extends Fragment implements PointContract.View,
     private ProgressBar progressCustomerPoint;
     private ProgressBar progressProjectPoint;
     private ProgressBar progressAddPoint;
+    private TextInputLayout inputLayoutHourPoint;
+    private TextInputLayout inputLayoutReasonPoint;
 
 
 
@@ -135,6 +143,8 @@ public class PointFragment extends Fragment implements PointContract.View,
         progressCustomerPoint = view.findViewById(R.id.progress_customer_point);
         progressProjectPoint = view.findViewById(R.id.progress_project_point);
         progressAddPoint = view.findViewById(R.id.progress_add_point);
+        inputLayoutHourPoint = view.findViewById(R.id.input_layout_hour_point);
+        inputLayoutReasonPoint = view.findViewById(R.id.input_layout_reason_point);
     }
 
     @Override
@@ -215,26 +225,6 @@ public class PointFragment extends Fragment implements PointContract.View,
         spinnerProjectPoint.setVisibility(View.INVISIBLE);
     }
 
-    @SuppressLint("ResourceAsColor")
-    @Override
-    public void setRedHour(boolean condicional) {
-        if(condicional)
-            editTextHourPoint.setBackgroundColor(R.color.errorColor);
-        else
-            editTextHourPoint.setBackgroundColor(R.color.colorLogin);
-    }
-
-    @SuppressLint("ResourceType")
-    @Override
-    public void setRedReason(boolean condicional) {
-        if(condicional)
-            editTextReasonPoint.setHintTextColor
-                    (R.color.errorColor);
-        else
-            editTextReasonPoint.setHintTextColor(R.color.colorWhiteTransparent);
-
-    }
-
     @Override
     public void showProgressCustomer(final boolean show) {
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
@@ -286,5 +276,36 @@ public class PointFragment extends Fragment implements PointContract.View,
     public void setClearFields() {
         editTextHourPoint.setText("");
         editTextReasonPoint.setText("");
+    }
+
+    @Override
+    public void setErrorHourField(String message) {
+
+        setErrorMessage(editTextHourPoint, inputLayoutHourPoint, message);
+    }
+
+    @Override
+    public void setErrorReasonField(String message) {
+       setErrorMessage(editTextReasonPoint, inputLayoutReasonPoint, message);
+    }
+
+    @Override
+    public void setErrorProjectField(String message) {
+
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void setErrorMessage(EditText editText, TextInputLayout textInputLayout, String message){
+        textInputLayout.setErrorEnabled(true);
+        textInputLayout.setError(message);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textInputLayout.setErrorEnabled(false);
+            }
+            @Override
+            public void afterTextChanged(Editable s) { }});
     }
 }
