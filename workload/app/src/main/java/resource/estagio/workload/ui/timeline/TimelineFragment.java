@@ -53,21 +53,20 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
         loadUI();
         setTextDate();
         final int thisMonth = calendar.get(Calendar.MONTH);
-        //LoadList();
 
         imageViewMonthLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if( month >= thisMonth-2) {
+                if (month >= thisMonth - 2) {
                     calendar.add(Calendar.MONTH, -1);
                     setTextDate();
                     imageViewMonthLeft.setVisibility(View.VISIBLE);
                     imageViewMonthRight.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     imageViewMonthLeft.setVisibility(View.INVISIBLE);
                 }
-                if( month == thisMonth-6) {
+                if (month == thisMonth - 6) {
                     imageViewMonthLeft.setVisibility(View.INVISIBLE);
                 }
             }
@@ -78,15 +77,15 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
             @Override
             public void onClick(View v) {
 
-                if( month <= thisMonth) {
+                if (month <= thisMonth) {
                     calendar.add(Calendar.MONTH, +1);
                     setTextDate();
                     imageViewMonthRight.setVisibility(View.VISIBLE);
                     imageViewMonthLeft.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     imageViewMonthRight.setVisibility(View.INVISIBLE);
                 }
-                if( month == thisMonth+1) {
+                if (month == thisMonth + 1) {
                     imageViewMonthRight.setVisibility(View.INVISIBLE);
                 }
             }
@@ -100,7 +99,7 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
         textViewMonth.setText(new SimpleDateFormat("MMM").format(calendar.getTime()));
         textViewYear.setText("" + calendar.get(Calendar.YEAR));
 
-        month = calendar.get(Calendar.MONTH)+1;
+        month = calendar.get(Calendar.MONTH) + 1;
         year = calendar.get(Calendar.YEAR);
 
         presenter.getTimeline(month, year);
@@ -111,41 +110,20 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
         pd = new ProgressDialog(getActivity());
         pd.setCancelable(false);
         recyclerViewTimeline = view.findViewById(R.id.id_recyclerview_timeline);
-        textViewMonth = view.findViewById(R.id.text_view_month);
-        textViewYear = view.findViewById(R.id.text_view_year);
-        imageViewMonthLeft = view.findViewById(R.id.image_view_month_left);
-        imageViewMonthRight = view.findViewById(R.id.image_view_month_right);
+        textViewMonth = view.findViewById(R.id.text_view_month_timeline);
+        textViewYear = view.findViewById(R.id.text_view_year_timeline);
+        imageViewMonthLeft = view.findViewById(R.id.image_view_month_left_timeline);
+        imageViewMonthRight = view.findViewById(R.id.image_view_month_right_timeline);
         imageViewMonthRight.setVisibility(View.INVISIBLE);
     }
 
 
-    public void LoadList() {
-
-        list.add(new TimeEntryModel(1, "Apxx", 2, "Itau", "6666", 3, "05/01/2019", "jhjjhjhjhj"));
-        list.add(new TimeEntryModel(1, "Apxx", 2, "Itau", "6666", 3, "06/02/2019", "jhjjhjhjhj"));
-        list.add(new TimeEntryModel(1, "Apxx", 2, "Itau", "6666", 3, "07/03/2019", "jhjjhjhjhj"));
-        list.add(new TimeEntryModel(1, "Apxx", 2, "Itau", "6666", 3, "08/04/2019", "jhjjhjhjhj"));
-        list.add(new TimeEntryModel(1, "Apxx", 2, "Itau", "6666", 3, "09/05/2019", "jhjjhjhjhj"));
-        list.add(new TimeEntryModel(1, "Apxx", 2, "Itau", "6666", 3, "10/06/2019", "jhjjhjhjhj"));
-        list.add(new TimeEntryModel(1, "Apxx", 2, "Itau", "6666", 3, "11/07/2019", "jhjjhjhjhj"));
-        list.add(new TimeEntryModel(1, "Apxx", 2, "Itau", "6666", 3, "12/08/2019", "jhjjhjhjhj"));
-        list.add(new TimeEntryModel(1, "Apxx", 2, "Itau", "6666", 3, "13/09/2019", "jhjjhjhjhj"));
-        list.add(new TimeEntryModel(1, "Apxx", 2, "Itau", "6666", 3, "14/10/2019", "jhjjhjhjhj"));
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerViewTimeline.setLayoutManager(layoutManager);
-        recyclerViewTimeline.setHasFixedSize(true);
-
-        adapterTimeline = new AdapterTimeline(list);
-        recyclerViewTimeline.setAdapter(adapterTimeline);
-    }
-
     @Override
     public void dialog(boolean Key) {
         pd.setMessage("Carregando...");
-        if(Key){
+        if (Key) {
             pd.show();
-        }else{
+        } else {
             pd.dismiss();
         }
     }
