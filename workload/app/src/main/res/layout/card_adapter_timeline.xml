@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#4050D5"
@@ -14,10 +15,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:fontFamily="@font/open_sans"
         android:text="21/01"
         android:textColor="@color/colorWhite"
         android:textSize="15dp"
-        android:fontFamily="@font/open_sans"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,27 +79,30 @@
 
     <Button
         android:id="@+id/button_name_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="19dp"
+        android:layout_width="88dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="132dp"
         android:background="@drawable/round_name_customer"
         android:fontFamily="@font/open_sans"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Banco Alfa"
+        android:text="santandeppppr"
         android:textColor="#FFFFFF"
         android:textSize="9dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/button_hours"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toEndOf="@+id/cardView4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_hours"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/round_hours"
         android:fontFamily="@font/open_sans_semibold"
         android:paddingLeft="10dp"
@@ -108,8 +112,8 @@
         android:textSize="9dp"
         app:layout_constraintBottom_toBottomOf="@+id/button_name_customer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button_name_customer"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/button_name_customer"
+        app:layout_constraintTop_toTopOf="@+id/button_name_customer" />
 
     <View
         android:id="@+id/cardView4"
