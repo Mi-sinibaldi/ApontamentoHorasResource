@@ -111,8 +111,6 @@ public class PointFragment extends Fragment implements PointContract.View,
 
         buttonConfirmCheck = dialog.findViewById( R.id.button_dialog_error );
         buttonConfirmCheck.setOnClickListener( v -> {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_layout_home, new TimelineFragment()).commit();
             dialog.dismiss();
 //            getActivity().finish();
         } );
