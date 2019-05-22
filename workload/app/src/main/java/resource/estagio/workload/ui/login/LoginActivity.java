@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         } else {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.botton_in,R.anim.top_out);
             finish();
 
 //            Intent intent = new Intent(this, TsteActivityTimeLine.class);

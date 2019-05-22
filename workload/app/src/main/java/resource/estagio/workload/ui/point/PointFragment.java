@@ -130,6 +130,9 @@ public class PointFragment extends Fragment implements PointContract.View,
         spinnerProjectPoint = view.findViewById(R.id.spinner_project_point);
         presenter = new PointPresenter(this);
         buttonPointConfirm=view.findViewById( R.id.button_point_confirm );
+
+        editTextHourPoint.setFocusable(false);
+        editTextReasonPoint.setFocusable(false);
     }
 
     @Override
