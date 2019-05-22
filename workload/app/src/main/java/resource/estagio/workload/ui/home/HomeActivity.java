@@ -71,4 +71,9 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     public Context Context() {
         return this;
     }
+
+    @Override
+    public void exitDialog() {
+        finish();
+    }
 }
