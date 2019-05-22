@@ -25,7 +25,12 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
                                            call, Response<List<TimeEntryModel>> response) {
 
                 if (!response.isSuccessful()) {
-                    onResult.onUnsuccessful("Erro\n" + response.message());
+                    onResult.onUnsuccessful("Não foi possivel carregar a lista!");
+                    return;
+                }
+
+                if(response.code()==401){
+                    onResult.onUnsuccessful("Acesso negado\nEntre com um usuario valido!");
                     return;
                 }
                 onResult.onSuccessful(response.body());
