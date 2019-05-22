@@ -132,7 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="35dp"
         android:backgroundTint="@color/colorWhite"
-        android:focusable="auto"
+
         android:inputType="numberSigned"
         android:maxLength="1"
         android:textColor="@color/colorWhite"
