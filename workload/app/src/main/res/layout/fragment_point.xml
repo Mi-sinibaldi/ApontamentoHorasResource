@@ -13,12 +13,27 @@
     tools:context=".ui.point.PointFragment">
 
 
+    <ImageView
+        android:id="@+id/image_view_resource_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="37dp"
+        android:src="@mipmap/resource_white"
+        android:textAlignment="textStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <TextView
         android:id="@+id/text_view_title_point"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="37dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="19dp"
         android:layout_marginEnd="37dp"
         android:text="@string/lan_amento"
         android:textColor="@color/colorWhite"
@@ -26,7 +41,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/image_view_resource_point" />
 
     <TextView
         android:id="@+id/text_view_subtitle_point"
