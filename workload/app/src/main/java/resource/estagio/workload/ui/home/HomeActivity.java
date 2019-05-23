@@ -1,19 +1,23 @@
 package resource.estagio.workload.ui.home;
 
-import android.content.Context;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.ui.login.LoginActivity;
 import resource.estagio.workload.ui.point.PointFragment;
 
 public class HomeActivity extends AppCompatActivity implements HomeContract.View {
@@ -23,6 +27,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     private Toast backToast;
     private BottomNavigationView navigation;
     private HomeContract.Presenter presenter;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +73,36 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
                 .replace(R.id.frame_layout_home,fragment).commit();
     }
 
+
+
+
     @Override
-    public Context Context() {
-        return this;
+    public void dialog(boolean key) {
+
+        for (int i = 0; i < navigation.getMenu().size(); i++){
+            navigation.getMenu().getItem(i).setEnabled(!key);
+        }
+
+
     }
 
     @Override
-    public void exitDialog() {
-        finish();
+    public void showDialogChooser() {
+        dialog = new Dialog( this, R.style.CustomAlertDialog );
+        dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
+        dialog.setContentView( R.layout.activity_dialog_chooser );
+        dialog.setCancelable( false );
+        dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN );
+        dialog.show();
+
+        Button buttonChosserYes = dialog.findViewById( R.id.button_dialog_chooser_yes );
+        Button buttonChosserNo = dialog.findViewById( R.id.buttton_dialog_chooser_no );
+
+        buttonChosserYes.setOnClickListener( v -> {
+            finishAffinity();
+
+        } );
+        buttonChosserNo.setOnClickListener( v -> dialog.dismiss() );
     }
 }

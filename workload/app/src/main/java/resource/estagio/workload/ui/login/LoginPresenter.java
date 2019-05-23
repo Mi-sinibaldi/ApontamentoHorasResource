@@ -1,11 +1,17 @@
 package resource.estagio.workload.ui.login;
 
 import android.app.Activity;
+import android.content.Context;
+import android.hardware.fingerprint.FingerprintManager;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import resource.estagio.workload.data.repository.AuthRepository;
 import resource.estagio.workload.domain.User;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.infra.FingerprintHandler;
 import resource.estagio.workload.ui.home.HomeActivity;
 
 public class LoginPresenter implements LoginContract.Presenter {
@@ -41,5 +47,28 @@ public class LoginPresenter implements LoginContract.Presenter {
             view.showProgress(false);
             view.showError(e.getMessage());
         }
+    }
+
+    @Override
+    public void fingerResponse(String s) {
+        view.showError(s);
+    }
+
+    @Override
+    public void fingerResponseSuccess(boolean key) {
+        if (key) {
+            view.navigateToHomeByFingerPrint();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void validateFingerPrint(FingerprintManager fingerprintManager,
+                                    FingerprintManager.CryptoObject cryptoObject, Context context) {
+
+        FingerprintHandler helper = new FingerprintHandler(context);
+        helper.presenter = this;
+        helper.startAuthentication(fingerprintManager, cryptoObject);
+
     }
 }
