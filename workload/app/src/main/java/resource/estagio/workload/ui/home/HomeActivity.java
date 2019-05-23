@@ -1,7 +1,6 @@
 package resource.estagio.workload.ui.home;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
@@ -17,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.ui.login.LoginActivity;
 import resource.estagio.workload.ui.point.PointFragment;
 
 public class HomeActivity extends AppCompatActivity implements HomeContract.View {
@@ -82,8 +80,6 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
         for (int i = 0; i < navigation.getMenu().size(); i++){
             navigation.getMenu().getItem(i).setEnabled(!key);
         }
-
-
     }
 
     @Override
