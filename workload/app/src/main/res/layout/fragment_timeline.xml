@@ -20,7 +20,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="37dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/open_sans_bold"
             android:text="Histórico"
@@ -34,7 +34,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="37dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="45dp"
             android:fontFamily="@font/open_sans"
@@ -50,8 +50,8 @@
             android:id="@+id/imageView"
             android:layout_width="99dp"
             android:layout_height="11dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="41dp"
             android:src="@drawable/logo_resource"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,15 +70,15 @@
 
 
         <ImageView
-            android:padding="20dp"
             android:id="@+id/image_view_month_left_timeline"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="35dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/ic_arrow_left_black_24dp"
+            android:padding="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/text_view_month_timeline"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +91,7 @@
             android:layout_marginStart="100dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/open_sans"
+            android:fontFamily="@font/open_sans_bold"
             android:text="Jan"
             android:textColor="@color/colorWhite"
             android:textSize="15dp"
@@ -108,7 +108,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/open_sans"
+            android:fontFamily="@font/open_sans_bold"
             android:text="2019"
             android:textColor="@color/colorWhite"
             android:textSize="15dp"
@@ -118,15 +118,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:padding="20dp"
             android:id="@+id/image_view_month_right_timeline"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginStart="67dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/ic_arrow_right_black_24dp"
+            android:padding="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/text_view_year_timeline"
@@ -144,15 +144,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
+        <ProgressBar
+            android:id="@+id/progressBarTimeLine"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/id_recyclerview_timeline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/id_recyclerview_timeline"
+            app:layout_constraintVertical_bias="0.498" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/id_recyclerview_timeline"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

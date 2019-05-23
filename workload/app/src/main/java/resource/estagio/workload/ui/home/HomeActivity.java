@@ -31,6 +31,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
         presenter = new HomePresenter(this);
         loadUi();
+        showFragment(new PointFragment(this));
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -70,5 +71,10 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     @Override
     public Context Context() {
         return this;
+    }
+
+    @Override
+    public void exitDialog() {
+        finish();
     }
 }
