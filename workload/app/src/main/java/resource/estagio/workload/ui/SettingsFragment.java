@@ -65,6 +65,8 @@ public class SettingsFragment extends Fragment {
         dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
         dialog.setContentView( R.layout.activity_dialog_chooser );
         dialog.setCancelable( false );
+        TextView text = dialog.findViewById(R.id.text_view_subtitle_point);
+        text.setText("Deseja realmente limpar as credenciais salvas?");
         dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN );
         dialog.show();

@@ -37,19 +37,23 @@ public class PointPresenter implements PointContract.Presenter{
                     view.showDialog();
                     view.showProgressAdd(false);
                     view.setClearFields();
+                    view.enabledNavigation(false);
                 }
 
                 @Override
                 public void onUnsuccessful(String error) {
                     view.showProgressAdd(false);
+                    view.enabledNavigation(false);
                     view.notification(error);
                 }
             });
         }catch (NumberFormatException e){
             view.notification("Numero de horas esta vazia");
             view.showProgressAdd(false);
+            view.enabledNavigation(false);
         } catch (Exception e) {
             view.showProgressAdd(false);
+            view.enabledNavigation(false);
             view.notification(e.getMessage());
         }
     }
@@ -75,14 +79,16 @@ public class PointPresenter implements PointContract.Presenter{
         public void onSuccessful(List<CustomerModel> value) {
             view.loadSpinnerCustomer(value);
             view.showProgressCustomer(false);
+            view.enabledNavigation(false);
         }
 
         @Override
         public void onUnsuccessful(String error) {
             view.notification(error);
-            view.showProgressCustomer(false);
+            view.enabledNavigation(false);
         }
     });
+
 
     }
 
