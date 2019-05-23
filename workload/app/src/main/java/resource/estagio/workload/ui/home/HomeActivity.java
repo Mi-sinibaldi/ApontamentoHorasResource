@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.ui.client.ClientFragment;
 import resource.estagio.workload.ui.point.PointFragment;
 
 public class HomeActivity extends AppCompatActivity implements HomeContract.View {
@@ -31,7 +32,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
         presenter = new HomePresenter(this);
         loadUi();
-        showFragment(new PointFragment(this));
+        showFragment(new ClientFragment());
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
