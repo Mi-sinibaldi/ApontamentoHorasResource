@@ -68,6 +68,7 @@ public class PointPresenter implements PointContract.Presenter{
     @Override
     public void getCustumers() {
         view.showProgressCustomer(true);
+        view.enabledNavigation(true);
         CustomerRepository repository = new CustomerRepository();
     repository.getCustomers(App.getUser().getAccessToken(), new BaseCallback<List<CustomerModel>>() {
         @Override
@@ -93,6 +94,7 @@ public class PointPresenter implements PointContract.Presenter{
             @Override
             public void onSuccessful(List<ActivityModel> value) {
                 view.showProgressProject(false);
+                view.enabledNavigation(false);
                 if(value.isEmpty()){
                     view.disableSpinnerActivity();
                     view.notification("Lista vazia");
@@ -103,6 +105,7 @@ public class PointPresenter implements PointContract.Presenter{
             @Override
             public void onUnsuccessful(String error) {
                 view.showProgressProject(false);
+                view.enabledNavigation(false);
             }
         });
     }

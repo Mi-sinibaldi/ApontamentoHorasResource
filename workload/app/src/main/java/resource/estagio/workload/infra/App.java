@@ -11,6 +11,7 @@ public class App extends Application {
     private static RestClient restClient;
     private static AppDatabase db;
     private static User user;
+    private static SaveLoginSharedPref saveLoginSharedPref;
 
     @Override
     public void onCreate() {
@@ -19,6 +20,12 @@ public class App extends Application {
         restClient = RestClient.getInstante();
         db = Room.databaseBuilder(
                 getApplicationContext(), AppDatabase.class, "app_database").build();
+
+        saveLoginSharedPref = new SaveLoginSharedPref(getApplicationContext());
+    }
+
+    public static SaveLoginSharedPref getPref(){
+        return saveLoginSharedPref;
     }
 
     public static App getInstance() {

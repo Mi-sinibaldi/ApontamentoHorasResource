@@ -16,6 +16,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -39,11 +40,13 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
+import resource.estagio.workload.ui.home.HomeContract;
 import resource.estagio.workload.ui.timeline.TimelineFragment;
 
 public class PointFragment extends Fragment implements PointContract.View,
@@ -53,7 +56,7 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     private PointContract.Presenter presenter;
 
-    private Context context;
+    private HomeContract.View viewHome;
     private View view;
     private EditText editTextDatePoint;
     private EditText editTextHourPoint;
@@ -77,10 +80,9 @@ public class PointFragment extends Fragment implements PointContract.View,
     private TextInputLayout inputLayoutReasonPoint;
 
 
-
     // Construtor Vazio
-    public PointFragment(Context context) {
-        this.context = context;
+    public PointFragment(HomeContract.View view) {
+        this.viewHome = view;
     }
 
     @Override
@@ -100,20 +102,20 @@ public class PointFragment extends Fragment implements PointContract.View,
                 editTextReasonPoint.getText().toString()));
     }
 
-    public void showDialog(){
-        dialog = new Dialog( getActivity(), R.style.CustomAlertDialog );
-        dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
-        dialog.setContentView( R.layout.activity_check );
-        dialog.setCancelable( false );
-        dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN );
+    public void showDialog() {
+        dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_check);
+        dialog.setCancelable(false);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         dialog.show();
 
-        buttonConfirmCheck = dialog.findViewById( R.id.button_dialog_error );
-        buttonConfirmCheck.setOnClickListener( v -> {
+        buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
+        buttonConfirmCheck.setOnClickListener(v -> {
             dialog.dismiss();
 //            getActivity().finish();
-        } );
+        });
 
     }
 
@@ -130,24 +132,28 @@ public class PointFragment extends Fragment implements PointContract.View,
     private void loadUI() {
         editTextDatePoint = view.findViewById(R.id.edit_text_date_point);
         editTextHourPoint = view.findViewById(R.id.edit_text_hour_point);
-        editTextHourPoint.setFilters(new InputFilter[]{new InputFilterMinMax(1,8)});
+        editTextHourPoint.setFilters(new InputFilter[]{new InputFilterMinMax(1, 8)});
         editTextReasonPoint = view.findViewById(R.id.edit_text_reason_point);
         spinnerCustomerPoint = view.findViewById(R.id.spinner_customer_point);
         spinnerProjectPoint = view.findViewById(R.id.spinner_project_point);
         presenter = new PointPresenter(this);
-        buttonPointConfirm=view.findViewById( R.id.button_point_confirm );
+        buttonPointConfirm = view.findViewById(R.id.button_point_confirm);
         progressCustomerPoint = view.findViewById(R.id.progress_customer_point);
         progressProjectPoint = view.findViewById(R.id.progress_project_point);
         progressAddPoint = view.findViewById(R.id.progress_add_point);
         inputLayoutHourPoint = view.findViewById(R.id.input_layout_hour_point);
         inputLayoutReasonPoint = view.findViewById(R.id.input_layout_reason_point);
+
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return inflater.inflate(R.layout.fragment_point, null);
+
     }
 
     @Override
@@ -166,12 +172,12 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     @Override
     public void notification(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void loadSpinnerCustomer(List<CustomerModel> customerModels) {
-        ArrayAdapter<CustomerModel> adapterCustomer = new ArrayAdapter<>(context,
+        ArrayAdapter<CustomerModel> adapterCustomer = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item, customerModels);
         adapterCustomer.setDropDownViewResource(R.layout.spinner_custom_dropdown);
         spinnerCustomerPoint.setAdapter(adapterCustomer);
@@ -189,14 +195,17 @@ public class PointFragment extends Fragment implements PointContract.View,
 
             }
         });
+
+
     }
 
     @Override
     public void loadSpinnerActivity(List<ActivityModel> activityModels) {
-        ArrayAdapter<ActivityModel> adapterActivity = new ArrayAdapter<>(context,
-               android.R.layout.simple_spinner_item, activityModels);
+        ArrayAdapter<ActivityModel> adapterActivity = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, activityModels);
         adapterActivity.setDropDownViewResource(R.layout.spinner_custom_dropdown);
         spinnerProjectPoint.setAdapter(adapterActivity);
+
         spinnerProjectPoint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -217,7 +226,10 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     @Override
     public void disableSpinnerActivity() {
-        customerName = null; projectId = 0; projectName = null; demandNumber = null;
+        customerName = null;
+        projectId = 0;
+        projectName = null;
+        demandNumber = null;
         spinnerProjectPoint.setVisibility(View.INVISIBLE);
     }
 
@@ -251,6 +263,7 @@ public class PointFragment extends Fragment implements PointContract.View,
             }
         });
 
+
     }
 
     @Override
@@ -282,7 +295,7 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     @Override
     public void setErrorReasonField(String message) {
-       setErrorMessage(editTextReasonPoint, inputLayoutReasonPoint, message);
+        setErrorMessage(editTextReasonPoint, inputLayoutReasonPoint, message);
     }
 
     @Override
@@ -290,18 +303,28 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     }
 
+    @Override
+    public void enabledNavigation(boolean key) {
+        viewHome.dialog(key);
+    }
+
     @SuppressLint("ResourceAsColor")
-    public void setErrorMessage(EditText editText, TextInputLayout textInputLayout, String message){
+    public void setErrorMessage(EditText editText, TextInputLayout textInputLayout, String message) {
         textInputLayout.setErrorEnabled(true);
         textInputLayout.setError(message);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 textInputLayout.setErrorEnabled(false);
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }});
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 }
