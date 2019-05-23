@@ -45,6 +45,7 @@ import resource.estagio.workload.R;
 import resource.estagio.workload.domain.User;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.SaveLoginSharedPref;
+import resource.estagio.workload.ui.admin.HomeAdminActivity;
 import resource.estagio.workload.ui.home.HomeActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
