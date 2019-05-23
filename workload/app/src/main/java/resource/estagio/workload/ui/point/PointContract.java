@@ -35,6 +35,8 @@ public class PointContract {
         void setErrorHourField(String message);
 
         void setErrorProjectField(String message);
+
+        void enabledNavigation(boolean key);
     }
 
     interface Presenter {

@@ -181,8 +181,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             overridePendingTransition(R.anim.botton_in,R.anim.top_out);
             finish();
 
-//            Intent intent = new Intent(this, TsteActivityTimeLine.class);
-//            startActivity(intent);
         }
     }
 
