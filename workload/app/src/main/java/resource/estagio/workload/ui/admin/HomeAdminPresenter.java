@@ -1,4 +1,5 @@
 package resource.estagio.workload.ui.admin;
 
-public class HomeAdminPresenter {
+public class HomeAdminPresenter implements HomeAdminContract.Presenter {
+
 }
