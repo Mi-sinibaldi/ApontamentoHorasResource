@@ -75,6 +75,6 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
     @Override
     public void exitDialog() {
-        finish();
+        finishAffinity();
     }
 }
