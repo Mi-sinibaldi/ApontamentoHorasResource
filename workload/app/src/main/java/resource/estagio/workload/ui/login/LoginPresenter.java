@@ -1,12 +1,9 @@
 package resource.estagio.workload.ui.login;
 
-import android.app.Activity;
-
 import resource.estagio.workload.data.repository.AuthRepository;
 import resource.estagio.workload.domain.User;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
-import resource.estagio.workload.ui.home.HomeActivity;
 
 public class LoginPresenter implements LoginContract.Presenter {
 

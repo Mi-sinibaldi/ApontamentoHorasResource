@@ -16,10 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.domain.User;
+import resource.estagio.workload.ui.admin.HomeAdminActivity;
 import resource.estagio.workload.ui.home.HomeActivity;
-import resource.estagio.workload.ui.timeline.TsteActivityTimeLine;
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.View{
+public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
     private EditText usernameView;
     private EditText passwordView;
@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 usernameView.getText().toString(), passwordView.getText().toString()));
 
 
-}
+    }
 
     @Override
     public void showProgress(final boolean show) {
@@ -101,20 +101,23 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void navigateToHome(User user) {
-        if(user.isAdmin()){
+        if (user.isAdmin()) {
+
+            Intent intent = new Intent(this, HomeAdminActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.botton_in, R.anim.top_out);
+            finish();
 
         } else {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
-            overridePendingTransition(R.anim.botton_in,R.anim.top_out);
+            overridePendingTransition(R.anim.botton_in, R.anim.top_out);
             finish();
 
-//            Intent intent = new Intent(this, TsteActivityTimeLine.class);
-//            startActivity(intent);
         }
     }
 
-    public void setFonts(){
+    public void setFonts() {
         Typeface medium = Typeface.createFromAsset(getAssets(),
                 "BwModelica-Medium.otf");
 
