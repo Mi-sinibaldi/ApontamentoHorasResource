@@ -47,7 +47,7 @@ import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.SaveLoginSharedPref;
 import resource.estagio.workload.ui.home.HomeActivity;
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.View{
+public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
     private EditText usernameView;
     private EditText passwordView;
@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 usernameView.getText().toString(), passwordView.getText().toString()));
 
 
-}
+    }
 
     @Override
     public void showProgress(final boolean show) {
@@ -175,10 +175,15 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         }
         if(user.isAdmin()){
 
+            Intent intent = new Intent(this, HomeAdminActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.botton_in, R.anim.top_out);
+            finish();
+
         } else {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
-            overridePendingTransition(R.anim.botton_in,R.anim.top_out);
+            overridePendingTransition(R.anim.botton_in, R.anim.top_out);
             finish();
 
         }
