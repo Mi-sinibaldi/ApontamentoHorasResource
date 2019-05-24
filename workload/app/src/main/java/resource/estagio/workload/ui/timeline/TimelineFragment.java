@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import resource.estagio.workload.ui.home.HomeContract;
 import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
@@ -51,9 +52,9 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
             buttonChosserNo, buttonConfirmCheck, buttonError;
 
     private Dialog dialog;
-
-    public TimelineFragment() {
-
+    private HomeContract.View viewHome;
+    public TimelineFragment(HomeContract.View view) {
+        this.viewHome = view;
     }
 
     @Override
@@ -128,7 +129,6 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
 
     @Override
     public void dialog(boolean Key) {
-
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
         recyclerViewTimeline.setVisibility(Key ? View.INVISIBLE : View.VISIBLE);
@@ -140,6 +140,7 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
                 progressBarTimeLine.setVisibility(Key ? View.VISIBLE : View.GONE);
             }
         });
+        viewHome.dialog(Key);
     }
 
     @Override

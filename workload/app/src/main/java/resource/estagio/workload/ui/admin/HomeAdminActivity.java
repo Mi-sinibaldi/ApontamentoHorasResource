@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.home;
+package resource.estagio.workload.ui.admin;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -16,26 +16,20 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.ui.point.PointFragment;
 
-public class HomeActivity extends AppCompatActivity implements HomeContract.View {
+public class HomeAdminActivity extends AppCompatActivity implements HomeAdminContract.View {
 
-    private FrameLayout frameLayoutHome;
-    private long backPresssedTime;
-    private Toast backToast;
+    private HomeAdminContract.Presenter presenter;
     private BottomNavigationView navigation;
-    private HomeContract.Presenter presenter;
+    private long backPressedTime;
+    private Toast backToast;
     private Dialog dialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_home );
-
-        presenter = new HomePresenter(this);
-        loadUi();
-        showFragment(new PointFragment(this));
-
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home_admin);
+        presenter = new HomeAdminPresenter(this);
+        navigation = findViewById(R.id.bottom_navigation_admin);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -43,43 +37,12 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
                 return true;
             }
         });
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (backPresssedTime + 20000 > System.currentTimeMillis()) {
-            backToast.cancel();
-            super.onBackPressed();
-            return;
-        } else {
-            backToast = Toast.makeText( getBaseContext(),
-                    "Pressione novamente para sair", Toast.LENGTH_SHORT );
-            backToast.show();
-        }
-        backPresssedTime = System.currentTimeMillis();
-    }
-
-    private void loadUi() {
-        frameLayoutHome = findViewById( R.id.frame_layout_home );
-        navigation = findViewById(R.id.bottom_navigation_employee);
     }
 
     @Override
     public void showFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_layout_home,fragment).commit();
-    }
-
-
-
-
-    @Override
-    public void dialog(boolean key) {
-
-        for (int i = 0; i < navigation.getMenu().size(); i++){
-            navigation.getMenu().getItem(i).setEnabled(!key);
-        }
+        getSupportFragmentManager().beginTransaction().
+                replace(R.id.frame_admin, fragment).commit();
     }
 
     @Override
@@ -100,5 +63,26 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
         } );
         buttonChosserNo.setOnClickListener( v -> dialog.dismiss() );
+    }
+
+    @Override
+    public void enableNavigation(boolean key) {
+        for (int i = 0; i < navigation.getMenu().size(); i++){
+            navigation.getMenu().getItem(i).setEnabled(!key);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 20000 > System.currentTimeMillis()) {
+            backToast.cancel();
+            super.onBackPressed();
+            return;
+        } else {
+            backToast = Toast.makeText( getBaseContext(),
+                    "Pressione novamente para sair", Toast.LENGTH_SHORT );
+            backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 }

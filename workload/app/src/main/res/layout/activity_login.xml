@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/text_view_lacamento_login"
-        android:layout_width="74dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="65dp"
         android:layout_marginTop="8dp"
