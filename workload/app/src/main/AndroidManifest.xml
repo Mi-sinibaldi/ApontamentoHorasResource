@@ -20,12 +20,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.employee.adapterEmployee.AdapterEmployee"></activity>
         <activity
             android:name=".ui.home.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.timeline.TsteActivityTimeLine"
+            android:name=".ui.admin.HomeAdminActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.LoginActivity"
