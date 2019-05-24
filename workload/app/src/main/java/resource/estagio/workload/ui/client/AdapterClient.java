@@ -53,7 +53,7 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            buttonCardClient=itemView.findViewById(R.id.button_card_client);
+            buttonCardClient = itemView.findViewById(R.id.button_card_client);
         }
     }
 }
