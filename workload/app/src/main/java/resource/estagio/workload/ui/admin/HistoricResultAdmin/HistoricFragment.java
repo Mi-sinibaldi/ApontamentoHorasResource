@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,9 +26,7 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
-import resource.estagio.workload.ui.admin.HistoricResultAdmin.adapter.AdapterListResult;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
-import resource.estagio.workload.ui.home.HomeContract;
 import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
 
@@ -48,13 +45,13 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     private int month;
     private int year;
     private TextView text_dialog_error;
-    ProgressBar progressBarTimeLine;
+    private ProgressBar progressBarTimeLine;
 
     private Dialog dialog;
     private HomeAdminContract.View viewHome;
+    private int shortAnimTime;
 
-    private Button buttonConfirm, buttonChooser, buttonChosserYes,
-            buttonChosserNo, buttonConfirmCheck, buttonError;
+    private Button buttonError;
 
     public HistoricFragment(HomeAdminContract.View view) {
         this.viewHome = view;
@@ -64,14 +61,13 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_historic, container, false);
         calendar = Calendar.getInstance();
-
         loadUi();
-        calendar = Calendar.getInstance();
         setTextDate();
-        final int thisMonth = calendar.get(Calendar.MONTH);
 
+        final int thisMonth = calendar.get(Calendar.MONTH);
         imageViewMonthLeft.setOnClickListener(v -> {
 
             if (month >= thisMonth - 2) {
@@ -86,7 +82,6 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
                 imageViewMonthLeft.setVisibility(View.INVISIBLE);
             }
         });
-
 
         imageViewMonthRight.setOnClickListener(v -> {
 
@@ -108,7 +103,6 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
 
     private void loadUi() {
         presenter = new HistoricFragmentPresenter(this);
-        buttonConfirm = view.findViewById(R.id.button_point_confirm);
 
         recyclerViewTimeline = view.findViewById(R.id.id_recyclerview_historic_admin);
         textViewMonth = view.findViewById(R.id.text_view_month_historic_admin);
@@ -117,16 +111,15 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
         imageViewMonthRight = view.findViewById(R.id.image_view_month_right_historic_admin);
         progressBarTimeLine = view.findViewById(R.id.progressBar_historic_admin);
         imageViewMonthRight.setVisibility(View.INVISIBLE);
+        shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
     }
 
     private void setTextDate() {
 
         textViewMonth.setText(new SimpleDateFormat("MMM").format(calendar.getTime()));
         textViewYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
-
         month = calendar.get(Calendar.MONTH) + 1;
         year = calendar.get(Calendar.YEAR);
-
         presenter.getTimeline(month, year);
     }
 
@@ -140,7 +133,6 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
 
     @Override
     public void dialog(boolean Key) {
-        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
         recyclerViewTimeline.setVisibility(Key ? View.INVISIBLE : View.VISIBLE);
         progressBarTimeLine.setVisibility(Key ? View.VISIBLE : View.GONE);
@@ -152,7 +144,6 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
             }
         });
         viewHome.enableNavigation(Key);
-
     }
 
     @Override

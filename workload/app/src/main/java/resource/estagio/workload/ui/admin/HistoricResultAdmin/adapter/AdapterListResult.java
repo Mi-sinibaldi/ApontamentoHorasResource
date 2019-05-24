@@ -36,7 +36,7 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        TimeEntryModel model = listTimeline.get(position);
+        //TimeEntryModel model = listTimeline.get(position);
 
         holder.projectName.setText("AlfaPrev");
         holder.customerName.setText("Banco Alfa");
@@ -65,8 +65,6 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
             customerName = itemView.findViewById(R.id.textView_name_customer_result);
             Allhours = itemView.findViewById(R.id.button_all_hours_result);
             hours = itemView.findViewById(R.id.textView_hour_project_result);
-
-
         }
     }
 }
