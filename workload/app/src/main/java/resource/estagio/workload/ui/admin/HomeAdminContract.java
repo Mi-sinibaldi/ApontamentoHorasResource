@@ -11,7 +11,7 @@ public class HomeAdminContract {
         void identifyItemClicked(MenuItem menuItem);
     }
 
-    interface View{
+    public interface View{
 
         void showFragment(Fragment fragment);
 

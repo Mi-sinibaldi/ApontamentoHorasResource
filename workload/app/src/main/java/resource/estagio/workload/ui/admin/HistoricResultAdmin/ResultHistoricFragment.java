@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.tabs.TabLayout;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.ui.admin.HomeAdminContract;
+import resource.estagio.workload.ui.home.HomeContract;
 
 public class ResultHistoricFragment extends Fragment {
     private View view;
@@ -21,9 +23,10 @@ public class ResultHistoricFragment extends Fragment {
     TabLayout tabLayout;
     TextView textTitle, textSubtitle;
     Fragment fragment;
+    HomeAdminContract.View viewHome;
 
-    public ResultHistoricFragment() {
-        // Required empty public constructor
+    public ResultHistoricFragment(HomeAdminContract.View view) {
+        viewHome = view;
     }
 
 
@@ -60,7 +63,7 @@ public class ResultHistoricFragment extends Fragment {
                     case 1:
                         textTitle.setText("Histórico");
                         textSubtitle.setText("Histórico de Apontamentos");
-                        fragment = new HistoricFragment();
+                        fragment = new HistoricFragment(viewHome);
                 }
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
