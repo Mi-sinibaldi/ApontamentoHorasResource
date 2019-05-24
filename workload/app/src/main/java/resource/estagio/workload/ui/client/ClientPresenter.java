@@ -18,6 +18,16 @@ public class ClientPresenter implements ClientContract.Presenter{
     }
 
     @Override
+    public void setReturn() {
+        view.showReturn();
+    }
+
+    @Override
+    public void setConfig() {
+        view.showRemove();
+    }
+
+    @Override
     public void getCustomers() {
         CustomerRepository repository = new CustomerRepository();
         repository.getCustomers(App.getUser().getAccessToken(),
