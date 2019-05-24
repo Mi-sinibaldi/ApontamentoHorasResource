@@ -20,5 +20,6 @@
     <string name="data">Data</string>
     <string name="horas">Horas</string>
     <string name="adicionar">Adicionar</string>
+    <string name="colaboradores">Colaboradores</string>
 
 </resources>

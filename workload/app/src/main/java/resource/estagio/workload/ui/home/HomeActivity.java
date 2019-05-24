@@ -1,7 +1,6 @@
 package resource.estagio.workload.ui.home;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
@@ -10,14 +9,12 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.ui.login.LoginActivity;
 import resource.estagio.workload.ui.point.PointFragment;
 
 public class HomeActivity extends AppCompatActivity implements HomeContract.View {
@@ -31,19 +28,17 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_home );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
 
         presenter = new HomePresenter(this);
         loadUi();
         showFragment(new PointFragment(this));
 
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                presenter.identifyItemClicked(menuItem);
-                return true;
-            }
+        navigation.setOnNavigationItemSelectedListener(menuItem -> {
+
+            presenter.identifyItemClicked(menuItem);
+            return true;
         });
 
     }
@@ -54,23 +49,24 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
             backToast.cancel();
             super.onBackPressed();
             return;
+
         } else {
-            backToast = Toast.makeText( getBaseContext(),
-                    "Pressione novamente para sair", Toast.LENGTH_SHORT );
+            backToast = Toast.makeText(getBaseContext(),
+                    "Pressione novamente para sair", Toast.LENGTH_SHORT);
             backToast.show();
         }
         backPresssedTime = System.currentTimeMillis();
     }
 
     private void loadUi() {
-        frameLayoutHome = findViewById( R.id.frame_layout_home );
+        frameLayoutHome = findViewById(R.id.frame_layout_home);
         navigation = findViewById(R.id.bottom_navigation_employee);
     }
 
     @Override
     public void showFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_layout_home,fragment).commit();
+                .replace(R.id.frame_layout_home, fragment).commit();
     }
 
 
@@ -82,8 +78,6 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
         for (int i = 0; i < navigation.getMenu().size(); i++){
             navigation.getMenu().getItem(i).setEnabled(!key);
         }
-
-
     }
 
     @Override

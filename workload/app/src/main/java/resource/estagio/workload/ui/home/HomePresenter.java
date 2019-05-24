@@ -3,7 +3,8 @@ package resource.estagio.workload.ui.home;
 import android.view.MenuItem;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.ui.SettingsFragment;
+import resource.estagio.workload.ui.employee.EmployeeFragment;
+import resource.estagio.workload.ui.login.LoginActivity;
 import resource.estagio.workload.ui.point.PointFragment;
 import resource.estagio.workload.ui.timeline.TimelineFragment;
 
@@ -27,7 +28,6 @@ public class HomePresenter implements HomeContract.Presenter {
                 view.showFragment(new TimelineFragment(view));
                 break;
             case R.id.ic_config:
-                view.showFragment(new SettingsFragment());
                 break;
             case R.id.ic_exit:
                 view.showDialogChooser();
