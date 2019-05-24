@@ -2,6 +2,8 @@ package resource.estagio.workload.data.remote.model;
 
 import androidx.annotation.NonNull;
 
+import resource.estagio.workload.domain.Customer;
+
 public class CustomerModel {
 
     private int id;
@@ -30,6 +32,10 @@ public class CustomerModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Customer toDomain() {
+        return new Customer(id, name);
     }
 
     @NonNull
