@@ -3,6 +3,10 @@
     android:shape="oval">
 
     <solid android:color="@color/colorButtonBack"/>
+    <padding android:right="6dp"
+        android:left="6dp"
+        android:bottom="6dp"
+        android:top="6dp"/>
 
 
 </shape>

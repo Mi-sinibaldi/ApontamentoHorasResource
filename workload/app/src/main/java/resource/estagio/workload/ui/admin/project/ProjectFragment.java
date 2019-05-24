@@ -21,7 +21,6 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     ProjectFragment() {
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
