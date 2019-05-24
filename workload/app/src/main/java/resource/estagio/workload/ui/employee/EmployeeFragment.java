@@ -28,6 +28,8 @@ import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.EmployeeAPI;
 import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricFragment;
+import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.client.ClientFragment;
 import resource.estagio.workload.ui.employee.adapterEmployee.AdapterEmployee;
 import resource.estagio.workload.ui.employee.adapterEmployee.RecyclerItemClickListener;
@@ -48,10 +50,10 @@ public class EmployeeFragment extends Fragment {
     private Button button_re_employee;
     private List<EmployeeModel> employee = new ArrayList<>();
     private ProgressBar progress_employee;
+    private HomeAdminContract.View viewHome;
 
-
-    public EmployeeFragment() {
-        // Required empty public constructor
+    public EmployeeFragment(HomeAdminContract.View view) {
+        viewHome = view;
     }
 
 
@@ -76,7 +78,7 @@ public class EmployeeFragment extends Fragment {
                             @Override
                             public void onItemClick(View view, int position) {
                                 getFragmentManager().beginTransaction()
-                                        .replace(R.id.frame_admin, new ClientFragment()).commit();
+                                        .replace(R.id.frame_admin, new ResultHistoricFragment(viewHome)).commit();
                             }
 
                             @Override
