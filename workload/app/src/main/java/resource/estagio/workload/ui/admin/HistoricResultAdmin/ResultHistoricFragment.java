@@ -15,15 +15,16 @@ import com.google.android.material.tabs.TabLayout;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
-import resource.estagio.workload.ui.home.HomeContract;
 
 public class ResultHistoricFragment extends Fragment {
     private View view;
 
-    TabLayout tabLayout;
-    TextView textTitle, textSubtitle;
-    Fragment fragment;
-    HomeAdminContract.View viewHome;
+    private TabLayout tabLayout;
+    private TextView textTitle, textSubtitle;
+    private Fragment fragment;
+    private HomeAdminContract.View viewHome;
+    private FragmentManager fm ;
+    private FragmentTransaction ft ;
 
     public ResultHistoricFragment(HomeAdminContract.View view) {
         viewHome = view;
@@ -34,18 +35,10 @@ public class ResultHistoricFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_result_historic, container, false);
-        // Inflate the layout for this fragment
-
 
         loadUI();
-
         actionTabSelected();
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frameLayout, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        ft.commit();
-
+        loadFragment(fragment);
         return view;
     }
 
@@ -64,12 +57,9 @@ public class ResultHistoricFragment extends Fragment {
                         textTitle.setText("Histórico");
                         textSubtitle.setText("Histórico de Apontamentos");
                         fragment = new HistoricFragment(viewHome);
+                        break;
                 }
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.frameLayout, fragment);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.commit();
+                loadFragment(fragment);
             }
 
 
@@ -86,11 +76,21 @@ public class ResultHistoricFragment extends Fragment {
     }
 
     private void loadUI() {
+        fm = getActivity().getSupportFragmentManager();
+        ft = fm.beginTransaction();
         textTitle=view.findViewById(R.id.textTitle);
         textSubtitle = view.findViewById(R.id.textSubtitle);
         fragment = new ResultFragment();
         tabLayout = view.findViewById(R.id.tabLayout);
         tabLayout.setSelectedTabIndicator(0);
+    }
+
+    private void loadFragment(Fragment fragment){
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.frameLayout, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.commit();
     }
 
 }

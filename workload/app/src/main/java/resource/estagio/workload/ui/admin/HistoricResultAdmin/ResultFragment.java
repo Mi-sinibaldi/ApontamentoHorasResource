@@ -7,13 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.adapter.AdapterListResult;
 
 
 public class ResultFragment extends Fragment {
-
-
+    private AdapterListResult adapterListResult;
+    private RecyclerView recyclerViewListResult;
+    private List<TimeEntryModel> listResult;
+    private List<TimeEntryModel> list = new ArrayList<>();
+    View view;
     public ResultFragment() {
         // Required empty public constructor
     }
@@ -22,8 +32,29 @@ public class ResultFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_result, container, false);
+        view = inflater.inflate(R.layout.fragment_result, container, false);
+
+
+        recyclerViewListResult = view.findViewById(R.id.recyclerView_result_admin);
+        loadList();
+        return view;
     }
 
+
+    private void configAdapter() {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerViewListResult.setLayoutManager(layoutManager);
+        recyclerViewListResult.setHasFixedSize(true);
+
+        adapterListResult = new AdapterListResult(listResult);
+        recyclerViewListResult.setAdapter(adapterListResult);
+    }
+
+
+    private void loadList(){
+        list.add(new TimeEntryModel(1,"teste",9,"",
+                "000",9,"111","aaa"));
+        listResult = list;
+        configAdapter();
+    }
 }
