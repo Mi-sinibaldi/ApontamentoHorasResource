@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="#4050D5"
+    tools:context=".ui.employee.adapterEmployee.AdapterEmployee">
+
+    <Button
+        android:id="@+id/button_name_employee"
+        android:layout_width="376dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_name_employee"
+        android:fontFamily="@font/open_sans"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="jhashahashdh"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_re_employee"
+        android:layout_width="88dp"
+        android:layout_height="33dp"
+        android:background="@drawable/button_re_employee"
+        android:fontFamily="@font/open_sans"
+        android:text="re036748"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_name_employee"
+        app:layout_constraintEnd_toEndOf="@+id/button_name_employee"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toStartOf="@+id/button_name_employee"
+        app:layout_constraintTop_toTopOf="@+id/button_name_employee" />
+</android.support.constraint.ConstraintLayout>

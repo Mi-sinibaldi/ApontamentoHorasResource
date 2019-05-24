@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import resource.estagio.workload.DialogActivity;
 import resource.estagio.workload.R;
+import resource.estagio.workload.ui.employee.EmployeeFragment;
 import resource.estagio.workload.ui.login.LoginActivity;
 import resource.estagio.workload.ui.point.PointFragment;
 import resource.estagio.workload.ui.timeline.TimelineFragment;
@@ -33,6 +34,7 @@ public class HomePresenter implements HomeContract.Presenter {
                 view.showFragment(new TimelineFragment());
                 break;
             case R.id.ic_config:
+                view.showFragment(new EmployeeFragment());
                 break;
             case R.id.ic_exit:
                 showDialogChooser();

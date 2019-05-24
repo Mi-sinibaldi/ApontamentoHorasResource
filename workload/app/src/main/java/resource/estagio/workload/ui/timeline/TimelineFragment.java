@@ -44,8 +44,8 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
     private TimeLineContract.Presenter presenter;
     private int month;
     private int year;
-    private ProgressBar progressBarTimeLine;
-    TextView text_dialog_error;
+    private    TextView text_dialog_error;
+    ProgressBar progressBarTimeLine;
 
     private Button buttonConfirm, buttonChooser, buttonChosserYes,
             buttonChosserNo, buttonConfirmCheck, buttonError;
