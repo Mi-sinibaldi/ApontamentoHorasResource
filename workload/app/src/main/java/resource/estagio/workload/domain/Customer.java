@@ -2,11 +2,6 @@ package resource.estagio.workload.domain;
 
 import android.content.Context;
 
-import java.util.List;
-
-import resource.estagio.workload.data.remote.model.CustomerModel;
-import resource.estagio.workload.infra.BaseCallback;
-
 public class Customer {
 
     public  CustomerContract.IRepository repository;
@@ -45,21 +40,5 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void getCustomers(String token, BaseCallback<List<CustomerModel>> onResult) throws Exception {
-        if(repository == null)
-            throw new Exception("Repositório Vazio");
-        repository.getCustomers(token, new BaseCallback<List<CustomerModel>>() {
-            @Override
-            public void onSuccessful(List<CustomerModel> value) {
-                onResult.onSuccessful(value);
-            }
-
-            @Override
-            public void onUnsuccessful(String error) {
-                onResult.onUnsuccessful(error);
-            }
-        });
     }
 }
