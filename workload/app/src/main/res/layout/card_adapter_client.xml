@@ -7,55 +7,25 @@
     android:layout_height="wrap_content"
     android:background="@color/colorLogin">
 
-    <TextView
+    <Button
         android:id="@+id/button_card_client"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/button_customized_client_adapter"
+        android:drawableRight="@drawable/ic_arrow_right_black_24dp"
         android:paddingLeft="28dp"
-        android:paddingRight="15dp"
+        android:paddingRight="28dp"
+        android:text="@string/cliente"
+        android:textAlignment="textStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/text_view_client_adapter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="@string/cliente"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/button_card_client"
-        app:layout_constraintStart_toStartOf="@+id/button_card_client"
-        app:layout_constraintTop_toTopOf="@+id/button_card_client" />
-
-    <ImageView
-        android:id="@+id/image_view_icon_adapter_client"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="4dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/button_card_client"
-        app:layout_constraintEnd_toEndOf="@+id/button_card_client"
-        app:layout_constraintTop_toTopOf="@+id/button_card_client"
-        app:srcCompat="@drawable/ic_arrow_right_black_24dp"
-        tools:ignore="VectorDrawableCompat" />
-
-    <ImageView
-        android:id="@+id/image_view_delete_client"
-        android:layout_width="40dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="4dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/button_card_client"
-        app:layout_constraintEnd_toEndOf="@+id/image_view_icon_adapter_client"
-        app:layout_constraintTop_toTopOf="@+id/button_card_client"
-        app:srcCompat="@mipmap/ic_delete" />
+        app:layout_constraintVertical_bias="0.028" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

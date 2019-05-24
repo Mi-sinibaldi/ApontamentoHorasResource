@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,16 +27,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     private View view;
     private RecyclerView recyclerClient;
     private ConstraintLayout buttonConstraintLayout;
-    private ImageView imageViewConfigClient;
-    private Button buttonSaveClient;
-    private TextView textViewCancelClient;
-    private TextView textViewSelecionarClient;
-    private AdapterClient adapterClient;
-
-    private List<CustomerModel> customerModels;
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +40,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
         presenter= new ClientPresenter(this);
-        loadUI();
         buttonConstraintLayout = view.findViewById(R.id.button_constraints_client);
         buttonConstraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,22 +48,8 @@ public class ClientFragment extends Fragment implements ClientContract.View {
             }
         });
 
-        presenter.getCustomers();
-
-        imageViewConfigClient.setOnClickListener(v -> presenter.setConfig());
-
-        buttonSaveClient.setOnClickListener(v -> presenter.setReturn());
-
-        textViewCancelClient.setOnClickListener(v -> presenter.setReturn());
-
-    }
-
-    public void loadUI(){
-        buttonSaveClient = view.findViewById(R.id.button_save_client);
-        textViewCancelClient = view.findViewById(R.id.text_view_cancel_client);
-        textViewSelecionarClient = view.findViewById(R.id.text_view_selecionar_client);
         recyclerClient = view.findViewById(R.id.recycler_clients_client);
-        imageViewConfigClient = view.findViewById(R.id.image_view_config_client);
+        presenter.getCustomers();
 
     }
 
@@ -86,8 +58,8 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerClient.setLayoutManager(layoutManager);
         recyclerClient.setHasFixedSize(true);
-        this.customerModels = customerModels;
-        adapterClient = new AdapterClient(customerModels,true);
+
+        AdapterClient adapterClient = new AdapterClient(customerModels);
         recyclerClient.setAdapter(adapterClient);
 
     }
@@ -95,28 +67,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     @Override
     public void notification(String messenge) {
         Toast.makeText(getApplicationContext(), messenge, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showRemove() {
-        imageViewConfigClient.setVisibility(View.INVISIBLE);
-        textViewSelecionarClient.setVisibility(View.INVISIBLE);
-        textViewCancelClient.setVisibility(View.VISIBLE);
-        buttonSaveClient.setVisibility(View.VISIBLE);
-        adapterClient = new AdapterClient(customerModels,false);
-        recyclerClient.setAdapter(adapterClient);
-       // adapterClient.myViewHolder.setIconRemove();
-    }
-
-    @Override
-    public void showReturn() {
-        imageViewConfigClient.setVisibility(View.VISIBLE);
-        textViewSelecionarClient.setVisibility(View.VISIBLE);
-        textViewCancelClient.setVisibility(View.INVISIBLE);
-        buttonSaveClient.setVisibility(View.INVISIBLE);
-        adapterClient = new AdapterClient(customerModels,true);
-        recyclerClient.setAdapter(adapterClient);
-      //  adapterClient.myViewHolder.setIconClient();
     }
 
     private Context getApplicationContext() {

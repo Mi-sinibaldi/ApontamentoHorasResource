@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_view_title_client"
+            android:id="@+id/textView3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="37dp"
@@ -50,7 +50,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <TextView
-            android:id="@+id/text_view_sub_title_client"
+            android:id="@+id/textView4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="37dp"
@@ -63,7 +63,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.086"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_title_client" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 
         <TextView
@@ -73,12 +73,11 @@
             android:layout_marginStart="37dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="30dp"
             android:text="Selecione um cliente para ver os projetos"
             android:textColor="@color/colorWhite"
-            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/image_view_config_client"
+            app:layout_constraintEnd_toStartOf="@+id/imageView3"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_constraints_client" />
@@ -95,10 +94,9 @@
             android:textColorLink="#00FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_sub_title_client">
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
 
             <TextView
-                android:id="@+id/text_view_add_client_client"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_add_black_24dp"
@@ -113,7 +111,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
-            android:id="@+id/image_view_config_client"
+            android:id="@+id/imageView3"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="30dp"
@@ -121,39 +119,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/text_view_selecionar_client"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/text_view_selecionar_client" />
-
-        <Button
-            android:id="@+id/button_save_client"
-            android:layout_width="74dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/button_white_client"
-            android:text="Salvar"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorLogin"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_constraints_client"
-            app:layout_constraintVertical_bias="0.65" />
-
-        <TextView
-            android:id="@+id/text_view_cancel_client"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="@color/colorLogin"
-            android:text="Cancelar"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorWhite"
-            android:textSize="14dp"
-            android:textStyle="bold"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/button_save_client"
-            app:layout_constraintEnd_toStartOf="@+id/button_save_client"
-            app:layout_constraintTop_toTopOf="@+id/button_save_client" />
 
 
     </android.support.constraint.ConstraintLayout>
