@@ -8,11 +8,13 @@
     tools:context=".ui.employee.EmployeeFragment">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="409dp"
-        android:layout_height="201dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/constraintLayout3"
+        android:layout_width="410dp"
+        android:layout_height="229dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/id_recyclerview_employee"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -20,65 +22,80 @@
             android:id="@+id/imageView_recource"
             android:layout_width="99dp"
             android:layout_height="11dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="48dp"
             android:src="@drawable/logo_resource"
-            app:layout_constraintBottom_toTopOf="@+id/text_employee"
             app:layout_constraintEnd_toEndOf="@+id/text_employee"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/text_employee" />
+            app:layout_constraintHorizontal_bias="0.023"
+            app:layout_constraintStart_toStartOf="@+id/text_employee"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_employee"
-            android:layout_width="wrap_content"
+            android:layout_width="183dp"
             android:layout_height="34dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/open_sans_bold"
             android:text="@string/colaboradores"
             android:textColor="@color/colorWhite"
             android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView_desc"
             app:layout_constraintEnd_toEndOf="@+id/textView_desc"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView_desc" />
+            app:layout_constraintStart_toStartOf="@+id/textView_desc"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_recource" />
 
         <TextView
             android:id="@+id/textView_desc"
             android:layout_width="wrap_content"
             android:layout_height="17dp"
-            android:layout_marginBottom="68dp"
             android:fontFamily="@font/open_sans"
             android:text="Lista de colaboradores cadastrados."
             android:textColor="@color/colorWhite"
             android:textSize="12dp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/searchView"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.007"
             app:layout_constraintStart_toStartOf="@+id/searchView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/text_employee" />
 
         <SearchView
             android:id="@+id/searchView"
             android:layout_width="331dp"
             android:layout_height="39dp"
-            android:layout_marginStart="37dp"
-            android:layout_marginTop="136dp"
-            android:layout_marginEnd="37dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/seach_employee"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_desc" />
     </android.support.constraint.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/id_recyclerview_employee"
-        android:layout_width="397dp"
-        android:layout_height="501dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+
+    <!--<ProgressBar-->
+        <!--android:id="@+id/progress_employee"-->
+        <!--style="?android:attr/progressBarStyle"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/id_recyclerview_employee"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/id_recyclerview_employee"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/id_recyclerview_employee"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/id_recyclerview_employee" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

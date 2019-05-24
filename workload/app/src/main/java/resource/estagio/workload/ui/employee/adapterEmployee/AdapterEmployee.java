@@ -1,5 +1,6 @@
 package resource.estagio.workload.ui.employee.adapterEmployee;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,15 @@ import java.util.Collections;
 import java.util.List;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 
-public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyViewHolder> {
+public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyViewHolder> implements View.OnClickListener {
 
-    private List<TimeEntryModel> listEmployee;
-    private  int sizeList;
+    private List<EmployeeModel> listEmployee;
+    private int sizeList;
 
-    public  AdapterEmployee(List<TimeEntryModel>listEmployee){
+    public AdapterEmployee(List<EmployeeModel> listEmployee) {
         this.listEmployee = listEmployee;
         Collections.reverse(listEmployee);
         sizeList = listEmployee.size() - 1;
@@ -35,27 +37,30 @@ public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        TimeEntryModel model = listEmployee.get(position);
-
-        if(position == sizeList){
-
-        }
+        EmployeeModel model = listEmployee.get(position);
+        holder.nome.setText(model.getNome());
+        holder.re.setText(model.getRe());
     }
 
-      @Override
+    @Override
     public int getItemCount() {
         return listEmployee.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    @Override
+    public void onClick(View v) {
 
-      Button activityName;
-      Button activityId;
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+        Button nome;
+        Button re;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            activityName = itemView.findViewById(R.id.button_name_employee);
-            activityId = itemView.findViewById(R.id.button_re_employee);
+            nome = itemView.findViewById(R.id.button_name_employee);
+            re = itemView.findViewById(R.id.button_re_employee);
 
         }
     }

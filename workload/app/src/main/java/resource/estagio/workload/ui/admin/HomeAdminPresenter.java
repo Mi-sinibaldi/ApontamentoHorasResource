@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import resource.estagio.workload.R;
 import resource.estagio.workload.ui.SettingsFragment;
 import resource.estagio.workload.ui.client.ClientFragment;
+import resource.estagio.workload.ui.employee.EmployeeFragment;
 
 public class HomeAdminPresenter implements HomeAdminContract.Presenter {
     private HomeAdminContract.View view;
@@ -17,7 +18,7 @@ public class HomeAdminPresenter implements HomeAdminContract.Presenter {
     public void identifyItemClicked(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.ic_employee_admin:
-
+                view.showFragment(new EmployeeFragment());
                 break;
             case R.id.ic_customer_admin:
                 view.showFragment(new ClientFragment());
