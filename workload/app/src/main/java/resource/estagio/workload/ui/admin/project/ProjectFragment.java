@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
+import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.adapterProject.AdapterProject;
 import resource.estagio.workload.ui.client.ClientFragment;
 
@@ -30,8 +31,10 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     private ProgressBar progressBarProjectAdmin;
     private ProjectContract.Presenter presenter;
     private CustomerModel customer;
+    private HomeAdminContract.View activityView;
 
-    public ProjectFragment() {
+    public ProjectFragment(HomeAdminContract.View activityView) {
+        this.activityView = activityView;
     }
 
     @Override
@@ -54,7 +57,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
 
         imageViewBackCustomers.setOnClickListener(v -> getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.frame_admin, new ClientFragment())
+                .replace(R.id.frame_admin, new ClientFragment(activityView))
                 .commit());
     }
 
@@ -103,6 +106,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
                 progressBarProjectAdmin.setVisibility(result ? View.VISIBLE : View.GONE);
             }
         });
+        activityView.enableNavigation(result);
 
     }
 }
