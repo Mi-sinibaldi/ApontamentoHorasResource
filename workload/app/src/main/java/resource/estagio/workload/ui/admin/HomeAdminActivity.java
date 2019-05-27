@@ -32,7 +32,7 @@ public class HomeAdminActivity extends AppCompatActivity implements HomeAdminCon
         presenter = new HomeAdminPresenter(this);
         navigation = findViewById(R.id.bottom_navigation_admin);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_admin, new EmployeeFragment()).commit();
+                .replace(R.id.frame_admin, new EmployeeFragment(this)).commit();
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
