@@ -60,8 +60,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
             @Override
             public void onClick(View v) {
                 Toast.makeText(view.getContext(), "Deu", Toast.LENGTH_SHORT).show();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_admin, new ProjectFragment()).commit();
             }
         });
 
@@ -99,8 +97,10 @@ public class ClientFragment extends Fragment implements ClientContract.View {
             public void goToProject(View v, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("customer", customerModels.get(position));
-                Fragment fragment = new Fragment();
+                ProjectFragment fragment = new ProjectFragment();
                 fragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_admin, fragment).commit();
             }
         };
     }
