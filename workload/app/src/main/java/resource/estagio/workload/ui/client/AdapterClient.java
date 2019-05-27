@@ -24,9 +24,10 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
 
     public boolean setStatusList;
 
-    public AdapterClient(List<CustomerModel> list, boolean status) {
+    public AdapterClient(List<CustomerModel> list, boolean status, AdapterInterface listener) {
         this.list = list;
         this.setStatusList = status;
+        this.listener = listener;
     }
 
     @NonNull

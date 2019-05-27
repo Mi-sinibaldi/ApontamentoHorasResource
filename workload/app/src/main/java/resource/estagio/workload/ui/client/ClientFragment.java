@@ -112,7 +112,7 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         recyclerClient.setLayoutManager(layoutManager);
         recyclerClient.setHasFixedSize(true);
         this.customerModels = customerModels;
-        adapterClient = new AdapterClient(customerModels, true);
+        adapterClient = new AdapterClient(customerModels, true, adapterInterface);
         recyclerClient.setAdapter(adapterClient);
 
     }
@@ -128,7 +128,7 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         textViewSelecionarClient.setVisibility(View.INVISIBLE);
         textViewCancelClient.setVisibility(View.VISIBLE);
         buttonSaveClient.setVisibility(View.VISIBLE);
-        adapterClient = new AdapterClient(customerModels, false);
+        adapterClient = new AdapterClient(customerModels, false, adapterInterface);
         recyclerClient.setAdapter(adapterClient);
     }
 
@@ -138,7 +138,7 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         textViewSelecionarClient.setVisibility(View.VISIBLE);
         textViewCancelClient.setVisibility(View.INVISIBLE);
         buttonSaveClient.setVisibility(View.INVISIBLE);
-        adapterClient = new AdapterClient(customerModels, true);
+        adapterClient = new AdapterClient(customerModels, true, adapterInterface);
         recyclerClient.setAdapter(adapterClient);
     }
 
