@@ -11,10 +11,12 @@ public class ProjectContract {
         void showToast(int message);
 
         void showError(String error);
+
+        void showProgress(boolean result);
     }
 
     interface Presenter{
 
-        void loadList();
+        void loadList(int idCustomer);
     }
 }

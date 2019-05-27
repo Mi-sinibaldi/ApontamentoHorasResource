@@ -18,33 +18,26 @@ public class ProjectPresenter implements ProjectContract.Presenter {
     }
 
     @Override
-    public void loadList() {
-        new ActivityRepository().getActivity(1, App.getUser().getAccessToken(),
-                new BaseCallback<List<ActivityModel>>() {
+    public void loadList(int idCustomer) {
+        view.showProgress(true);
 
+        new ActivityRepository().getActivity(idCustomer, App.getUser().getAccessToken(),
+                new BaseCallback<List<ActivityModel>>() {
                     @Override
                     public void onSuccessful(List<ActivityModel> value) {
-                        new ActivityRepository().getActivity(3, App.getUser().getAccessToken(),
-                                new BaseCallback<List<ActivityModel>>() {
-                                    @Override
-                                    public void onSuccessful(List<ActivityModel> value) {
-                                        if (value == null) {
-                                            view.showToast(R.string.no_records_found);
-                                            return;
-                                        }
-                                        view.listAdapter(new AdapterProject(value));
-                                    }
-
-                                    @Override
-                                    public void onUnsuccessful(String error) {
-                                        view.showError(error);
-                                    }
-                                });
+                        if (value == null) {
+                            view.showToast(R.string.no_records_found);
+                            view.showProgress(false);
+                            return;
+                        }
+                        view.listAdapter(new AdapterProject(value));
+                        view.showProgress(false);
                     }
 
                     @Override
                     public void onUnsuccessful(String error) {
                         view.showError(error);
+                        view.showProgress(false);
                     }
                 });
     }
