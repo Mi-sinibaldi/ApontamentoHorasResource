@@ -3,7 +3,6 @@ package resource.estagio.workload.ui.client;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,12 +61,8 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         loadUI();
         loadAdapterListener();
 
-        buttonConstraintLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(view.getContext(), "Deu", Toast.LENGTH_SHORT).show();
-            }
-        });
+        buttonConstraintLayout.setOnClickListener(v -> Toast.makeText(view.getContext(), "Deu",
+                Toast.LENGTH_SHORT).show());
 
         presenter.getCustomers(true);
 
