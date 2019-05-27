@@ -14,11 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
-import resource.estagio.workload.domain.Customer;
 
 
 public class ClientFragment extends Fragment implements ClientContract.View {
