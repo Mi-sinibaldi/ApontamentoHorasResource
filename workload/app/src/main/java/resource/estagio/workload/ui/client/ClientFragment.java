@@ -1,5 +1,7 @@
 package resource.estagio.workload.ui.client;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,8 +39,10 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     private TextView textViewCancelClient;
     private TextView textViewSelecionarClient;
     private AdapterClient adapterClient;
+    private ProgressBar progressBarClient;
 
     private List<CustomerModel> customerModels;
+    private List<CustomerModel> customerModelsDelete;
 
     private AdapterClient.AdapterInterface adapterInterface;
 
@@ -63,34 +68,32 @@ public class ClientFragment extends Fragment implements ClientContract.View {
             }
         });
 
-        presenter.getCustomers();
+        presenter.getCustomers(true);
 
-        imageViewConfigClient.setOnClickListener(v -> presenter.setRemoveRecycler());
+        imageViewConfigClient.setOnClickListener(v -> presenter.getCustomers(false));
 
-        buttonSaveClient.setOnClickListener( v -> presenter.setReturnRecycler());
+        buttonSaveClient.setOnClickListener( v -> presenter.deleteCustomer(customerModelsDelete));
 
-        textViewCancelClient.setOnClickListener( v -> presenter.setReturnRecycler());
-
-
-        presenter.getCustomers();
+        textViewCancelClient.setOnClickListener( v -> presenter.getCustomers(true));
 
     }
 
     private void loadUI() {
-        presenter= new ClientPresenter(this);
+        presenter = new ClientPresenter(this);
         buttonConstraintLayout = view.findViewById(R.id.button_constraints_client);
         recyclerClient = view.findViewById(R.id.recycler_clients_client);
         textViewCancelClient = view.findViewById(R.id.text_view_cancel_client);
         textViewSelecionarClient = view.findViewById(R.id.text_view_selecionar_client);
         imageViewConfigClient = view.findViewById(R.id.image_view_config_client);
         buttonSaveClient = view.findViewById(R.id.button_save_client);
+        progressBarClient = view.findViewById(R.id.progress_client);
     }
 
     private  void loadAdapterListener(){
         adapterInterface = new AdapterClient.AdapterInterface() {
             @Override
-            public void removeClient(View v, int position) {
-
+            public void removeClient(View v, int position, List<CustomerModel> models) {
+                customerModelsDelete = models;
             }
 
             @Override
@@ -107,14 +110,12 @@ public class ClientFragment extends Fragment implements ClientContract.View {
 
 
     @Override
-    public void setRecyclerClient(List<CustomerModel> customerModels){
+    public void setRecyclerClient(List<CustomerModel> customerModels, boolean status){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerClient.setLayoutManager(layoutManager);
         recyclerClient.setHasFixedSize(true);
         this.customerModels = customerModels;
-        adapterClient = new AdapterClient(customerModels, true, adapterInterface);
-        recyclerClient.setAdapter(adapterClient);
-
+        showAdapterRecycler(status);
     }
 
     @Override
@@ -123,26 +124,39 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     }
 
     @Override
-    public void showRemove() {
-        imageViewConfigClient.setVisibility(View.INVISIBLE);
-        textViewSelecionarClient.setVisibility(View.INVISIBLE);
-        textViewCancelClient.setVisibility(View.VISIBLE);
-        buttonSaveClient.setVisibility(View.VISIBLE);
-        adapterClient = new AdapterClient(customerModels, false, adapterInterface);
-        recyclerClient.setAdapter(adapterClient);
-    }
-
-    @Override
-    public void showReturn() {
-        imageViewConfigClient.setVisibility(View.VISIBLE);
-        textViewSelecionarClient.setVisibility(View.VISIBLE);
-        textViewCancelClient.setVisibility(View.INVISIBLE);
-        buttonSaveClient.setVisibility(View.INVISIBLE);
-        adapterClient = new AdapterClient(customerModels, true, adapterInterface);
+    public void showAdapterRecycler(boolean status) {
+        if(status){
+            imageViewConfigClient.setVisibility(View.VISIBLE);
+            textViewSelecionarClient.setVisibility(View.VISIBLE);
+            textViewCancelClient.setVisibility(View.INVISIBLE);
+            buttonSaveClient.setVisibility(View.INVISIBLE);
+        }else {
+            imageViewConfigClient.setVisibility(View.INVISIBLE);
+            textViewSelecionarClient.setVisibility(View.INVISIBLE);
+            textViewCancelClient.setVisibility(View.VISIBLE);
+            buttonSaveClient.setVisibility(View.VISIBLE);
+        }
+        adapterClient = new AdapterClient(customerModels, status, adapterInterface);
         recyclerClient.setAdapter(adapterClient);
     }
 
     private Context getApplicationContext() {
         return view.getContext();
+    }
+
+    @Override
+    public void showProgressClient(final boolean show) {
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+        recyclerClient.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        progressBarClient.setVisibility(show ? View.VISIBLE : View.GONE);
+        progressBarClient.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressBarClient.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
+
     }
 }

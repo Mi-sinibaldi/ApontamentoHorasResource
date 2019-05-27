@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import resource.estagio.workload.R;
@@ -47,7 +48,15 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
             holder.buttonCardClient.setOnClickListener(v -> listener.goToProject(v, position));
             holder.setIconClient();
         }else{
-            holder.imageViewDeleteClient.setOnClickListener(v -> listener.removeClient(v, position));
+            List<CustomerModel> customerModels = new ArrayList<>();
+            holder.imageViewDeleteClient.setOnClickListener(v -> {
+                customerModels.add(list.get(position));
+                listener.removeClient(v, position, customerModels);
+
+                list.remove(position);
+                notifyItemRemoved(position);
+
+            });
             holder.setIconRemove();
         }
 
@@ -64,7 +73,7 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
     }
 
     public interface AdapterInterface {
-        void removeClient(View v, int position);
+        void removeClient(View v, int position, List<CustomerModel> models);
 
         void goToProject(View v, int position);
     }
