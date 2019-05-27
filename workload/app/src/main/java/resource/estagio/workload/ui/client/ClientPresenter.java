@@ -1,7 +1,5 @@
 package resource.estagio.workload.ui.client;
 
-import android.widget.ImageView;
-
 import java.util.List;
 
 import resource.estagio.workload.data.remote.model.CustomerModel;
@@ -26,7 +24,6 @@ public class ClientPresenter implements ClientContract.Presenter{
             public void onSuccessful(List<CustomerModel> value) {
                 view.setRecyclerClient(value, status);
                 view.showProgressClient(false);
-
             }
 
             @Override
@@ -38,21 +35,22 @@ public class ClientPresenter implements ClientContract.Presenter{
     }
 
     @Override
-    public void deleteCustomer(List<CustomerModel> models) {
+    public void deleteCustomer(CustomerModel model) {
+        view.showProgressClient(true);
         try{
-            for (CustomerModel model: models){
-                Customer customer = new Customer(model.getId(),model.getName());
-                customer.repository = new CustomerRepository();
-                customer.deleteCustomer(App.getUser().getAccessToken(), new BaseCallback<Void>() {
-                    @Override
-                    public void onSuccessful(Void value) { }
+            Customer customer = new Customer(model.getId(),model.getName());
+            customer.repository = new CustomerRepository();
+            customer.deleteCustomer(App.getUser().getAccessToken(), new BaseCallback<Void>() {
+                @Override
+                public void onSuccessful(Void value) { view.showProgressClient(false);}
 
-                    @Override
-                    public void onUnsuccessful(String error) {
-                        view.notification(error);
-                    }
-                });
-            }
+                @Override
+                public void onUnsuccessful(String error) {
+                    view.showProgressClient(false);
+                    view.notification(error);
+                }
+            });
+
             getCustomers(true);
         }catch (Exception e){
             view.notification(e.getMessage());
