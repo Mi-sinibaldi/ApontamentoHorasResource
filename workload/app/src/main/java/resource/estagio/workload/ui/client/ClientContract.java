@@ -21,7 +21,7 @@ public class ClientContract {
 
         void getCustomers(boolean status);
 
-        void deleteCustomer(List<CustomerModel> models);
+        void deleteCustomer(CustomerModel model);
 
     }
 }

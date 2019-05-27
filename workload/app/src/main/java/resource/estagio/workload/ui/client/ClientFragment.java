@@ -31,7 +31,7 @@ import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
 public class ClientFragment extends Fragment implements ClientContract.View {
 
-    private ClientPresenter presenter;
+    // ATRIBUTOS DE REFERÊNCIA VISUAL
     private View view;
     private RecyclerView recyclerClient;
     private ConstraintLayout buttonConstraintLayout;
@@ -43,6 +43,8 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     private ProgressBar progressBarClient;
     private HomeAdminContract.View activityView;
 
+    // ATRIBUTOS INTERNOS
+    private ClientPresenter presenter;
     private List<CustomerModel> customerModels;
     private List<CustomerModel> customerModelsDelete;
     private AdapterClient.AdapterInterface adapterInterface;
@@ -53,10 +55,8 @@ public class ClientFragment extends Fragment implements ClientContract.View {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_client, container, false);
-    }
+                             Bundle savedInstanceState){
+        return inflater.inflate(R.layout.fragment_client, container, false); }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -66,23 +66,28 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         loadUI();
         loadAdapterListener();
 
+        presenter.getCustomers(true);
+
+        loadListernersClick();
+
+    }
+
+    private void loadListernersClick() {
         buttonConstraintLayout.setOnClickListener(v -> Toast.makeText(view.getContext(), "Deu",
                 Toast.LENGTH_SHORT).show());
-
-        presenter.getCustomers(true);
 
         imageViewConfigClient.setOnClickListener(v -> presenter.getCustomers(false));
 
         buttonSaveClient.setOnClickListener( v -> {
-            if(customerModelsDelete.size() > 0)
-                presenter.deleteCustomer(customerModelsDelete);
-            else
-                presenter.getCustomers(true);
+            if(customerModelsDelete.size() > 0) {
+                for(CustomerModel model : customerModelsDelete){
+                    presenter.deleteCustomer(model);
+                }
 
-        });
+            }
+            else presenter.getCustomers(true); });
 
         textViewCancelClient.setOnClickListener( v -> presenter.getCustomers(true));
-
     }
 
     private void loadUI() {
@@ -99,7 +104,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     private  void loadAdapterListener(){
         customerModelsDelete = new ArrayList<>();
         adapterInterface = new AdapterClient.AdapterInterface() {
-
             @Override
             public void removeClient(View v, int position) {
                 customerModelsDelete.add(customerModels.get(position));
