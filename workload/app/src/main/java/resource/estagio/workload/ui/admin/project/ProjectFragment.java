@@ -37,7 +37,8 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     private Button buttonNewProject;
     private String activityName;
     private TextView text_dialog_error;
-    ProgressBar progressBarTimeLine;
+    ProgressBar progressBarProjectAdmin;
+    private ProjectContract.Presenter presenter;
 
     public ProjectFragment() {
     }
@@ -47,45 +48,12 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_project_admin, container, false);
+
+        presenter = new ProjectPresenter(this);
         loadUI();
         setCustomerName();
-        loadList();
+        presenter.loadList();
         return view;
-    }
-
-    private void loadList() {
-
-        new ActivityRepository().getActivity(1, App.getUser().getAccessToken(),
-                new BaseCallback<List<ActivityModel>>() {
-
-                    @Override
-                    public void onSuccessful(List<ActivityModel> value) {
-                        new ActivityRepository().getActivity(3, App.getUser().getAccessToken(),
-                                new BaseCallback<List<ActivityModel>>() {
-                                    @Override
-                                    public void onSuccessful(List<ActivityModel> value) {
-                                        if (value == null) {
-                                            Toast.makeText(getActivity(),
-                                                    String.valueOf(R.string.no_records_found),
-                                                    Toast.LENGTH_LONG).show();
-                                            return;
-                                        }
-                                        AdapterProject adapter = new AdapterProject(value);
-                                        recyclerProject.setAdapter(adapter);
-                                    }
-
-                                    @Override
-                                    public void onUnsuccessful(String error) {
-                                        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onUnsuccessful(String error) {
-                        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
-                    }
-                });
     }
 
     private void setCustomerName() {
@@ -100,5 +68,23 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         //buttonNewProject = view.findViewById(R.id.button_new_project);
     }
 
+    @Override
+    public void listAdapter(AdapterProject adapter) {
+        recyclerProject.setAdapter(adapter);
+    }
+
+    @Override
+    public void showToast(int message) {
+        Toast.makeText(getActivity(),
+                String.valueOf(message),
+                Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showError(String error) {
+        Toast.makeText(getActivity(),
+                String.valueOf(error),
+                Toast.LENGTH_LONG).show();
+    }
 }
 
