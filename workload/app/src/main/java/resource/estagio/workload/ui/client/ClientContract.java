@@ -12,5 +12,7 @@ public class ClientContract {
 
     interface Presenter {
         void getCustomers();
+        void deleteCustomer(int id, String name, int position);
+
     }
 }
