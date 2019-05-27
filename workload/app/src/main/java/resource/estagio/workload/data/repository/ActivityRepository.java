@@ -2,6 +2,7 @@ package resource.estagio.workload.data.repository;
 
 import java.util.List;
 
+import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.ActivityAPI;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
@@ -69,9 +70,9 @@ public class ActivityRepository extends Repository implements ActivityContract.I
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
-                            onResult.onSuccessful("Projeto inserido com sucesso");
+                            onResult.onSuccessful(String.valueOf(R.string.project_entered_successfully));
                         } else {
-                            onResult.onUnsuccessful("Projeto não inserido");
+                            onResult.onUnsuccessful(String.valueOf(R.string.project_not_entered));
                         }
                     }
 
@@ -91,9 +92,9 @@ public class ActivityRepository extends Repository implements ActivityContract.I
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
-                            onResult.onSuccessful("Projeto atualizado com sucesso");
+                            onResult.onSuccessful(String.valueOf(R.string.project_updated_successfully));
                         } else {
-                            onResult.onUnsuccessful("Projeto não atualizado");
+                            onResult.onUnsuccessful(String.valueOf(R.string.project_not_updated));
                         }
                     }
 
@@ -114,9 +115,9 @@ public class ActivityRepository extends Repository implements ActivityContract.I
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
-                            onResult.onSuccessful("Projeto excluido com sucesso");
+                            onResult.onSuccessful(String.valueOf(R.string.project_deleted_successfully));
                         } else {
-                            onResult.onUnsuccessful("Projeto não excluido");
+                            onResult.onUnsuccessful(String.valueOf(R.string.project_not_deleted));
                         }
                     }
 
