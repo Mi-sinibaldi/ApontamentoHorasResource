@@ -19,6 +19,7 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
+import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
 
 public class ClientFragment extends Fragment implements ClientContract.View {
@@ -45,6 +46,8 @@ public class ClientFragment extends Fragment implements ClientContract.View {
             @Override
             public void onClick(View v) {
                 Toast.makeText(view.getContext(), "Deu", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_admin, new ProjectFragment()).commit();
             }
         });
 
