@@ -112,7 +112,7 @@ public class ClientFragment extends Fragment implements ClientContract.View {
                 ProjectFragment fragment = new ProjectFragment();
                 fragment.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_admin, fragment).commit();
+                        .replace(R.id.frame_admin, fragment).addToBackStack(null).commit();
             }
         };
     }
