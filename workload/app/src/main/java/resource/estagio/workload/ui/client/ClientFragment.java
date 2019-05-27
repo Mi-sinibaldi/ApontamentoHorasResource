@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import resource.estagio.workload.R;
@@ -72,7 +73,13 @@ public class ClientFragment extends Fragment implements ClientContract.View {
 
         imageViewConfigClient.setOnClickListener(v -> presenter.getCustomers(false));
 
-        buttonSaveClient.setOnClickListener( v -> presenter.deleteCustomer(customerModelsDelete));
+        buttonSaveClient.setOnClickListener( v -> {
+            if(customerModelsDelete.size() > 0)
+                presenter.deleteCustomer(customerModelsDelete);
+            else
+                presenter.getCustomers(true);
+
+        });
 
         textViewCancelClient.setOnClickListener( v -> presenter.getCustomers(true));
 
@@ -90,10 +97,12 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     }
 
     private  void loadAdapterListener(){
+        customerModelsDelete = new ArrayList<>();
         adapterInterface = new AdapterClient.AdapterInterface() {
+
             @Override
-            public void removeClient(View v, int position, List<CustomerModel> models) {
-                customerModelsDelete = models;
+            public void removeClient(View v, int position) {
+                customerModelsDelete.add(customerModels.get(position));
             }
 
             @Override

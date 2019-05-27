@@ -48,10 +48,8 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
             holder.buttonCardClient.setOnClickListener(v -> listener.goToProject(v, position));
             holder.setIconClient();
         }else{
-            List<CustomerModel> customerModels = new ArrayList<>();
             holder.imageViewDeleteClient.setOnClickListener(v -> {
-                customerModels.add(list.get(position));
-                listener.removeClient(v, position, customerModels);
+                listener.removeClient(v, position);
 
                 list.remove(position);
                 notifyItemRemoved(position);
@@ -73,7 +71,7 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
     }
 
     public interface AdapterInterface {
-        void removeClient(View v, int position, List<CustomerModel> models);
+        void removeClient(View v, int position);
 
         void goToProject(View v, int position);
     }
