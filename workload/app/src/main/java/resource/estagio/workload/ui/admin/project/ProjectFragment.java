@@ -22,7 +22,6 @@ import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.data.repository.ActivityRepository;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
-import resource.estagio.workload.infra.Repository;
 import resource.estagio.workload.ui.admin.project.adapterProject.AdapterProject;
 import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
@@ -58,15 +57,16 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
 
         new ActivityRepository().getActivity(1, App.getUser().getAccessToken(),
                 new BaseCallback<List<ActivityModel>>() {
+
                     @Override
                     public void onSuccessful(List<ActivityModel> value) {
                         new ActivityRepository().getActivity(3, App.getUser().getAccessToken(),
                                 new BaseCallback<List<ActivityModel>>() {
                                     @Override
                                     public void onSuccessful(List<ActivityModel> value) {
-                                        if(value==null) {
+                                        if (value == null) {
                                             Toast.makeText(getActivity(),
-                                                    "Nenhum registro encontrado",
+                                                    String.valueOf(R.string.no_records_found),
                                                     Toast.LENGTH_LONG).show();
                                             return;
                                         }
@@ -101,3 +101,4 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     }
 
 }
+
