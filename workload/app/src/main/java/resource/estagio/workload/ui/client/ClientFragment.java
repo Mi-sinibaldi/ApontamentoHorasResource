@@ -25,6 +25,7 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
+import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
 
@@ -40,11 +41,15 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     private TextView textViewSelecionarClient;
     private AdapterClient adapterClient;
     private ProgressBar progressBarClient;
+    private HomeAdminContract.View activityView;
 
     private List<CustomerModel> customerModels;
     private List<CustomerModel> customerModelsDelete;
-
     private AdapterClient.AdapterInterface adapterInterface;
+
+    public ClientFragment(HomeAdminContract.View activityView) {
+        this.activityView = activityView;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,7 +109,7 @@ public class ClientFragment extends Fragment implements ClientContract.View {
             public void goToProject(View v, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("customer", customerModels.get(position));
-                ProjectFragment fragment = new ProjectFragment();
+                ProjectFragment fragment = new ProjectFragment(activityView);
                 fragment.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_admin, fragment).addToBackStack(null).commit();
@@ -161,6 +166,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
                 progressBarClient.setVisibility(show ? View.VISIBLE : View.GONE);
             }
         });
-
+        activityView.enableNavigation(show);
     }
 }
