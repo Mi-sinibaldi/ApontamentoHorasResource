@@ -13,36 +13,50 @@ import resource.estagio.workload.infra.BaseCallback;
 public class ClientPresenter implements ClientContract.Presenter{
 
     private ClientFragment view;
-    private ImageView deleteClient;
 
-    public ClientPresenter(ClientFragment view) { this.view=view; }
-
-    @Override
-    public void setReturnRecycler() { view.showReturn(); }
+    public ClientPresenter(ClientFragment view) { this.view = view; }
 
     @Override
-    public void setRemoveRecycler() { view.showRemove(); }
-
-    @Override
-    public void getCustomers() {
+    public void getCustomers(boolean status) {
+        view.showProgressClient(true);
         CustomerRepository repository = new CustomerRepository();
         repository.getCustomers(App.getUser().getAccessToken(),
                 new BaseCallback<List<CustomerModel>>() {
             @Override
             public void onSuccessful(List<CustomerModel> value) {
-                view.setRecyclerClient(value);
+                view.setRecyclerClient(value, status);
+                view.showProgressClient(false);
+
             }
 
             @Override
             public void onUnsuccessful(String error) {
                 view.notification(error);
+                view.showProgressClient(false);
             }
         });
     }
 
     @Override
-    public void deleteCustomer(int id, String name, int position) {
-        deleteClient = new ImageView(view.getContext());
-        Customer customer = new Customer(id,name);
+    public void deleteCustomer(List<CustomerModel> models) {
+        try{
+            for (CustomerModel model: models){
+                Customer customer = new Customer(model.getId(),model.getName());
+                customer.repository = new CustomerRepository();
+                customer.deleteCustomer(App.getUser().getAccessToken(), new BaseCallback<Void>() {
+                    @Override
+                    public void onSuccessful(Void value) { }
+
+                    @Override
+                    public void onUnsuccessful(String error) {
+                        view.notification(error);
+                    }
+                });
+            }
+            getCustomers(true);
+        }catch (Exception e){
+            view.notification(e.getMessage());
+        }
+
     }
 }
