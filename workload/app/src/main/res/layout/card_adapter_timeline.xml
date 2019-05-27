@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#4050D5"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp">
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
     <TextView
         android:id="@+id/textView_date_history"
@@ -51,7 +50,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-
         android:fontFamily="@font/open_sans"
         android:gravity="left"
         android:text="Lorem ipsum dolor sit amet,consectetur adipiscing elit.In ac commodo tortor."

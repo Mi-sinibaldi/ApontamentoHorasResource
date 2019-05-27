@@ -32,6 +32,8 @@ public class PointContract {
 
         void setErrorReasonField(String message);
 
+        void showProsseEmployee();
+
         void setErrorHourField(String message);
 
         void setErrorProjectField(String message);

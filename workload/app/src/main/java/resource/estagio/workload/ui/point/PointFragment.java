@@ -299,6 +299,11 @@ public class PointFragment extends Fragment implements PointContract.View,
     }
 
     @Override
+    public void showProsseEmployee() {
+
+    }
+
+    @Override
     public void setErrorProjectField(String message) {
 
     }

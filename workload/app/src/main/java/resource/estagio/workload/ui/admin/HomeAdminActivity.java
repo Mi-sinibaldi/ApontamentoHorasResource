@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.ui.employee.EmployeeFragment;
 
 public class HomeAdminActivity extends AppCompatActivity implements HomeAdminContract.View {
 
@@ -30,6 +31,8 @@ public class HomeAdminActivity extends AppCompatActivity implements HomeAdminCon
         setContentView(R.layout.activity_home_admin);
         presenter = new HomeAdminPresenter(this);
         navigation = findViewById(R.id.bottom_navigation_admin);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_admin, new EmployeeFragment(this)).commit();
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

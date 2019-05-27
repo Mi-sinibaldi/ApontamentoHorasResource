@@ -5,12 +5,23 @@ import java.util.List;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 
 public class ClientContract {
+
     interface View {
-        void setRecyclerClient(List<CustomerModel> customerModels);
+
+        void setRecyclerClient(List<CustomerModel> customerModels, boolean status);
+
         void notification(String messenge);
+
+        void showAdapterRecycler(boolean status);
+
+        void showProgressClient(final boolean show);
     }
 
     interface Presenter {
-        void getCustomers();
+
+        void getCustomers(boolean status);
+
+        void deleteCustomer(CustomerModel model);
+
     }
 }

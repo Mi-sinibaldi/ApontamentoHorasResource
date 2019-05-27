@@ -21,5 +21,11 @@
     <string name="horas">Horas</string>
     <string name="adicionar">Adicionar</string>
     <string name="colaboradores">Colaboradores</string>
-
+    <string name="project_not_updated">Projeto não atualizado</string>
+    <string name="project_updated_successfully">Projeto atualizado com sucesso</string>
+    <string name="project_not_entered">Projeto não inserido</string>
+    <string name="project_entered_successfully">Projeto inserido com sucesso</string>
+    <string name="project_not_deleted">Projeto não excluído</string>
+    <string name="project_deleted_successfully">Projeto excluído com sucesso</string>
+    <string name="no_records_found">Nenhum registro encontrado</string>
 </resources>

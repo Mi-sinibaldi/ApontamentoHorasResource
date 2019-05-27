@@ -2,6 +2,8 @@ package resource.estagio.workload.domain;
 
 import android.content.Context;
 
+import resource.estagio.workload.infra.BaseCallback;
+
 public class Customer {
 
     public  CustomerContract.IRepository repository;
@@ -41,4 +43,24 @@ public class Customer {
     public void setName(String name) {
         this.name = name;
     }
+    public void deleteCustomer(String token, BaseCallback<Void> onResult) throws Exception {
+        if(repository == null){
+            throw new Exception("Repositorio vazio");
+        }
+        if(id == 0){
+            throw new Exception("Campo Id nao pode ser vazio");
+        }
+        repository.deleteCustomer(id, token, new BaseCallback<Void>() {
+            @Override
+            public void onSuccessful(Void value) {
+                onResult.onSuccessful(value);
+            }
+
+            @Override
+            public void onUnsuccessful(String error) {
+                onResult.onUnsuccessful(error);
+            }
+        });
+    }
 }
+
