@@ -13,13 +13,14 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.newListResultAdmin;
 
 public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.MyViewHolder>{
 
-    private List<TimeEntryModel> listTimeline;
+    private List<newListResultAdmin> listTimeline;
     private int sizeList;
 
-    public AdapterListResult(List<TimeEntryModel> listTimeline) {
+    public AdapterListResult(List<newListResultAdmin> listTimeline) {
         this.listTimeline = listTimeline;
         Collections.reverse(listTimeline);
         sizeList = listTimeline.size() - 1;
@@ -36,18 +37,18 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        //TimeEntryModel model = listTimeline.get(position);
+        newListResultAdmin model = listTimeline.get(position);
 
-        holder.projectName.setText("AlfaPrev");
-        holder.customerName.setText("Banco Alfa");
-        holder.Allhours.setText("40:00");
-        holder.hours.setText("20:00");
+        holder.projectName.setText(model.getProjectName());
+        holder.customerName.setText(model.getCustomerName());
+        
+        holder.hours.setText("");
 
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return listTimeline.size();
     }
 
 

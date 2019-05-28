@@ -19,4 +19,19 @@ public class ResultHistoricContract {
         void showSucessMessage(String text);
 
     }
+
+
+    public interface ResultPresenter{
+        void getListResult(int month, int year);
+
+    }
+    public interface ResultView{
+
+        void dialog(boolean Key);
+        void showListResult(List<newListResultAdmin> list);
+        void allHours(Long hours);
+        void showErrorMessage(String text);
+        void showSucessMessage(String text);
+
+    }
 }
