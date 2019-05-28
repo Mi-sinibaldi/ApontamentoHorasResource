@@ -1,24 +1,31 @@
 package resource.estagio.workload.ui.admin.project;
 
-import resource.estagio.workload.ui.admin.project.adapterProject.AdapterProject;
+import java.util.List;
+
+import resource.estagio.workload.data.remote.model.ActivityModel;
 
 public class ProjectContract {
 
     interface View{
-
-        void listAdapter(AdapterProject adapter);
 
         void showToast(int message);
 
         void showError(String error);
 
         void showProgress(boolean result);
+
+        void showVisibility();
+
+        void showInvisibility();
+
+        void listAdapter(List<ActivityModel> value, boolean status);
     }
+
 
     interface Presenter{
 
-        void loadList(int idCustomer);
+        void loadList(int idCustomer, boolean status);
 
-        void visibilityActionClick();
+        void deleteCustomer(ActivityModel model);
     }
 }
