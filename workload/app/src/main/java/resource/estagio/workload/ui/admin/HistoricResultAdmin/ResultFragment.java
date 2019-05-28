@@ -1,10 +1,13 @@
 package resource.estagio.workload.ui.admin.HistoricResultAdmin;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,7 +28,10 @@ public class ResultFragment extends Fragment  implements ResultHistoricContract.
     private List<newListResultAdmin> newlistResult;
     private List<TimeEntryModel> list = new ArrayList<>();
     private ResultHistoricContract.ResultPresenter presenter;
+    private ProgressBar progressBarResultAdmin;
     View view;
+
+    private int shortAnimTime;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -36,10 +42,14 @@ public class ResultFragment extends Fragment  implements ResultHistoricContract.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_result, container, false);
+        recyclerViewListResult = view.findViewById(R.id.recyclerView_result_admin);
+        progressBarResultAdmin=view.findViewById( R.id.progressbar_result_admin );
+
         presenter = new ResultPresenter(this);
         presenter.getListResult(4,2019);
 
-        recyclerViewListResult = view.findViewById(R.id.recyclerView_result_admin);
+
+
         //loadList();
         return view;
     }
@@ -72,7 +82,15 @@ public class ResultFragment extends Fragment  implements ResultHistoricContract.
 
     @Override
     public void dialog(boolean Key) {
-
+        recyclerViewListResult.setVisibility(Key ? View.INVISIBLE : View.VISIBLE);
+        progressBarResultAdmin.setVisibility(Key ? View.VISIBLE : View.GONE);
+        progressBarResultAdmin.animate().setDuration(shortAnimTime).alpha(
+                Key ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressBarResultAdmin.setVisibility(Key ? View.VISIBLE : View.GONE);
+            }
+        });
     }
 
     @Override

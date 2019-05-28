@@ -55,26 +55,26 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
                         if (timeEntryModel.getCustomerName().contains(model.getName())) {
                             customerName = timeEntryModel.getCustomerName();
 
-//                            if(aux.equals(timeEntryModel.getActivityName())){
-//                              total+= timeEntryModel.getHours();
-//                                aux = timeEntryModel.getActivityName();
-//                            }else {
-//                                listaGerson.add(new ResultProject(aux,total));
-//                                total=0;
-//                                total += timeEntryModel.getHours();
-//                                aux = timeEntryModel.getActivityName();
-//
-//                            }
-                            if(aux.isEmpty() || aux.equals(timeEntryModel.getActivityName()) || aux == "" || aux==null) {
-                                total+=timeEntryModel.getHours();
-
+                            if(aux.equals(timeEntryModel.getActivityName())){
+                              total+= timeEntryModel.getHours();
                                 aux = timeEntryModel.getActivityName();
-                            }else{
-                                aux = timeEntryModel.getActivityName();
-                                projectName += timeEntryModel.getActivityName() + "             " + total + "\n";
+                            }else {
+                                listaGerson.add(new ResultProject(aux,total));
                                 total=0;
+                                total += timeEntryModel.getHours();
+                                aux = timeEntryModel.getActivityName();
 
                             }
+//                            if(aux.isEmpty() || aux.equals(timeEntryModel.getActivityName()) || aux == "" || aux==null) {
+//                                total+=timeEntryModel.getHours();
+//
+//                                aux = timeEntryModel.getActivityName();
+//                            }else{
+//                                aux = timeEntryModel.getActivityName();
+//                                projectName += timeEntryModel.getActivityName() + "             " + total + "\n";
+//                                total=0;
+//
+//                            }
                         }
 
                     }
