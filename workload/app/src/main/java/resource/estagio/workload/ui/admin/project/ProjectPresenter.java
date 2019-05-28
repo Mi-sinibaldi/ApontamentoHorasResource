@@ -19,7 +19,7 @@ public class ProjectPresenter implements ProjectContract.Presenter {
     }
 
     @Override
-    public void loadList(int idCustomer) {
+    public void loadList(int idCustomer, boolean status) {
         view.showProgress(true);
 
         new ActivityRepository().getActivity(idCustomer, App.getUser().getAccessToken(),
@@ -31,8 +31,7 @@ public class ProjectPresenter implements ProjectContract.Presenter {
                             view.showProgress(false);
                             return;
                         }
-                        adapter = new AdapterProject(value);
-                        view.listAdapter(adapter);
+                        view.listAdapter(value, status);
                         view.showProgress(false);
                     }
 
@@ -45,7 +44,8 @@ public class ProjectPresenter implements ProjectContract.Presenter {
     }
 
     @Override
-    public void visibilityActionClick() {
-        adapter.showIconActions();
+    public void deleteCustomer(ActivityModel model) {
+
     }
+
 }

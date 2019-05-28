@@ -16,11 +16,14 @@ import resource.estagio.workload.data.remote.model.ActivityModel;
 
 public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHolder> {
 
-
     private List<ActivityModel> listProject;
+    private boolean status;
+    private AdapterProjectInterface listener;
 
-    public AdapterProject(List<ActivityModel> listProject) {
+    public AdapterProject(List<ActivityModel> listProject, boolean status, AdapterProjectInterface listener) {
         this.listProject = listProject;
+        this.status = status;
+        this.listener = listener;
     }
 
     @NonNull
@@ -37,6 +40,16 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
 
         ActivityModel activityModel = listProject.get(position);
         holder.loadFilds(activityModel);
+        holder.showIconActions();
+        if (status){
+            holder.showIconActions();
+
+            holder.textRenameProject.setOnClickListener(v -> listener.rename(position));
+
+            holder.imageDeleteProject.setOnClickListener(v -> listener.delete(position));
+        }else{
+            holder.setInvisibleIcons();
+        }
     }
 
     @Override
@@ -44,25 +57,44 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
         return listProject.size();
     }
 
-    public void showIconActions() {
+    public interface AdapterProjectInterface{
+        void rename(int position);
+        void delete(int position);
 
     }
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView activityName;
+        TextView textActivityName;
         TextView textRenameProject;
-        ImageView ImageDeleteProject;
+        ImageView imageDeleteProject;
+        View viewBarProject;
+
+
+        public void showIconActions() {
+            textRenameProject.setVisibility(View.VISIBLE);
+            imageDeleteProject.setVisibility(View.VISIBLE);
+            viewBarProject.setVisibility(View.VISIBLE);
+        }
+
+        public void setInvisibleIcons(){
+            textRenameProject.setVisibility(View.INVISIBLE);
+            imageDeleteProject.setVisibility(View.INVISIBLE);
+            viewBarProject.setVisibility(View.INVISIBLE);
+        }
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            activityName = itemView.findViewById(R.id.text_view_name_project);
+            textActivityName = itemView.findViewById(R.id.text_view_name_project);
             textRenameProject = itemView.findViewById(R.id.text_view_rename_project);
-            ImageDeleteProject = itemView.findViewById(R.id.image_view_delete_project);
+            imageDeleteProject = itemView.findViewById(R.id.image_view_delete_project);
+            viewBarProject = itemView.findViewById(R.id.view_bar_project);
         }
 
         public void loadFilds(ActivityModel activityModel) {
-            activityName.setText(activityModel.getName());
+
+            textActivityName.setText(activityModel.getName());
         }
     }
 }

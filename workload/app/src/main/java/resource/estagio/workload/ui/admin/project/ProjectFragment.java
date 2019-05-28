@@ -15,7 +15,10 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import resource.estagio.workload.R;
+import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.adapterProject.AdapterProject;
@@ -31,11 +34,15 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     private Button buttonSaveProject;
     private TextView textViewCancelProject;
     private ProgressBar progressBarProjectAdmin;
+    private TextView textViewInsideProject;
 
     private View view;
     private ProjectContract.Presenter presenter;
     private CustomerModel customer;
     private HomeAdminContract.View activityView;
+    private AdapterProject.AdapterProjectInterface listener;
+    private List<ActivityModel> activityModels;
+    private List<ActivityModel> activityModelsDelete;
 
     public ProjectFragment(HomeAdminContract.View activityView) {
         this.activityView = activityView;
@@ -51,15 +58,49 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         Bundle arguments = getArguments();
         customer = (CustomerModel) arguments.getSerializable("customer");
         loadUI();
+        loadListenerAdapter();
         setCustomerName();
-        presenter.loadList(customer.getId());
+        presenter.loadList(customer.getId(),false);
+        showInvisibility();
         backtoCustomers();
         filterClick();
         return view;
     }
 
+    private void loadListenerAdapter() {
+        listener = new AdapterProject.AdapterProjectInterface() {
+            @Override
+            public void rename(int position) {
+                // Ir para a outra fragment
+            }
+
+            @Override
+            public void delete(int position) {
+                activityModelsDelete.add(activityModels.get(position));
+            }
+        };
+    }
+
     private void filterClick() {
-        imageViewFilterProject.setOnClickListener(v -> presenter.visibilityActionClick());
+        imageViewFilterProject.setOnClickListener(v -> {
+            presenter.loadList(customer.getId(),true);
+            showVisibility();
+
+        });
+
+        buttonSaveProject.setOnClickListener(v -> {
+            presenter.loadList(customer.getId(), false);
+            showInvisibility();
+            for(ActivityModel model : activityModelsDelete){
+                presenter.deleteCustomer(model);
+            }
+
+        });
+
+        textViewCancelProject.setOnClickListener(v -> {
+            presenter.loadList(customer.getId(), false);
+            showInvisibility();
+        });
     }
 
 
@@ -82,13 +123,16 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         imageViewBackCustomers = view.findViewById(R.id.image_view_back_customers);
         imageViewFilterProject = view.findViewById(R.id.image_view_filter_project);
         progressBarProjectAdmin = view.findViewById(R.id.progress_bar_project_admin);
-//        buttonNewProject = view.findViewById(R.id.button_new_project);
-//        textViewCancelProject = view.findViewById(R.id.text_view_cancel_project);
-//        buttonSaveProject = view.findViewById(R.id.button_save_project);
+        buttonSaveProject = view.findViewById(R.id.button_save_project);
+        textViewCancelProject = view.findViewById(R.id.text_view_cancel_project);
+        textViewInsideProject = view.findViewById(R.id.text_view_inside_project);
+
     }
 
     @Override
-    public void listAdapter(AdapterProject adapter) {
+    public void listAdapter(List<ActivityModel> value, boolean status) {
+        activityModels = value;
+        AdapterProject adapter = new AdapterProject(value, status, listener);
         recyclerProject.setAdapter(adapter);
     }
 
@@ -121,6 +165,22 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         });
         activityView.enableNavigation(result);
 
+    }
+
+    @Override
+    public void showVisibility() {
+        buttonSaveProject.setVisibility(View.VISIBLE);
+        textViewCancelProject.setVisibility(View.VISIBLE);
+        imageViewFilterProject.setVisibility(View.INVISIBLE);
+        textViewInsideProject.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showInvisibility() {
+        buttonSaveProject.setVisibility(View.INVISIBLE);
+        textViewCancelProject.setVisibility(View.INVISIBLE);
+        imageViewFilterProject.setVisibility(View.VISIBLE);
+        textViewInsideProject.setVisibility(View.VISIBLE);
     }
 
 }

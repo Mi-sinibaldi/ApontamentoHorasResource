@@ -43,6 +43,7 @@ public class Customer {
     public void setName(String name) {
         this.name = name;
     }
+
     public void deleteCustomer(String token, BaseCallback<Void> onResult) throws Exception {
         if(repository == null){
             throw new Exception("Repositorio vazio");
