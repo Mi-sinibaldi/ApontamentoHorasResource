@@ -23,12 +23,15 @@ import resource.estagio.workload.ui.client.ClientFragment;
 
 public class ProjectFragment extends Fragment implements ProjectContract.View {
 
-    private View view;
     private RecyclerView recyclerProject;
     private TextView textViewCustomer;
     private ImageView imageViewBackCustomers;
     private Button buttonNewProject;
+    private Button buttonSaveProject;
+    private TextView textViewCancelProject;
     private ProgressBar progressBarProjectAdmin;
+
+    private View view;
     private ProjectContract.Presenter presenter;
     private CustomerModel customer;
     private HomeAdminContract.View activityView;
@@ -71,7 +74,10 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         textViewCustomer = view.findViewById(R.id.text_view_customer_project);
         imageViewBackCustomers = view.findViewById(R.id.image_view_back_customers);
         progressBarProjectAdmin = view.findViewById(R.id.progress_bar_project_admin);
-        //buttonNewProject = view.findViewById(R.id.button_new_project);
+//        buttonNewProject = view.findViewById(R.id.button_new_project);
+//        textViewCancelProject = view.findViewById(R.id.text_view_cancel_project);
+//        buttonSaveProject = view.findViewById(R.id.button_save_project);
+
     }
 
     @Override
