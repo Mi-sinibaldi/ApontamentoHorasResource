@@ -4,6 +4,7 @@ package resource.estagio.workload.ui.employee;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -37,12 +38,12 @@ import resource.estagio.workload.ui.employee.adapterEmployee.RecyclerItemClickLi
 import resource.estagio.workload.ui.timeline.TimelineFragment;
 import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
-public class EmployeeFragment extends Fragment {
+public class EmployeeFragment extends Fragment implements EmployeeContract.View {
 
     private EmployeeFragment employeeFragment;
     private ImageView imageView_recource;
     private TextView text_employee, textView_desc;
-    private SearchView searchView;
+    private SearchView searchEmployee;
     private RecyclerView id_recyclerview_employee;
     private List<TimeEntryModel> list = new ArrayList<>();
     private View view;
@@ -52,6 +53,7 @@ public class EmployeeFragment extends Fragment {
     private List<EmployeeModel> employee = new ArrayList<>();
     private ProgressBar progress_employee;
     private HomeAdminContract.View viewHome;
+    private EmployeeContract.Presenter presenter;
 
     public EmployeeFragment(HomeAdminContract.View view) {
         viewHome = view;
@@ -70,6 +72,7 @@ public class EmployeeFragment extends Fragment {
 
     }
 
+
     private void clickRecycler() {
         id_recyclerview_employee.addOnItemTouchListener(
                 new RecyclerItemClickListener(
@@ -80,6 +83,7 @@ public class EmployeeFragment extends Fragment {
                             public void onItemClick(View view, int position) {
                                 getFragmentManager().beginTransaction()
                                         .replace(R.id.frame_admin, new ResultHistoricFragment(viewHome)).commit();
+
                             }
 
                             @Override
@@ -101,6 +105,7 @@ public class EmployeeFragment extends Fragment {
         button_re_employee = view.findViewById(R.id.button_re_employee);
         id_recyclerview_employee = view.findViewById(R.id.id_recyclerview_employee);
         //progress_employee = view.findViewById(R.id.progress_employee);
+        presenter = new EmployeePresenter(this);
 
     }
 
@@ -211,7 +216,11 @@ public class EmployeeFragment extends Fragment {
             }
 
             public void callSearch(String query) {
-                //Do searching
+//                if (query == null){
+//                    Log.i("erro","***************");
+//                }else{
+//                    return;
+//                }
             }
 
         });
