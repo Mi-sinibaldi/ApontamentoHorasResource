@@ -4,6 +4,7 @@ import java.util.List;
 
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -17,5 +18,8 @@ public interface CustomerAPI {
 
     @DELETE("customer")
     Call<Void> deleteCustomer(@Query("id") long id, @Header("Authorization") String token);
+
+    @POST("custumer")
+    Call<Void> postCustomer(@Body CustomerModel model, @Header("Authorization")String token);
 }
 
