@@ -12,6 +12,7 @@ import resource.estagio.workload.ui.admin.project.adapterProject.AdapterProject;
 public class ProjectPresenter implements ProjectContract.Presenter {
 
     private ProjectContract.View view;
+    private AdapterProject adapter;
 
     public ProjectPresenter(ProjectContract.View view) {
         this.view = view;
@@ -30,7 +31,8 @@ public class ProjectPresenter implements ProjectContract.Presenter {
                             view.showProgress(false);
                             return;
                         }
-                        view.listAdapter(new AdapterProject(value));
+                        adapter = new AdapterProject(value);
+                        view.listAdapter(adapter);
                         view.showProgress(false);
                     }
 
@@ -40,5 +42,10 @@ public class ProjectPresenter implements ProjectContract.Presenter {
                         view.showProgress(false);
                     }
                 });
+    }
+
+    @Override
+    public void visibilityActionClick() {
+        adapter.showIconActions();
     }
 }

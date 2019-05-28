@@ -26,6 +26,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     private RecyclerView recyclerProject;
     private TextView textViewCustomer;
     private ImageView imageViewBackCustomers;
+    private ImageView imageViewFilterProject;
     private Button buttonNewProject;
     private Button buttonSaveProject;
     private TextView textViewCancelProject;
@@ -53,8 +54,14 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         setCustomerName();
         presenter.loadList(customer.getId());
         backtoCustomers();
+        filterClick();
         return view;
     }
+
+    private void filterClick() {
+        imageViewFilterProject.setOnClickListener(v -> presenter.visibilityActionClick());
+    }
+
 
     private void backtoCustomers() {
 
@@ -73,11 +80,11 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         recyclerProject = view.findViewById(R.id.recycler_project);
         textViewCustomer = view.findViewById(R.id.text_view_customer_project);
         imageViewBackCustomers = view.findViewById(R.id.image_view_back_customers);
+        imageViewFilterProject = view.findViewById(R.id.image_view_filter_project);
         progressBarProjectAdmin = view.findViewById(R.id.progress_bar_project_admin);
 //        buttonNewProject = view.findViewById(R.id.button_new_project);
 //        textViewCancelProject = view.findViewById(R.id.text_view_cancel_project);
 //        buttonSaveProject = view.findViewById(R.id.button_save_project);
-
     }
 
     @Override
@@ -115,5 +122,6 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         activityView.enableNavigation(result);
 
     }
+
 }
 
