@@ -5,18 +5,14 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,7 +43,6 @@ import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
 import resource.estagio.workload.ui.home.HomeContract;
-import resource.estagio.workload.ui.timeline.TimelineFragment;
 
 public class PointFragment extends Fragment implements PointContract.View,
         DatePickerDialog.OnDateSetListener {
@@ -133,16 +128,16 @@ public class PointFragment extends Fragment implements PointContract.View,
         editTextDatePoint = view.findViewById(R.id.edit_text_date_point);
         editTextHourPoint = view.findViewById(R.id.edit_text_hour_point);
         editTextHourPoint.setFilters(new InputFilter[]{new InputFilterMinMax(1, 8)});
-        editTextReasonPoint = view.findViewById(R.id.edit_text_reason_point);
-        spinnerCustomerPoint = view.findViewById(R.id.spinner_customer_point);
+        editTextReasonPoint = view.findViewById(R.id.edit_text_name_project);
+        spinnerCustomerPoint = view.findViewById(R.id.spinner_type_activity_project);
         spinnerProjectPoint = view.findViewById(R.id.spinner_project_point);
         presenter = new PointPresenter(this);
-        buttonPointConfirm = view.findViewById(R.id.button_point_confirm);
+        buttonPointConfirm = view.findViewById(R.id.button_project_confirm);
         progressCustomerPoint = view.findViewById(R.id.progress_customer_point);
         progressProjectPoint = view.findViewById(R.id.progress_project_point);
         progressAddPoint = view.findViewById(R.id.progress_add_point);
         inputLayoutHourPoint = view.findViewById(R.id.input_layout_hour_point);
-        inputLayoutReasonPoint = view.findViewById(R.id.input_layout_reason_point);
+        inputLayoutReasonPoint = view.findViewById(R.id.input_layout_name_project);
 
     }
 

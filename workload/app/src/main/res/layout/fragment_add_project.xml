@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fillViewport="true">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#4050D5"
+        tools:context=".ui.point.PointFragment">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_demand_number_project"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:textColorHint="@android:color/white"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="37dp"
+            android:backgroundTint="#4050D5"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_layout_name_project">
+
+            <EditText
+                android:id="@+id/edit_text_demand_number_project"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#4050D5"
+                android:ems="10"
+                android:foregroundTint="#4050D5"
+                android:gravity="start|top"
+                android:hint="Numero de Demanda"
+                android:textColorHighlight="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
+                android:textCursorDrawable="@color/colorWhite"
+                android:inputType="numberSigned"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhiteTransparent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/image_view_resource_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginEnd="37dp"
+            android:src="@mipmap/resource_white"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/text_view_title_point"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="37dp"
+            android:text="@string/projeto"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_resource_point" />
+
+        <TextView
+            android:id="@+id/text_view_subtitle_project"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="37dp"
+            android:text="Cadastro de projeto"
+            android:textColor="@color/colorWhite"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_title_point" />
+
+        <TextView
+            android:id="@+id/text_view_type_activity_project"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="37dp"
+            android:text="Tipo de atividade"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_layout_demand_number_project" />
+
+        <Spinner
+            android:id="@+id/spinner_type_activity_project"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginEnd="37dp"
+            android:background="@drawable/spinner_custom"
+            android:focusableInTouchMode="false"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_type_activity_project" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_name_project"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="32dp"
+            android:textColorHint="@android:color/white"
+            android:layout_marginEnd="37dp"
+            android:backgroundTint="#4050D5"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_subtitle_project">
+
+            <EditText
+                android:id="@+id/edit_text_name_project"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#4050D5"
+                android:ems="10"
+                android:foregroundTint="#4050D5"
+                android:gravity="start|top"
+                android:hint="Nome"
+                android:inputType="textMultiLine"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhiteTransparent"
+                tools:targetApi="lollipop" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/button_project_confirm"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="37dp"
+            android:layout_marginBottom="37dp"
+            android:background="@drawable/button_custom_radius"
+            android:text="@string/adicionar"
+            android:textColor="#4050D5"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_type_activity_project" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+

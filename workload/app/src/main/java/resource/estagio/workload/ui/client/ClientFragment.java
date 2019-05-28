@@ -92,7 +92,7 @@ public class ClientFragment extends Fragment implements ClientContract.View {
 
     private void loadUI() {
         presenter = new ClientPresenter(this);
-        buttonConstraintLayout = view.findViewById(R.id.button_constraints_client);
+        buttonConstraintLayout = view.findViewById(R.id.button_constraints_project);
         recyclerClient = view.findViewById(R.id.recycler_clients_client);
         textViewCancelClient = view.findViewById(R.id.text_view_cancel_client);
         textViewSelecionarClient = view.findViewById(R.id.text_view_selecionar_client);

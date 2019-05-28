@@ -16,7 +16,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import resource.estagio.workload.R;
@@ -65,7 +64,7 @@ public class SettingsFragment extends Fragment {
         dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
         dialog.setContentView( R.layout.activity_dialog_chooser );
         dialog.setCancelable( false );
-        TextView text = dialog.findViewById(R.id.text_view_subtitle_point);
+        TextView text = dialog.findViewById(R.id.text_view_subtitle_project);
         text.setText("Deseja realmente limpar as credenciais salvas?");
         dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN );

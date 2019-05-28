@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/image_view_resource_point" />
 
     <TextView
-        android:id="@+id/text_view_subtitle_point"
+        android:id="@+id/text_view_subtitle_project"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="37dp"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_title_point" />
 
     <TextView
-        android:id="@+id/text_view_cliente_point"
+        android:id="@+id/text_view_type_activity_project"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="37dp"
@@ -70,10 +70,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_subtitle_point" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_subtitle_project" />
 
     <Spinner
-        android:id="@+id/spinner_customer_point"
+        android:id="@+id/spinner_type_activity_project"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="37dp"
@@ -83,7 +83,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_cliente_point" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_type_activity_project" />
 
     <ProgressBar
         android:id="@+id/progress_customer_point"
@@ -91,10 +91,10 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner_customer_point"
-        app:layout_constraintEnd_toEndOf="@+id/spinner_customer_point"
-        app:layout_constraintStart_toStartOf="@+id/spinner_customer_point"
-        app:layout_constraintTop_toTopOf="@+id/spinner_customer_point" />
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_type_activity_project"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_type_activity_project"
+        app:layout_constraintStart_toStartOf="@+id/spinner_type_activity_project"
+        app:layout_constraintTop_toTopOf="@+id/spinner_type_activity_project" />
 
     <TextView
         android:id="@+id/text_view_project_point"
@@ -109,7 +109,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_customer_point" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_type_activity_project" />
 
     <Spinner
         android:id="@+id/spinner_project_point"
@@ -205,7 +205,7 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner_project_point" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_layout_reason_point"
+        android:id="@+id/input_layout_name_project"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="37dp"
@@ -218,7 +218,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edit_text_date_point">
 
         <EditText
-            android:id="@+id/edit_text_reason_point"
+            android:id="@+id/edit_text_name_project"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#4050D5"
@@ -234,7 +234,7 @@
 
 
     <Button
-        android:id="@+id/button_point_confirm"
+        android:id="@+id/button_project_confirm"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="37dp"
@@ -248,7 +248,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_layout_reason_point" />
+        app:layout_constraintTop_toBottomOf="@+id/input_layout_name_project" />
 
     <ProgressBar
         android:id="@+id/progress_add_point"
@@ -257,10 +257,10 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/button_point_confirm"
-        app:layout_constraintEnd_toEndOf="@+id/button_point_confirm"
-        app:layout_constraintStart_toStartOf="@+id/button_point_confirm"
-        app:layout_constraintTop_toTopOf="@+id/button_point_confirm" />
+        app:layout_constraintBottom_toBottomOf="@+id/button_project_confirm"
+        app:layout_constraintEnd_toEndOf="@+id/button_project_confirm"
+        app:layout_constraintStart_toStartOf="@+id/button_project_confirm"
+        app:layout_constraintTop_toTopOf="@+id/button_project_confirm" />
     <TextView
         android:id="@+id/text_vew_invisible_point"
         android:layout_width="53dp"

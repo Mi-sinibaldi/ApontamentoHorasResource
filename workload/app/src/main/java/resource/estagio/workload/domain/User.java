@@ -2,7 +2,7 @@ package resource.estagio.workload.domain;
 
 import resource.estagio.workload.infra.BaseCallback;
 
-public class User {
+public class  User {
 
     public UserContract.IRepository repository;
 

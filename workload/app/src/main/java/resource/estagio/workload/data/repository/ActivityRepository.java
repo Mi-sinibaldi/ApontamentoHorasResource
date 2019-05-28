@@ -6,14 +6,15 @@ import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.ActivityAPI;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
-import resource.estagio.workload.domain.ActivityContract;
+import resource.estagio.workload.domain.Project;
+import resource.estagio.workload.domain.ProjectContract;
 import resource.estagio.workload.infra.BaseCallback;
 import resource.estagio.workload.infra.Repository;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityRepository extends Repository implements ActivityContract.IRepository {
+public class ActivityRepository extends Repository implements ProjectContract.IRepository {
 
     @Override
     public void getActivity(int id, String token, BaseCallback<List<ActivityModel>> onResult) {
@@ -40,21 +41,19 @@ public class ActivityRepository extends Repository implements ActivityContract.I
     }
 
     @Override
-    public void getAtcivityType(String token, BaseCallback<List<ActivityTypeModel>> onResult) {
+    public void getActivityType(String token, BaseCallback<List<ActivityTypeModel>> onResult) {
         super.data.restApi(ActivityAPI.class)
-                .getActivityType("bearer " + token)
+                .getActivityType("bearer "+token)
                 .enqueue(new Callback<List<ActivityTypeModel>>() {
                     @Override
-                    public void onResponse(Call<List<ActivityTypeModel>>
-                                                   call, Response<List<ActivityTypeModel>> response) {
-                        if (response.isSuccessful() && response.body() != null) {
+                    public void onResponse(Call<List<ActivityTypeModel>> call, Response<List<ActivityTypeModel>> response) {
+                        if(response.isSuccessful()&&  response.body() != null ){
                             onResult.onSuccessful(response.body());
-                        } else {
+                        }
+                        else{
                             onResult.onUnsuccessful(response.message());
                         }
-
                     }
-
                     @Override
                     public void onFailure(Call<List<ActivityTypeModel>> call, Throwable t) {
                         onResult.onUnsuccessful(t.getMessage());
@@ -63,22 +62,26 @@ public class ActivityRepository extends Repository implements ActivityContract.I
     }
 
     @Override
-    public void insertProject(ActivityModel activityModel, String token, BaseCallback<String> onResult) {
+    public void insertProject(Project project, String token, BaseCallback<String> onResult) {
+        ActivityModel activityModel = new ActivityModel(project.getId(), project.getNameProject(), project.getDemandNumber(),
+                project.getActivityTypeModel().getId(), project.getCustomer().getId(),
+                project.getCustomer().getName());
         super.data.restApi(ActivityAPI.class)
-                .insertProject(activityModel, "bearer " + token)
+                .insertProject(activityModel, "bearer "+token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.isSuccessful()) {
-                            onResult.onSuccessful(String.valueOf(R.string.project_entered_successfully));
-                        } else {
-                            onResult.onUnsuccessful(String.valueOf(R.string.project_not_entered));
+                        if(response.isSuccessful()){
+                            onResult.onSuccessful("Projeto inserido com sucesso.");
+                        }
+                        else{
+                            onResult.onUnsuccessful("Erro ao cadastrar o projeto .");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                            onResult.onUnsuccessful(t.getMessage());
                     }
                 });
 
@@ -87,21 +90,21 @@ public class ActivityRepository extends Repository implements ActivityContract.I
     @Override
     public void updateProject(ActivityModel activityModel, String token, BaseCallback<String> onResult) {
         super.data.restApi(ActivityAPI.class)
-                .updateProject(activityModel, "bearer " + token)
+                .updateProject(activityModel, "bearer "+token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.isSuccessful()) {
-                            onResult.onSuccessful(String.valueOf(R.string.project_updated_successfully));
-                        } else {
-                            onResult.onUnsuccessful(String.valueOf(R.string.project_not_updated));
+                        if(response.isSuccessful()){
+                            onResult.onSuccessful("Projeto atualizado com sucesso.");
+                        }
+                        else{
+                            onResult.onUnsuccessful("Erro ao atualizar o projeto.");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
-
+                            onResult.onUnsuccessful(t.getMessage());
                     }
                 });
 
