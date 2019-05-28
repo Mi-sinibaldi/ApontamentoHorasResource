@@ -11,6 +11,8 @@ public class CustomerContract {
         void getCustomers(String token, BaseCallback<List<CustomerModel>> onResult);
 
         void deleteCustomer(int id, String token, BaseCallback<Void> onResult);
+
+        void postCustomer(CustomerModel model, String token, BaseCallback<Void> onResult);
     }
 
 
