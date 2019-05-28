@@ -14,17 +14,16 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Renomear"
-        android:visibility="gone"
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
         android:textStyle="bold"
-
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/image_view_delete_project"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/image_view_delete_project"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:layout_width="40dp"
         android:layout_height="35dp"
         android:layout_marginTop="8dp"

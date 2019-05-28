@@ -49,8 +49,8 @@
 
     <ImageView
         android:id="@+id/image_view_back_customers"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/shape_oval_back"
@@ -114,9 +114,9 @@
 
     <ImageView
         android:id="@+id/image_view_filter_project"
-        android:layout_width="38dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="30dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:src="@mipmap/ic_filter"
         app:layout_constraintEnd_toEndOf="parent"
