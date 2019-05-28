@@ -4,7 +4,6 @@ import android.view.MenuItem;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.ui.SettingsFragment;
-import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricFragment;
 import resource.estagio.workload.ui.client.ClientFragment;
 import resource.estagio.workload.ui.employee.EmployeeFragment;
 
@@ -22,7 +21,7 @@ public class HomeAdminPresenter implements HomeAdminContract.Presenter {
                 view.showFragment(new EmployeeFragment(view));
                 break;
             case R.id.ic_customer_admin:
-                view.showFragment(new ClientFragment());
+                view.showFragment(new ClientFragment(view));
                 break;
             case R.id.ic_config_admin:
                 view.showFragment(new SettingsFragment());

@@ -2,11 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/time_line_fragment"
+    android:id="@+id/project_admin_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#4050D5"
     tools:context=".ui.admin.project.ProjectFragment">
+
+    <ProgressBar
+        android:id="@+id/progress_bar_project_admin"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/button_constraints_client"
@@ -38,8 +49,8 @@
 
     <ImageView
         android:id="@+id/image_view_back_customers"
-        android:layout_width="25dp"
-        android:layout_height="22dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/shape_oval_back"
@@ -49,15 +60,15 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
+        android:layout_width="99dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/logo_resource"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/image_view_back_customers" />
 
     <TextView
         android:id="@+id/text_view_customer_project"
@@ -100,5 +111,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:listitem="@layout/card_adapter_project" />
+
+    <ImageView
+        android:id="@+id/image_view_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:src="@mipmap/ic_filter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_constraints_client" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

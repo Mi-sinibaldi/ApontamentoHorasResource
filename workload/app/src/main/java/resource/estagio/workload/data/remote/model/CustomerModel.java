@@ -2,7 +2,9 @@ package resource.estagio.workload.data.remote.model;
 
 import androidx.annotation.NonNull;
 
-public class CustomerModel {
+import java.io.Serializable;
+
+public class CustomerModel implements Serializable {
 
     private int id;
 
