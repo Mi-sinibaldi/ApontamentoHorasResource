@@ -18,5 +18,7 @@ public class ProjectContract {
     interface Presenter{
 
         void loadList(int idCustomer);
+
+        void visibilityActionClick();
     }
 }

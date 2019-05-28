@@ -3,6 +3,7 @@ package resource.estagio.workload.ui.admin.project.adapterProject;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,8 +36,7 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         ActivityModel activityModel = listProject.get(position);
-
-        holder.activityName.setText(activityModel.getName());
+        holder.loadFilds(activityModel);
     }
 
     @Override
@@ -44,14 +44,25 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
         return listProject.size();
     }
 
+    public void showIconActions() {
+
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView activityName;
+        TextView textRenameProject;
+        ImageView ImageDeleteProject;
 
         public MyViewHolder(@NonNull View itemView) {
-
             super(itemView);
             activityName = itemView.findViewById(R.id.text_view_name_project);
+            textRenameProject = itemView.findViewById(R.id.text_view_rename_project);
+            ImageDeleteProject = itemView.findViewById(R.id.image_view_delete_project);
+        }
+
+        public void loadFilds(ActivityModel activityModel) {
+            activityName.setText(activityModel.getName());
         }
     }
 }
