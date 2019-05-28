@@ -9,7 +9,10 @@ public class CustomerContract {
 
     public interface IRepository {
         void getCustomers(String token, BaseCallback<List<CustomerModel>> onResult);
+
+        void deleteCustomer(int id, String token, BaseCallback<Void> onResult);
     }
+
 
 
 }

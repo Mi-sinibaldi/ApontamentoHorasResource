@@ -8,23 +8,20 @@ public class ClientContract {
 
     interface View {
 
-        void setRecyclerClient(List<CustomerModel> customerModels);
+        void setRecyclerClient(List<CustomerModel> customerModels, boolean status);
 
         void notification(String messenge);
 
-        void showRemove();
+        void showAdapterRecycler(boolean status);
 
-        void showReturn();
+        void showProgressClient(final boolean show);
     }
 
     interface Presenter {
-        void setReturnRecycler();
 
-        void setRemoveRecycler();
+        void getCustomers(boolean status);
 
-        void getCustomers();
-
-        void deleteCustomer(int id, String name, int position);
+        void deleteCustomer(CustomerModel model);
 
     }
 }

@@ -3,7 +3,6 @@ package resource.estagio.workload.ui.client;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,7 +46,13 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
             holder.buttonCardClient.setOnClickListener(v -> listener.goToProject(v, position));
             holder.setIconClient();
         }else{
-            holder.imageViewDeleteClient.setOnClickListener(v -> listener.removeClient(v, position));
+            holder.imageViewDeleteClient.setOnClickListener(v -> {
+                listener.removeClient(v, position);
+
+                list.remove(position);
+                notifyItemRemoved(position);
+
+            });
             holder.setIconRemove();
         }
 
