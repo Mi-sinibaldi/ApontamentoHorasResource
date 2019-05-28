@@ -33,4 +33,25 @@ public class CustomerRepository extends Repository implements CustomerContract.I
                 });
     }
 
+    @Override
+    public void deleteCustomer(int id, String token, BaseCallback<Void> onResult) {
+        super.data.restApi(CustomerAPI.class)
+                .deleteCustomer(id, "bearer " + token)
+                .enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if(response.isSuccessful())
+                            onResult.onSuccessful(response.body());
+                        else
+                            onResult.onUnsuccessful(response.message());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        onResult.onUnsuccessful(t.getMessage());
+                    }
+                });
+    }
+
+
 }
