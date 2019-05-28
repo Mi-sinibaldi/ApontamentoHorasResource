@@ -5,6 +5,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -182,4 +183,51 @@ public class EmployeeFragment extends Fragment {
         employeeModel = new EmployeeModel("Paulo Henrique", "re032398");
         employee.add(employeeModel);
     }
+
+
+    public boolean OnCreateOptionsMenu(Menu menu) {
+        SearchView searchView = (SearchView) menu.findItem(R.id.searchView).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                callSearch(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+                id_recyclerview_employee.setLayoutManager(layoutManager);
+                id_recyclerview_employee.setHasFixedSize(true);
+
+                AdapterEmployee adapterEmployee = new AdapterEmployee(searchEmployee(newText));
+                id_recyclerview_employee.setAdapter(adapterEmployee);
+
+                adapterEmployee.notifyDataSetChanged();
+
+                callSearch(newText);
+
+                return true;
+            }
+
+            public void callSearch(String query) {
+                //Do searching
+            }
+
+        });
+        return true;
+    }
+
+    private List<EmployeeModel> searchEmployee(String newText){
+      List<EmployeeModel> temp = new ArrayList();
+      for (EmployeeModel employeeModel : employee){
+          if(employeeModel.getNome().contains(newText)){
+              temp.add(employeeModel);
+          }
+      }
+      return temp;
+    }
+
+
+
 }
