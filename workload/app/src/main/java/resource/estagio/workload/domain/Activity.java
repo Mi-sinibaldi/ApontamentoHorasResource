@@ -11,7 +11,7 @@ public class Activity {
     private int activityType;
     private int customerId;
     private String customerName;
-    private ActivityContract.IRepository repository;
+    public ActivityContract.IRepository repository;
 
     public Activity() {
     }
@@ -25,6 +25,10 @@ public class Activity {
         this.activityType = activityType;
         this.customerId = customerId;
         this.customerName = customerName;
+    }
+
+    public Activity(int id) {
+        this.id = id;
     }
 
     public int getId() {
@@ -75,14 +79,23 @@ public class Activity {
         this.customerName = customerName;
     }
 
-    public void deleteActivity(String token, BaseCallback<Void> onResult) throws Exception {
+    public void deleteActivity(String token, BaseCallback<String> onResult) throws Exception {
         if (repository == null) {
             throw new Exception("Repositório nulo");
-
         }
         if (id == 0) {
             throw new Exception("Id nulo");
         }
-        
+        repository.deleteProject(id, token, new BaseCallback<String>() {
+            @Override
+            public void onSuccessful(String value) {
+                onResult.onSuccessful(value);
+            }
+
+            @Override
+            public void onUnsuccessful(String error) {
+                onResult.onUnsuccessful(error);
+            }
+        });
     }
 }

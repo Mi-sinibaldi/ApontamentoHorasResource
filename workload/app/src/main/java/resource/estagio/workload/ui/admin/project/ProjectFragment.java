@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import resource.estagio.workload.R;
@@ -68,6 +69,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     }
 
     private void loadListenerAdapter() {
+        activityModelsDelete = new ArrayList<>();
         listener = new AdapterProject.AdapterProjectInterface() {
             @Override
             public void rename(int position) {
@@ -139,7 +141,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     @Override
     public void showToast(int message) {
         Toast.makeText(getActivity(),
-                String.valueOf(message),
+                getString(message),
                 Toast.LENGTH_LONG).show();
     }
 

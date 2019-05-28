@@ -46,7 +46,11 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
 
             holder.textRenameProject.setOnClickListener(v -> listener.rename(position));
 
-            holder.imageDeleteProject.setOnClickListener(v -> listener.delete(position));
+            holder.imageDeleteProject.setOnClickListener(v -> {
+                listener.delete(position);
+                notifyItemRemoved(position);
+                listProject.remove(position);
+            });
         }else{
             holder.setInvisibleIcons();
         }
