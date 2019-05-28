@@ -55,9 +55,6 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
             });
             holder.setIconRemove();
         }
-
-
-
     }
 
     @Override

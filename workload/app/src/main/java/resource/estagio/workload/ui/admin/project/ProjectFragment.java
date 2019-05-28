@@ -74,6 +74,12 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
             @Override
             public void rename(int position) {
                 // Ir para a outra fragment
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("activity", activityModels.get(position));
+                ProjectFragment fragment = new ProjectFragment(activityView);
+                fragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_admin, fragment).addToBackStack(null).commit();
             }
 
             @Override
