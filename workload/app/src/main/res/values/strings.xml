@@ -28,4 +28,6 @@
     <string name="project_not_deleted">Projeto não excluído</string>
     <string name="project_deleted_successfully">Projeto excluído com sucesso</string>
     <string name="no_records_found">Nenhum registro encontrado</string>
+    <string name="null_repository">Repositório nulo</string>
+    <string name="null_id">Id nulo</string>
 </resources>

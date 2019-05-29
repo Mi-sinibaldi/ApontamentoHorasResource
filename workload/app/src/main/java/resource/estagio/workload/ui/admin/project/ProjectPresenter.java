@@ -49,7 +49,7 @@ public class ProjectPresenter implements ProjectContract.Presenter {
     public void deleteCustomer(ActivityModel model) {
 
         view.showProgress(true);
-        Activity activity = new Activity(model.getId());
+        Activity activity = new Activity(model.getId(), view.getContext());
         activity.repository = new ActivityRepository();
 
         try {

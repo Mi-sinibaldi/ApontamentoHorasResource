@@ -2,6 +2,7 @@ package resource.estagio.workload.ui.admin.project;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -210,5 +212,10 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         textViewInsideProject.setVisibility(View.VISIBLE);
     }
 
+    @Nullable
+    @Override
+    public Context getContext() {
+        return super.getContext();
+    }
 }
 
