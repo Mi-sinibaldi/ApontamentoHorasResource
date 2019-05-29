@@ -5,7 +5,7 @@ import java.util.List;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.repository.ActivityRepository;
-import resource.estagio.workload.domain.Activity;
+import resource.estagio.workload.domain.Project;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
 import resource.estagio.workload.ui.admin.project.adapterProject.AdapterProject;
@@ -49,11 +49,11 @@ public class ProjectPresenter implements ProjectContract.Presenter {
     public void deleteCustomer(ActivityModel model) {
 
         view.showProgress(true);
-        Activity activity = new Activity(model.getId(), view.getContext());
-        activity.repository = new ActivityRepository();
+        Project project = new Project(model.getId());
+        project.repository = new ActivityRepository();
 
         try {
-            activity.deleteActivity(App.getUser().getAccessToken(), new BaseCallback<String>() {
+            project.deleteActivity(App.getUser().getAccessToken(), new BaseCallback<String>() {
                 @Override
                 public void onSuccessful(String value) {
                     view.showProgress(false);

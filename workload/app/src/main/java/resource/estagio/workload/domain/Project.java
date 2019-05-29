@@ -1,5 +1,6 @@
 package resource.estagio.workload.domain;
 
+import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
 import resource.estagio.workload.data.repository.ActivityRepository;
 import resource.estagio.workload.infra.App;
@@ -20,6 +21,10 @@ public class Project {
         this.activityTypeModel = activityTypeModel;
         this.customer = customer;
         this.repository = new ActivityRepository();
+    }
+
+    public Project(int id) {
+        this.id = id;
     }
 
     public int getId() {
@@ -55,6 +60,26 @@ public class Project {
             throw new Exception("Required repository is null ");
 
         repository.insertProject(this, App.getUser().getAccessToken(), new BaseCallback<String>() {
+            @Override
+            public void onSuccessful(String value) {
+                onResult.onSuccessful(value);
+            }
+
+            @Override
+            public void onUnsuccessful(String error) {
+                onResult.onUnsuccessful(error);
+            }
+        });
+    }
+    public void deleteActivity(String token, BaseCallback<String> onResult) throws Exception {
+
+        if (repository == null) {
+            throw new Exception("Repositório nulo");
+        }
+        if (id == 0) {
+            throw new Exception("Id nulo");
+        }
+        repository.deleteProject(id, token, new BaseCallback<String>() {
             @Override
             public void onSuccessful(String value) {
                 onResult.onSuccessful(value);

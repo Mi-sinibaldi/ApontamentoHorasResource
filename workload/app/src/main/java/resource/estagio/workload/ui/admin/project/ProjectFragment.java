@@ -35,7 +35,6 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     private TextView textViewCustomer;
     private ImageView imageViewBackCustomers;
     private ImageView imageViewFilterProject;
-    private Button buttonNewProject;
     private ConstraintLayout buttonNewProject;
     private Button buttonSaveProject;
     private TextView textViewCancelProject;
@@ -81,8 +80,9 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
             public void rename(int position) {
                 // Ir para a outra fragment
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("activity", activityModels.get(position));
-                ProjectFragment fragment = new ProjectFragment(activityView);
+                bundle.putSerializable("project", activityModels.get(position));
+                AddProjectFragment fragment = new AddProjectFragment(customer.toDomain(),
+                        activityView);
                 fragment.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_admin, fragment).addToBackStack(null).commit();
