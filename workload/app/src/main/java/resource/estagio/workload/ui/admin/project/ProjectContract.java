@@ -1,5 +1,7 @@
 package resource.estagio.workload.ui.admin.project;
 
+import android.content.Context;
+
 import java.util.List;
 
 import resource.estagio.workload.data.remote.model.ActivityModel;
@@ -23,6 +25,8 @@ public class ProjectContract {
         void listAdapter(List<ActivityModel> value, boolean status);
 
         void reloadList();
+
+        Context getContext();
     }
 
 

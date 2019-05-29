@@ -1,6 +1,10 @@
 package resource.estagio.workload.domain;
 
+import android.content.Context;
+
+import resource.estagio.workload.R;
 import resource.estagio.workload.infra.BaseCallback;
+
 
 public class Activity {
 
@@ -11,6 +15,7 @@ public class Activity {
     private int customerId;
     private String customerName;
     public ActivityContract.IRepository repository;
+    public Context context;
 
     public Activity() {
     }
@@ -26,8 +31,9 @@ public class Activity {
         this.customerName = customerName;
     }
 
-    public Activity(int id) {
+    public Activity(int id, Context context) {
         this.id = id;
+        this.context = context;
     }
 
     public int getId() {
@@ -79,11 +85,12 @@ public class Activity {
     }
 
     public void deleteActivity(String token, BaseCallback<String> onResult) throws Exception {
+
         if (repository == null) {
-            throw new Exception("Repositório nulo");
+            throw new Exception(context.getString(R.string.null_repository));
         }
         if (id == 0) {
-            throw new Exception("Id nulo");
+            throw new Exception(context.getString(R.string.null_id));
         }
         repository.deleteProject(id, token, new BaseCallback<String>() {
             @Override

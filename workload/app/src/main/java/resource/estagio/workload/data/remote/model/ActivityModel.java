@@ -5,12 +5,12 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 public class ActivityModel implements Serializable {
-    private  int id;
+    private int id;
     private String name;
     private String demandNumber;
-    private  int activityType;
+    private int activityType;
     private int customerId;
-    private  String customerName;
+    private String customerName;
 
     public ActivityModel() {
     }
