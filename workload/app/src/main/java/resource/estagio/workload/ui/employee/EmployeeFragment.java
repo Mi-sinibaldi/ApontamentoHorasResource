@@ -4,21 +4,24 @@ package resource.estagio.workload.ui.employee;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.Layout;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,23 +29,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.data.remote.EmployeeAPI;
 import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricFragment;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
-import resource.estagio.workload.ui.client.ClientFragment;
 import resource.estagio.workload.ui.employee.adapterEmployee.AdapterEmployee;
 import resource.estagio.workload.ui.employee.adapterEmployee.RecyclerItemClickListener;
-import resource.estagio.workload.ui.timeline.TimelineFragment;
-import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
-public class EmployeeFragment extends Fragment {
+public class EmployeeFragment extends Fragment implements EmployeeContract.View {
 
     private EmployeeFragment employeeFragment;
     private ImageView imageView_recource;
     private TextView text_employee, textView_desc;
-    private SearchView searchView;
+    private EditText editTextEmployee;
     private RecyclerView id_recyclerview_employee;
     private List<TimeEntryModel> list = new ArrayList<>();
     private View view;
@@ -52,6 +51,8 @@ public class EmployeeFragment extends Fragment {
     private List<EmployeeModel> employee = new ArrayList<>();
     private ProgressBar progress_employee;
     private HomeAdminContract.View viewHome;
+    private EmployeeContract.Presenter presenter;
+    private AdapterEmployee adapterEmployee;
 
     public EmployeeFragment(HomeAdminContract.View view) {
         viewHome = view;
@@ -61,36 +62,74 @@ public class EmployeeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        super.onCreateView(inflater, container, savedInstanceState);
         view = inflater.inflate(R.layout.fragment_employee, container, false);
         loadUI();
         criarColaborador();
-        showListTimeline(null);
-        clickRecycler();
-        return view;
+        configAdapter();
+        //showListTimeline(null);
+        //clickRecycler();
+        editTextEmployee.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString().trim());
+
+            }
+        });
+         return view;
 
     }
+    private void filter(String nome){
+        ArrayList<EmployeeModel> filterList = new ArrayList<> ();
+
+        for(EmployeeModel colaborador : employee){
+            if(colaborador.getNome().toLowerCase().contains(nome.toLowerCase())){
+                filterList.add(colaborador);
+            }else if(colaborador.getRe().toLowerCase().contains(nome.toLowerCase())){
+                filterList.add(colaborador);
+            }
+        }
+        if(filterList == null) adapterEmployee.filterAdapter(employee);
+        else adapterEmployee.filterAdapter(filterList);
+
+
+    }
+
 
     private void clickRecycler() {
         id_recyclerview_employee.addOnItemTouchListener(
                 new RecyclerItemClickListener(
-                        getContext(),
-                        id_recyclerview_employee,
-                        new RecyclerItemClickListener.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(View view, int position) {
-                                getFragmentManager().beginTransaction()
-                                        .replace(R.id.frame_admin, new ResultHistoricFragment(viewHome)).commit();
-                            }
+                getContext(),
+                id_recyclerview_employee,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.frame_admin, new ResultHistoricFragment(viewHome))
+                                .commit();
 
-                            @Override
-                            public void onLongItemClick(View view, int position) {
+                    }
 
-                            }
+                    @Override
+                    public void onLongItemClick(View view, int position) {
 
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            }
-                        }
+                    }
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    }
+                }
 
                 )
         );
@@ -101,8 +140,11 @@ public class EmployeeFragment extends Fragment {
         button_re_employee = view.findViewById(R.id.button_re_employee);
         id_recyclerview_employee = view.findViewById(R.id.id_recyclerview_employee);
         //progress_employee = view.findViewById(R.id.progress_employee);
+        editTextEmployee = view.findViewById(R.id.edit_text_employee);
+        presenter = new EmployeePresenter(this);
 
-    }
+        }
+
 
 
     public void showProsseEmployee(final boolean show) {
@@ -132,11 +174,13 @@ public class EmployeeFragment extends Fragment {
         configAdapter();
     }
 
+
+
     private void configAdapter() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         id_recyclerview_employee.setLayoutManager(layoutManager);
         id_recyclerview_employee.setHasFixedSize(true);
-        AdapterEmployee adapterEmployee = new AdapterEmployee(employee);
+        adapterEmployee = new AdapterEmployee(employee);
         id_recyclerview_employee.setAdapter(adapterEmployee);
     }
 
@@ -185,9 +229,14 @@ public class EmployeeFragment extends Fragment {
     }
 
 
-    public boolean OnCreateOptionsMenu(Menu menu) {
-        SearchView searchView = (SearchView) menu.findItem(R.id.searchView).getActionView();
+    public void OnCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu,null);
+
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.edit_text_employee).getActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 callSearch(query);
@@ -211,11 +260,12 @@ public class EmployeeFragment extends Fragment {
             }
 
             public void callSearch(String query) {
-                //Do searching
+//                urn;
+//                }
             }
 
         });
-        return true;
+        return ;
     }
 
     private List<EmployeeModel> searchEmployee(String newText){

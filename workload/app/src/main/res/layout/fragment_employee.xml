@@ -53,13 +53,13 @@
             android:textColor="@color/colorWhite"
             android:textSize="12dp"
             android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="@+id/searchView"
+            app:layout_constraintEnd_toEndOf="@+id/edit_text_employee"
             app:layout_constraintHorizontal_bias="0.007"
-            app:layout_constraintStart_toStartOf="@+id/searchView"
+            app:layout_constraintStart_toStartOf="@+id/edit_text_employee"
             app:layout_constraintTop_toBottomOf="@+id/text_employee" />
 
-        <SearchView
-            android:id="@+id/searchView"
+        <EditText
+            android:id="@+id/edit_text_employee"
             android:layout_width="331dp"
             android:layout_height="39dp"
             android:layout_marginStart="8dp"

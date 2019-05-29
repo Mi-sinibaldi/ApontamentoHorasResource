@@ -9,6 +9,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,6 +48,10 @@ public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyView
         return listEmployee.size();
     }
 
+    public void filterAdapter(List<EmployeeModel> filterList){
+        listEmployee = filterList;
+        notifyDataSetChanged();
+    }
     @Override
     public void onClick(View v) {
 
