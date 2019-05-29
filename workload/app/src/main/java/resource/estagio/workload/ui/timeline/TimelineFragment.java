@@ -3,7 +3,6 @@ package resource.estagio.workload.ui.timeline;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -115,7 +113,7 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
     private void loadUI() {
 
         presenter = new TimeLinePresenter(this);
-        buttonConfirm = view.findViewById(R.id.button_point_confirm);
+        buttonConfirm = view.findViewById(R.id.button_project_confirm);
 
         recyclerViewTimeline = view.findViewById(R.id.id_recyclerview_timeline);
         textViewMonth = view.findViewById(R.id.text_view_month_timeline);

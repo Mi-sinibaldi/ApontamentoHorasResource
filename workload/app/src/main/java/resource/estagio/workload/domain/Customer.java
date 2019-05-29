@@ -2,6 +2,8 @@ package resource.estagio.workload.domain;
 
 import android.content.Context;
 
+import java.io.Serializable;
+
 import resource.estagio.workload.infra.BaseCallback;
 
 public class Customer {

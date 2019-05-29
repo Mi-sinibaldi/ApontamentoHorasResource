@@ -21,7 +21,7 @@ public class DialogActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_dialog );
 
-        buttonConfirm = findViewById( R.id.button_point_confirm );
+        buttonConfirm = findViewById( R.id.button_project_confirm);
         buttonChooser = findViewById( R.id.button_escolher );
         buttonChooser.setOnClickListener( v -> showDialogChooser() );
     }
@@ -67,7 +67,7 @@ public class DialogActivity extends AppCompatActivity {
         dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN );
         dialog.show();
-        buttonError = dialog.findViewById( R.id.button_dialog_error );
+        buttonError = dialog.findViewById( R.id.button_dialog_error);
         buttonError.setOnClickListener( v -> dialog.dismiss() );
     }
 }

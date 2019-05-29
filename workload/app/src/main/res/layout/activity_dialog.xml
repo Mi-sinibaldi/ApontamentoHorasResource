@@ -7,7 +7,7 @@
     tools:context=".DialogActivity">
 
     <Button
-        android:id="@+id/button_point_confirm"
+        android:id="@+id/button_project_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -35,5 +35,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_point_confirm" />
+        app:layout_constraintTop_toBottomOf="@+id/button_project_confirm" />
 </android.support.constraint.ConstraintLayout>

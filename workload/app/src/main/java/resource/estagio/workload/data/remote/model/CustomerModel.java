@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
+import resource.estagio.workload.domain.Customer;
+
 public class CustomerModel implements Serializable {
 
     private int id;
@@ -38,5 +40,9 @@ public class CustomerModel implements Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    public Customer toDomain() {
+        return new Customer(id, name);
     }
 }
