@@ -2,7 +2,9 @@ package resource.estagio.workload.data.remote.model;
 
 import androidx.annotation.NonNull;
 
-public class ActivityModel {
+import java.io.Serializable;
+
+public class ActivityModel implements Serializable {
     private  int id;
     private String name;
     private String demandNumber;

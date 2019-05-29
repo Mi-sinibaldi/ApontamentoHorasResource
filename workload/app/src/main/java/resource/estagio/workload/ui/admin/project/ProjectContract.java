@@ -10,6 +10,8 @@ public class ProjectContract {
 
         void showToast(int message);
 
+        void showError(int error);
+
         void showError(String error);
 
         void showProgress(boolean result);
@@ -19,6 +21,8 @@ public class ProjectContract {
         void showInvisibility();
 
         void listAdapter(List<ActivityModel> value, boolean status);
+
+        void reloadList();
     }
 
 

@@ -41,17 +41,20 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
         ActivityModel activityModel = listProject.get(position);
         holder.loadFilds(activityModel);
         holder.showIconActions();
-        if (status){
-            holder.showIconActions();
+        if (status) {
 
-            holder.textRenameProject.setOnClickListener(v -> listener.rename(position));
+            holder.showIconActions();
+            holder.textRenameProject.setOnClickListener(v ->
+                    listener.rename(position)
+            );
 
             holder.imageDeleteProject.setOnClickListener(v -> {
                 listener.delete(position);
                 notifyItemRemoved(position);
                 listProject.remove(position);
             });
-        }else{
+
+        } else {
             holder.setInvisibleIcons();
         }
     }
@@ -61,10 +64,11 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
         return listProject.size();
     }
 
-    public interface AdapterProjectInterface{
-        void rename(int position);
-        void delete(int position);
+    public interface AdapterProjectInterface {
 
+        void rename(int position);
+
+        void delete(int position);
     }
 
 
@@ -82,7 +86,7 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
             viewBarProject.setVisibility(View.VISIBLE);
         }
 
-        public void setInvisibleIcons(){
+        public void setInvisibleIcons() {
             textRenameProject.setVisibility(View.INVISIBLE);
             imageDeleteProject.setVisibility(View.INVISIBLE);
             viewBarProject.setVisibility(View.INVISIBLE);
