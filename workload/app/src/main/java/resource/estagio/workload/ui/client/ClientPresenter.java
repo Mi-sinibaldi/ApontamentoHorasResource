@@ -1,12 +1,24 @@
 package resource.estagio.workload.ui.client;
 
+import android.app.Dialog;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.List;
 
+import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.data.repository.CustomerRepository;
 import resource.estagio.workload.domain.Customer;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
 public class ClientPresenter implements ClientContract.Presenter{
 
@@ -56,5 +68,46 @@ public class ClientPresenter implements ClientContract.Presenter{
             view.notification(e.getMessage());
         }
 
+    }
+
+    @Override
+    public void showDialogCustomer() {
+        Dialog dialog = new Dialog(view.getActivity(), R.style.CustomAlertDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_new_customer);
+        dialog.setCancelable(false);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        dialog.show();
+
+        TextInputLayout name = dialog.findViewById(R.id.text_add_customer);
+        Button save = dialog.findViewById(R.id.button_save_customer);
+        Button cancel = dialog.findViewById(R.id.button_cancel_customer);
+        save.setOnClickListener(v -> {
+            Customer customer = new Customer(0, name.getEditText().getText().toString());
+            customer.repository = new CustomerRepository();
+            try {
+                customer.postCustomer(App.getUser().getAccessToken(), new BaseCallback<String>() {
+                    @Override
+                    public void onSuccessful(String value) {
+                        view.showToast(value);
+                    }
+
+                    @Override
+                    public void onUnsuccessful(String error) {
+                        view.showToast(error);
+
+                    }
+                });
+            } catch (Exception e) {
+                view.showToast(e.getMessage());
+                e.printStackTrace();
+            }
+
+            dialog.dismiss();
+
+        });
+
+        cancel.setOnClickListener(v -> dialog.dismiss());
     }
 }

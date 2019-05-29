@@ -1,6 +1,5 @@
 package resource.estagio.workload.ui.admin.project.add_project;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import java.util.List;
+
 import resource.estagio.workload.R;
+import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
 import resource.estagio.workload.domain.Customer;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
@@ -23,7 +25,6 @@ import resource.estagio.workload.ui.admin.HomeAdminContract;
 public class AddProjectFragment extends Fragment implements AddProjectContract.View {
 
     View view;
-    private Dialog dialog;
     private EditText nameProject;
     private EditText demandNumber;
     private Spinner spinnerProjectType;
@@ -31,6 +32,7 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
     private Customer customer;
     private HomeAdminContract.View activityView;
     private AddProjectContract.Presenter presenter;
+    private ActivityModel project;
 
 
     public AddProjectFragment(Customer customer, HomeAdminContract.View activityView) {
@@ -46,6 +48,11 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_project, container, false);
         loadUI();
+        if(getArguments().getSerializable("project") != null){
+            project = (ActivityModel) getArguments().getSerializable("project");
+            nameProject.setText(project.getName());
+            demandNumber.setText(project.getDemandNumber());
+        }
 
         presenter.loadSpinner();
         selectItemInSpinner();
@@ -53,8 +60,15 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
         buttonProjectConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.addProject(nameProject.getText().toString(),
-                        demandNumber.getText().toString(), customer);
+                if(project == null ) {
+                    presenter.addProject(nameProject.getText().toString(),
+                            demandNumber.getText().toString(), customer);
+                }
+                else{
+                    presenter.updateProject(project.getId(), nameProject.getText().toString(),
+                            demandNumber.getText().toString(), customer);
+                }
+
             }
         });
 

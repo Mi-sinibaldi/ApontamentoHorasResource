@@ -19,11 +19,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="37dp"
-            android:textColorHint="@android:color/white"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="37dp"
             android:backgroundTint="#4050D5"
-            app:hintEnabled="false"
+            android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/input_layout_name_project">
@@ -37,12 +36,12 @@
                 android:foregroundTint="#4050D5"
                 android:gravity="start|top"
                 android:hint="Numero de Demanda"
-                android:textColorHighlight="@color/colorWhite"
-                android:textColorLink="@color/colorWhite"
-                android:textCursorDrawable="@color/colorWhite"
                 android:inputType="numberSigned"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhiteTransparent" />
+                android:textColorHighlight="@color/colorWhite"
+                android:textColorHint="@color/colorWhiteTransparent"
+                android:textColorLink="@color/colorWhite"
+                android:textCursorDrawable="@color/colorWhite" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
@@ -123,10 +122,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="37dp"
             android:layout_marginTop="32dp"
-            android:textColorHint="@android:color/white"
             android:layout_marginEnd="37dp"
             android:backgroundTint="#4050D5"
-            app:hintEnabled="false"
+            android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_subtitle_project">

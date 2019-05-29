@@ -19,7 +19,7 @@ public interface CustomerAPI {
     @DELETE("customer")
     Call<Void> deleteCustomer(@Query("id") long id, @Header("Authorization") String token);
 
-    @POST("custumer")
+    @POST("customer")
     Call<Void> postCustomer(@Body CustomerModel model, @Header("Authorization")String token);
 }
 

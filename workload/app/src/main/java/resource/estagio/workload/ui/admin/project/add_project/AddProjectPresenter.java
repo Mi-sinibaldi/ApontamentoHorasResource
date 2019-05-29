@@ -8,9 +8,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.List;
 
 import resource.estagio.workload.R;
@@ -67,7 +65,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
             project.insertProject(new BaseCallback<String>() {
                 @Override
                 public void onSuccessful(String value) {
-                    showDialogConfirm();
+                    showDialogConfirm(value);
                 }
 
                 @Override
@@ -81,7 +79,31 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
         }
     }
 
-    private void showDialogConfirm() {
+    @Override
+    public void updateProject(int id, String nameProject, String demandNumber, Customer customer) {
+
+        this.customer = customer;
+        Project project = new Project(id, nameProject, demandNumber, activityTypeModel, customer);
+        try{
+            project.updateProject(new BaseCallback<String>() {
+                @Override
+                public void onSuccessful(String value) {
+                    showDialogConfirm(value);
+                }
+
+                @Override
+                public void onUnsuccessful(String error) {
+                    view.showToast(error);
+                }
+            });
+        }catch (Exception e){
+            view.showToast(e.getMessage());
+            e.printStackTrace();
+        }
+
+    }
+
+    private void showDialogConfirm(String value) {
         Dialog dialog = new Dialog(view.getActivity(), R.style.CustomAlertDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.activity_check);
@@ -90,6 +112,8 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         dialog.show();
 
+        TextView text = dialog.findViewById(R.id.textDialog);
+        text.setText(value);
         Button buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
         buttonConfirmCheck.setOnClickListener(v -> {
 

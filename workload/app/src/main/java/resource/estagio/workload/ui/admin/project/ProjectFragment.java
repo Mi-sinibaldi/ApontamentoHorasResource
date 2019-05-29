@@ -67,7 +67,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         setCustomerName();
         presenter.loadList(customer.getId(), false);
         showInvisibility();
-        backtoCustomers();
+        backToCustomers();
         filterClick();
         clickButtonAdd();
         return view;
@@ -127,14 +127,19 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         buttonNewProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("add_project", null);
+                AddProjectFragment fragment = new AddProjectFragment(customer.toDomain(),
+                        activityView);
+                fragment.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_admin, new AddProjectFragment(customer.toDomain(), activityView))
+                        .replace(R.id.frame_admin, fragment)
                         .addToBackStack(null).commit();
             }
         });
     }
 
-    private void backtoCustomers() {
+    private void backToCustomers() {
 
         imageViewBackCustomers.setOnClickListener(v -> getActivity().getSupportFragmentManager()
                 .beginTransaction()

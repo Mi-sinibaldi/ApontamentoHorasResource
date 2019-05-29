@@ -16,15 +16,15 @@ public class DialogActivity extends AppCompatActivity {
     Dialog dialog;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_dialog );
-
-        buttonConfirm = findViewById( R.id.button_project_confirm);
-        buttonChooser = findViewById( R.id.button_escolher );
-        buttonChooser.setOnClickListener( v -> showDialogChooser() );
-    }
+   // @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate( savedInstanceState );
+//        setContentView( R.layout.activity_dialog );
+//
+//        buttonConfirm = findViewById( R.id.button_project_confirm);
+//        buttonChooser = findViewById( R.id.button_escolher );
+//        buttonChooser.setOnClickListener( v -> showDialogChooser() );
+//    }
 
 //    public void showDialogConfirm() {
 //        dialog = new Dialog( this, R.style.CustomAlertDialog );

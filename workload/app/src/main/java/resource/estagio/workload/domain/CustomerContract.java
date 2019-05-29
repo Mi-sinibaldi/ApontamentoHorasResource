@@ -12,7 +12,7 @@ public class CustomerContract {
 
         void deleteCustomer(int id, String token, BaseCallback<Void> onResult);
 
-        void postCustomer(CustomerModel model, String token, BaseCallback<Void> onResult);
+        void postCustomer(Customer customer, String token, BaseCallback<String> onResult);
     }
 
 
