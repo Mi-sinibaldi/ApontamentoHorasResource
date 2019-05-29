@@ -65,12 +65,29 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
+            android:paddingLeft="45dp"
+            android:paddingRight="10dp"
+            android:maxLines="1"
+            android:hint="Pesquisar"
             android:layout_marginBottom="8dp"
             android:background="@drawable/seach_employee"
             app:layout_constraintBottom_toBottomOf="parent"
+            
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_desc" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="30dp"
+            android:layout_height="29dp"
+            android:src="@mipmap/ic_search"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_text_employee"
+            app:layout_constraintEnd_toEndOf="@+id/edit_text_employee"
+            app:layout_constraintHorizontal_bias="0.033"
+            app:layout_constraintStart_toStartOf="@+id/edit_text_employee"
+            app:layout_constraintTop_toTopOf="@+id/edit_text_employee"
+            app:layout_constraintVertical_bias="0.59000003" />
     </android.support.constraint.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
