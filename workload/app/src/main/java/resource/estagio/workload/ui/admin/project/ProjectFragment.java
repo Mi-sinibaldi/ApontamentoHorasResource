@@ -61,7 +61,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         loadUI();
         loadListenerAdapter();
         setCustomerName();
-        presenter.loadList(customer.getId(),false);
+        presenter.loadList(customer.getId(), false);
         showInvisibility();
         backtoCustomers();
         filterClick();
@@ -90,19 +90,24 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     }
 
     private void filterClick() {
-        imageViewFilterProject.setOnClickListener(v -> {
-            presenter.loadList(customer.getId(),true);
-            showVisibility();
 
+        imageViewFilterProject.setOnClickListener(v -> {
+            presenter.loadList(customer.getId(), true);
+            showVisibility();
         });
 
         buttonSaveProject.setOnClickListener(v -> {
-            presenter.loadList(customer.getId(), false);
-            showInvisibility();
-            for(ActivityModel model : activityModelsDelete){
-                presenter.deleteCustomer(model);
-            }
 
+            if (activityModelsDelete.size() > 0) {
+
+                for (ActivityModel model : activityModelsDelete) {
+                    presenter.deleteCustomer(model);
+                }
+                activityModelsDelete = new ArrayList<>();
+            } else {
+                presenter.loadList(customer.getId(), false);
+                showInvisibility();
+            }
         });
 
         textViewCancelProject.setOnClickListener(v -> {
@@ -145,9 +150,22 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     }
 
     @Override
+    public void reloadList() {
+        showInvisibility();
+        presenter.loadList(customer.getId(), false);
+    }
+
+    @Override
     public void showToast(int message) {
         Toast.makeText(getActivity(),
                 getString(message),
+                Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showError(int error) {
+        Toast.makeText(getActivity(),
+                getString(error),
                 Toast.LENGTH_LONG).show();
     }
 
@@ -160,6 +178,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
 
     @Override
     public void showProgress(boolean result) {
+
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
         recyclerProject.setVisibility(result ? View.GONE : View.VISIBLE);
@@ -171,8 +190,8 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
                 progressBarProjectAdmin.setVisibility(result ? View.VISIBLE : View.GONE);
             }
         });
-        activityView.enableNavigation(result);
 
+        activityView.enableNavigation(result);
     }
 
     @Override

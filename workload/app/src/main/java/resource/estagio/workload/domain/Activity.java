@@ -1,7 +1,6 @@
 package resource.estagio.workload.domain;
 
 import resource.estagio.workload.infra.BaseCallback;
-import resource.estagio.workload.infra.Repository;
 
 public class Activity {
 
