@@ -71,6 +71,32 @@ public class Project {
             }
         });
     }
+
+    public void updateProject(BaseCallback<String> onResult) throws Exception{
+        if(nameProject.isEmpty() || nameProject == null)
+            throw new Exception("Required name is null or empty");
+        if(demandNumber.isEmpty() || demandNumber == null)
+            throw new Exception("Required demand number is null or empty");
+        if(activityTypeModel== null)
+            throw new Exception("Required activity type is null");
+        if(customer == null)
+            throw new Exception("Required customer is null");
+        if(repository == null)
+            throw new Exception("Required repository is null ");
+
+        repository.updateProject(this, App.getUser().getAccessToken(), new BaseCallback<String>() {
+            @Override
+            public void onSuccessful(String value) {
+                onResult.onSuccessful(value);
+            }
+
+            @Override
+            public void onUnsuccessful(String error) {
+                onResult.onUnsuccessful(error);
+            }
+        });
+
+    }
     public void deleteActivity(String token, BaseCallback<String> onResult) throws Exception {
 
         if (repository == null) {

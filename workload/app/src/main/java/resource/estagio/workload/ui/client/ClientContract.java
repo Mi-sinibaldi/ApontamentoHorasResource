@@ -15,6 +15,8 @@ public class ClientContract {
         void showAdapterRecycler(boolean status);
 
         void showProgressClient(final boolean show);
+
+        void showToast(String value);
     }
 
     interface Presenter {
@@ -23,5 +25,6 @@ public class ClientContract {
 
         void deleteCustomer(CustomerModel model);
 
+        void showDialogCustomer();
     }
 }

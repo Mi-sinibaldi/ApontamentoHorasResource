@@ -28,6 +28,8 @@ public class AddProjectContract {
         void getItemInSpinner(AdapterView<?> parent, int position);
 
         void addProject(String nameProject, String demandNumber, Customer customer);
+
+        void updateProject(int id, String nameProject, String demandNumber, Customer customer);
     }
     
 }

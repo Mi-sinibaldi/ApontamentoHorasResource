@@ -13,7 +13,7 @@ public class ProjectContract {
         void getActivity(int id, String token, BaseCallback<List<ActivityModel>> onResult);
         void getActivityType(String token, BaseCallback<List<ActivityTypeModel>> onResult);
         void insertProject (Project project, String token, BaseCallback<String> onResult);
-        void updateProject(ActivityModel activityModel, String token, BaseCallback<String> onResult);
+        void updateProject(Project project, String token, BaseCallback<String> onResult);
 
         void deleteProject(long id, String token, BaseCallback<String> onResult);
     }
