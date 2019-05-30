@@ -20,11 +20,9 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
     private List<CustomerModel> listCustomer = new ArrayList<>();
     private List<ResultProject> listAuxProjects = new ArrayList<>();
 
-    String aux = "";
-    String auxCustomer = "";
-    String customerName = "";
-    String projectName = "";
-    int total = 0;
+    private String aux = "";
+    private String auxCustomer = "";
+    private int total = 0;
 
 
     public ResultPresenter(ResultHistoricContract.ResultView view) {
@@ -33,10 +31,10 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 
     @Override
     public void getListResult(int month, int year) {
+
         getCustomers();
         hours = 0;
         view.dialog(true);
-
 
         EmployeeDomain employeeDomain = new EmployeeDomain();
         employeeDomain.irepository = new EmployeeRepository();
@@ -45,24 +43,21 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
             @Override
             public void onSuccessful(List<TimeEntryModel> value) {
                 Collections.sort(value);
-                listAuxProjects.add(new ResultProject("aaaaaaaaaaaa","aaaaaaaaaaaaaaaa", 0));
+                listAuxProjects.add(new ResultProject("aaa", "aa", 0));
                 for (CustomerModel model : listCustomer) {
-
 
                     for (TimeEntryModel timeEntryModel : value) {
 
                         if (timeEntryModel.getCustomerName().contains(model.getName())) {
-                            customerName = timeEntryModel.getCustomerName();
 
                             if (aux.isEmpty() || aux.equals(timeEntryModel.getActivityName())) {
                                 total += timeEntryModel.getHours();
                                 aux = timeEntryModel.getActivityName();
                                 auxCustomer = timeEntryModel.getCustomerName();
-                                hours+=timeEntryModel.getHours();
+                                hours += timeEntryModel.getHours();
                             } else {
-                               // hours+=total;
-                                hours+=timeEntryModel.getHours();
-                                listAuxProjects.add(new ResultProject(auxCustomer,aux, total));
+                                hours += timeEntryModel.getHours();
+                                listAuxProjects.add(new ResultProject(auxCustomer, aux, total));
                                 total = 0;
                                 total += timeEntryModel.getHours();
                                 aux = timeEntryModel.getActivityName();
@@ -71,10 +66,8 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 
                             if (aux.isEmpty() || aux.equals(timeEntryModel.getActivityName())) {
 
-                                projectName += timeEntryModel.getActivityName() + "             " + timeEntryModel.getHours() + "\n";
                                 aux = timeEntryModel.getActivityName();
                             } else {
-                                projectName += timeEntryModel.getActivityName() + "             " + timeEntryModel.getHours() + "\n";
                                 aux = timeEntryModel.getActivityName();
                             }
 
@@ -82,32 +75,31 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 
                     }
 
-
-                    projectName = "";
-
                 }
-
 
 
                 listAuxProjects.add(new ResultProject(auxCustomer, aux, total));
 
-                String auxNameCustomer = "", auxNameProject = "";
+                String auxNameCustomer = "";
+                StringBuilder auxNameProject = new StringBuilder();
                 for (ResultProject project : listAuxProjects) {
 
                     if (auxNameCustomer.equals("") || auxNameCustomer.equals(project.getClient())) {
-                        auxNameProject += project.getName() + "!" + project.getHoras() + "!";
+                        auxNameProject.append(project.getName()).append("!").append(project.getHoras()).append("!");
 
                         auxNameCustomer = project.getClient();
                     } else {
-                        newListResultAdmin listResultAdmin = new newListResultAdmin(auxNameCustomer, auxNameProject, hours, 1);
+                        newListResultAdmin listResultAdmin = new newListResultAdmin(auxNameCustomer,
+                                auxNameProject.toString(), hours, 1);
                         newListResult.add(listResultAdmin);
-                        auxNameProject = "";
-                        auxNameProject += project.getName() + "!" + project.getHoras() + "!";
+                        auxNameProject = new StringBuilder();
+                        auxNameProject.append(project.getName()).append("!").append(project.getHoras()).append("!");
                         auxNameCustomer = project.getClient();
                     }
 
                 }
-                newListResultAdmin listResultAdmin = new newListResultAdmin(auxNameCustomer, auxNameProject, hours, 1);
+                newListResultAdmin listResultAdmin = new newListResultAdmin(auxNameCustomer,
+                        auxNameProject.toString(), hours, 1);
                 newListResult.add(listResultAdmin);
 
 
@@ -136,7 +128,8 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 
             @Override
             public void onUnsuccessful(String error) {
-
+                view.showErrorMessage("Erro\n" + error);
+                view.dialog(false);
             }
         });
     }

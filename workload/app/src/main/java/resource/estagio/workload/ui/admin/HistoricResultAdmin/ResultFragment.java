@@ -19,6 +19,7 @@ import java.util.List;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.ui.admin.HistoricResultAdmin.adapter.AdapterListResult;
+import resource.estagio.workload.ui.admin.HomeAdminContract;
 
 
 public class ResultFragment extends Fragment  implements ResultHistoricContract.ResultView{
@@ -31,11 +32,14 @@ public class ResultFragment extends Fragment  implements ResultHistoricContract.
     private ProgressBar progressBarResultAdmin;
     View view;
 
+    HomeAdminContract.View viewHome;
+
     private int shortAnimTime;
 
-    public ResultFragment() {
-        // Required empty public constructor
+    public ResultFragment(HomeAdminContract.View viewHome) {
+        this.viewHome =viewHome;
     }
+
 
 
     @Override
@@ -46,7 +50,7 @@ public class ResultFragment extends Fragment  implements ResultHistoricContract.
         progressBarResultAdmin=view.findViewById( R.id.progressbar_result_admin );
 
         presenter = new ResultPresenter(this);
-        presenter.getListResult(4,2019);
+        presenter.getListResult(5,2019);
 
 
 
@@ -91,6 +95,8 @@ public class ResultFragment extends Fragment  implements ResultHistoricContract.
                 progressBarResultAdmin.setVisibility(Key ? View.VISIBLE : View.GONE);
             }
         });
+
+        viewHome.enableNavigation(Key);
     }
 
     @Override
