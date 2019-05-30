@@ -65,6 +65,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
+            android:maxLines="1"
+            android:hint="Pesquisar"
+            android:paddingLeft="37dp"
             android:layout_marginBottom="8dp"
             android:textCursorDrawable="@drawable/color_cusor"
             android:background="@drawable/seach_employee"
@@ -72,6 +75,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_desc" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:src="@android:drawable/ic_search_category_default"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_text_employee"
+            app:layout_constraintStart_toStartOf="@+id/edit_text_employee"
+            app:layout_constraintTop_toTopOf="@+id/edit_text_employee" />
     </android.support.constraint.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
