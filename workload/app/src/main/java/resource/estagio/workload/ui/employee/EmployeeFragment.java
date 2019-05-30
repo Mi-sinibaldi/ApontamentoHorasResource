@@ -5,22 +5,18 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Layout;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,9 +34,7 @@ import resource.estagio.workload.ui.employee.adapterEmployee.RecyclerItemClickLi
 
 public class EmployeeFragment extends Fragment implements EmployeeContract.View {
 
-    private EmployeeFragment employeeFragment;
-    private ImageView imageView_recource;
-    private TextView text_employee, textView_desc;
+
     private EditText editTextEmployee;
     private RecyclerView id_recyclerview_employee;
     private List<TimeEntryModel> list = new ArrayList<>();
