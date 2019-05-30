@@ -30,6 +30,12 @@
     <string name="no_records_found">Nenhum registro encontrado</string>
     <string name="null_repository">Repositório nulo</string>
     <string name="null_id">Id nulo</string>
-    <string name="pesquisar">Pesquisar</string>
-    <string name="lista_de_colaboradores_cadastrados">Lista de colaboradores cadastrados.</string>
+    <string name="required_repository_is_null">Repositório requerido é nulo</string>
+    <string name="username_is_null_or_empty">Nome de usuário requerido é nulo ou vazio</string>
+    <string name="required_password_is_null_or_empty">Senha requerida é nula ou vazia</string>
+    <string name="password_must_have_at_least_four_characters">A senha precisa ter no mínimo 4 caracteres</string>
+    <string name="required_name_is_null_or_empty">Nome do Projeto requerido é nulo ou vazio</string>
+    <string name="required_demand_number_is_null_or_empty">Número de demanda requerido é nulo ou vazio</string>
+    <string name="required_customer_is_null">Cliente requerido é nulo</string>
+    <string name="required_activity_type_is_null">Tipo de atividade requerida é nula</string>
 </resources>
