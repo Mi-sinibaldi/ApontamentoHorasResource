@@ -9,7 +9,7 @@ public class EmployeeContract {
     }
     public interface Presenter{
 
-        void searchEmployee(EmployeeModel employeeModel);
+
 
     }
 }

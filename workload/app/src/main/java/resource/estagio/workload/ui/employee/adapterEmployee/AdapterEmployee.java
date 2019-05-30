@@ -7,14 +7,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-
 import java.util.Collections;
 import java.util.List;
-
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.EmployeeModel;
-import resource.estagio.workload.data.remote.model.TimeEntryModel;
+
 
 public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyViewHolder> implements View.OnClickListener {
 

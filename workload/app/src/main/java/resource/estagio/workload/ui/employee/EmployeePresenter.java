@@ -14,8 +14,4 @@ public class EmployeePresenter implements EmployeeContract.Presenter {
 
 
 
-    @Override
-    public void searchEmployee(EmployeeModel employeeModel) {
-
-    }
 }
