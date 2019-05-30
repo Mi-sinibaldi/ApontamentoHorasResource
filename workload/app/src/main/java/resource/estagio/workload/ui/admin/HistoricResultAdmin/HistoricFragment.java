@@ -167,6 +167,8 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
        // Toast.makeText(getActivity(), "Foi", Toast.LENGTH_SHORT).show();
     }
 
+
+
     public void showDialogError(String text) {
         dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
