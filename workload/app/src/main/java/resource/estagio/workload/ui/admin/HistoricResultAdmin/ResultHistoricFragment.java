@@ -50,7 +50,7 @@ public class ResultHistoricFragment extends Fragment {
                     case 0:
                         textTitle.setText("Resultado");
                         textSubtitle.setText("Resultado dos Apontamentos do mês");
-                        fragment = new ResultFragment();
+                        fragment = new ResultFragment(viewHome);
                         break;
 
                     case 1:
@@ -80,7 +80,7 @@ public class ResultHistoricFragment extends Fragment {
         ft = fm.beginTransaction();
         textTitle=view.findViewById(R.id.textTitle);
         textSubtitle = view.findViewById(R.id.textSubtitle);
-        fragment = new ResultFragment();
+        fragment = new ResultFragment(viewHome);
         tabLayout = view.findViewById(R.id.tabLayout);
         tabLayout.setSelectedTabIndicator(0);
     }
