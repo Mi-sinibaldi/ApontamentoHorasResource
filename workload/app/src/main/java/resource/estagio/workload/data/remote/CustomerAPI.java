@@ -12,14 +12,18 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface CustomerAPI {
-
     @GET("customer")
-    Call<List<CustomerModel>> getCustomer(@Header("Authorization") String token);
+    Call<List<CustomerModel>> getCustomer(
+            @Header("Authorization") String token);
 
     @DELETE("customer")
-    Call<Void> deleteCustomer(@Query("id") long id, @Header("Authorization") String token);
+    Call<Void> deleteCustomer(
+            @Query("id") long id,
+            @Header("Authorization") String token);
 
     @POST("customer")
-    Call<Void> postCustomer(@Body CustomerModel model, @Header("Authorization")String token);
+    Call<Void> postCustomer(
+            @Body CustomerModel model,
+            @Header("Authorization") String token);
 }
 

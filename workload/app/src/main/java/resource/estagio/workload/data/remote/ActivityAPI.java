@@ -15,20 +15,26 @@ import retrofit2.http.Path;
 
 public interface ActivityAPI {
     @GET("activity/{customerId}")
-    Call<List<ActivityModel>> getActivity(@Path("customerId") int id,
-                                          @Header("Authorization") String token);
+    Call<List<ActivityModel>> getActivity(
+            @Path("customerId") int id,
+            @Header("Authorization") String token);
+
     @GET("activity/type")
-    Call<List<ActivityTypeModel>> getActivityType(@Header("Authorization") String token);
+    Call<List<ActivityTypeModel>> getActivityType(
+            @Header("Authorization") String token);
 
     @POST("activity")
-    Call<Void> insertProject(@Body ActivityModel activityModel,
-                                            @Header("Authorization") String token);
+    Call<Void> insertProject(
+            @Body ActivityModel activityModel,
+            @Header("Authorization") String token);
     @POST("activity/update")
-    Call<Void> updateProject (@Body ActivityModel activityModel,
-                                             @Header("Authorization") String token);
+    Call<Void> updateProject (
+            @Body ActivityModel activityModel,
+            @Header("Authorization") String token);
 
     @DELETE("activity/{activityId}")
-    Call<Void> deleteProject(@Path("activityId") long id,
-                             @Header("Authorization") String token);
+    Call<Void> deleteProject(
+            @Path("activityId") long id,
+            @Header("Authorization") String token);
 
 }

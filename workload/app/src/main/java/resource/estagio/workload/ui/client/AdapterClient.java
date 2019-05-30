@@ -17,11 +17,11 @@ import resource.estagio.workload.data.remote.model.CustomerModel;
 
 public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHolder>{
 
-    List<CustomerModel> list;
+    private List<CustomerModel> list;
 
-    public AdapterInterface listener;
+    private AdapterInterface listener;
 
-    public boolean setStatusList;
+    private boolean setStatusList;
 
     public AdapterClient(List<CustomerModel> list, boolean status, AdapterInterface listener) {
         this.list = list;
@@ -70,19 +70,13 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
 
         void goToProject(View v, int position);
     }
-
-    public interface AdapterViewHolder{
-        void setIconRemove();
-        void setIconClient();
-    }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder implements AdapterViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout buttonCardClient;
         TextView textViewClientAdapter;
         ImageView imageViewIconClientAdapter;
         ImageView imageViewDeleteClient;
 
-        public MyViewHolder(@NonNull View itemView) {
+        MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewClientAdapter = itemView.findViewById(R.id.text_view_client_adapter);
             buttonCardClient = itemView.findViewById(R.id.button_card_client);
@@ -90,14 +84,12 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
             imageViewDeleteClient = itemView.findViewById(R.id.image_view_delete_client);
         }
 
-        @Override
-        public void setIconRemove() {
+       void setIconRemove() {
             imageViewDeleteClient.setVisibility(View.VISIBLE);
             imageViewIconClientAdapter.setVisibility(View.INVISIBLE);
         }
 
-        @Override
-        public void setIconClient() {
+        void setIconClient() {
             imageViewDeleteClient.setVisibility(View.INVISIBLE);
             imageViewIconClientAdapter.setVisibility(View.VISIBLE);
         }
