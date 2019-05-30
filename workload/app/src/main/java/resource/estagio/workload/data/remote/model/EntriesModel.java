@@ -16,7 +16,6 @@ public class EntriesModel {
 
     public EntriesModel(int activityId, String activityName, int customerId, String customerName,
                         String demandNumber, int hours, String date, String reason) {
-
         this.activityId = activityId;
         this.activityName = activityName;
         this.customerId = customerId;

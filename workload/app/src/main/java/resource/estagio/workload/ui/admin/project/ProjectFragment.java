@@ -27,7 +27,7 @@ import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.adapterProject.AdapterProject;
 import resource.estagio.workload.ui.admin.project.add_project.AddProjectFragment;
-import resource.estagio.workload.ui.client.ClientFragment;
+import resource.estagio.workload.ui.admin.client.ClientFragment;
 
 public class ProjectFragment extends Fragment implements ProjectContract.View {
 
@@ -74,6 +74,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     }
 
     private void loadListenerAdapter() {
+
         activityModelsDelete = new ArrayList<>();
         listener = new AdapterProject.AdapterProjectInterface() {
             @Override
@@ -84,8 +85,12 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
                 AddProjectFragment fragment = new AddProjectFragment(customer.toDomain(),
                         activityView);
                 fragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_admin, fragment).addToBackStack(null).commit();
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame_admin, fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
 
             @Override
@@ -122,26 +127,27 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         });
     }
 
-
     private void clickButtonAdd() {
-        buttonNewProject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("add_project", null);
-                AddProjectFragment fragment = new AddProjectFragment(customer.toDomain(),
-                        activityView);
-                fragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_admin, fragment)
-                        .addToBackStack(null).commit();
-            }
+
+        buttonNewProject.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("add_project", null);
+            AddProjectFragment fragment = new AddProjectFragment(customer.toDomain(),
+                    activityView);
+            fragment.setArguments(bundle);
+            getActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_admin, fragment)
+                    .addToBackStack(null)
+                    .commit();
         });
     }
 
     private void backToCustomers() {
 
-        imageViewBackCustomers.setOnClickListener(v -> getActivity().getSupportFragmentManager()
+        imageViewBackCustomers.setOnClickListener(v -> getActivity()
+                .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frame_admin, new ClientFragment(activityView))
                 .commit());

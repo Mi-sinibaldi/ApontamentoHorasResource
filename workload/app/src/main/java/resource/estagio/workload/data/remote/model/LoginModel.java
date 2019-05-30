@@ -1,6 +1,7 @@
 package resource.estagio.workload.data.remote.model;
 
 import com.google.gson.annotations.SerializedName;
+
 import resource.estagio.workload.domain.User;
 
 public class LoginModel {

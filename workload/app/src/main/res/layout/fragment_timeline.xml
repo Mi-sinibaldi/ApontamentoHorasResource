@@ -29,10 +29,10 @@
             android:textSize="25dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_recource" />
+            app:layout_constraintTop_toBottomOf="@+id/image_view_resource" />
 
         <TextView
-            android:id="@+id/textView_desc"
+            android:id="@+id/text_view_desc"
             android:layout_width="wrap_content"
             android:layout_height="17dp"
             android:layout_marginStart="37dp"
@@ -48,7 +48,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textDialog" />
 
         <ImageView
-            android:id="@+id/imageView_recource"
+            android:id="@+id/image_view_resource"
             android:layout_width="99dp"
             android:layout_height="11dp"
             android:layout_marginStart="37dp"

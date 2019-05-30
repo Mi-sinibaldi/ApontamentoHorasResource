@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 public class ActivityModel implements Serializable {
+
     private int id;
     private String name;
     private String demandNumber;
@@ -15,9 +16,8 @@ public class ActivityModel implements Serializable {
     public ActivityModel() {
     }
 
-    public ActivityModel(int id, String name, String demandNumber,
-                         int activityType, int customerId, String customerName) {
-
+    public ActivityModel(int id, String name, String demandNumber, int activityType,
+                         int customerId, String customerName) {
         this.id = id;
         this.name = name;
         this.demandNumber = demandNumber;

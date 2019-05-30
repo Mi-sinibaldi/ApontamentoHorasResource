@@ -9,7 +9,6 @@ import resource.estagio.workload.domain.Customer;
 public class CustomerModel implements Serializable {
 
     private int id;
-
     private String name;
 
     public CustomerModel() {
@@ -36,13 +35,13 @@ public class CustomerModel implements Serializable {
         this.name = name;
     }
 
+    public Customer toDomain() {
+        return new Customer(id, name);
+    }
+
     @NonNull
     @Override
     public String toString() {
         return name;
-    }
-
-    public Customer toDomain() {
-        return new Customer(id, name);
     }
 }

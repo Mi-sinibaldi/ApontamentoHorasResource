@@ -5,7 +5,6 @@ public class ActivityTypeModel {
     private int id;
     private String description;
 
-
     public ActivityTypeModel() {
     }
 

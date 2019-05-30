@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.client;
+package resource.estagio.workload.ui.admin.client;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

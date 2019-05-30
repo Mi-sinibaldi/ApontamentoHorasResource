@@ -60,20 +60,20 @@ public class CustomerRepository extends Repository implements CustomerContract.I
         super.data.restApi(CustomerAPI.class)
                 .postCustomer(model, "bearer " + token)
                 .enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful())
-                    onResult.onSuccessful("Cliente cadastrado com sucesso.");
-                else
-                    onResult.onUnsuccessful("Erro ao cadastrar cliente.");
-            }
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful())
+                            onResult.onSuccessful("Cliente cadastrado com sucesso.");
+                        else
+                            onResult.onUnsuccessful("Erro ao cadastrar cliente.");
+                    }
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                onResult.onUnsuccessful(t.getMessage());
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        onResult.onUnsuccessful(t.getMessage());
 
-            }
-        });
+                    }
+                });
     }
 
 
