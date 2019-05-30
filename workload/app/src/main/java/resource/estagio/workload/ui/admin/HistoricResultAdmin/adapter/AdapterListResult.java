@@ -22,7 +22,7 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
 
     public AdapterListResult(List<newListResultAdmin> listTimeline) {
         this.listTimeline = listTimeline;
-        Collections.reverse(listTimeline);
+        //Collections.reverse(listTimeline);
         sizeList = listTimeline.size() - 1;
     }
 
@@ -38,11 +38,19 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         newListResultAdmin model = listTimeline.get(position);
-
-        holder.projectName.setText(model.getProjectName());
+        String project="";
+        String hours="";
+        String[] split = model.getProjectName().split("!");
+        for (int i =0;i<split.length-1;i++){
+            if(i%2==0) {
+                project += split[i] + "\n";
+                hours += split[i + 1] + "\n";
+            }
+        }
+        holder.projectName.setText(project);
         holder.customerName.setText(model.getCustomerName());
-        
-        holder.hours.setText("");
+
+        holder.hours.setText(hours);
 
     }
 
