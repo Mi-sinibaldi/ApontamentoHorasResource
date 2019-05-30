@@ -32,7 +32,7 @@ import resource.estagio.workload.ui.employee.adapterEmployee.AdapterEmployee;
 public class EmployeeFragment extends Fragment implements EmployeeContract.View {
 
     private EmployeeFragment employeeFragment;
-    private ImageView imageView_recource;
+    //private ImageView imageView_recource;
     private TextView text_employee, textView_desc;
     private EditText editTextEmployee;
     private RecyclerView recyclerViewEmployee;
