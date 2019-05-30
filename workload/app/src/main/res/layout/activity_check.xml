@@ -6,7 +6,7 @@
     android:background="@drawable/dialog_corner">
 
     <ImageView
-        android:id="@+id/imageView_recource"
+        android:id="@+id/image_view_resource"
         android:layout_width="69.5dp"
         android:layout_height="69.5dp"
         android:layout_marginStart="91dp"
@@ -50,6 +50,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_recource"
+        app:layout_constraintTop_toBottomOf="@+id/image_view_resource"
         app:layout_constraintVertical_bias="0.372" />
 </android.support.constraint.ConstraintLayout>

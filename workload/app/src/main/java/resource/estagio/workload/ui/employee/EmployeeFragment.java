@@ -26,8 +26,10 @@ import java.util.List;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricFragment;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.employee.adapterEmployee.AdapterEmployee;
+import resource.estagio.workload.ui.employee.adapterEmployee.RecyclerItemClickListener;
 
 public class EmployeeFragment extends Fragment implements EmployeeContract.View {
 
@@ -60,6 +62,7 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         view = inflater.inflate(R.layout.fragment_employee, container, false);
         loadUI();
         createCollaborator();
+        clickRecycler();
         configAdapter();
 
         editTextEmployee.addTextChangedListener(new TextWatcher() {
@@ -81,6 +84,31 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         });
         return view;
 
+    }
+    private void clickRecycler() {
+        recyclerViewEmployee.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        getContext(),
+                        recyclerViewEmployee,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                getFragmentManager().beginTransaction()
+                                        .replace(R.id.frame_admin, new ResultHistoricFragment(viewHome)).commit();
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            }
+                        }
+
+                )
+        );
     }
 
     private void filter(String nome) {
