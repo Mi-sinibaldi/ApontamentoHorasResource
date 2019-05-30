@@ -1,10 +1,8 @@
 package resource.estagio.workload.ui.admin.HistoricResultAdmin;
 
-import android.content.Intent;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import resource.estagio.workload.data.remote.model.CustomerModel;
@@ -19,11 +17,15 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 
     private ResultHistoricContract.ResultView view;
     private long hours = 0;
-    private List<newListResultAdmin> newListResult= new ArrayList();
-    private List<CustomerModel> listCustomer= new ArrayList<>();
-    private List<ResultProject> listaGerson= new ArrayList<>();
+    private List<newListResultAdmin> newListResult = new ArrayList();
+    private List<CustomerModel> listCustomer = new ArrayList<>();
+    private List<ResultProject> listAuxProjects = new ArrayList<>();
 
-
+    String aux = "";
+    String auxCustomer = "";
+    String customerName = "";
+    String projectName = "";
+    int total = 0;
 
 
     public ResultPresenter(ResultHistoricContract.ResultView view) {
@@ -43,51 +45,68 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
         employeeDomain.getWorkList(month, year, new BaseCallback<List<TimeEntryModel>>() {
             @Override
             public void onSuccessful(List<TimeEntryModel> value) {
-                String aux="";
-                String customerName = "";
-                String projectName = "";
-                int total = 0;
+
 
                 for (CustomerModel model : listCustomer) {
+
 
                     for (TimeEntryModel timeEntryModel : value) {
 
                         if (timeEntryModel.getCustomerName().contains(model.getName())) {
                             customerName = timeEntryModel.getCustomerName();
 
-//                            if(aux.equals(timeEntryModel.getActivityName())){
-//                              total+= timeEntryModel.getHours();
-//                                aux = timeEntryModel.getActivityName();
-//                            }else {
-//                                listaGerson.add(new ResultProject(aux,total));
-//                                total=0;
-//                                total += timeEntryModel.getHours();
-//                                aux = timeEntryModel.getActivityName();
-//
-//                            }
-                            if(aux.isEmpty() || aux.equals(timeEntryModel.getActivityName()) || aux == "" || aux==null) {
-                                total+=timeEntryModel.getHours();
-
+                            if (aux.isEmpty() || aux.equals(timeEntryModel.getActivityName())) {
+                                total += timeEntryModel.getHours();
                                 aux = timeEntryModel.getActivityName();
-                            }else{
+                                auxCustomer = timeEntryModel.getCustomerName();
+                            } else {
+                                listAuxProjects.add(new ResultProject(auxCustomer,aux, total));
+                                total = 0;
+                                total += timeEntryModel.getHours();
                                 aux = timeEntryModel.getActivityName();
-                                projectName += timeEntryModel.getActivityName() + "             " + total + "\n";
-                                total=0;
-
+                                auxCustomer = timeEntryModel.getCustomerName();
                             }
+
+                            if (aux.isEmpty() || aux.equals(timeEntryModel.getActivityName())) {
+
+                                projectName += timeEntryModel.getActivityName() + "             " + timeEntryModel.getHours() + "\n";
+                                aux = timeEntryModel.getActivityName();
+                            } else {
+                                projectName += timeEntryModel.getActivityName() + "             " + timeEntryModel.getHours() + "\n";
+                                aux = timeEntryModel.getActivityName();
+                            }
+
                         }
 
                     }
 
-                    if(!customerName.isEmpty()) {
-                        newListResultAdmin listResultAdmin = new newListResultAdmin(customerName, projectName, 1, 1);
+
+                    projectName = "";
+                }
+
+
+
+                listAuxProjects.add(new ResultProject(auxCustomer, aux, total));
+
+                String auxNameCustomer = "", auxNameProject = "";
+                for (ResultProject project : listAuxProjects) {
+
+                    if (auxNameCustomer.equals("") || auxNameCustomer.equals(project.getClient())) {
+                        auxNameProject += project.getName() + "!" + project.getHoras() + "!";
+
+                        auxNameCustomer = project.getClient();
+                    } else {
+                        newListResultAdmin listResultAdmin = new newListResultAdmin(auxNameCustomer, auxNameProject, 1, 1);
                         newListResult.add(listResultAdmin);
+                        auxNameProject = "";
+                        auxNameProject += project.getName() + "!" + project.getHoras() + "!";
+                        auxNameCustomer = project.getClient();
                     }
-                    customerName="";
+
                 }
-                for (ResultProject resultProject : listaGerson) {
-                    Log.e("TESTE",resultProject.getName()+" "+resultProject.getHoras());
-                }
+                newListResultAdmin listResultAdmin = new newListResultAdmin(auxNameCustomer, auxNameProject, 1, 1);
+                newListResult.add(listResultAdmin);
+
 
                 view.showListResult(newListResult);
 
@@ -118,4 +137,6 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
             }
         });
     }
+
+
 }
