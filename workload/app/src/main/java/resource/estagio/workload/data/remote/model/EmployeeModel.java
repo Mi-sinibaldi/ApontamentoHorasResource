@@ -5,6 +5,14 @@ public class EmployeeModel {
     private String nome;
     private String re;
 
+    public EmployeeModel() {
+    }
+
+    public EmployeeModel(String nome, String re) {
+        this.nome = nome;
+        this.re = re;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -18,11 +26,6 @@ public class EmployeeModel {
     }
 
     public void setRe(String re) {
-        this.re = re;
-    }
-
-    public EmployeeModel(String nome, String re) {
-        this.nome = nome;
         this.re = re;
     }
 }

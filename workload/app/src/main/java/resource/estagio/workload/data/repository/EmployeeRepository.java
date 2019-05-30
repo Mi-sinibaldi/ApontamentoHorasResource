@@ -17,30 +17,29 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
 
     @Override
     public void getWorkList(int month, int year, BaseCallback<List<TimeEntryModel>> onResult) {
-        super.data.restApi(EmployeeAPI.class).getWorkList(month, year, "bearer "+ App.getUser().getAccessToken())
+        super.data.restApi(EmployeeAPI.class).getWorkList(month, year, "bearer " + App.getUser().getAccessToken())
                 .enqueue(new Callback<List<TimeEntryModel>>() {
+                    @Override
+                    public void onResponse(Call<List<TimeEntryModel>>
+                                                   call, Response<List<TimeEntryModel>> response) {
+                        if (!response.isSuccessful()) {
+                            onResult.onUnsuccessful("Não foi possivel carregar a lista!");
+                            return;
+                        }
 
-            @Override
-            public void onResponse(Call<List<TimeEntryModel>>
-                                           call, Response<List<TimeEntryModel>> response) {
+                        if (response.code() == 401) {
+                            onResult.onUnsuccessful(
+                                    "Acesso negado\nEntre com um usuario valido!");
+                            return;
+                        }
+                        onResult.onSuccessful(response.body());
+                    }
 
-                if (!response.isSuccessful()) {
-                    onResult.onUnsuccessful("Não foi possivel carregar a lista!");
-                    return;
-                }
-
-                if(response.code()==401){
-                    onResult.onUnsuccessful("Acesso negado\nEntre com um usuario valido!");
-                    return;
-                }
-                onResult.onSuccessful(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<TimeEntryModel>> call, Throwable t) {
-                onResult.onUnsuccessful(t.getMessage());
-            }
-        });
+                    @Override
+                    public void onFailure(Call<List<TimeEntryModel>> call, Throwable t) {
+                        onResult.onUnsuccessful(t.getMessage());
+                    }
+                });
     }
 
     @Override
@@ -50,7 +49,7 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        if(response.isSuccessful())
+                        if (response.isSuccessful())
                             onResult.onSuccessful(response.body());
                         else
                             onResult.onUnsuccessful(response.message());
