@@ -1,12 +1,9 @@
-package resource.estagio.workload.ui.client;
+package resource.estagio.workload.ui.admin.client;
 
 import android.app.Dialog;
-import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -18,7 +15,6 @@ import resource.estagio.workload.data.repository.CustomerRepository;
 import resource.estagio.workload.domain.Customer;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
-import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
 public class ClientPresenter implements ClientContract.Presenter{
 
