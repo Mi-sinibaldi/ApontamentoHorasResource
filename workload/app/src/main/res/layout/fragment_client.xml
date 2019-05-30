@@ -119,8 +119,7 @@
             android:layout_marginEnd="30dp"
             android:src="@mipmap/ic_filter"
             app:layout_constraintBottom_toBottomOf="@+id/text_view_selecionar_client"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_view_selecionar_client" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/button_save_client"

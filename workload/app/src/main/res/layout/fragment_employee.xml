@@ -12,7 +12,7 @@
         android:layout_width="410dp"
         android:layout_height="229dp"
         android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/id_recyclerview_employee"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerview_employee"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +66,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:textCursorDrawable="@drawable/color_cusor"
             android:background="@drawable/seach_employee"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +75,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/id_recyclerview_employee"
+        android:id="@+id/recyclerview_employee"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="14dp"
