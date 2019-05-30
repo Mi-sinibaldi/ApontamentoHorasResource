@@ -1,8 +1,7 @@
 package resource.estagio.workload.ui.admin.HistoricResultAdmin;
 
-import android.util.Log;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import resource.estagio.workload.data.remote.model.CustomerModel;
@@ -16,7 +15,7 @@ import resource.estagio.workload.infra.BaseCallback;
 public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 
     private ResultHistoricContract.ResultView view;
-    private long hours = 0;
+    private int hours = 0;
     private List<newListResultAdmin> newListResult = new ArrayList();
     private List<CustomerModel> listCustomer = new ArrayList<>();
     private List<ResultProject> listAuxProjects = new ArrayList<>();
@@ -45,8 +44,8 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
         employeeDomain.getWorkList(month, year, new BaseCallback<List<TimeEntryModel>>() {
             @Override
             public void onSuccessful(List<TimeEntryModel> value) {
-
-
+                Collections.sort(value);
+                listAuxProjects.add(new ResultProject("aaaaaaaaaaaa","aaaaaaaaaaaaaaaa", 0));
                 for (CustomerModel model : listCustomer) {
 
 
@@ -59,7 +58,10 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
                                 total += timeEntryModel.getHours();
                                 aux = timeEntryModel.getActivityName();
                                 auxCustomer = timeEntryModel.getCustomerName();
+                                hours+=timeEntryModel.getHours();
                             } else {
+                               // hours+=total;
+                                hours+=timeEntryModel.getHours();
                                 listAuxProjects.add(new ResultProject(auxCustomer,aux, total));
                                 total = 0;
                                 total += timeEntryModel.getHours();
@@ -82,6 +84,7 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 
 
                     projectName = "";
+
                 }
 
 
@@ -96,7 +99,7 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 
                         auxNameCustomer = project.getClient();
                     } else {
-                        newListResultAdmin listResultAdmin = new newListResultAdmin(auxNameCustomer, auxNameProject, 1, 1);
+                        newListResultAdmin listResultAdmin = new newListResultAdmin(auxNameCustomer, auxNameProject, hours, 1);
                         newListResult.add(listResultAdmin);
                         auxNameProject = "";
                         auxNameProject += project.getName() + "!" + project.getHoras() + "!";
@@ -104,7 +107,7 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
                     }
 
                 }
-                newListResultAdmin listResultAdmin = new newListResultAdmin(auxNameCustomer, auxNameProject, 1, 1);
+                newListResultAdmin listResultAdmin = new newListResultAdmin(auxNameCustomer, auxNameProject, hours, 1);
                 newListResult.add(listResultAdmin);
 
 

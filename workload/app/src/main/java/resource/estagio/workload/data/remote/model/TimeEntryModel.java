@@ -1,6 +1,8 @@
 package resource.estagio.workload.data.remote.model;
 
-public class TimeEntryModel {
+import java.util.Objects;
+
+public class TimeEntryModel implements Comparable<TimeEntryModel> {
 
     private int activityId;
     private String activityName;
@@ -85,6 +87,13 @@ public class TimeEntryModel {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+
+
+    @Override
+    public int compareTo(TimeEntryModel o) {
+        return this.activityName.compareTo(o.activityName);
     }
 }
 
