@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Collections;
@@ -38,19 +39,28 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         newListResultAdmin model = listTimeline.get(position);
+        if(position==0){
+            holder.texAllHoursProjects.setText(model.getAllHours()+":00");
+            holder.cardViewAllHours.setVisibility(View.VISIBLE);
+            holder.cardViewAllProjects.setVisibility(View.GONE);
+        }
+
+
         String project="";
         String hours="";
+        int allHours=0;
         String[] split = model.getProjectName().split("!");
         for (int i =0;i<split.length-1;i++){
             if(i%2==0) {
                 project += split[i] + "\n";
-                hours += split[i + 1] + "\n";
+                hours += split[i + 1] + ":00\n";
+                allHours +=Integer.parseInt(split[i + 1]);
             }
         }
         holder.projectName.setText(project);
         holder.customerName.setText(model.getCustomerName());
-
         holder.hours.setText(hours);
+        holder.Allhours.setText(allHours+":00");
 
     }
 
@@ -67,6 +77,9 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
         TextView Allhours;
         TextView hours;
 
+        CardView cardViewAllHours;
+        CardView cardViewAllProjects;
+        TextView texAllHoursProjects;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,6 +87,11 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
             customerName = itemView.findViewById(R.id.textView_name_customer_result);
             Allhours = itemView.findViewById(R.id.button_all_hours_result);
             hours = itemView.findViewById(R.id.textView_hour_project_result);
+
+            cardViewAllHours = itemView.findViewById(R.id.cardView_AllHours);
+            cardViewAllProjects= itemView.findViewById(R.id.cardView_all_projects);
+            texAllHoursProjects= itemView.findViewById(R.id.textView5_all_hours_result);
+
         }
     }
 }
