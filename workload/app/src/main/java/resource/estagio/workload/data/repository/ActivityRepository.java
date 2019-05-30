@@ -88,7 +88,12 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
     }
 
     @Override
-    public void updateProject(ActivityModel activityModel, String token, BaseCallback<String> onResult) {
+    public void updateProject(Project project, String token, BaseCallback<String> onResult) {
+
+        ActivityModel activityModel = new ActivityModel(project.getId(), project.getNameProject(), project.getDemandNumber(),
+                project.getActivityTypeModel().getId(), project.getCustomer().getId(),
+                project.getCustomer().getName());
+
         super.data.restApi(ActivityAPI.class)
                 .updateProject(activityModel, "bearer "+token)
                 .enqueue(new Callback<Void>() {

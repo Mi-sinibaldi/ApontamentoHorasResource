@@ -20,6 +20,14 @@
         <item name="android:colorControlHighlight" tools:targetApi="lollipop">#ffffff</item>
     </style>
 
+    <style name="StyledEditTextDialogCustomer">
+        <item name="colorControlNormal">@color/colorLogin</item> // Cor padrão da linha
+        <item name="android:colorAccent" tools:targetApi="lollipop">@color/colorLogin</item>
+        <item name="colorControlActivated">@color/colorLogin</item> // Cor linha e texto quando recebe foco
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorLogin</item>
+        <item name="android:colorControlHighlight" tools:targetApi="lollipop">@color/colorLogin</item>
+    </style>
+
     <style name="StyledTilEditTextThemeFalse">
         <item name="colorControlNormal">#F44336</item> // Cor padrão da linha
         <item name="android:colorAccent" tools:targetApi="lollipop">#ffffff</item>

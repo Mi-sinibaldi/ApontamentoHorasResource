@@ -73,8 +73,7 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     }
 
     private void loadListernersClick() {
-        buttonConstraintLayout.setOnClickListener(v -> Toast.makeText(view.getContext(), "Deu",
-                Toast.LENGTH_SHORT).show());
+        buttonConstraintLayout.setOnClickListener(v -> presenter.showDialogCustomer());
 
         imageViewConfigClient.setOnClickListener(v -> presenter.getCustomers(false));
 
@@ -171,5 +170,10 @@ public class ClientFragment extends Fragment implements ClientContract.View {
             }
         });
         activityView.enableNavigation(show);
+    }
+
+    @Override
+    public void showToast(String value) {
+        Toast.makeText(getActivity(), value, Toast.LENGTH_SHORT).show();
     }
 }
