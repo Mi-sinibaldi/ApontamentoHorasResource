@@ -94,7 +94,9 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
                             @Override
                             public void onItemClick(View view, int position) {
                                 getFragmentManager().beginTransaction()
-                                        .replace(R.id.frame_admin, new ResultHistoricFragment(viewHome)).commit();
+                                        .replace(R.id.frame_admin, new ResultHistoricFragment(viewHome))
+                                        .addToBackStack(null)
+                                        .commit();
                             }
 
                             @Override
