@@ -46,7 +46,7 @@ public class ResultFragment extends Fragment  implements ResultHistoricContract.
         progressBarResultAdmin=view.findViewById( R.id.progressbar_result_admin );
 
         presenter = new ResultPresenter(this);
-        presenter.getListResult(5,2019);
+        presenter.getListResult(4,2019);
 
 
 
