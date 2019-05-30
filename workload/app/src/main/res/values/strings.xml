@@ -38,4 +38,6 @@
     <string name="required_demand_number_is_null_or_empty">Número de demanda requerido é nulo ou vazio</string>
     <string name="required_customer_is_null">Cliente requerido é nulo</string>
     <string name="required_activity_type_is_null">Tipo de atividade requerida é nula</string>
+    <string name="lista_de_colaboradores_cadastrados">Lista de colaboradores cadastrados.</string>
+    <string name="pesquisar">Pesquisar</string>
 </resources>
