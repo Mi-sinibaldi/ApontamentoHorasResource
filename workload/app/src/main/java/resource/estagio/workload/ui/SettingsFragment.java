@@ -26,11 +26,9 @@ public class SettingsFragment extends Fragment {
     private Switch switchFingerPrint;
     private Button buttonClearPrefSettings;
     private TextView textNameUserSettings;
-
     private Button buttonChosserYes;
     private Button buttonChosserNo;
-
-    Dialog dialog;
+    private Dialog dialog;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -42,24 +40,32 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        switchFingerPrint = view.findViewById(R.id.switchFingerPrint);
-        buttonClearPrefSettings = view.findViewById(R.id.buttonClearPrefSettings);
-        textNameUserSettings = view.findViewById(R.id.textView_name_user_settings);
-        textNameUserSettings.setText(App.getUser().getName());
+        loadUi(view);
 
         haveFingerPrint();
         initSwitch();
 
-        switchFingerPrint.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            setActionSwitch(isChecked);
-        });
+        actionSwitch();
 
 
         buttonClearPrefSettings.setOnClickListener(v -> showDialogChooser());
         return view;
     }
 
-    public void showDialogChooser() {
+    private void actionSwitch() {
+        switchFingerPrint.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setActionSwitch(isChecked);
+        });
+    }
+
+    private void loadUi(View view) {
+        switchFingerPrint = view.findViewById(R.id.switchFingerPrint);
+        buttonClearPrefSettings = view.findViewById(R.id.buttonClearPrefSettings);
+        textNameUserSettings = view.findViewById(R.id.textView_name_user_settings);
+        textNameUserSettings.setText(App.getUser().getName());
+    }
+
+    private void showDialogChooser() {
         dialog = new Dialog( getContext(), R.style.CustomAlertDialog );
         dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
         dialog.setContentView( R.layout.activity_dialog_chooser );
@@ -102,26 +108,24 @@ public class SettingsFragment extends Fragment {
         }
     }
 
-
-
     private void haveFingerPrint(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //Fingerprint API only available on from Android 6.0 (M)
             FingerprintManager fingerprintManager = (FingerprintManager) getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
             if (!fingerprintManager.isHardwareDetected()) {
                 // Device doesn't support fingerprint authentication
-                switchFingerPrint.setVisibility(View.INVISIBLE);
+                switchFingerPrint.setVisibility(View.GONE);
             } else if (!fingerprintManager.hasEnrolledFingerprints()) {
                 // User hasn't enrolled any fingerprints to authenticate with
-                switchFingerPrint.setVisibility(View.INVISIBLE);
+                switchFingerPrint.setVisibility(View.GONE);
             }
             if(App.getPref().getItsSave()==0){
-                switchFingerPrint.setVisibility(View.INVISIBLE);
+                switchFingerPrint.setVisibility(View.GONE);
             }else {
                 switchFingerPrint.setVisibility(View.VISIBLE);
             }
         }else {
-            switchFingerPrint.setVisibility(View.INVISIBLE);
+            switchFingerPrint.setVisibility(View.GONE);
         }
     }
 

@@ -161,7 +161,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
 
         recyclerProject = view.findViewById(R.id.recycler_project);
         textViewCustomer = view.findViewById(R.id.text_view_customer_project);
-        imageViewBackCustomers = view.findViewById(R.id.image_view_back_customers);
+        imageViewBackCustomers = view.findViewById(R.id.image_view_back_collaborator);
         imageViewFilterProject = view.findViewById(R.id.image_view_filter_project);
         progressBarProjectAdmin = view.findViewById(R.id.progress_bar_project_admin);
         buttonNewProject = view.findViewById(R.id.button_constraints_project);
