@@ -88,8 +88,8 @@
     <ProgressBar
         android:id="@+id/progress_customer_point"
         style="?android:attr/progressBarStyleLarge"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/spinner_type_activity_project"
         app:layout_constraintEnd_toEndOf="@+id/spinner_type_activity_project"
@@ -126,8 +126,8 @@
     <ProgressBar
         android:id="@+id/progress_project_point"
         style="?android:attr/progressBarStyleLarge"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/spinner_project_point"
         app:layout_constraintEnd_toEndOf="@+id/spinner_project_point"
@@ -253,8 +253,8 @@
     <ProgressBar
         android:id="@+id/progress_add_point"
         style="?android:attr/progressBarStyleLarge"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/button_project_confirm"
