@@ -60,6 +60,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         view = inflater.inflate(R.layout.fragment_project_admin, container, false);
 
         presenter = new ProjectPresenter(this);
+
         Bundle arguments = getArguments();
         customer = (CustomerModel) arguments.getSerializable("customer");
         loadUI();
@@ -77,9 +78,9 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
 
         activityModelsDelete = new ArrayList<>();
         listener = new AdapterProject.AdapterProjectInterface() {
+
             @Override
-            public void rename(int position) {
-                // Ir para a outra fragment
+            public void renameProject(int position) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("project", activityModels.get(position));
                 AddProjectFragment fragment = new AddProjectFragment(customer.toDomain(),
@@ -94,7 +95,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
             }
 
             @Override
-            public void delete(int position) {
+            public void deleteProject(int position) {
                 activityModelsDelete.add(activityModels.get(position));
             }
         };
@@ -168,7 +169,6 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         buttonSaveProject = view.findViewById(R.id.button_save_project);
         textViewCancelProject = view.findViewById(R.id.text_view_cancel_project);
         textViewInsideProject = view.findViewById(R.id.text_view_inside_project);
-
     }
 
     @Override

@@ -57,19 +57,16 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
         presenter.loadSpinner();
         selectItemInSpinner();
 
-        buttonProjectConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(project == null ) {
-                    presenter.addProject(nameProject.getText().toString(),
-                            demandNumber.getText().toString(), customer);
-                }
-                else{
-                    presenter.updateProject(project.getId(), nameProject.getText().toString(),
-                            demandNumber.getText().toString(), customer);
-                }
-
+        buttonProjectConfirm.setOnClickListener(v -> {
+            if(project == null ) {
+                presenter.addProject(nameProject.getText().toString(),
+                        demandNumber.getText().toString(), customer);
             }
+            else{
+                presenter.updateProject(project.getId(), nameProject.getText().toString(),
+                        demandNumber.getText().toString(), customer);
+            }
+
         });
 
 

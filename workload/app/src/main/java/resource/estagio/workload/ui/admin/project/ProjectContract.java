@@ -8,7 +8,7 @@ import resource.estagio.workload.data.remote.model.ActivityModel;
 
 public class ProjectContract {
 
-    interface View{
+    interface View {
 
         void showToast(int message);
 
@@ -29,8 +29,7 @@ public class ProjectContract {
         Context getContext();
     }
 
-
-    interface Presenter{
+    interface Presenter {
 
         void loadList(int idCustomer, boolean status);
 
