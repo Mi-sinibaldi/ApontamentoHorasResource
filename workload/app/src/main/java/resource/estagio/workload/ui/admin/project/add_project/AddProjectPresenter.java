@@ -23,6 +23,7 @@ import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
 public class AddProjectPresenter implements AddProjectContract.Presenter {
+
     private AddProjectContract.View view;
     private HomeAdminContract.View activityView;
     private ActivityTypeModel activityTypeModel;
@@ -34,13 +35,12 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
     }
 
     @Override
-    public void loadSpinner() {
+    public void loadSpinnerActivityType() {
         new ActivityRepository().getActivityType(App.getUser().getAccessToken(),
                 new BaseCallback<List<ActivityTypeModel>>() {
                     @Override
                     public void onSuccessful(List<ActivityTypeModel> value) {
                         view.spinnerList(value);
-
                     }
 
                     @Override
@@ -52,6 +52,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
     @Override
     public void getItemInSpinner(AdapterView<?> parent, int position) {
+
         ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
         ActivityTypeModel activityTypeModel = (ActivityTypeModel) parent.getItemAtPosition(position);
         this.activityTypeModel = activityTypeModel;
@@ -59,6 +60,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
     @Override
     public void addProject(String nameProject, String demandNumber, Customer customer) {
+
         this.customer = customer;
         Project project = new Project(0, nameProject, demandNumber, activityTypeModel, customer);
         try {
@@ -84,7 +86,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
         this.customer = customer;
         Project project = new Project(id, nameProject, demandNumber, activityTypeModel, customer);
-        try{
+        try {
             project.updateProject(new BaseCallback<String>() {
                 @Override
                 public void onSuccessful(String value) {
@@ -96,14 +98,14 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
                     view.showToast(error);
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             view.showToast(e.getMessage());
             e.printStackTrace();
         }
-
     }
 
     private void showDialogConfirm(String value) {
+
         Dialog dialog = new Dialog(view.getActivity(), R.style.CustomAlertDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.activity_check);
@@ -121,16 +123,15 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
             bundle.putSerializable("customer", new CustomerModel(customer.getId(), customer.getName()));
             ProjectFragment fragment = new ProjectFragment(activityView);
             fragment.setArguments(bundle);
-            view.getActivity().getSupportFragmentManager()
-                    .beginTransaction().replace(R.id.frame_admin, fragment
-            ).commit();
+            view.getActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_admin, fragment)
+                    .commit();
             dialog.dismiss();
 
         });
-
-
     }
-
 
 }
 
