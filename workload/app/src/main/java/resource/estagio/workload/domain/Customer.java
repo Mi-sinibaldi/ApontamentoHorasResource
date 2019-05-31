@@ -1,29 +1,13 @@
 package resource.estagio.workload.domain;
 
-import android.content.Context;
-
-import java.io.Serializable;
-
 import resource.estagio.workload.infra.BaseCallback;
 
 public class Customer {
 
     public CustomerContract.IRepository repository;
-    private Context context;
 
     private int id;
     private String name;
-
-    public Customer(Context context, int id, String name) {
-        this.context = context;
-        this.id = id;
-        this.name = name;
-    }
-
-    public Customer(Context context, int id) {
-        this.context = context;
-        this.id = id;
-    }
 
     public Customer(int id, String name) {
         this.id = id;
@@ -90,4 +74,3 @@ public class Customer {
         });
     }
 }
-

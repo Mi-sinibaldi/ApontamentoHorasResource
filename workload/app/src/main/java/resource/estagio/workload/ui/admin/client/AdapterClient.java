@@ -42,19 +42,25 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         CustomerModel customerModel = list.get(position);
         holder.textViewClientAdapter.setText(customerModel.getName());
+        getClickAdapter(holder, position);
+    }
+
+    private void getClickAdapter(@NonNull MyViewHolder holder, int position) {
         if(setStatusList) {
             holder.buttonCardClient.setOnClickListener(v -> listener.goToProject(v, position));
             holder.setIconClient();
-        }else{
-            holder.imageViewDeleteClient.setOnClickListener(v -> {
-                listener.removeClient(v, position);
+        }else
+            deleteCustomer(holder, position);
 
-                list.remove(position);
-                notifyItemRemoved(position);
+    }
 
-            });
-            holder.setIconRemove();
-        }
+    private void deleteCustomer(@NonNull MyViewHolder holder, int position) {
+        holder.imageViewDeleteClient.setOnClickListener(v -> {
+            listener.removeClient(v, position);
+            list.remove(position);
+            notifyItemRemoved(position);
+        });
+        holder.setIconRemove();
     }
 
     @Override
