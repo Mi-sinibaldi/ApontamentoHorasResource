@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
+import resource.estagio.workload.ui.employee.EmployeeFragment;
 
 public class ResultHistoricFragment extends Fragment {
     private View view;
@@ -23,8 +25,9 @@ public class ResultHistoricFragment extends Fragment {
     private TextView textTitle, textSubtitle;
     private Fragment fragment;
     private HomeAdminContract.View viewHome;
-    private FragmentManager fm ;
-    private FragmentTransaction ft ;
+    private FragmentManager fm;
+    private FragmentTransaction ft;
+    private ImageView imageViewBackCollaborator;
 
     public ResultHistoricFragment(HomeAdminContract.View view) {
         viewHome = view;
@@ -39,6 +42,7 @@ public class ResultHistoricFragment extends Fragment {
         loadUI();
         actionTabSelected();
         loadFragment(fragment);
+        backToCustomers();
         return view;
     }
 
@@ -83,6 +87,7 @@ public class ResultHistoricFragment extends Fragment {
         fragment = new ResultFragment(viewHome);
         tabLayout = view.findViewById(R.id.tabLayout);
         tabLayout.setSelectedTabIndicator(0);
+        imageViewBackCollaborator = view.findViewById(R.id.image_view_back_collaborator);
     }
 
     private void loadFragment(Fragment fragment){
@@ -91,6 +96,15 @@ public class ResultHistoricFragment extends Fragment {
         ft.replace(R.id.frameLayout, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
+    }
+
+    private void backToCustomers() {
+
+        imageViewBackCollaborator.setOnClickListener(v -> getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_admin, new EmployeeFragment(viewHome))
+                .commit());
     }
 
 }

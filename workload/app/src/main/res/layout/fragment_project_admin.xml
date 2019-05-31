@@ -48,7 +48,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/image_view_back_customers"
+        android:id="@+id/image_view_back_collaborator"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="32dp"
@@ -68,7 +68,7 @@
         android:src="@drawable/logo_resource"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/image_view_back_customers" />
+        app:layout_constraintTop_toTopOf="@+id/image_view_back_collaborator" />
 
     <TextView
         android:id="@+id/text_view_customer_project"
