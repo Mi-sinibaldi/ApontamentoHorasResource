@@ -2,11 +2,13 @@ package resource.estagio.workload.ui.admin.client;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.Context;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -17,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
 public class ClientFragment extends Fragment implements ClientContract.View {
 
+    public static final String CUSTOMER = "customer";
     // ATRIBUTOS DE REFERÊNCIA VISUAL
     private View view;
     private RecyclerView recyclerClient;
@@ -38,7 +40,7 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     private ImageView imageViewConfigClient;
     private Button buttonSaveClient;
     private TextView textViewCancelClient;
-    private TextView textViewSelecionarClient;
+    private TextView textViewSelectClient;
     private AdapterClient adapterClient;
     private ProgressBar progressBarClient;
     private HomeAdminContract.View activityView;
@@ -55,8 +57,9 @@ public class ClientFragment extends Fragment implements ClientContract.View {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
-        return inflater.inflate(R.layout.fragment_client, container, false); }
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_client, container, false);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -77,16 +80,15 @@ public class ClientFragment extends Fragment implements ClientContract.View {
 
         imageViewConfigClient.setOnClickListener(v -> presenter.getCustomers(false));
 
-        buttonSaveClient.setOnClickListener( v -> {
-            if(customerModelsDelete.size() > 0) {
-                for(CustomerModel model : customerModelsDelete){
-                    presenter.deleteCustomer(model);
-                }
+        buttonSaveClient.setOnClickListener(v -> {
+            if (customerModelsDelete.size() > 0)
+                for (CustomerModel model : customerModelsDelete) presenter.deleteCustomer(model);
+             else
+                 presenter.getCustomers(true);
+             customerModelsDelete = new ArrayList<>();
+        });
 
-            }
-            else presenter.getCustomers(true); });
-
-        textViewCancelClient.setOnClickListener( v -> presenter.getCustomers(true));
+        textViewCancelClient.setOnClickListener(v -> presenter.getCustomers(true));
     }
 
     private void loadUI() {
@@ -94,13 +96,13 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         buttonConstraintLayout = view.findViewById(R.id.button_constraints_project);
         recyclerClient = view.findViewById(R.id.recycler_clients_client);
         textViewCancelClient = view.findViewById(R.id.text_view_cancel_client);
-        textViewSelecionarClient = view.findViewById(R.id.text_view_selecionar_client);
+        textViewSelectClient = view.findViewById(R.id.text_view_selecionar_client);
         imageViewConfigClient = view.findViewById(R.id.image_view_config_client);
         buttonSaveClient = view.findViewById(R.id.button_save_client);
         progressBarClient = view.findViewById(R.id.progress_client);
     }
 
-    private  void loadAdapterListener(){
+    private void loadAdapterListener() {
         customerModelsDelete = new ArrayList<>();
         adapterInterface = new AdapterClient.AdapterInterface() {
             @Override
@@ -110,51 +112,43 @@ public class ClientFragment extends Fragment implements ClientContract.View {
 
             @Override
             public void goToProject(View v, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("customer", customerModels.get(position));
-                ProjectFragment fragment = new ProjectFragment(activityView);
-                fragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_admin, fragment).addToBackStack(null).commit();
+                sendToFragmentProject(position);
             }
         };
     }
 
+    private void sendToFragmentProject(int position) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(CUSTOMER, customerModels.get(position));
+        ProjectFragment fragment = new ProjectFragment(activityView);
+        fragment.setArguments(bundle);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_admin, fragment).addToBackStack(null).commit();
+    }
+
 
     @Override
-    public void setRecyclerClient(List<CustomerModel> customerModels, boolean status){
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerClient.setLayoutManager(layoutManager);
+    public void setRecyclerClient(List<CustomerModel> customerModels, boolean status) {
         recyclerClient.setHasFixedSize(true);
         this.customerModels = customerModels;
         showAdapterRecycler(status);
     }
 
-    @Override
-    public void notification(String messenge) {
-        Toast.makeText(getApplicationContext(), messenge, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void showAdapterRecycler(boolean status) {
-        if(status){
-            imageViewConfigClient.setVisibility(View.VISIBLE);
-            textViewSelecionarClient.setVisibility(View.VISIBLE);
-            textViewCancelClient.setVisibility(View.INVISIBLE);
-            buttonSaveClient.setVisibility(View.INVISIBLE);
-        }else {
-            imageViewConfigClient.setVisibility(View.INVISIBLE);
-            textViewSelecionarClient.setVisibility(View.INVISIBLE);
-            textViewCancelClient.setVisibility(View.VISIBLE);
-            buttonSaveClient.setVisibility(View.VISIBLE);
-        }
+        setVisibilityIcons(status);
         adapterClient = new AdapterClient(customerModels, status, adapterInterface);
         recyclerClient.setAdapter(adapterClient);
     }
 
-    private Context getApplicationContext() {
-        return view.getContext();
+    private void setVisibilityIcons(boolean status) {
+        imageViewConfigClient.setVisibility(status ? View.VISIBLE : View.INVISIBLE);
+        textViewSelectClient.setVisibility(status ? View.VISIBLE : View.INVISIBLE);
+        textViewCancelClient.setVisibility(status ? View.INVISIBLE : View.VISIBLE);
+        buttonSaveClient.setVisibility(status ? View.INVISIBLE : View.VISIBLE);
     }
+
 
     @Override
     public void showProgressClient(final boolean show) {
@@ -173,7 +167,28 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     }
 
     @Override
-    public void showToast(String value) {
-        Toast.makeText(getActivity(), value, Toast.LENGTH_SHORT).show();
+    public void showToast(String value, boolean status) {
+        Dialog dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(status ? R.layout.activity_check : R.layout.acativity_dialog_error);
+        dialog.setCancelable(false);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        dialog.show();
+
+        TextView text = dialog.findViewById(status ? R.id.textDialog : R.id.text_dialog_error);
+        text.setText(value);
+        Button buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
+        buttonConfirmCheck.setOnClickListener(v -> {
+            dialog.dismiss();
+
+        });
     }
+
+    @Override
+    public void refleshAdapter() {
+        presenter.getCustomers(true);
+    }
+
+
 }

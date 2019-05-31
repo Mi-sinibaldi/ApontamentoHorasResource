@@ -10,13 +10,13 @@ public class ClientContract {
 
         void setRecyclerClient(List<CustomerModel> customerModels, boolean status);
 
-        void notification(String messenge);
-
         void showAdapterRecycler(boolean status);
 
         void showProgressClient(final boolean show);
 
-        void showToast(String value);
+        void showToast(String value, boolean status);
+
+        void refleshAdapter();
     }
 
     interface Presenter {

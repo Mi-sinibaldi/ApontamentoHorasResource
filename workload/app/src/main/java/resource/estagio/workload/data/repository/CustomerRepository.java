@@ -14,10 +14,13 @@ import retrofit2.Response;
 
 public class CustomerRepository extends Repository implements CustomerContract.IRepository {
 
+    public static final String BEARER = "bearer ";
+    public static final int ISR = 500;
+
     @Override
     public void getCustomers(String token, BaseCallback<List<CustomerModel>> onResult) {
         super.data.restApi(CustomerAPI.class)
-                .getCustomer("bearer " + token)
+                .getCustomer(BEARER + token)
                 .enqueue(new Callback<List<CustomerModel>>() {
                     @Override
                     public void onResponse(Call<List<CustomerModel>> call, Response<List<CustomerModel>> response) {
@@ -35,14 +38,17 @@ public class CustomerRepository extends Repository implements CustomerContract.I
     }
 
     @Override
-    public void deleteCustomer(int id, String token, BaseCallback<Void> onResult) {
+    public void deleteCustomer(int id, String customerName, String token, BaseCallback<String> onResult) {
         super.data.restApi(CustomerAPI.class)
-                .deleteCustomer(id, "bearer " + token)
+                .deleteCustomer(id, BEARER + token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful())
-                            onResult.onSuccessful(response.body());
+                            onResult.onSuccessful("Cliente "+customerName+" excluído com sucesso.");
+                        else if(response.code()== ISR)
+                            onResult.onUnsuccessful("Cliente "+customerName+" tem projetos cadastrados "+
+                                    "e não pode ser deletado.");
                         else
                             onResult.onUnsuccessful(response.message());
                     }
@@ -58,7 +64,7 @@ public class CustomerRepository extends Repository implements CustomerContract.I
     public void postCustomer(Customer customer, String token, BaseCallback<String> onResult) {
         CustomerModel model = new CustomerModel(customer.getId(), customer.getName());
         super.data.restApi(CustomerAPI.class)
-                .postCustomer(model, "bearer " + token)
+                .postCustomer(model, BEARER + token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
