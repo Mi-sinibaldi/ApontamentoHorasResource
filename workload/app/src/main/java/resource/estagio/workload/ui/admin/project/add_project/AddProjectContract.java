@@ -1,7 +1,5 @@
 package resource.estagio.workload.ui.admin.project.add_project;
 
-import android.app.Activity;
-import android.content.Context;
 import android.widget.AdapterView;
 
 import androidx.fragment.app.FragmentActivity;
@@ -12,7 +10,7 @@ import resource.estagio.workload.data.remote.model.ActivityTypeModel;
 import resource.estagio.workload.domain.Customer;
 
 public class AddProjectContract {
-    
+
     interface View {
 
         void showToast(String error);
@@ -21,9 +19,10 @@ public class AddProjectContract {
 
         FragmentActivity getActivity();
     }
-    interface Presenter{
 
-        void loadSpinner();
+    interface Presenter {
+
+        void loadSpinnerActivityType();
 
         void getItemInSpinner(AdapterView<?> parent, int position);
 
@@ -31,5 +30,5 @@ public class AddProjectContract {
 
         void updateProject(int id, String nameProject, String demandNumber, Customer customer);
     }
-    
+
 }
