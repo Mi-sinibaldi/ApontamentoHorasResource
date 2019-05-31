@@ -14,7 +14,6 @@ public class ResultHistoricContract {
 
         void dialog(boolean Key);
         void showListTimeline(List<TimeEntryModel> list);
-        void allHours(Long hours);
         void showErrorMessage(String text);
         void showSucessMessage(String text);
 
@@ -29,7 +28,6 @@ public class ResultHistoricContract {
 
         void dialog(boolean Key);
         void showListResult(List<newListResultAdmin> list);
-        void allHours(Long hours);
         void showErrorMessage(String text);
         void showSucessMessage(String text);
 

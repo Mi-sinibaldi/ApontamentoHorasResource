@@ -29,7 +29,7 @@ public class AuthRepository extends Repository implements UserContract.IReposito
 
                     @Override
                     public void onFailure(Call<LoginModel> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
                     }
                 });
     }

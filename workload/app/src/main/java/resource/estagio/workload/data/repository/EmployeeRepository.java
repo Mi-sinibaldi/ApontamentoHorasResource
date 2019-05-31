@@ -37,7 +37,7 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
 
                     @Override
                     public void onFailure(Call<List<TimeEntryModel>> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
                     }
                 });
     }

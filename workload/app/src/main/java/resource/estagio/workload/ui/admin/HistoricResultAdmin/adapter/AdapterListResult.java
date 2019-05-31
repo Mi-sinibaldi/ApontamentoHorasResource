@@ -43,7 +43,12 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
             holder.texAllHoursProjects.setText(model.getAllHours()+":00");
             holder.cardViewAllHours.setVisibility(View.VISIBLE);
             holder.cardViewAllProjects.setVisibility(View.GONE);
+        }else {
+            holder.cardViewAllHours.setVisibility(View.GONE);
+            holder.cardViewAllProjects.setVisibility(View.VISIBLE);
         }
+
+
 
 
         String project="";
