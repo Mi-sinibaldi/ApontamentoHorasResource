@@ -14,7 +14,9 @@ public class ClientContract {
 
         void showProgressClient(final boolean show);
 
-        void showToast(String value);
+        void showToast(String value, boolean status);
+
+        void refleshAdapter();
     }
 
     interface Presenter {

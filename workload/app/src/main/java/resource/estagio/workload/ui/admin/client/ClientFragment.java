@@ -2,10 +2,13 @@ package resource.estagio.workload.ui.admin.client;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -82,6 +85,7 @@ public class ClientFragment extends Fragment implements ClientContract.View {
                 for (CustomerModel model : customerModelsDelete) presenter.deleteCustomer(model);
              else
                  presenter.getCustomers(true);
+             customerModelsDelete = new ArrayList<>();
         });
 
         textViewCancelClient.setOnClickListener(v -> presenter.getCustomers(true));
@@ -163,7 +167,28 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     }
 
     @Override
-    public void showToast(String value) {
-        Toast.makeText(getActivity(), value, Toast.LENGTH_SHORT).show();
+    public void showToast(String value, boolean status) {
+        Dialog dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(status ? R.layout.activity_check : R.layout.acativity_dialog_error);
+        dialog.setCancelable(false);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        dialog.show();
+
+        TextView text = dialog.findViewById(status ? R.id.textDialog : R.id.text_dialog_error);
+        text.setText(value);
+        Button buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
+        buttonConfirmCheck.setOnClickListener(v -> {
+            dialog.dismiss();
+
+        });
     }
+
+    @Override
+    public void refleshAdapter() {
+        presenter.getCustomers(true);
+    }
+
+
 }

@@ -37,7 +37,7 @@ public class ClientPresenter implements ClientContract.Presenter {
 
                     @Override
                     public void onUnsuccessful(String error) {
-                        view.showToast(error);
+                        view.showToast(error, false);
                         view.showProgressClient(false);
                     }
                 });
@@ -49,21 +49,23 @@ public class ClientPresenter implements ClientContract.Presenter {
         try {
             Customer customer = new Customer(model.getId(), model.getName());
             customer.repository = new CustomerRepository();
-            customer.deleteCustomer(App.getUser().getAccessToken(), new BaseCallback<Void>() {
+            customer.deleteCustomer(App.getUser().getAccessToken(), new BaseCallback<String>() {
                 @Override
-                public void onSuccessful(Void value) {
+                public void onSuccessful(String value) {
                     view.showProgressClient(false);
+                    view.showToast(value, true);
+                    view.refleshAdapter();
                 }
 
                 @Override
                 public void onUnsuccessful(String error) {
                     view.showProgressClient(false);
-                    view.showToast(error);
+                    view.showToast(error, false);
                 }
             });
             getCustomers(true);
         } catch (Exception e) {
-            view.showToast(e.getMessage());
+            view.showToast(e.getMessage(), false);
         }
     }
 
@@ -101,16 +103,17 @@ public class ClientPresenter implements ClientContract.Presenter {
                 customer.postCustomer(App.getUser().getAccessToken(), new BaseCallback<String>() {
                     @Override
                     public void onSuccessful(String value) {
-                        view.showToast(value);
+                        view.showToast(value, true);
+                        view.refleshAdapter();
                     }
 
                     @Override
                     public void onUnsuccessful(String error) {
-                        view.showToast(error);
+                        view.showToast(error, false);
                     }
                 });
             } catch (Exception e) {
-                view.showToast(e.getMessage());
+                view.showToast(e.getMessage(), false);
                 e.printStackTrace();
             }
             dialog.dismiss();

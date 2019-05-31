@@ -38,16 +38,16 @@ public class CustomerRepository extends Repository implements CustomerContract.I
     }
 
     @Override
-    public void deleteCustomer(int id, String token, BaseCallback<Void> onResult) {
+    public void deleteCustomer(int id, String customerName, String token, BaseCallback<String> onResult) {
         super.data.restApi(CustomerAPI.class)
                 .deleteCustomer(id, BEARER + token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful())
-                            onResult.onSuccessful(response.body());
+                            onResult.onSuccessful("Cliente "+customerName+" excluído com sucesso.");
                         else if(response.code()== ISR)
-                            onResult.onUnsuccessful("Cliente tem projetos cadastrados " +
+                            onResult.onUnsuccessful("Cliente "+customerName+" tem projetos cadastrados "+
                                     "e não pode ser deletado.");
                         else
                             onResult.onUnsuccessful(response.message());
