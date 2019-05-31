@@ -8,12 +8,11 @@ import resource.estagio.workload.data.repository.ActivityRepository;
 import resource.estagio.workload.domain.Project;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
-import resource.estagio.workload.ui.admin.project.adapterProject.AdapterProject;
 
 public class ProjectPresenter implements ProjectContract.Presenter {
 
     private ProjectContract.View view;
-    private AdapterProject adapter;
+
 
     public ProjectPresenter(ProjectContract.View view) {
         this.view = view;
@@ -73,7 +72,6 @@ public class ProjectPresenter implements ProjectContract.Presenter {
             view.showProgress(false);
             view.showError(e.getMessage());
         }
-
     }
 
 }

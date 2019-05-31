@@ -42,14 +42,13 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
         holder.loadFilds(activityModel);
         holder.showIconActions();
         if (status) {
-
             holder.showIconActions();
             holder.textRenameProject.setOnClickListener(v ->
-                    listener.rename(position)
+                    listener.renameProject(position)
             );
 
             holder.imageDeleteProject.setOnClickListener(v -> {
-                listener.delete(position);
+                listener.deleteProject(position);
                 notifyItemRemoved(position);
                 listProject.remove(position);
             });
@@ -66,9 +65,9 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
 
     public interface AdapterProjectInterface {
 
-        void rename(int position);
+        void renameProject(int position);
 
-        void delete(int position);
+        void deleteProject(int position);
     }
 
 
