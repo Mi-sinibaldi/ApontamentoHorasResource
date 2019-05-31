@@ -32,7 +32,7 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
 
                     @Override
                     public void onFailure(Call<List<ActivityModel>> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
                     }
                 });
 
@@ -53,7 +53,7 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
 
                     @Override
                     public void onFailure(Call<List<ActivityTypeModel>> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
                     }
                 });
     }
@@ -76,7 +76,7 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
                     }
                 });
 

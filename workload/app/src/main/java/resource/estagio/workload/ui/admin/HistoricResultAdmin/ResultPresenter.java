@@ -18,7 +18,6 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
     private int hours = 0;
     private List<newListResultAdmin> newListResult = new ArrayList();
     private List<CustomerModel> listCustomer = new ArrayList<>();
-    private List<ResultProject> listAuxProjects = new ArrayList<>();
 
     private String aux = "";
     private String auxCustomer = "";
@@ -35,15 +34,17 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
         getCustomers();
         hours = 0;
         view.dialog(true);
+        List<ResultProject> listAuxProjects = new ArrayList<>();
 
         EmployeeDomain employeeDomain = new EmployeeDomain();
         employeeDomain.irepository = new EmployeeRepository();
-
         employeeDomain.getWorkList(month, year, new BaseCallback<List<TimeEntryModel>>() {
             @Override
             public void onSuccessful(List<TimeEntryModel> value) {
+
                 Collections.sort(value);
-                listAuxProjects.add(new ResultProject("aaa", "aa", 0));
+                //listCustomer.clear();
+                listAuxProjects.add(new ResultProject("0", "0", 0));
                 for (CustomerModel model : listCustomer) {
 
                     for (TimeEntryModel timeEntryModel : value) {
@@ -104,9 +105,9 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 
 
                 view.showListResult(newListResult);
-
                 view.showSucessMessage("Sucesso");
                 view.dialog(false);
+
             }
 
             @Override
@@ -128,7 +129,7 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 
             @Override
             public void onUnsuccessful(String error) {
-                view.showErrorMessage("Erro\n" + error);
+                //view.showErrorMessage("Erro\n" + error);
                 view.dialog(false);
             }
         });

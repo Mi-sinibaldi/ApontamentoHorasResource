@@ -14,19 +14,19 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Objects;
+
 import resource.estagio.workload.R;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.employee.EmployeeFragment;
 
 public class ResultHistoricFragment extends Fragment {
-    private View view;
 
+    private View view;
     private TabLayout tabLayout;
     private TextView textTitle, textSubtitle;
     private Fragment fragment;
     private HomeAdminContract.View viewHome;
-    private FragmentManager fm;
-    private FragmentTransaction ft;
     private ImageView imageViewBackCollaborator;
 
     public ResultHistoricFragment(HomeAdminContract.View view) {
@@ -43,14 +43,16 @@ public class ResultHistoricFragment extends Fragment {
         actionTabSelected();
         loadFragment(fragment);
         backToCustomers();
+
         return view;
     }
 
     private void actionTabSelected() {
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
+                switch (tab.getPosition()) {
                     case 0:
                         textTitle.setText("Resultado");
                         textSubtitle.setText("Resultado dos Apontamentos do mês");
@@ -80,9 +82,9 @@ public class ResultHistoricFragment extends Fragment {
     }
 
     private void loadUI() {
-        fm = getActivity().getSupportFragmentManager();
-        ft = fm.beginTransaction();
-        textTitle=view.findViewById(R.id.textTitle);
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        textTitle = view.findViewById(R.id.textTitle);
         textSubtitle = view.findViewById(R.id.textSubtitle);
         fragment = new ResultFragment(viewHome);
         tabLayout = view.findViewById(R.id.tabLayout);
@@ -90,7 +92,7 @@ public class ResultHistoricFragment extends Fragment {
         imageViewBackCollaborator = view.findViewById(R.id.image_view_back_collaborator);
     }
 
-    private void loadFragment(Fragment fragment){
+    private void loadFragment(Fragment fragment) {
         FragmentManager fm = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.frameLayout, fragment);
@@ -100,7 +102,7 @@ public class ResultHistoricFragment extends Fragment {
 
     private void backToCustomers() {
 
-        imageViewBackCollaborator.setOnClickListener(v -> getActivity()
+        imageViewBackCollaborator.setOnClickListener(v -> Objects.requireNonNull(getActivity())
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frame_admin, new EmployeeFragment(viewHome))

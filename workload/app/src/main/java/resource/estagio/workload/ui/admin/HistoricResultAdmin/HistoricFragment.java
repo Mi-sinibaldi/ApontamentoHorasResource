@@ -1,8 +1,6 @@
 package resource.estagio.workload.ui.admin.HistoricResultAdmin;
 
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,12 +10,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
 
-public class HistoricFragment extends Fragment implements ResultHistoricContract.historicView{
+public class HistoricFragment extends Fragment implements ResultHistoricContract.historicView {
     private AdapterTimeline adapterTimeline;
     private View view;
     private RecyclerView recyclerViewTimeline;
@@ -45,11 +43,10 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     private int month;
     private int year;
     private TextView text_dialog_error;
-    private ProgressBar progressBarTimeLine;
 
     private Dialog dialog;
     private HomeAdminContract.View viewHome;
-    private int shortAnimTime;
+    private SwipeRefreshLayout swipeRefreshHistoric;
 
     private Button buttonError;
 
@@ -61,9 +58,8 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_historic, container, false);
-        calendar = Calendar.getInstance();
+
         loadUi();
         setTextDate();
 
@@ -97,11 +93,25 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
                 imageViewMonthRight.setVisibility(View.INVISIBLE);
             }
         });
+        actioSwipeRefresh(this);
 
         return view;
     }
 
+    private void actioSwipeRefresh(ResultHistoricContract.historicView view) {
+        recyclerViewTimeline.setVisibility(View.GONE);
+        swipeRefreshHistoric.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter = new HistoricFragmentPresenter(view);
+                presenter.getTimeline(month, year);
+            }
+        });
+    }
+
     private void loadUi() {
+        calendar = Calendar.getInstance();
+        swipeRefreshHistoric = view.findViewById(R.id.swipe_Refresh_historic);
         presenter = new HistoricFragmentPresenter(this);
 
         recyclerViewTimeline = view.findViewById(R.id.id_recyclerview_historic_admin);
@@ -109,9 +119,7 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
         textViewYear = view.findViewById(R.id.text_view_year_historic_admin);
         imageViewMonthLeft = view.findViewById(R.id.image_view_month_left_historic_admin);
         imageViewMonthRight = view.findViewById(R.id.image_view_month_right_historic_admin);
-        progressBarTimeLine = view.findViewById(R.id.progressBar_historic_admin);
         imageViewMonthRight.setVisibility(View.INVISIBLE);
-        shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
     }
 
     private void setTextDate() {
@@ -135,14 +143,8 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     public void dialog(boolean Key) {
 
         recyclerViewTimeline.setVisibility(Key ? View.INVISIBLE : View.VISIBLE);
-        progressBarTimeLine.setVisibility(Key ? View.VISIBLE : View.GONE);
-        progressBarTimeLine.animate().setDuration(shortAnimTime).alpha(
-                Key ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                progressBarTimeLine.setVisibility(Key ? View.VISIBLE : View.GONE);
-            }
-        });
+        swipeRefreshHistoric.setRefreshing(Key);
+
         viewHome.enableNavigation(Key);
     }
 
@@ -153,23 +155,16 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     }
 
     @Override
-    public void allHours(Long hours) {
-
-    }
-
-    @Override
     public void showErrorMessage(String text) {
         showDialogError(text);
     }
 
     @Override
     public void showSucessMessage(String text) {
-       // Toast.makeText(getActivity(), "Foi", Toast.LENGTH_SHORT).show();
     }
 
 
-
-    public void showDialogError(String text) {
+    private void showDialogError(String text) {
         dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.acativity_dialog_error);

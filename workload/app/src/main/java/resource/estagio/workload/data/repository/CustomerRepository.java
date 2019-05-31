@@ -32,7 +32,7 @@ public class CustomerRepository extends Repository implements CustomerContract.I
 
                     @Override
                     public void onFailure(Call<List<CustomerModel>> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
                     }
                 });
     }
@@ -55,7 +55,7 @@ public class CustomerRepository extends Repository implements CustomerContract.I
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
                     }
                 });
     }
@@ -76,7 +76,7 @@ public class CustomerRepository extends Repository implements CustomerContract.I
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
 
                     }
                 });
