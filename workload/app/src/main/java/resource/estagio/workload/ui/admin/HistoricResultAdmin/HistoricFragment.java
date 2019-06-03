@@ -40,7 +40,7 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     private ResultHistoricContract.historicPresenter presenter;
     private int month;
     private int year;
-    private TextView text_dialog_error;
+    private TextView textDialogError;
 
     private Dialog dialog;
     private HomeAdminContract.View viewHome;
@@ -164,8 +164,8 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
         dialog.setContentView(R.layout.acativity_dialog_error);
         dialog.setCancelable(false);
 
-        text_dialog_error = dialog.findViewById(R.id.text_dialog_error);
-        text_dialog_error.setText(text);
+        textDialogError = dialog.findViewById(R.id.text_dialog_error);
+        textDialogError.setText(text);
 
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN);
