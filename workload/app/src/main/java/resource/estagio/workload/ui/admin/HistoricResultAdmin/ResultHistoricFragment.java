@@ -82,7 +82,6 @@ public class ResultHistoricFragment extends Fragment {
     }
 
     private void loadUI() {
-        FragmentManager fm = getActivity().getSupportFragmentManager();
         textTitle = view.findViewById(R.id.textTitle);
         textSubtitle = view.findViewById(R.id.textSubtitle);
         fragment = new ResultFragment(viewHome);
@@ -106,6 +105,15 @@ public class ResultHistoricFragment extends Fragment {
                 .beginTransaction()
                 .replace(R.id.frame_admin, new EmployeeFragment(viewHome))
                 .commit());
+
+        imageViewBackCollaborator.setOnClickListener(v -> {
+            Objects.requireNonNull(getActivity())
+            .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_admin, new EmployeeFragment(viewHome))
+                    .commit();
+            viewHome.enableNavigation(false);
+        });
     }
 
 }

@@ -23,7 +23,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.data.remote.EmployeeAPI;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.infra.App;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
@@ -40,7 +42,7 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     private ResultHistoricContract.historicPresenter presenter;
     private int month;
     private int year;
-    private TextView text_dialog_error;
+    private TextView textDialogError;
 
     private Dialog dialog;
     private HomeAdminContract.View viewHome;
@@ -164,13 +166,15 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
         dialog.setContentView(R.layout.acativity_dialog_error);
         dialog.setCancelable(false);
 
-        text_dialog_error = dialog.findViewById(R.id.text_dialog_error);
-        text_dialog_error.setText(text);
+        textDialogError = dialog.findViewById(R.id.text_dialog_error);
+        textDialogError.setText(text);
 
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         dialog.show();
         buttonError = dialog.findViewById(R.id.button_dialog_error);
         buttonError.setOnClickListener(v -> dialog.dismiss());
+
     }
+
 }
