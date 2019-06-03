@@ -18,14 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.data.remote.EmployeeAPI;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
-import resource.estagio.workload.infra.App;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
