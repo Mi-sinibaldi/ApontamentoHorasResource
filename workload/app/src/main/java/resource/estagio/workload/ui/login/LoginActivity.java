@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private EditText usernameView;
     private EditText passwordView;
     private View progressView;
-    //private View loginFormView;
     private Button signInButton;
     private TextView text_view_lacamento_login;
     private Switch switchSavePassword;
@@ -145,14 +144,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         // the progress spinner.
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-//        loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-//        loginFormView.animate().setDuration(shortAnimTime).alpha(
-//                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-//            }
-//        });
+        signInButton.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        signInButton.animate().setDuration(shortAnimTime).alpha(
+                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                signInButton.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+            }
+        });
 
         progressView.setVisibility(show ? View.VISIBLE : View.GONE);
         progressView.animate().setDuration(shortAnimTime).alpha(

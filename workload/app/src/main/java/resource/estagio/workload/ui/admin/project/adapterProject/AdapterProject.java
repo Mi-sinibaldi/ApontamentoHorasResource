@@ -48,9 +48,9 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
             );
 
             holder.imageDeleteProject.setOnClickListener(v -> {
-                listener.deleteProject(position);
-                notifyItemRemoved(position);
-                listProject.remove(position);
+                listener.deleteProject(holder.getLayoutPosition());
+                listProject.remove(holder.getLayoutPosition());
+                notifyItemRemoved(holder.getLayoutPosition());
             });
 
         } else {
