@@ -75,17 +75,4 @@ public class HomeAdminActivity extends AppCompatActivity implements HomeAdminCon
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (backPressedTime + 20000 > System.currentTimeMillis()) {
-            backToast.cancel();
-            super.onBackPressed();
-            return;
-        } else {
-            backToast = Toast.makeText( getBaseContext(),
-                    "Pressione novamente para sair", Toast.LENGTH_SHORT );
-            backToast.show();
-        }
-        backPressedTime = System.currentTimeMillis();
-    }
 }

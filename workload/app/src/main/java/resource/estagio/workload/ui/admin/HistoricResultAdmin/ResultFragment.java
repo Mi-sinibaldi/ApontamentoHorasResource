@@ -32,7 +32,7 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
     private View view;
     private Dialog dialog;
     private Button buttonError;
-    private TextView text_dialog_error;
+    private TextView textDialogError;
     private HomeAdminContract.View viewHome;
     private SwipeRefreshLayout swipe_Refresh_result;
 
@@ -56,12 +56,10 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
 
     private void actioSwipeRefresh(ResultHistoricContract.ResultView view) {
         recyclerViewListResult.setVisibility(View.GONE);
-        swipe_Refresh_result.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                presenter = new ResultPresenter(view);
-                presenter.getListResult(5, 2019);
-            }
+
+        swipe_Refresh_result.setOnRefreshListener(() -> {
+            presenter = new ResultPresenter(view);
+            presenter.getListResult(5, 2019);
         });
     }
 
@@ -117,15 +115,14 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
         dialog.setContentView(R.layout.acativity_dialog_error);
         dialog.setCancelable(false);
 
-        text_dialog_error = dialog.findViewById(R.id.text_dialog_error);
-        text_dialog_error.setText(text);
+        textDialogError = dialog.findViewById(R.id.text_dialog_error);
+        textDialogError.setText(text);
 
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         dialog.show();
         buttonError = dialog.findViewById(R.id.button_dialog_error);
-        buttonError.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
+
+        buttonError.setOnClickListener(v -> dialog.dismiss());
     }
 }
