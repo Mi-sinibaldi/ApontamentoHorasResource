@@ -29,10 +29,8 @@ import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
 
 public class HistoricFragment extends Fragment implements ResultHistoricContract.historicView {
-    private AdapterTimeline adapterTimeline;
     private View view;
     private RecyclerView recyclerViewTimeline;
-    private List<TimeEntryModel> list = new ArrayList<>();
     private List<TimeEntryModel> listWorkLoad;
     private TextView textViewMonth;
     private TextView textViewYear;
@@ -62,8 +60,14 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
 
         loadUi();
         setTextDate();
-
         final int thisMonth = calendar.get(Calendar.MONTH);
+        actionArrowsButton(thisMonth);
+        actioSwipeRefresh(this);
+
+        return view;
+    }
+
+    private void actionArrowsButton(int thisMonth) {
         imageViewMonthLeft.setOnClickListener(v -> {
 
             if (month >= thisMonth - 2) {
@@ -93,19 +97,14 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
                 imageViewMonthRight.setVisibility(View.INVISIBLE);
             }
         });
-        actioSwipeRefresh(this);
-
-        return view;
     }
 
     private void actioSwipeRefresh(ResultHistoricContract.historicView view) {
         recyclerViewTimeline.setVisibility(View.GONE);
-        swipeRefreshHistoric.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                presenter = new HistoricFragmentPresenter(view);
-                presenter.getTimeline(month, year);
-            }
+
+        swipeRefreshHistoric.setOnRefreshListener(() -> {
+            presenter = new HistoricFragmentPresenter(view);
+            presenter.getTimeline(month, year);
         });
     }
 
@@ -144,7 +143,6 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
 
         recyclerViewTimeline.setVisibility(Key ? View.INVISIBLE : View.VISIBLE);
         swipeRefreshHistoric.setRefreshing(Key);
-
         viewHome.enableNavigation(Key);
     }
 
@@ -157,10 +155,6 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     @Override
     public void showErrorMessage(String text) {
         showDialogError(text);
-    }
-
-    @Override
-    public void showSucessMessage(String text) {
     }
 
 

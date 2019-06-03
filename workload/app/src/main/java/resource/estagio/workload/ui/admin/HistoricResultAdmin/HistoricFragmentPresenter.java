@@ -28,7 +28,6 @@ public class HistoricFragmentPresenter implements ResultHistoricContract.histori
             @Override
             public void onSuccessful(List<TimeEntryModel> value) {
                 view.showListTimeline(value);
-                view.showSucessMessage("Sucesso");
                 view.dialog(false);
             }
 

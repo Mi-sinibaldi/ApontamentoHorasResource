@@ -83,7 +83,6 @@ public class ResultHistoricFragment extends Fragment {
 
     private void loadUI() {
         FragmentManager fm = getActivity().getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
         textTitle = view.findViewById(R.id.textTitle);
         textSubtitle = view.findViewById(R.id.textSubtitle);
         fragment = new ResultFragment(viewHome);
