@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.Objects;
+
 import resource.estagio.workload.R;
 import resource.estagio.workload.infra.App;
 
@@ -40,15 +42,13 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        loadUi(view);
 
+        loadUi(view);
         haveFingerPrint();
         initSwitch();
-
         actionSwitch();
-
-
         buttonClearPrefSettings.setOnClickListener(v -> showDialogChooser());
+
         return view;
     }
 
@@ -62,56 +62,57 @@ public class SettingsFragment extends Fragment {
         switchFingerPrint = view.findViewById(R.id.switchFingerPrint);
         buttonClearPrefSettings = view.findViewById(R.id.buttonClearPrefSettings);
         textNameUserSettings = view.findViewById(R.id.textView_name_user_settings);
-        textNameUserSettings.setText(App.getUser().getName());
+        textNameUserSettings.setText("Olá, "+App.getUser().getName());
+
     }
 
     private void showDialogChooser() {
-        dialog = new Dialog( getContext(), R.style.CustomAlertDialog );
-        dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
-        dialog.setContentView( R.layout.activity_dialog_chooser );
-        dialog.setCancelable( false );
+        dialog = new Dialog(getContext(), R.style.CustomAlertDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_dialog_chooser);
+        dialog.setCancelable(false);
         TextView text = dialog.findViewById(R.id.text_view_subtitle_project);
         text.setText("Deseja realmente limpar as credenciais salvas?");
-        dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN );
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         dialog.show();
 
-        buttonChosserYes = dialog.findViewById( R.id.button_dialog_chooser_yes );
-        buttonChosserNo = dialog.findViewById( R.id.buttton_dialog_chooser_no );
+        buttonChosserYes = dialog.findViewById(R.id.button_dialog_chooser_yes);
+        buttonChosserNo = dialog.findViewById(R.id.buttton_dialog_chooser_no);
 
-        buttonChosserYes.setOnClickListener( v -> {
-               App.getPref().clear();
-                initSwitch();
-                switchFingerPrint.setChecked(false);
-               dialog.dismiss();
+        buttonChosserYes.setOnClickListener(v -> {
+            App.getPref().clear();
+            initSwitch();
+            switchFingerPrint.setChecked(false);
+            dialog.dismiss();
 
             Toast.makeText(getActivity(), "Preferencias limpas", Toast.LENGTH_SHORT).show();
-        } );
-        buttonChosserNo.setOnClickListener( v -> dialog.dismiss() );
+        });
+        buttonChosserNo.setOnClickListener(v -> dialog.dismiss());
 
 
     }
 
     private void setActionSwitch(boolean isChecked) {
-        if(isChecked == true){
+        if (isChecked) {
             App.getPref().saveFinger(1);
-        }else{
+        } else {
             App.getPref().saveFinger(0);
         }
     }
 
     private void initSwitch() {
-        if(App.getPref().getFingerPrint()==1){
+        if (App.getPref().getFingerPrint() == 1) {
             switchFingerPrint.setChecked(true);
-        }else {
+        } else {
             switchFingerPrint.setChecked(false);
         }
     }
 
-    private void haveFingerPrint(){
+    private void haveFingerPrint() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //Fingerprint API only available on from Android 6.0 (M)
-            FingerprintManager fingerprintManager = (FingerprintManager) getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
+            FingerprintManager fingerprintManager = (FingerprintManager) Objects.requireNonNull(getActivity()).getSystemService(Context.FINGERPRINT_SERVICE);
             if (!fingerprintManager.isHardwareDetected()) {
                 // Device doesn't support fingerprint authentication
                 switchFingerPrint.setVisibility(View.GONE);
@@ -119,12 +120,12 @@ public class SettingsFragment extends Fragment {
                 // User hasn't enrolled any fingerprints to authenticate with
                 switchFingerPrint.setVisibility(View.GONE);
             }
-            if(App.getPref().getItsSave()==0){
+            if (App.getPref().getItsSave() == 0) {
                 switchFingerPrint.setVisibility(View.GONE);
-            }else {
+            } else {
                 switchFingerPrint.setVisibility(View.VISIBLE);
             }
-        }else {
+        } else {
             switchFingerPrint.setVisibility(View.GONE);
         }
     }
