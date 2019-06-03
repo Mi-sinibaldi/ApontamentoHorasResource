@@ -88,7 +88,10 @@ public class ClientFragment extends Fragment implements ClientContract.View {
              customerModelsDelete = new ArrayList<>();
         });
 
-        textViewCancelClient.setOnClickListener(v -> presenter.getCustomers(true));
+        textViewCancelClient.setOnClickListener(v -> {
+            presenter.getCustomers(true);
+            customerModelsDelete = new ArrayList<>();
+        });
     }
 
     private void loadUI() {
@@ -106,8 +109,8 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         customerModelsDelete = new ArrayList<>();
         adapterInterface = new AdapterClient.AdapterInterface() {
             @Override
-            public void removeClient(View v, int position) {
-                customerModelsDelete.add(customerModels.get(position));
+            public void removeClient(View v, int position, CustomerModel model) {
+                customerModelsDelete.add(model);
             }
 
             @Override

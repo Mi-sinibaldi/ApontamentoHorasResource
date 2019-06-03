@@ -54,11 +54,13 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
 
     }
 
+
+
     private void deleteCustomer(@NonNull MyViewHolder holder, int position) {
         holder.imageViewDeleteClient.setOnClickListener(v -> {
-            listener.removeClient(v, position);
-            list.remove(position);
-            notifyItemRemoved(position);
+            listener.removeClient(v, position, list.get(holder.getLayoutPosition()));
+            list.remove(holder.getLayoutPosition());
+            notifyItemRemoved(holder.getLayoutPosition());
         });
         holder.setIconRemove();
     }
@@ -72,7 +74,7 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
     }
 
     public interface AdapterInterface {
-        void removeClient(View v, int position);
+        void removeClient(View v, int position, CustomerModel model);
 
         void goToProject(View v, int position);
     }
