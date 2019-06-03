@@ -23,7 +23,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.data.remote.EmployeeAPI;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.infra.App;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
@@ -172,5 +174,7 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
         dialog.show();
         buttonError = dialog.findViewById(R.id.button_dialog_error);
         buttonError.setOnClickListener(v -> dialog.dismiss());
+
     }
+
 }

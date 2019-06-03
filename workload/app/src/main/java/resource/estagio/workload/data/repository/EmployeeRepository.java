@@ -29,7 +29,7 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
 
                         if (response.code() == 401) {
                             onResult.onUnsuccessful(
-                                    "Acesso negado\nEntre com um usuario valido!");
+                                    "Acesso negado\n\nEntre com um usuario valido!");
                             return;
                         }
                         onResult.onSuccessful(response.body());
@@ -41,6 +41,7 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
                     }
                 });
     }
+
 
     @Override
     public void postEntry(TimeEntryModel timeEntryModel, String token, BaseCallback<Void> onResult) {

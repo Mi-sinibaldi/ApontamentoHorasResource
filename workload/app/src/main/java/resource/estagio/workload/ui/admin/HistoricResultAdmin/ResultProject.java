@@ -12,11 +12,6 @@ public class ResultProject {
         this.horas = horas;
     }
 
-    public ResultProject(String aux, int total) {
-        this.name = name;
-        this.horas = horas;
-    }
-
     public String getClient() {
         return client;
     }
