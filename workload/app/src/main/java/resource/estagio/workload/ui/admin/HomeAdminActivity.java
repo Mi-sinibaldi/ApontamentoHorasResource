@@ -33,13 +33,10 @@ public class HomeAdminActivity extends AppCompatActivity implements HomeAdminCon
         navigation = findViewById(R.id.bottom_navigation_admin);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_admin, new EmployeeFragment(this)).commit();
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                presenter.identifyItemClicked(menuItem);
-                return true;
-            }
-        });
+        navigation.setOnNavigationItemSelectedListener( menuItem -> {
+            presenter.identifyItemClicked(menuItem);
+            return true;
+        } );
     }
 
     @Override
@@ -75,17 +72,4 @@ public class HomeAdminActivity extends AppCompatActivity implements HomeAdminCon
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (backPressedTime + 20000 > System.currentTimeMillis()) {
-            backToast.cancel();
-            super.onBackPressed();
-            return;
-        } else {
-            backToast = Toast.makeText( getBaseContext(),
-                    "Pressione novamente para sair", Toast.LENGTH_SHORT );
-            backToast.show();
-        }
-        backPressedTime = System.currentTimeMillis();
-    }
 }

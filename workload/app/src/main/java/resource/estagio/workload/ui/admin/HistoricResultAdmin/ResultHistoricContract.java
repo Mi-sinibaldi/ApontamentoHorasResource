@@ -9,6 +9,7 @@ public class ResultHistoricContract {
     public interface historicPresenter{
         void getTimeline(int month, int year);
 
+
     }
     public interface historicView{
 
