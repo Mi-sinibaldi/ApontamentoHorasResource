@@ -97,10 +97,11 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
     }
 
     @Override
-    public void spinnerList(List<ActivityTypeModel> value) {
-        ArrayAdapter<ActivityTypeModel> activityTypeModelArrayAdapter
-                = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_spinner_dropdown_item, value);
+    public void spinnerListActivityType(List<ActivityTypeModel> value) {
+
+        ArrayAdapter<ActivityTypeModel> activityTypeModelArrayAdapter = new ArrayAdapter<>(
+                getActivity(), android.R.layout.simple_spinner_dropdown_item, value);
+        activityTypeModelArrayAdapter.setDropDownViewResource(R.layout.spinner_custom_dropdown);
         spinnerProjectType.setAdapter(activityTypeModelArrayAdapter);
     }
 }

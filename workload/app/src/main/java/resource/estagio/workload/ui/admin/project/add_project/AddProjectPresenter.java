@@ -40,7 +40,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
                 new BaseCallback<List<ActivityTypeModel>>() {
                     @Override
                     public void onSuccessful(List<ActivityTypeModel> value) {
-                        view.spinnerList(value);
+                        view.spinnerListActivityType(value);
                     }
 
                     @Override

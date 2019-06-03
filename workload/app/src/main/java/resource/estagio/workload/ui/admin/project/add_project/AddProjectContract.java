@@ -15,7 +15,7 @@ public class AddProjectContract {
 
         void showToast(String error);
 
-        void spinnerList(List<ActivityTypeModel> value);
+        void spinnerListActivityType(List<ActivityTypeModel> value);
 
         FragmentActivity getActivity();
     }
