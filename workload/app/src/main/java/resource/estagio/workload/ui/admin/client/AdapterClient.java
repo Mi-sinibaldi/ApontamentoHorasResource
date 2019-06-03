@@ -1,5 +1,6 @@
 package resource.estagio.workload.ui.admin.client;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
+import resource.estagio.workload.domain.Customer;
 
 public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHolder>{
 
@@ -41,8 +43,18 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         CustomerModel customerModel = list.get(position);
-        holder.textViewClientAdapter.setText(customerModel.getName());
+        holder.setItens(customerModel);
         getClickAdapter(holder, position);
+        setPaddingButton(holder);
+
+
+    }
+
+    private void setPaddingButton(@NonNull MyViewHolder holder) {
+        if(list.size() - 1 == holder.getLayoutPosition())
+            holder.constraintClient.setPadding(0,0,0,100);
+        else
+            holder.constraintClient.setPadding(0,0,0,0);
     }
 
     private void getClickAdapter(@NonNull MyViewHolder holder, int position) {
@@ -58,11 +70,25 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
 
     private void deleteCustomer(@NonNull MyViewHolder holder, int position) {
         holder.imageViewDeleteClient.setOnClickListener(v -> {
-            listener.removeClient(v, position, list.get(holder.getLayoutPosition()));
-            list.remove(holder.getLayoutPosition());
-            notifyItemRemoved(holder.getLayoutPosition());
+            try{
+                listener.removeClient(v, position, list.get(holder.getLayoutPosition()));
+                verifyRemove(holder);
+            }catch (ArrayIndexOutOfBoundsException e){
+                notifyDataSetChanged();
+            }
         });
         holder.setIconRemove();
+    }
+
+    private void verifyRemove(@NonNull MyViewHolder holder) {
+        if (list.size() - 1 == holder.getLayoutPosition()) {
+            list.remove(holder.getLayoutPosition());
+            notifyDataSetChanged();
+            holder.setItens(list.get(list.size() - 1));
+        } else {
+            list.remove(holder.getLayoutPosition());
+            notifyItemRemoved(holder.getLayoutPosition());
+        }
     }
 
     @Override
@@ -79,13 +105,16 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
         void goToProject(View v, int position);
     }
     class MyViewHolder extends RecyclerView.ViewHolder {
+        ConstraintLayout constraintClient;
         ConstraintLayout buttonCardClient;
         TextView textViewClientAdapter;
         ImageView imageViewIconClientAdapter;
         ImageView imageViewDeleteClient;
+        CustomerModel model;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            constraintClient = itemView.findViewById(R.id.constraint_client);
             textViewClientAdapter = itemView.findViewById(R.id.text_view_client_adapter);
             buttonCardClient = itemView.findViewById(R.id.button_card_client);
             imageViewIconClientAdapter = itemView.findViewById(R.id.image_view_icon_adapter_client);
@@ -100,6 +129,16 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
         void setIconClient() {
             imageViewDeleteClient.setVisibility(View.INVISIBLE);
             imageViewIconClientAdapter.setVisibility(View.VISIBLE);
+        }
+
+        public void setItens(CustomerModel customerModel) {
+            textViewClientAdapter.setText(customerModel.getName());
+            model = customerModel;
+            if(list.get(list.size() - 1).getId() == model.getId())
+                constraintClient.setPadding(0,0,0,100);
+            else
+                constraintClient.setPadding(0,0,0,0);
+
         }
     }
 }

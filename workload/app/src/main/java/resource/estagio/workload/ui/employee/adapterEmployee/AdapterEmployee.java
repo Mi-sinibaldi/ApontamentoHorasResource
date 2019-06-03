@@ -40,6 +40,14 @@ public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyView
         EmployeeModel model = listEmployee.get(position);
         holder.nome.setText(model.getNome());
         holder.re.setText(model.getRe());
+
+        /*
+        if(sizeList == holder.getLayoutPosition())
+            holder.constraintEmployee.setPadding(0,0,0,100);
+        else
+            holder.constraintEmployee.setPadding(0,0,0,0);
+            */
+
     }
 
     @Override
