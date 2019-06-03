@@ -15,7 +15,6 @@ public class ResultHistoricContract {
         void dialog(boolean Key);
         void showListTimeline(List<TimeEntryModel> list);
         void showErrorMessage(String text);
-        void showSucessMessage(String text);
 
     }
 
