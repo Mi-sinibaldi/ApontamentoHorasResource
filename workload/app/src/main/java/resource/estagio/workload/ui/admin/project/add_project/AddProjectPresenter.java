@@ -3,15 +3,12 @@ package resource.estagio.workload.ui.admin.project.add_project;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
 
-import resource.estagio.workload.ConstantApp;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
@@ -20,6 +17,7 @@ import resource.estagio.workload.domain.Customer;
 import resource.estagio.workload.domain.Project;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.ProjectFragment;

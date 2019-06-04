@@ -9,13 +9,13 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
-import resource.estagio.workload.ConstantApp;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.data.repository.CustomerRepository;
 import resource.estagio.workload.domain.Customer;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.DialogApp;
 
 public class ClientPresenter implements ClientContract.Presenter {

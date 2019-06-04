@@ -55,7 +55,6 @@ public class ResultHistoricFragment extends Fragment implements ResultHistoricCo
         loadFragment(fragment);
         backToCustomers();
         verifyMonth();
-
         return view;
     }
 
