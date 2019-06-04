@@ -2,8 +2,7 @@ package resource.estagio.workload.ui.admin.project;
 
 import java.util.List;
 
-import resource.estagio.workload.ConstantApp;
-import resource.estagio.workload.R;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.repository.ActivityRepository;
 import resource.estagio.workload.domain.Project;

@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin;
+package resource.estagio.workload.ui.admin.HistoricResultAdmin.result;
 
 
 import android.app.Dialog;
@@ -16,9 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import java.util.Calendar;
 import java.util.List;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricContract;
 import resource.estagio.workload.ui.admin.HistoricResultAdmin.adapter.AdapterListResult;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 
@@ -35,10 +37,15 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
     private TextView textDialogError;
     private HomeAdminContract.View viewHome;
     private SwipeRefreshLayout swipe_Refresh_result;
+    private int month;
+    private int year;
+    private Calendar calendar;
 
 
-    public ResultFragment(HomeAdminContract.View viewHome) {
+    public ResultFragment(HomeAdminContract.View viewHome, int m, int y) {
         this.viewHome = viewHome;
+        this.year = y;
+        this.month = m;
     }
 
 
@@ -49,9 +56,19 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
 
         loadUi();
         actioSwipeRefresh(this);
-        presenter.getListResult(5, 2019);
+        verifyMonthForRequest();
 
         return view;
+    }
+
+    private void verifyMonthForRequest() {
+        if (year == 0 || month == 0) {
+            month = calendar.get(Calendar.MONTH) + 1;
+            year = calendar.get(Calendar.YEAR);
+            presenter.getListResult(month, year);
+        } else {
+            presenter.getListResult(month, year);
+        }
     }
 
     private void actioSwipeRefresh(ResultHistoricContract.ResultView view) {
@@ -59,11 +76,12 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
 
         swipe_Refresh_result.setOnRefreshListener(() -> {
             presenter = new ResultPresenter(view);
-            presenter.getListResult(5, 2019);
+            presenter.getListResult(month, year);
         });
     }
 
     private void loadUi() {
+        calendar = Calendar.getInstance();
         recyclerViewListResult = view.findViewById(R.id.recyclerView_result_admin);
         swipe_Refresh_result = view.findViewById(R.id.swipe_Refresh_result);
         presenter = new ResultPresenter(this);
@@ -92,7 +110,6 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
     public void showListResult(List<newListResultAdmin> list) {
         newlistResult = list;
         configAdapter();
-
         swipe_Refresh_result.setRefreshing(false);
 
     }

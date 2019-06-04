@@ -1,6 +1,6 @@
 package resource.estagio.workload.data.repository;
 
-import resource.estagio.workload.ConstantApp;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.model.LoginModel;
 import resource.estagio.workload.domain.User;
 import resource.estagio.workload.domain.UserContract;

@@ -2,7 +2,7 @@ package resource.estagio.workload.domain.employee;
 
 import java.util.List;
 
-import resource.estagio.workload.ConstantApp;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.infra.BaseCallback;
 

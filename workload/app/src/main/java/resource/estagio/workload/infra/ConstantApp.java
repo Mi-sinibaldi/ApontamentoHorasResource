@@ -1,4 +1,4 @@
-package resource.estagio.workload;
+package resource.estagio.workload.infra;
 
 public class ConstantApp {
 
@@ -37,4 +37,10 @@ public class ConstantApp {
 
     // Constantes do UI
     public static final String REGISTER_NOT_FOUND = "Nenhum registro encontrado!";
+
+    // constantes do Result e Historic Fragment
+    public static final String TITLE_RESULT_MAIN_FRAGMENT = "Resultado";
+    public static final String TITLE_HISTORIC_MAIN_FRAGMENT = "Histórico";
+    public static final String SUBTITLE_RESULT_MAIN_FRAGMENT = "Resultado dos Apontamentos do mês: ";
+    public static final String SUBTITLE_HISTORIC_MAIN_FRAGMENT = "Histórico de Apontamentos";
 }
