@@ -1,6 +1,7 @@
 package resource.estagio.workload.ui.admin;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
@@ -16,7 +17,9 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.infra.App;
 import resource.estagio.workload.ui.employee.EmployeeFragment;
+import resource.estagio.workload.ui.login.LoginActivity;
 
 public class HomeAdminActivity extends AppCompatActivity implements HomeAdminContract.View {
 
@@ -59,7 +62,10 @@ public class HomeAdminActivity extends AppCompatActivity implements HomeAdminCon
         Button buttonChosserNo = dialog.findViewById( R.id.buttton_dialog_chooser_no );
 
         buttonChosserYes.setOnClickListener( v -> {
-            finishAffinity();
+            App.getPref().clear();
+            Intent intent = new Intent(HomeAdminActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
 
         } );
         buttonChosserNo.setOnClickListener( v -> dialog.dismiss() );

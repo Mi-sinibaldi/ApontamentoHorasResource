@@ -1,6 +1,7 @@
 package resource.estagio.workload.ui.home;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.infra.App;
+import resource.estagio.workload.ui.login.LoginActivity;
 import resource.estagio.workload.ui.point.PointFragment;
 
 public class HomeActivity extends AppCompatActivity implements HomeContract.View {
@@ -94,8 +97,10 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
         Button buttonChosserNo = dialog.findViewById( R.id.buttton_dialog_chooser_no );
 
         buttonChosserYes.setOnClickListener( v -> {
-            finishAffinity();
-
+            App.getPref().clear();
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         } );
         buttonChosserNo.setOnClickListener( v -> dialog.dismiss() );
     }
