@@ -16,7 +16,7 @@ public class DialogActivity extends AppCompatActivity {
     Dialog dialog;
 
 
-   // @Override
+    // @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate( savedInstanceState );
 //        setContentView( R.layout.activity_dialog );
@@ -40,34 +40,47 @@ public class DialogActivity extends AppCompatActivity {
 //    }
 
     public void showDialogChooser() {
-        dialog = new Dialog( this, R.style.CustomAlertDialog );
-        dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
-        dialog.setContentView( R.layout.activity_dialog_chooser );
-        dialog.setCancelable( false );
-        dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN );
+        dialog = new Dialog(this, R.style.CustomAlertDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_dialog_chooser);
+        dialog.setCancelable(false);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         dialog.show();
 
-        buttonChosserYes = dialog.findViewById( R.id.button_dialog_chooser_yes );
-        buttonChosserNo = dialog.findViewById( R.id.buttton_dialog_chooser_no );
+        buttonChosserYes = dialog.findViewById(R.id.button_dialog_chooser_yes);
+        buttonChosserNo = dialog.findViewById(R.id.buttton_dialog_chooser_no);
 
-        buttonChosserYes.setOnClickListener( v -> {
+        buttonChosserYes.setOnClickListener(v -> {
 //                finish();
 //                Intent intent = new Intent( DialogActivity.this , TELA DE LOGIN );
 //                startActivity( intent );
-        } );
-        buttonChosserNo.setOnClickListener( v -> dialog.dismiss() );
+        });
+        buttonChosserNo.setOnClickListener(v -> dialog.dismiss());
     }
 
-    public void showDialogError(){
-        dialog = new Dialog( this, R.style.CustomAlertDialog );
+    public void showDialogError() {
+        dialog = new Dialog(this, R.style.CustomAlertDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.acativity_dialog_error);
+        dialog.setCancelable(false);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        dialog.show();
+        buttonError = dialog.findViewById(R.id.button_dialog_error);
+        buttonError.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    public void showDialogConnection() {
+        dialog = new Dialog(this, R.style.CustomAlertDialog);
         dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
-        dialog.setContentView( R.layout.acativity_dialog_error );
+        dialog.setContentView( R.layout.activity_dialog_connection );
         dialog.setCancelable( false );
         dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN );
         dialog.show();
-        buttonError = dialog.findViewById( R.id.button_dialog_error);
-        buttonError.setOnClickListener( v -> dialog.dismiss() );
+       Button buttonConnection = dialog.findViewById( R.id.button_dialog_connection);
+        buttonConnection.setOnClickListener( v -> dialog.dismiss() );
+
     }
 }
