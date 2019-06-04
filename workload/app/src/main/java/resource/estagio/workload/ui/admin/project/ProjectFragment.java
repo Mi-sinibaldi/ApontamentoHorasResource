@@ -185,23 +185,9 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     }
 
     @Override
-    public void showToast(int message) {
+    public void showToast(String message) {
         Toast.makeText(getActivity(),
-                getString(message),
-                Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void showError(int error) {
-        Toast.makeText(getActivity(),
-                getString(error),
-                Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void showError(String error) {
-        Toast.makeText(getActivity(),
-                String.valueOf(error),
+                message,
                 Toast.LENGTH_LONG).show();
     }
 

@@ -27,7 +27,7 @@ public class PointPresenter implements PointContract.Presenter {
         view.showProgressAdd(true);
 
         try {
-            EmployeeDomain employee = new EmployeeDomain(view.getContext(), projectId, projectName,
+            EmployeeDomain employee = new EmployeeDomain(projectId, projectName,
                     customerId, customerName, demandNumber, Integer.parseInt(hour), date, reason);
             employee.irepository = new EmployeeRepository();
 

@@ -2,6 +2,7 @@ package resource.estagio.workload.data.repository;
 
 import java.util.List;
 
+import resource.estagio.workload.ConstantApp;
 import resource.estagio.workload.data.remote.CustomerAPI;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.domain.Customer;
@@ -14,25 +15,27 @@ import retrofit2.Response;
 
 public class CustomerRepository extends Repository implements CustomerContract.IRepository {
 
-    public static final String BEARER = "bearer ";
     public static final int ISR = 500;
 
     @Override
     public void getCustomers(String token, BaseCallback<List<CustomerModel>> onResult) {
         super.data.restApi(CustomerAPI.class)
-                .getCustomer(BEARER + token)
+                .getCustomer(ConstantApp.BEARER + token)
                 .enqueue(new Callback<List<CustomerModel>>() {
                     @Override
-                    public void onResponse(Call<List<CustomerModel>> call, Response<List<CustomerModel>> response) {
-                        if (response.isSuccessful() && response != null)
+                    public void onResponse(Call<List<CustomerModel>> call,
+                                           Response<List<CustomerModel>> response) {
+                        if (response.isSuccessful() && response.body() != null)
                             onResult.onSuccessful(response.body());
+                        else if (response.body() == null)
+                            onResult.onUnsuccessful(ConstantApp.UNLOADED_LIST);
                         else
                             onResult.onUnsuccessful(response.message());
                     }
 
                     @Override
                     public void onFailure(Call<List<CustomerModel>> call, Throwable t) {
-                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
+                        onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
                     }
                 });
     }
@@ -40,22 +43,21 @@ public class CustomerRepository extends Repository implements CustomerContract.I
     @Override
     public void deleteCustomer(int id, String customerName, String token, BaseCallback<String> onResult) {
         super.data.restApi(CustomerAPI.class)
-                .deleteCustomer(id, BEARER + token)
+                .deleteCustomer(id, ConstantApp.BEARER + token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful())
-                            onResult.onSuccessful("Cliente "+customerName+" excluído com sucesso.");
+                            onResult.onSuccessful(customerName+ ConstantApp.DELETE_IS_SUCCESS);
                         else if(response.code()== ISR)
-                            onResult.onUnsuccessful("Cliente "+customerName+" tem projetos cadastrados "+
-                                    "e não pode ser deletado.");
+                            onResult.onUnsuccessful(customerName+ ConstantApp.CUSTOMER_WITH_PROJECT);
                         else
                             onResult.onUnsuccessful(response.message());
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
+                        onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
                     }
                 });
     }
@@ -64,19 +66,19 @@ public class CustomerRepository extends Repository implements CustomerContract.I
     public void postCustomer(Customer customer, String token, BaseCallback<String> onResult) {
         CustomerModel model = new CustomerModel(customer.getId(), customer.getName());
         super.data.restApi(CustomerAPI.class)
-                .postCustomer(model, BEARER + token)
+                .postCustomer(model, ConstantApp.BEARER + token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful())
-                            onResult.onSuccessful("Cliente cadastrado com sucesso.");
+                            onResult.onSuccessful(ConstantApp.CUSTOMER_ADD_SUCCESS);
                         else
-                            onResult.onUnsuccessful("Erro ao cadastrar cliente.");
+                            onResult.onUnsuccessful(ConstantApp.ERROR_CUSTOMER_ADD);
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
+                        onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
 
                     }
                 });

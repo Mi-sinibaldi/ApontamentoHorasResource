@@ -2,6 +2,7 @@ package resource.estagio.workload.ui.admin.project;
 
 import java.util.List;
 
+import resource.estagio.workload.ConstantApp;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.repository.ActivityRepository;
@@ -28,7 +29,7 @@ public class ProjectPresenter implements ProjectContract.Presenter {
                     @Override
                     public void onSuccessful(List<ActivityModel> value) {
                         if (value == null) {
-                            view.showToast(R.string.no_records_found);
+                            view.showToast(ConstantApp.REGISTER_NOT_FOUND);
                             view.showProgress(false);
                             return;
                         }
@@ -38,7 +39,7 @@ public class ProjectPresenter implements ProjectContract.Presenter {
 
                     @Override
                     public void onUnsuccessful(String error) {
-                        view.showError(error);
+                        view.showToast(error);
                         view.showProgress(false);
                     }
                 });
@@ -56,21 +57,21 @@ public class ProjectPresenter implements ProjectContract.Presenter {
                 @Override
                 public void onSuccessful(String value) {
                     view.showProgress(false);
-                    view.showToast(R.string.project_deleted_successfully);
+                    view.showToast(value);
                     view.reloadList();
                 }
 
                 @Override
                 public void onUnsuccessful(String error) {
                     view.showProgress(false);
-                    view.showError(R.string.project_not_deleted);
+                    view.showToast(error);
                     view.reloadList();
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
             view.showProgress(false);
-            view.showError(e.getMessage());
+            view.showToast(e.getMessage());
         }
     }
 

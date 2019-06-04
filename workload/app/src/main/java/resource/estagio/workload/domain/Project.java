@@ -1,8 +1,6 @@
 package resource.estagio.workload.domain;
 
-import android.content.Context;
-
-import resource.estagio.workload.R;
+import resource.estagio.workload.ConstantApp;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
 import resource.estagio.workload.data.repository.ActivityRepository;
 import resource.estagio.workload.infra.App;
@@ -16,8 +14,6 @@ public class Project {
     private ActivityTypeModel activityTypeModel;
     private Customer customer;
     public ProjectContract.IRepository repository;
-
-    private Context context;
 
     public Project(int id, String nameProject, String demandNumber,
                    ActivityTypeModel activityTypeModel, Customer customer) {
@@ -57,19 +53,19 @@ public class Project {
     public void insertProject(BaseCallback<String> onResult) throws Exception {
 
         if (nameProject.isEmpty() || nameProject == null) {
-            throw new Exception(context.getString(R.string.required_name_is_null_or_empty));
+            throw new Exception(ConstantApp.NAME_IS_REQUIRED);
         }
         if (demandNumber.isEmpty() || demandNumber == null) {
-            throw new Exception(context.getString(R.string.required_demand_number_is_null_or_empty));
+            throw new Exception(ConstantApp.DEMAND_NUMBER_REQUIRED);
         }
         if (activityTypeModel == null) {
-            throw new Exception(context.getString(R.string.required_activity_type_is_null));
+            throw new Exception(ConstantApp.ACTIVITY_TYPE_REQUIRED);
         }
         if (customer == null) {
-            throw new Exception(context.getString(R.string.required_customer_is_null));
+            throw new Exception(ConstantApp.CUSTOMER_IS_NULL);
         }
         if (repository == null) {
-            throw new Exception(context.getString(R.string.required_repository_is_null));
+            throw new Exception(ConstantApp.REPOSITORY_NULL);
         }
 
         repository.insertProject(this, App.getUser().getAccessToken(), new BaseCallback<String>() {
@@ -87,15 +83,15 @@ public class Project {
 
     public void updateProject(BaseCallback<String> onResult) throws Exception{
         if(nameProject.isEmpty() || nameProject == null)
-            throw new Exception("Required name is null or empty");
+            throw new Exception(ConstantApp.NAME_IS_REQUIRED);
         if(demandNumber.isEmpty() || demandNumber == null)
-            throw new Exception("Required demand number is null or empty");
+            throw new Exception(ConstantApp.DEMAND_NUMBER_REQUIRED);
         if(activityTypeModel== null)
-            throw new Exception("Required activity type is null");
+            throw new Exception(ConstantApp.ACTIVITY_TYPE_REQUIRED);
         if(customer == null)
-            throw new Exception("Required customer is null");
+            throw new Exception(ConstantApp.CUSTOMER_IS_NULL);
         if(repository == null)
-            throw new Exception("Required repository is null ");
+            throw new Exception(ConstantApp.REPOSITORY_NULL);
 
         repository.updateProject(this, App.getUser().getAccessToken(), new BaseCallback<String>() {
             @Override
@@ -113,10 +109,10 @@ public class Project {
     public void deleteActivity(String token, BaseCallback<String> onResult) throws Exception {
 
         if (repository == null) {
-            throw new Exception(context.getString(R.string.null_repository));
+            throw new Exception(ConstantApp.REPOSITORY_NULL);
         }
         if (id == 0) {
-            throw new Exception(context.getString(R.string.null_id));
+            throw new Exception(ConstantApp.ID_IS_REQUIRED);
         }
 
         repository.deleteProject(id, token, new BaseCallback<String>() {
