@@ -19,6 +19,7 @@ import resource.estagio.workload.domain.Customer;
 import resource.estagio.workload.domain.Project;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
@@ -106,19 +107,12 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
     private void showDialogConfirm(String value) {
 
-        Dialog dialog = new Dialog(view.getActivity(), R.style.CustomAlertDialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.activity_check);
-        dialog.setCancelable(false);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        dialog.show();
+        Dialog dialog = DialogApp.createDialog(view.getActivity(), R.layout.activity_check);
 
         TextView text = dialog.findViewById(R.id.textDialog);
         text.setText(value);
         Button buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
         buttonConfirmCheck.setOnClickListener(v -> {
-
             Bundle bundle = new Bundle();
             bundle.putSerializable("customer", new CustomerModel(customer.getId(), customer.getName()));
             ProjectFragment fragment = new ProjectFragment(activityView);

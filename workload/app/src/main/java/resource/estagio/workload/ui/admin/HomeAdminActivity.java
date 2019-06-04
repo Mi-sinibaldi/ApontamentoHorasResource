@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.infra.App;
+import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.employee.EmployeeFragment;
 import resource.estagio.workload.ui.login.LoginActivity;
 
@@ -50,13 +51,7 @@ public class HomeAdminActivity extends AppCompatActivity implements HomeAdminCon
 
     @Override
     public void showDialogChooser() {
-        dialog = new Dialog( this, R.style.CustomAlertDialog );
-        dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
-        dialog.setContentView( R.layout.activity_dialog_chooser );
-        dialog.setCancelable( false );
-        dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN );
-        dialog.show();
+        dialog = DialogApp.createDialog(this, R.layout.activity_dialog_chooser);
 
         Button buttonChosserYes = dialog.findViewById( R.id.button_dialog_chooser_yes );
         Button buttonChosserNo = dialog.findViewById( R.id.buttton_dialog_chooser_no );

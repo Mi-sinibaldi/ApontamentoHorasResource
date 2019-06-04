@@ -15,6 +15,7 @@ import resource.estagio.workload.data.repository.CustomerRepository;
 import resource.estagio.workload.domain.Customer;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.ui.DialogApp;
 
 public class ClientPresenter implements ClientContract.Presenter {
 
@@ -71,18 +72,7 @@ public class ClientPresenter implements ClientContract.Presenter {
 
     @Override
     public void showDialogCustomer() {
-        loadComponentsDialog(createDialog());
-    }
-
-    private Dialog createDialog() {
-        Dialog dialog = new Dialog(view.getActivity(), R.style.CustomAlertDialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_new_customer);
-        dialog.setCancelable(false);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        dialog.show();
-        return dialog;
+        loadComponentsDialog(DialogApp.createDialog(view.getActivity(), R.layout.dialog_new_customer));
     }
 
     private void loadComponentsDialog(Dialog dialog) {

@@ -26,6 +26,7 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
+import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
@@ -171,21 +172,7 @@ public class ClientFragment extends Fragment implements ClientContract.View {
 
     @Override
     public void showToast(String value, boolean status) {
-        Dialog dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(status ? R.layout.activity_check : R.layout.acativity_dialog_error);
-        dialog.setCancelable(false);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        dialog.show();
-
-        TextView text = dialog.findViewById(status ? R.id.textDialog : R.id.text_dialog_error);
-        text.setText(value);
-        Button buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
-        buttonConfirmCheck.setOnClickListener(v -> {
-            dialog.dismiss();
-
-        });
+        DialogApp.showDialogConfirm(value, status, getActivity());
     }
 
     @Override
