@@ -1,8 +1,6 @@
 package resource.estagio.workload.domain;
 
-import android.content.Context;
-
-import resource.estagio.workload.R;
+import resource.estagio.workload.ConstantApp;
 import resource.estagio.workload.infra.BaseCallback;
 
 public class User {
@@ -16,8 +14,6 @@ public class User {
     private long id;
     private String name;
     private boolean isAdmin;
-
-    private Context context;
 
     public User(String username, String password) {
         this.username = username;
@@ -50,23 +46,20 @@ public class User {
     public void login(final BaseCallback<User> listener) throws Exception {
 
         if (repository == null) {
-            throw new Exception(context.getString(R.string.required_repository_is_null));
+            throw new Exception(ConstantApp.REPOSITORY_NULL);
         }
         if (username == null || username.isEmpty()) {
-            throw new Exception(context.getString(R.string.username_is_null_or_empty));
+            throw new Exception(ConstantApp.USERNAME_IS_REQUIRED);
         }
         if (password == null || password.isEmpty()) {
-            throw new Exception(context.getString(R.string.required_password_is_null_or_empty));
+            throw new Exception(ConstantApp.PASSWORD_IS_REQUIRED);
         }
         if (password.length() < 4) {
-            throw new Exception(context.getString(R.string.password_must_have_at_least_four_characters));
+            throw new Exception(ConstantApp.PASSWORD_MIN_FOUR);
         }
-
         repository.login(username, password, new BaseCallback<User>() {
-
             @Override
             public void onSuccessful(User user) {
-                //ARMAZENAR O TOKEN
                 listener.onSuccessful(user);
             }
 

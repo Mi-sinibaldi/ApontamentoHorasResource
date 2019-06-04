@@ -1,44 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_employee"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     android:background="#4050D5"
     tools:context=".ui.employee.adapterEmployee.AdapterEmployee">
 
-    <Button
-        android:id="@+id/button_name_employee"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_name_employee"
-        android:fontFamily="@font/open_sans"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textAlignment="viewStart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/colorWhite"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:background="#4050D5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.159" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/button_re_employee"
-        android:layout_width="88dp"
-        android:layout_height="33dp"
-        android:background="@drawable/button_re_employee"
-        android:fontFamily="@font/open_sans"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/colorWhite"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button_name_employee"
-        app:layout_constraintEnd_toEndOf="@+id/button_name_employee"
-        app:layout_constraintHorizontal_bias="0.953"
-        app:layout_constraintStart_toStartOf="@+id/button_name_employee"
-        app:layout_constraintTop_toTopOf="@+id/button_name_employee" />
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/button_name_employee"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/button_name_employee"
+            android:fontFamily="@font/open_sans"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.159" />
+
+        <Button
+            android:id="@+id/button_re_employee"
+            android:layout_width="88dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button_re_employee"
+            android:fontFamily="@font/open_sans"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/button_name_employee"
+            app:layout_constraintEnd_toEndOf="@+id/button_name_employee"
+            app:layout_constraintHorizontal_bias="0.953"
+            app:layout_constraintStart_toStartOf="@+id/button_name_employee"
+            app:layout_constraintTop_toTopOf="@+id/button_name_employee" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

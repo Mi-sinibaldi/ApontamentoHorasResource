@@ -1,17 +1,14 @@
 package resource.estagio.workload.domain.employee;
 
-import android.content.Context;
-
 import java.util.List;
 
-import resource.estagio.workload.R;
+import resource.estagio.workload.ConstantApp;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.infra.BaseCallback;
 
 public class EmployeeDomain {
 
     public EmployeeContract.IRepository irepository;
-    private Context context;
 
     private String name;
     private String username;
@@ -24,10 +21,9 @@ public class EmployeeDomain {
     private String date;
     private String reason;
 
-    public EmployeeDomain(Context context, int activityId, String activityName, int customerId,
-                 String customerName, String demandNumber, int hours, String date, String reason) {
+    public EmployeeDomain(int activityId, String activityName, int customerId,
+                          String customerName, String demandNumber, int hours, String date, String reason) {
 
-        this.context = context;
         this.activityId = activityId;
         this.activityName = activityName;
         this.customerId = customerId;
@@ -126,23 +122,23 @@ public class EmployeeDomain {
         this.reason = reason;
     }
 
-    public void getPostEntry(){
+    public void getPostEntry() {
 
     }
 
     public void postEntry(String token, final BaseCallback<Void> listener) throws Exception {
-        if(getIrepository() == null)
-            throw new Exception("Repositório Vazio");
-        if(activityId == 0 || activityName.isEmpty() || demandNumber.isEmpty())
-            throw new Exception("Cliente sem Projeto");
-        if(customerId == 0 || customerName.isEmpty())
-            throw new Exception("Cliente não encontrado");
-        if(hours == 0)
-            throw new Exception("É necessário apontamento de no minimo uma hora");
-        if(date == null)
-            throw  new Exception("Data inválida");
-        if(reason.isEmpty())
-            throw new Exception("É necessário ter descrição da atividade");
+        if (irepository == null)
+            throw new Exception(ConstantApp.REPOSITORY_NULL);
+        if (activityId == 0 || activityName.isEmpty() || demandNumber.isEmpty())
+            throw new Exception(ConstantApp.CUSTOMER_WITHOUT_PROJECT);
+        if (customerId == 0 || customerName.isEmpty())
+            throw new Exception(ConstantApp.CUSTOMER_NOT_FOUND);
+        if (hours == 0)
+            throw new Exception(ConstantApp.POINTING_MIN_HOUR);
+        if (date == null)
+            throw new Exception(ConstantApp.DATE_IS_NULL);
+        if (reason.isEmpty())
+            throw new Exception(ConstantApp.REASON_IS_REQUIRED);
 
         TimeEntryModel model = new TimeEntryModel(activityId, activityName, customerId,
                 customerName, demandNumber, hours, date, reason);

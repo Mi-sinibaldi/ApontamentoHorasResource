@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -41,12 +42,12 @@ public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyView
         holder.nome.setText(model.getNome());
         holder.re.setText(model.getRe());
 
-        /*
+
         if(sizeList == holder.getLayoutPosition())
             holder.constraintEmployee.setPadding(0,0,0,100);
         else
             holder.constraintEmployee.setPadding(0,0,0,0);
-            */
+
 
     }
 
@@ -68,12 +69,13 @@ public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyView
 
         Button nome;
         Button re;
+        ConstraintLayout constraintEmployee;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             nome = itemView.findViewById(R.id.button_name_employee);
             re = itemView.findViewById(R.id.button_re_employee);
-
+            constraintEmployee = itemView.findViewById(R.id.constraint_employee);
         }
     }
 }

@@ -1,5 +1,6 @@
 package resource.estagio.workload.domain;
 
+import resource.estagio.workload.ConstantApp;
 import resource.estagio.workload.infra.BaseCallback;
 
 public class Customer {
@@ -32,13 +33,13 @@ public class Customer {
 
     public void postCustomer(String token, BaseCallback<String> onResult) throws Exception {
         if (name.isEmpty() || name == null) {
-            throw new Exception("Name can't be empty or null");
+            throw new Exception(ConstantApp.NAME_IS_REQUIRED);
         }
         if (id < 0) {
-            throw new Exception("id can't be null ");
+            throw new Exception(ConstantApp.ID_IS_REQUIRED);
         }
         if (repository == null) {
-            throw new Exception("Repository can't be empty");
+            throw new Exception(ConstantApp.REPOSITORY_NULL);
         }
         repository.postCustomer(this, token, new BaseCallback<String>() {
             @Override
@@ -56,10 +57,10 @@ public class Customer {
 
     public void deleteCustomer(String token, BaseCallback<String> onResult) throws Exception {
         if (repository == null) {
-            throw new Exception("Repositorio vazio");
+            throw new Exception(ConstantApp.REPOSITORY_NULL);
         }
         if (id == 0) {
-            throw new Exception("Campo Id nao pode ser vazio");
+            throw new Exception(ConstantApp.ID_IS_REQUIRED);
         }
         repository.deleteCustomer(id, name, token, new BaseCallback<String>() {
             @Override
