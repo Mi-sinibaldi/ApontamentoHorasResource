@@ -3,6 +3,7 @@ package resource.estagio.workload.ui.admin;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class HomeAdminActivity extends AppCompatActivity implements HomeAdminCon
     private Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_admin);
         presenter = new HomeAdminPresenter(this);

@@ -18,6 +18,8 @@ public class AddProjectContract {
         void spinnerListActivityType(List<ActivityTypeModel> value);
 
         FragmentActivity getActivity();
+
+        void showProgressSave(final boolean show);
     }
 
     interface Presenter {

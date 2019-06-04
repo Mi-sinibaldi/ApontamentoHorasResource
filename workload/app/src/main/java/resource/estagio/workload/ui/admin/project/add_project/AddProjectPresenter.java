@@ -61,23 +61,26 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
     @Override
     public void addProject(String nameProject, String demandNumber, Customer customer) {
-
+        view.showProgressSave(true);
         this.customer = customer;
         Project project = new Project(0, nameProject, demandNumber, activityTypeModel, customer);
         try {
             project.insertProject(new BaseCallback<String>() {
                 @Override
                 public void onSuccessful(String value) {
+                    view.showProgressSave(false);
                     showDialogConfirm(value);
                 }
 
                 @Override
                 public void onUnsuccessful(String error) {
+                    view.showProgressSave(false);
                     if(errorConnection(error)) return;
                     view.showToast(error);
                 }
             });
         } catch (Exception e) {
+            view.showProgressSave(false);
             view.showToast(e.getMessage());
             e.printStackTrace();
         }
@@ -85,23 +88,26 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
     @Override
     public void updateProject(int id, String nameProject, String demandNumber, Customer customer) {
-
+        view.showProgressSave(true);
         this.customer = customer;
         Project project = new Project(id, nameProject, demandNumber, activityTypeModel, customer);
         try {
             project.updateProject(new BaseCallback<String>() {
                 @Override
                 public void onSuccessful(String value) {
+                    view.showProgressSave(false);
                     showDialogConfirm(value);
                 }
 
                 @Override
                 public void onUnsuccessful(String error) {
+                    view.showProgressSave(false);
                     if(errorConnection(error)) return;
                     view.showToast(error);
                 }
             });
         } catch (Exception e) {
+            view.showProgressSave(false);
             view.showToast(e.getMessage());
             e.printStackTrace();
         }
