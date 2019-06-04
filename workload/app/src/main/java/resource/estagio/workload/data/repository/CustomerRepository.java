@@ -2,7 +2,7 @@ package resource.estagio.workload.data.repository;
 
 import java.util.List;
 
-import resource.estagio.workload.ConstantApp;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.CustomerAPI;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.domain.Customer;

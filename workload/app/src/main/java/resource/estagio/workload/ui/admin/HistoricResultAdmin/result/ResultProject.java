@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin;
+package resource.estagio.workload.ui.admin.HistoricResultAdmin.result;
 
 public class ResultProject {
 

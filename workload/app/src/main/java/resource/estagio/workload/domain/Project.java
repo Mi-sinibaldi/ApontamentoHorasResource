@@ -1,6 +1,6 @@
 package resource.estagio.workload.domain;
 
-import resource.estagio.workload.ConstantApp;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
 import resource.estagio.workload.data.repository.ActivityRepository;
 import resource.estagio.workload.infra.App;

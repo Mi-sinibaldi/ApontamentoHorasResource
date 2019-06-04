@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin;
+package resource.estagio.workload.ui.admin.HistoricResultAdmin.historic;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.data.repository.EmployeeRepository;
 import resource.estagio.workload.domain.employee.EmployeeDomain;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricContract;
 import resource.estagio.workload.ui.timeline.TimeLineContract;
 
 public class HistoricFragmentPresenter implements ResultHistoricContract.historicPresenter {

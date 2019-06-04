@@ -14,13 +14,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Objects;
 
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.R;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.historic.HistoricFragment;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.result.ResultFragment;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.employee.EmployeeFragment;
 
-public class ResultHistoricFragment extends Fragment {
+public class ResultHistoricFragment extends Fragment implements ResultHistoricContract.mainResult {
 
     private View view;
     private TabLayout tabLayout;
@@ -28,6 +33,12 @@ public class ResultHistoricFragment extends Fragment {
     private Fragment fragment;
     private HomeAdminContract.View viewHome;
     private ImageView imageViewBackCollaborator;
+    private ResultHistoricContract.mainResult mainResult = this;
+    private int month = 0;
+    private int year = 0;
+    private String textMonth = "";
+    private Calendar calendar;
+
 
     public ResultHistoricFragment(HomeAdminContract.View view) {
         viewHome = view;
@@ -43,8 +54,16 @@ public class ResultHistoricFragment extends Fragment {
         actionTabSelected();
         loadFragment(fragment);
         backToCustomers();
+        verifyMonth();
 
         return view;
+    }
+
+    private void verifyMonth() {
+        if (textMonth.isEmpty()) {
+            textSubtitle.setText(ConstantApp.SUBTITLE_RESULT_MAIN_FRAGMENT +
+                    new SimpleDateFormat("MMM").format(calendar.getTime()));
+        }
     }
 
     private void actionTabSelected() {
@@ -54,15 +73,15 @@ public class ResultHistoricFragment extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-                        textTitle.setText("Resultado");
-                        textSubtitle.setText("Resultado dos Apontamentos do mês");
-                        fragment = new ResultFragment(viewHome);
+                        textTitle.setText(ConstantApp.TITLE_RESULT_MAIN_FRAGMENT);
+                        textSubtitle.setText(ConstantApp.SUBTITLE_RESULT_MAIN_FRAGMENT + textMonth);
+                        fragment = new ResultFragment(viewHome, month, year);
                         break;
 
                     case 1:
-                        textTitle.setText("Histórico");
-                        textSubtitle.setText("Histórico de Apontamentos");
-                        fragment = new HistoricFragment(viewHome);
+                        textTitle.setText(ConstantApp.TITLE_HISTORIC_MAIN_FRAGMENT);
+                        textSubtitle.setText(ConstantApp.SUBTITLE_HISTORIC_MAIN_FRAGMENT);
+                        fragment = new HistoricFragment(viewHome, mainResult);
                         break;
                 }
                 loadFragment(fragment);
@@ -82,12 +101,16 @@ public class ResultHistoricFragment extends Fragment {
     }
 
     private void loadUI() {
+        calendar = Calendar.getInstance();
+        calendar.get(Calendar.MONTH);
         textTitle = view.findViewById(R.id.textTitle);
         textSubtitle = view.findViewById(R.id.textSubtitle);
-        fragment = new ResultFragment(viewHome);
+        fragment = new ResultFragment(viewHome, month, year);
         tabLayout = view.findViewById(R.id.tabLayout);
         tabLayout.setSelectedTabIndicator(0);
         imageViewBackCollaborator = view.findViewById(R.id.image_view_back_collaborator);
+        textTitle.setText(ConstantApp.TITLE_RESULT_MAIN_FRAGMENT);
+        textSubtitle.setText(ConstantApp.SUBTITLE_RESULT_MAIN_FRAGMENT + textMonth);
     }
 
     private void loadFragment(Fragment fragment) {
@@ -108,7 +131,7 @@ public class ResultHistoricFragment extends Fragment {
 
         imageViewBackCollaborator.setOnClickListener(v -> {
             Objects.requireNonNull(getActivity())
-            .getSupportFragmentManager()
+                    .getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.frame_admin, new EmployeeFragment(viewHome))
                     .commit();
@@ -116,4 +139,11 @@ public class ResultHistoricFragment extends Fragment {
         });
     }
 
+    @Override
+    public void getDateResultFragment(int m, int y, String textMonth) {
+        //Toast.makeText(getContext(), "" + m + "/" + y, Toast.LENGTH_SHORT).show();
+        month = m;
+        year = y;
+        this.textMonth = textMonth;
+    }
 }

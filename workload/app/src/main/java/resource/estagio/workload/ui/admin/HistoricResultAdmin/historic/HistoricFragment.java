@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin;
+package resource.estagio.workload.ui.admin.HistoricResultAdmin.historic;
 
 
 import android.app.Dialog;
@@ -23,11 +23,13 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricContract;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
 
-public class HistoricFragment extends Fragment implements ResultHistoricContract.historicView {
+public class HistoricFragment extends Fragment implements ResultHistoricContract.historicView,
+                                                            ResultHistoricContract.mainHistoric {
     private View view;
     private RecyclerView recyclerViewTimeline;
     private List<TimeEntryModel> listWorkLoad;
@@ -40,6 +42,7 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     private int month;
     private int year;
     private TextView textDialogError;
+    private ResultHistoricContract.mainResult mainResult;
 
     private Dialog dialog;
     private HomeAdminContract.View viewHome;
@@ -47,8 +50,9 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
 
     private Button buttonError;
 
-    public HistoricFragment(HomeAdminContract.View view) {
+    public HistoricFragment(HomeAdminContract.View view,ResultHistoricContract.mainResult mainResult) {
         this.viewHome = view;
+        this.mainResult = mainResult;
     }
 
 
@@ -127,6 +131,7 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
         month = calendar.get(Calendar.MONTH) + 1;
         year = calendar.get(Calendar.YEAR);
         presenter.getTimeline(month, year);
+        setDateResultFragment(month, year,textViewMonth.getText().toString());
     }
 
     private void configAdapter() {
@@ -174,4 +179,8 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
 
     }
 
+    @Override
+    public void setDateResultFragment(int m, int y, String textMonth) {
+        mainResult.getDateResultFragment(m,y,textMonth);
+    }
 }

@@ -2,7 +2,7 @@ package resource.estagio.workload.data.repository;
 
 import java.util.List;
 
-import resource.estagio.workload.ConstantApp;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.EmployeeAPI;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.domain.employee.EmployeeContract;
@@ -24,7 +24,7 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
                     @Override
                     public void onResponse(Call<List<TimeEntryModel>>
                                                    call, Response<List<TimeEntryModel>> response) {
-                        if (!response.isSuccessful()) {
+                        if (!response.isSuccessful() || response.body()==null) {
                             onResult.onUnsuccessful(ConstantApp.UNLOADED_LIST);
                             return;
                         }
@@ -33,6 +33,7 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
                             onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
                             return;
                         }
+
                         onResult.onSuccessful(response.body());
                     }
 

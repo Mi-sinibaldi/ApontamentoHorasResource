@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.ui.admin.HistoricResultAdmin.newListResultAdmin;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.result.newListResultAdmin;
 
 public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.MyViewHolder> {
 
