@@ -9,12 +9,14 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
+import resource.estagio.workload.ConstantApp;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.data.repository.CustomerRepository;
 import resource.estagio.workload.domain.Customer;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.ui.DialogApp;
 
 public class ClientPresenter implements ClientContract.Presenter {
 
@@ -37,8 +39,9 @@ public class ClientPresenter implements ClientContract.Presenter {
 
                     @Override
                     public void onUnsuccessful(String error) {
-                        view.showToast(error, false);
                         view.showProgressClient(false);
+                        if (errorConnection(error)) return;
+                        view.showToast(error, false);
                     }
                 });
     }
@@ -60,6 +63,7 @@ public class ClientPresenter implements ClientContract.Presenter {
                 @Override
                 public void onUnsuccessful(String error) {
                     view.showProgressClient(false);
+                    if (errorConnection(error)) return;
                     view.showToast(error, false);
                 }
             });
@@ -71,18 +75,7 @@ public class ClientPresenter implements ClientContract.Presenter {
 
     @Override
     public void showDialogCustomer() {
-        loadComponentsDialog(createDialog());
-    }
-
-    private Dialog createDialog() {
-        Dialog dialog = new Dialog(view.getActivity(), R.style.CustomAlertDialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_new_customer);
-        dialog.setCancelable(false);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        dialog.show();
-        return dialog;
+        loadComponentsDialog(DialogApp.createDialog(view.getActivity(), R.layout.dialog_new_customer));
     }
 
     private void loadComponentsDialog(Dialog dialog) {
@@ -109,6 +102,7 @@ public class ClientPresenter implements ClientContract.Presenter {
 
                     @Override
                     public void onUnsuccessful(String error) {
+                        if (errorConnection(error)) return;
                         view.showToast(error, false);
                     }
                 });
@@ -118,5 +112,13 @@ public class ClientPresenter implements ClientContract.Presenter {
             }
             dialog.dismiss();
         });
+    }
+
+    private boolean errorConnection(String error) {
+        if (error.equals(ConstantApp.CONNECTION_INTERNET)) {
+            DialogApp.showDialogConnection(view.getActivity());
+            return true;
+        }
+        return false;
     }
 }

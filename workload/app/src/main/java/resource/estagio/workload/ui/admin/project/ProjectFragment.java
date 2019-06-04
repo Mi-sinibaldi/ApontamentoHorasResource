@@ -2,21 +2,15 @@ package resource.estagio.workload.ui.admin.project;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,10 +21,11 @@ import java.util.List;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
+import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
+import resource.estagio.workload.ui.admin.client.ClientFragment;
 import resource.estagio.workload.ui.admin.project.adapterProject.AdapterProject;
 import resource.estagio.workload.ui.admin.project.add_project.AddProjectFragment;
-import resource.estagio.workload.ui.admin.client.ClientFragment;
 
 public class ProjectFragment extends Fragment implements ProjectContract.View {
 
@@ -189,18 +184,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
 
     @Override
     public void showToast(String message, boolean status) {
-        Dialog dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(status ? R.layout.activity_check : R.layout.acativity_dialog_error);
-        dialog.setCancelable(false);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        dialog.show();
-
-        TextView text = dialog.findViewById(status ? R.id.textDialog : R.id.text_dialog_error);
-        text.setText(message);
-        Button buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
-        buttonConfirmCheck.setOnClickListener(v -> dialog.dismiss());
+        DialogApp.showDialogConfirm(message, status, getActivity());
     }
 
     @Override
@@ -237,10 +221,5 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         textViewInsideProject.setVisibility(View.VISIBLE);
     }
 
-    @Nullable
-    @Override
-    public Context getContext() {
-        return super.getContext();
-    }
 }
 

@@ -8,6 +8,7 @@ import resource.estagio.workload.data.repository.ActivityRepository;
 import resource.estagio.workload.domain.Project;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.ui.DialogApp;
 
 public class ProjectPresenter implements ProjectContract.Presenter {
 
@@ -38,8 +39,9 @@ public class ProjectPresenter implements ProjectContract.Presenter {
 
                     @Override
                     public void onUnsuccessful(String error) {
-                        view.showToast(error, false);
                         view.showProgress(false);
+                        if(errorConnection(error)) return;
+                        view.showToast(error, false);
                     }
                 });
     }
@@ -62,6 +64,7 @@ public class ProjectPresenter implements ProjectContract.Presenter {
                 @Override
                 public void onUnsuccessful(String error) {
                     view.showProgress(false);
+                    if(errorConnection(error)) return;
                     view.showToast(error, false);
                     view.reloadList();
                 }
@@ -71,6 +74,13 @@ public class ProjectPresenter implements ProjectContract.Presenter {
             view.showProgress(false);
             view.showToast(e.getMessage(), false);
         }
+    }
+    private boolean errorConnection(String error) {
+        if (error.equals(ConstantApp.CONNECTION_INTERNET)) {
+            DialogApp.showDialogConnection(view.getActivity());
+            return true;
+        }
+        return false;
     }
 
 }
