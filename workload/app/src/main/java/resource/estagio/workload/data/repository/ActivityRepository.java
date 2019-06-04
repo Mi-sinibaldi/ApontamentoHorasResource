@@ -109,16 +109,16 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
     }
 
     @Override
-    public void deleteProject(long id, String token, BaseCallback<String> onResult) {
+    public void deleteProject(long id, String name, String token, BaseCallback<String> onResult) {
         super.data.restApi(ActivityAPI.class)
                 .deleteProject(id, ConstantApp.BEARER + token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful())
-                            onResult.onSuccessful(ConstantApp.DELETE_PROJECT_SUCCESS);
+                            onResult.onSuccessful(name+ConstantApp.DELETE_IS_SUCCESS);
                         else
-                            onResult.onUnsuccessful(ConstantApp.PROJECT_NOT_DELETE);
+                            onResult.onUnsuccessful(name+ConstantApp.DELETE_PROJECT_SUCCESS);
                     }
 
                     @Override

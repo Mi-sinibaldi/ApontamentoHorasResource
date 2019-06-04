@@ -15,6 +15,6 @@ public class ProjectContract {
         void insertProject (Project project, String token, BaseCallback<String> onResult);
         void updateProject(Project project, String token, BaseCallback<String> onResult);
 
-        void deleteProject(long id, String token, BaseCallback<String> onResult);
+        void deleteProject(long id, String name, String token, BaseCallback<String> onResult);
     }
 }

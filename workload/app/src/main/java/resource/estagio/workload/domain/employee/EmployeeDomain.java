@@ -23,7 +23,6 @@ public class EmployeeDomain {
 
     public EmployeeDomain(int activityId, String activityName, int customerId,
                           String customerName, String demandNumber, int hours, String date, String reason) {
-
         this.activityId = activityId;
         this.activityName = activityName;
         this.customerId = customerId;
@@ -31,7 +30,7 @@ public class EmployeeDomain {
         this.demandNumber = demandNumber;
         this.hours = hours;
         this.date = date;
-        this.reason = reason;
+        this.reason = reason.trim();
     }
 
     public EmployeeDomain() {
@@ -153,7 +152,6 @@ public class EmployeeDomain {
                 listener.onUnsuccessful(error);
             }
         });
-
     }
 
     public void getWorkList(int month, int year, final BaseCallback<List<TimeEntryModel>> listener) {

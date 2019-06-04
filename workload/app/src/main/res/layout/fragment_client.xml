@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_add_black_24dp"
                 android:gravity="center"
-                android:text="Adicionar novos cliente"
+                android:text="Adicionar novo cliente"
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -10,8 +10,7 @@ public class ConstantApp {
     public static final String ERROR_ADD_PROJECT = "Erro ao cadastrar o projeto.";
     public static final String PROJECT_UPDATE_SUCCESS = "Projeto atualizado com sucesso.";
     public static final String ERROR_UPDATE_PROJECT = "Erro ao atualizar o projeto.";
-    public static final String DELETE_PROJECT_SUCCESS = "Projeto excluído com sucesso";
-    public static final String PROJECT_NOT_DELETE = "Projeto não excluído";
+    public static final String DELETE_PROJECT_SUCCESS = " excluído com sucesso";
     public static final String PASSWORD = "password";
     public static final String USERNAME_OR_PASSWORD_INVALID = "Usuário ou senha inválido!";
     public static final String DELETE_IS_SUCCESS = " excluído com sucesso.";
