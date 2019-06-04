@@ -29,7 +29,7 @@ public class ProjectPresenter implements ProjectContract.Presenter {
                     @Override
                     public void onSuccessful(List<ActivityModel> value) {
                         if (value == null) {
-                            view.showToast(ConstantApp.REGISTER_NOT_FOUND);
+                            view.showToast(ConstantApp.REGISTER_NOT_FOUND, true);
                             view.showProgress(false);
                             return;
                         }
@@ -39,7 +39,7 @@ public class ProjectPresenter implements ProjectContract.Presenter {
 
                     @Override
                     public void onUnsuccessful(String error) {
-                        view.showToast(error);
+                        view.showToast(error, false);
                         view.showProgress(false);
                     }
                 });
@@ -47,9 +47,8 @@ public class ProjectPresenter implements ProjectContract.Presenter {
 
     @Override
     public void deleteCustomer(ActivityModel model) {
-
         view.showProgress(true);
-        Project project = new Project(model.getId());
+        Project project = new Project(model.getId(), model.getName());
         project.repository = new ActivityRepository();
 
         try {
@@ -57,21 +56,21 @@ public class ProjectPresenter implements ProjectContract.Presenter {
                 @Override
                 public void onSuccessful(String value) {
                     view.showProgress(false);
-                    view.showToast(value);
+                    view.showToast(value, true);
                     view.reloadList();
                 }
 
                 @Override
                 public void onUnsuccessful(String error) {
                     view.showProgress(false);
-                    view.showToast(error);
+                    view.showToast(error, false);
                     view.reloadList();
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
             view.showProgress(false);
-            view.showToast(e.getMessage());
+            view.showToast(e.getMessage(), false);
         }
     }
 

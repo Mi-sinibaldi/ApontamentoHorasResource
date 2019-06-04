@@ -10,7 +10,7 @@ public class ProjectContract {
 
     interface View {
 
-        void showToast(String message);
+        void showToast(String message, boolean status);
 
         void showProgress(boolean result);
 

@@ -26,8 +26,9 @@ public class Project {
         this.repository = new ActivityRepository();
     }
 
-    public Project(int id) {
+    public Project(int id, String nameProject) {
         this.id = id;
+        this.nameProject = nameProject;
     }
 
     public int getId() {
@@ -115,7 +116,11 @@ public class Project {
             throw new Exception(ConstantApp.ID_IS_REQUIRED);
         }
 
-        repository.deleteProject(id, token, new BaseCallback<String>() {
+        if (nameProject == null) {
+            throw new Exception(ConstantApp.NAME_IS_REQUIRED);
+        }
+
+        repository.deleteProject(id, nameProject, token, new BaseCallback<String>() {
             @Override
             public void onSuccessful(String value) {
                 onResult.onSuccessful(value);

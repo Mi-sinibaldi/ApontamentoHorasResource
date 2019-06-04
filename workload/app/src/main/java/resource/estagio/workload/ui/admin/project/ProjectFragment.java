@@ -2,11 +2,14 @@ package resource.estagio.workload.ui.admin.project;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -185,10 +188,19 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     }
 
     @Override
-    public void showToast(String message) {
-        Toast.makeText(getActivity(),
-                message,
-                Toast.LENGTH_LONG).show();
+    public void showToast(String message, boolean status) {
+        Dialog dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(status ? R.layout.activity_check : R.layout.acativity_dialog_error);
+        dialog.setCancelable(false);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        dialog.show();
+
+        TextView text = dialog.findViewById(status ? R.id.textDialog : R.id.text_dialog_error);
+        text.setText(message);
+        Button buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
+        buttonConfirmCheck.setOnClickListener(v -> dialog.dismiss());
     }
 
     @Override
