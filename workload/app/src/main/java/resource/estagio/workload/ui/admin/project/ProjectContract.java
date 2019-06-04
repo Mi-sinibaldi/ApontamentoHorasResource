@@ -22,7 +22,7 @@ public class ProjectContract {
 
         void reloadList();
 
-        Context getContext();
+        Context getActivity();
     }
 
     interface Presenter {

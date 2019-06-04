@@ -35,4 +35,10 @@ public class DialogApp {
         return dialog;
     }
 
+    public static void showDialogConnection(Context context) {
+        Dialog dialog = createDialog(context, R.layout.activity_dialog_connection);
+        Button buttonConnection = dialog.findViewById( R.id.button_dialog_connection);
+        buttonConnection.setOnClickListener( v -> dialog.dismiss() );
+    }
+
 }

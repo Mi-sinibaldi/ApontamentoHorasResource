@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import resource.estagio.workload.ConstantApp;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
@@ -46,6 +47,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
                     @Override
                     public void onUnsuccessful(String error) {
+                        if(errorConnection(error)) return;
                         view.showToast(error);
                     }
                 });
@@ -73,6 +75,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
                 @Override
                 public void onUnsuccessful(String error) {
+                    if(errorConnection(error)) return;
                     view.showToast(error);
                 }
             });
@@ -96,6 +99,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
                 @Override
                 public void onUnsuccessful(String error) {
+                    if(errorConnection(error)) return;
                     view.showToast(error);
                 }
             });
@@ -125,6 +129,13 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
             dialog.dismiss();
 
         });
+    }
+    private boolean errorConnection(String error) {
+        if (error.equals(ConstantApp.CONNECTION_INTERNET)) {
+            DialogApp.showDialogConnection(view.getActivity());
+            return true;
+        }
+        return false;
     }
 
 }

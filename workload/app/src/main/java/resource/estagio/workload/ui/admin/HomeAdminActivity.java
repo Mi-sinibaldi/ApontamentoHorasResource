@@ -3,14 +3,9 @@ package resource.estagio.workload.ui.admin;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 

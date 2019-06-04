@@ -2,21 +2,15 @@ package resource.estagio.workload.ui.admin.project;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,9 +23,9 @@ import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
+import resource.estagio.workload.ui.admin.client.ClientFragment;
 import resource.estagio.workload.ui.admin.project.adapterProject.AdapterProject;
 import resource.estagio.workload.ui.admin.project.add_project.AddProjectFragment;
-import resource.estagio.workload.ui.admin.client.ClientFragment;
 
 public class ProjectFragment extends Fragment implements ProjectContract.View {
 
@@ -227,10 +221,5 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         textViewInsideProject.setVisibility(View.VISIBLE);
     }
 
-    @Nullable
-    @Override
-    public Context getContext() {
-        return super.getContext();
-    }
 }
 

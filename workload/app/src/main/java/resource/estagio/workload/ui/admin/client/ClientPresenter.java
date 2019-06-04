@@ -9,6 +9,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
+import resource.estagio.workload.ConstantApp;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.data.repository.CustomerRepository;
@@ -38,8 +39,9 @@ public class ClientPresenter implements ClientContract.Presenter {
 
                     @Override
                     public void onUnsuccessful(String error) {
-                        view.showToast(error, false);
                         view.showProgressClient(false);
+                        if (errorConnection(error)) return;
+                        view.showToast(error, false);
                     }
                 });
     }
@@ -61,6 +63,7 @@ public class ClientPresenter implements ClientContract.Presenter {
                 @Override
                 public void onUnsuccessful(String error) {
                     view.showProgressClient(false);
+                    if (errorConnection(error)) return;
                     view.showToast(error, false);
                 }
             });
@@ -99,6 +102,7 @@ public class ClientPresenter implements ClientContract.Presenter {
 
                     @Override
                     public void onUnsuccessful(String error) {
+                        if (errorConnection(error)) return;
                         view.showToast(error, false);
                     }
                 });
@@ -108,5 +112,13 @@ public class ClientPresenter implements ClientContract.Presenter {
             }
             dialog.dismiss();
         });
+    }
+
+    private boolean errorConnection(String error) {
+        if (error.equals(ConstantApp.CONNECTION_INTERNET)) {
+            DialogApp.showDialogConnection(view.getActivity());
+            return true;
+        }
+        return false;
     }
 }
