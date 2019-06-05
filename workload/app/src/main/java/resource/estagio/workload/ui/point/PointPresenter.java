@@ -10,8 +10,11 @@ import resource.estagio.workload.data.repository.EmployeeRepository;
 import resource.estagio.workload.domain.employee.EmployeeDomain;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.infra.ConstantApp;
+import resource.estagio.workload.ui.DialogApp;
 
 public class PointPresenter implements PointContract.Presenter {
+
 
     private PointContract.View view;
 
@@ -45,11 +48,12 @@ public class PointPresenter implements PointContract.Presenter {
                 public void onUnsuccessful(String error) {
                     view.showProgressAdd(false);
                     view.enabledNavigation(false);
+                    if(errorConnection(error)) return;
                     view.notification(error);
                 }
             });
         } catch (NumberFormatException e) {
-            view.notification("Numero de horas esta vazia");
+            view.notification(ConstantApp.NUMBER_HOURS_IS_NULL);
             view.showProgressAdd(false);
             view.enabledNavigation(false);
         } catch (Exception e) {
@@ -62,16 +66,16 @@ public class PointPresenter implements PointContract.Presenter {
     private boolean validateFilds(String reason, String hour) {
         boolean error = false;
         if (reason.isEmpty()) {
-            view.setErrorReasonField("Coloque um motivo");
+            view.setErrorReasonField(ConstantApp.INSERT_REASON);
             error = true;
         }
         try {
             if (Integer.parseInt(hour) == 0) {
-                view.setErrorHourField("Coloque suas horas");
+                view.setErrorHourField(ConstantApp.INSERT_HOURS);
                 error = true;
             }
         } catch (NumberFormatException e) {
-            view.setErrorHourField("Coloque suas horas");
+            view.setErrorHourField(ConstantApp.INSERT_HOURS);
             error = true;
         }
         return error;
@@ -92,8 +96,10 @@ public class PointPresenter implements PointContract.Presenter {
 
             @Override
             public void onUnsuccessful(String error) {
-                view.notification(error);
+                view.showProgressCustomer(false);
                 view.enabledNavigation(false);
+                if(errorConnection(error)) return;
+                view.notification(error);
             }
         });
     }
@@ -109,16 +115,26 @@ public class PointPresenter implements PointContract.Presenter {
                 view.enabledNavigation(false);
                 if (value.isEmpty()) {
                     view.disableSpinnerActivity();
-                    view.notification("Lista vazia");
+                    view.notification(ConstantApp.LIST_IS_NULL);
                 } else
                     view.loadSpinnerActivity(value);
             }
 
             @Override
             public void onUnsuccessful(String error) {
-                view.showProgressProject(false);
                 view.enabledNavigation(false);
+                view.showProgressProject(false);
+                if(errorConnection(error)) return;
             }
         });
+    }
+
+    private boolean errorConnection(String error) {
+        if (error.equals(ConstantApp.CONNECTION_INTERNET)) {
+            DialogApp.showDialogConnection(view.getActivity());
+            view.disableSpinnerActivity();
+            return true;
+        }
+        return false;
     }
 }

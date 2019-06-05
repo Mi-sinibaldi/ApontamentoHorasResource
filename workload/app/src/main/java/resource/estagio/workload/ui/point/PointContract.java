@@ -40,6 +40,8 @@ public class PointContract {
         void setErrorProjectField(String message);
 
         void enabledNavigation(boolean key);
+
+        Context getActivity();
     }
 
     interface Presenter {

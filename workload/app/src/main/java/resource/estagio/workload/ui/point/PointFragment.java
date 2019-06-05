@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -43,6 +44,8 @@ import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
 import resource.estagio.workload.ui.home.HomeContract;
+import resource.estagio.workload.ui.timeline.TimeLineContract;
+import resource.estagio.workload.ui.timeline.TimeLinePresenter;
 
 public class PointFragment extends Fragment implements PointContract.View,
         DatePickerDialog.OnDateSetListener {
@@ -58,6 +61,8 @@ public class PointFragment extends Fragment implements PointContract.View,
     private EditText editTextReasonPoint;
     private Spinner spinnerCustomerPoint;
     private Spinner spinnerProjectPoint;
+    private SwipeRefreshLayout swipeRefreshPoint;
+
 
     private Button buttonPointConfirm;
     private Button buttonConfirmCheck;
@@ -87,6 +92,11 @@ public class PointFragment extends Fragment implements PointContract.View,
         loadDateHourSave();
         presenter.getCustumers();
         saveAddPoint();
+        actionSwipeRefresh();
+    }
+
+    private void actionSwipeRefresh() {
+        swipeRefreshPoint.setOnRefreshListener(() -> presenter.getCustumers());
     }
 
     private void saveAddPoint() {
@@ -129,6 +139,7 @@ public class PointFragment extends Fragment implements PointContract.View,
         editTextReasonPoint = view.findViewById(R.id.edit_text_name_project);
         spinnerCustomerPoint = view.findViewById(R.id.spinner_type_activity_project);
         spinnerProjectPoint = view.findViewById(R.id.spinner_project_point);
+        swipeRefreshPoint = view.findViewById(R.id.swipe_refresh_point);
         presenter = new PointPresenter(this);
         buttonPointConfirm = view.findViewById(R.id.button_project_confirm);
         progressCustomerPoint = view.findViewById(R.id.progress_customer_point);
@@ -224,7 +235,8 @@ public class PointFragment extends Fragment implements PointContract.View,
     public void showProgressCustomer(final boolean show) {
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-        buttonPointConfirm.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        swipeRefreshPoint.setRefreshing(show);
+        buttonPointConfirm.setEnabled(!show);
         spinnerCustomerPoint.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
         progressCustomerPoint.setVisibility(show ? View.VISIBLE : View.GONE);
         progressCustomerPoint.animate().setDuration(shortAnimTime).alpha(
@@ -240,7 +252,7 @@ public class PointFragment extends Fragment implements PointContract.View,
     public void showProgressProject(final boolean show) {
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-        buttonPointConfirm.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        buttonPointConfirm.setEnabled(!show);
         spinnerProjectPoint.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
         progressProjectPoint.setVisibility(show ? View.VISIBLE : View.GONE);
         progressProjectPoint.animate().setDuration(shortAnimTime).alpha(
@@ -256,7 +268,7 @@ public class PointFragment extends Fragment implements PointContract.View,
     public void showProgressAdd(final boolean show) {
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-        buttonPointConfirm.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        buttonPointConfirm.setVisibility(show ? View.GONE : View.VISIBLE);
         progressAddPoint.setVisibility(show ? View.VISIBLE : View.GONE);
         progressAddPoint.animate().setDuration(shortAnimTime).alpha(
                 show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
@@ -271,6 +283,7 @@ public class PointFragment extends Fragment implements PointContract.View,
     public void setClearFields() {
         editTextHourPoint.setText("");
         editTextReasonPoint.setText("");
+
     }
 
     @Override
