@@ -1,8 +1,6 @@
 package resource.estagio.workload.ui.admin.client;
 
 import android.app.Dialog;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -15,6 +13,8 @@ import resource.estagio.workload.data.repository.CustomerRepository;
 import resource.estagio.workload.domain.Customer;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.infra.ConstantApp;
+import resource.estagio.workload.ui.DialogApp;
 
 public class ClientPresenter implements ClientContract.Presenter {
 
@@ -37,8 +37,9 @@ public class ClientPresenter implements ClientContract.Presenter {
 
                     @Override
                     public void onUnsuccessful(String error) {
-                        view.showToast(error, false);
                         view.showProgressClient(false);
+                        if (errorConnection(error)) return;
+                        view.showDialog(error, false);
                     }
                 });
     }
@@ -53,36 +54,26 @@ public class ClientPresenter implements ClientContract.Presenter {
                 @Override
                 public void onSuccessful(String value) {
                     view.showProgressClient(false);
-                    view.showToast(value, true);
+                    view.showDialog(value, true);
                     view.refleshAdapter();
                 }
 
                 @Override
                 public void onUnsuccessful(String error) {
                     view.showProgressClient(false);
-                    view.showToast(error, false);
+                    if (errorConnection(error)) return;
+                    view.showDialog(error, false);
                 }
             });
             getCustomers(true);
         } catch (Exception e) {
-            view.showToast(e.getMessage(), false);
+            view.showDialog(e.getMessage(), false);
         }
     }
 
     @Override
     public void showDialogCustomer() {
-        loadComponentsDialog(createDialog());
-    }
-
-    private Dialog createDialog() {
-        Dialog dialog = new Dialog(view.getActivity(), R.style.CustomAlertDialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_new_customer);
-        dialog.setCancelable(false);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        dialog.show();
-        return dialog;
+        loadComponentsDialog(DialogApp.createDialog(view.getActivity(), R.layout.dialog_new_customer));
     }
 
     private void loadComponentsDialog(Dialog dialog) {
@@ -103,20 +94,30 @@ public class ClientPresenter implements ClientContract.Presenter {
                 customer.postCustomer(App.getUser().getAccessToken(), new BaseCallback<String>() {
                     @Override
                     public void onSuccessful(String value) {
-                        view.showToast(value, true);
+                        view.showDialog(value, true);
                         view.refleshAdapter();
+                        dialog.dismiss();
                     }
 
                     @Override
                     public void onUnsuccessful(String error) {
-                        view.showToast(error, false);
+                        if (errorConnection(error)) return;
+                        view.showDialog(error, false);
+                        dialog.dismiss();
                     }
                 });
             } catch (Exception e) {
-                view.showToast(e.getMessage(), false);
+                view.showToast(e.getMessage());
                 e.printStackTrace();
             }
-            dialog.dismiss();
         });
+    }
+
+    private boolean errorConnection(String error) {
+        if (error.equals(ConstantApp.CONNECTION_INTERNET)) {
+            DialogApp.showDialogConnection(view.getActivity());
+            return true;
+        }
+        return false;
     }
 }

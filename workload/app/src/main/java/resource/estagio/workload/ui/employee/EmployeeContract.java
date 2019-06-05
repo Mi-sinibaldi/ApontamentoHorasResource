@@ -1,15 +1,18 @@
 package resource.estagio.workload.ui.employee;
 
-import resource.estagio.workload.data.remote.model.EmployeeModel;
+import resource.estagio.workload.ui.employee.adapterEmployee.AdapterEmployee;
 
 public class EmployeeContract {
 
-    public interface View{
+    public interface View {
 
+        void adapterResult(AdapterEmployee adapterEmployee);
     }
-    public interface Presenter{
 
+    public interface Presenter {
 
+        void filter(String nome);
 
+        void createCollaborator();
     }
 }

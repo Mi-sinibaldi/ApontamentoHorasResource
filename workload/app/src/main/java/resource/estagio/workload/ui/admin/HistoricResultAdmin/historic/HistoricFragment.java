@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin;
+package resource.estagio.workload.ui.admin.HistoricResultAdmin.historic;
 
 
 import android.app.Dialog;
@@ -18,21 +18,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricContract;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
 
-public class HistoricFragment extends Fragment implements ResultHistoricContract.historicView {
-    private AdapterTimeline adapterTimeline;
+public class HistoricFragment extends Fragment implements ResultHistoricContract.historicView,
+                                                            ResultHistoricContract.mainHistoric {
     private View view;
     private RecyclerView recyclerViewTimeline;
-    private List<TimeEntryModel> list = new ArrayList<>();
     private List<TimeEntryModel> listWorkLoad;
     private TextView textViewMonth;
     private TextView textViewYear;
@@ -42,7 +41,8 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     private ResultHistoricContract.historicPresenter presenter;
     private int month;
     private int year;
-    private TextView text_dialog_error;
+    private TextView textDialogError;
+    private ResultHistoricContract.mainResult mainResult;
 
     private Dialog dialog;
     private HomeAdminContract.View viewHome;
@@ -50,8 +50,9 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
 
     private Button buttonError;
 
-    public HistoricFragment(HomeAdminContract.View view) {
+    public HistoricFragment(HomeAdminContract.View view,ResultHistoricContract.mainResult mainResult) {
         this.viewHome = view;
+        this.mainResult = mainResult;
     }
 
 
@@ -62,8 +63,14 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
 
         loadUi();
         setTextDate();
-
         final int thisMonth = calendar.get(Calendar.MONTH);
+        actionArrowsButton(thisMonth);
+        actioSwipeRefresh(this);
+
+        return view;
+    }
+
+    private void actionArrowsButton(int thisMonth) {
         imageViewMonthLeft.setOnClickListener(v -> {
 
             if (month >= thisMonth - 2) {
@@ -93,19 +100,14 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
                 imageViewMonthRight.setVisibility(View.INVISIBLE);
             }
         });
-        actioSwipeRefresh(this);
-
-        return view;
     }
 
     private void actioSwipeRefresh(ResultHistoricContract.historicView view) {
         recyclerViewTimeline.setVisibility(View.GONE);
-        swipeRefreshHistoric.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                presenter = new HistoricFragmentPresenter(view);
-                presenter.getTimeline(month, year);
-            }
+
+        swipeRefreshHistoric.setOnRefreshListener(() -> {
+            presenter = new HistoricFragmentPresenter(view);
+            presenter.getTimeline(month, year);
         });
     }
 
@@ -129,6 +131,7 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
         month = calendar.get(Calendar.MONTH) + 1;
         year = calendar.get(Calendar.YEAR);
         presenter.getTimeline(month, year);
+        setDateResultFragment(month, year,textViewMonth.getText().toString());
     }
 
     private void configAdapter() {
@@ -144,7 +147,6 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
 
         recyclerViewTimeline.setVisibility(Key ? View.INVISIBLE : View.VISIBLE);
         swipeRefreshHistoric.setRefreshing(Key);
-
         viewHome.enableNavigation(Key);
     }
 
@@ -159,10 +161,6 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
         showDialogError(text);
     }
 
-    @Override
-    public void showSucessMessage(String text) {
-    }
-
 
     private void showDialogError(String text) {
         dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
@@ -170,13 +168,19 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
         dialog.setContentView(R.layout.acativity_dialog_error);
         dialog.setCancelable(false);
 
-        text_dialog_error = dialog.findViewById(R.id.text_dialog_error);
-        text_dialog_error.setText(text);
+        textDialogError = dialog.findViewById(R.id.text_dialog_error);
+        textDialogError.setText(text);
 
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         dialog.show();
         buttonError = dialog.findViewById(R.id.button_dialog_error);
         buttonError.setOnClickListener(v -> dialog.dismiss());
+
+    }
+
+    @Override
+    public void setDateResultFragment(int m, int y, String textMonth) {
+        mainResult.getDateResultFragment(m,y,textMonth);
     }
 }

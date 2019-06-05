@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin;
+package resource.estagio.workload.ui.admin.HistoricResultAdmin.result;
 
 public class ResultProject {
 
@@ -8,11 +8,6 @@ public class ResultProject {
 
     public ResultProject(String client, String name, int horas) {
         this.client = client;
-        this.name = name;
-        this.horas = horas;
-    }
-
-    public ResultProject(String aux, int total) {
         this.name = name;
         this.horas = horas;
     }

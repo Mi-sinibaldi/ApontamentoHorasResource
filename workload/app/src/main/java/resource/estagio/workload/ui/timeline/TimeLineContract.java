@@ -1,5 +1,7 @@
 package resource.estagio.workload.ui.timeline;
 
+import android.content.Context;
+
 import java.util.List;
 
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
@@ -18,5 +20,6 @@ public class TimeLineContract {
         void showErrorMessage(String text);
         void showSucessMessage(String text);
 
+        Context getActivity();
     }
 }

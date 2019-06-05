@@ -9,8 +9,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ok">OK</string>
-    <!--<string name="apontamentos_feito_n_com_sucesso">Apontamentos feito \n   com sucesso</string>-->
-    <!--<string name="tem_certeza_que_n_deseja_sair">Tem certeza que   deseja sair</string>-->
     <string name="sim">Sim</string>
     <string name="n_o">Não</string>
     <string name="lan_amento">Lançamento</string>
@@ -21,23 +19,6 @@
     <string name="horas">Horas</string>
     <string name="adicionar">Adicionar</string>
     <string name="colaboradores">Colaboradores</string>
-    <string name="project_not_updated">Projeto não atualizado</string>
-    <string name="project_updated_successfully">Projeto atualizado com sucesso</string>
-    <string name="project_not_entered">Projeto não inserido</string>
-    <string name="project_entered_successfully">Projeto inserido com sucesso</string>
-    <string name="project_not_deleted">Projeto não excluído</string>
-    <string name="project_deleted_successfully">Projeto excluído com sucesso</string>
-    <string name="no_records_found">Nenhum registro encontrado</string>
-    <string name="null_repository">Repositório nulo</string>
-    <string name="null_id">Id nulo</string>
-    <string name="required_repository_is_null">Repositório requerido é nulo</string>
-    <string name="username_is_null_or_empty">Nome de usuário requerido é nulo ou vazio</string>
-    <string name="required_password_is_null_or_empty">Senha requerida é nula ou vazia</string>
-    <string name="password_must_have_at_least_four_characters">A senha precisa ter no mínimo 4 caracteres</string>
-    <string name="required_name_is_null_or_empty">Nome do Projeto requerido é nulo ou vazio</string>
-    <string name="required_demand_number_is_null_or_empty">Número de demanda requerido é nulo ou vazio</string>
-    <string name="required_customer_is_null">Cliente requerido é nulo</string>
-    <string name="required_activity_type_is_null">Tipo de atividade requerida é nula</string>
     <string name="lista_de_colaboradores_cadastrados">Lista de colaboradores cadastrados.</string>
     <string name="pesquisar">Pesquisar</string>
 </resources>

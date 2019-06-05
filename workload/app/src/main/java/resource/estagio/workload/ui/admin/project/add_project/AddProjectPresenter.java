@@ -3,8 +3,6 @@ package resource.estagio.workload.ui.admin.project.add_project;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,6 +17,8 @@ import resource.estagio.workload.domain.Customer;
 import resource.estagio.workload.domain.Project;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.infra.ConstantApp;
+import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
@@ -40,11 +40,12 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
                 new BaseCallback<List<ActivityTypeModel>>() {
                     @Override
                     public void onSuccessful(List<ActivityTypeModel> value) {
-                        view.spinnerList(value);
+                        view.spinnerListActivityType(value);
                     }
 
                     @Override
                     public void onUnsuccessful(String error) {
+                        if(errorConnection(error)) return;
                         view.showToast(error);
                     }
                 });
@@ -60,22 +61,26 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
     @Override
     public void addProject(String nameProject, String demandNumber, Customer customer) {
-
+        view.showProgressSave(true);
         this.customer = customer;
         Project project = new Project(0, nameProject, demandNumber, activityTypeModel, customer);
         try {
             project.insertProject(new BaseCallback<String>() {
                 @Override
                 public void onSuccessful(String value) {
+                    view.showProgressSave(false);
                     showDialogConfirm(value);
                 }
 
                 @Override
                 public void onUnsuccessful(String error) {
+                    view.showProgressSave(false);
+                    if(errorConnection(error)) return;
                     view.showToast(error);
                 }
             });
         } catch (Exception e) {
+            view.showProgressSave(false);
             view.showToast(e.getMessage());
             e.printStackTrace();
         }
@@ -83,22 +88,26 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
     @Override
     public void updateProject(int id, String nameProject, String demandNumber, Customer customer) {
-
+        view.showProgressSave(true);
         this.customer = customer;
         Project project = new Project(id, nameProject, demandNumber, activityTypeModel, customer);
         try {
             project.updateProject(new BaseCallback<String>() {
                 @Override
                 public void onSuccessful(String value) {
+                    view.showProgressSave(false);
                     showDialogConfirm(value);
                 }
 
                 @Override
                 public void onUnsuccessful(String error) {
+                    view.showProgressSave(false);
+                    if(errorConnection(error)) return;
                     view.showToast(error);
                 }
             });
         } catch (Exception e) {
+            view.showProgressSave(false);
             view.showToast(e.getMessage());
             e.printStackTrace();
         }
@@ -106,19 +115,12 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
     private void showDialogConfirm(String value) {
 
-        Dialog dialog = new Dialog(view.getActivity(), R.style.CustomAlertDialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.activity_check);
-        dialog.setCancelable(false);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        dialog.show();
+        Dialog dialog = DialogApp.createDialog(view.getActivity(), R.layout.activity_check);
 
         TextView text = dialog.findViewById(R.id.textDialog);
         text.setText(value);
         Button buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
         buttonConfirmCheck.setOnClickListener(v -> {
-
             Bundle bundle = new Bundle();
             bundle.putSerializable("customer", new CustomerModel(customer.getId(), customer.getName()));
             ProjectFragment fragment = new ProjectFragment(activityView);
@@ -131,6 +133,13 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
             dialog.dismiss();
 
         });
+    }
+    private boolean errorConnection(String error) {
+        if (error.equals(ConstantApp.CONNECTION_INTERNET)) {
+            DialogApp.showDialogConnection(view.getActivity());
+            return true;
+        }
+        return false;
     }
 
 }

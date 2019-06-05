@@ -7,12 +7,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
+import resource.estagio.workload.data.remote.model.CustomerModel;
+import resource.estagio.workload.ui.admin.client.AdapterClient;
 
 public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHolder> {
 
@@ -48,13 +51,28 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
             );
 
             holder.imageDeleteProject.setOnClickListener(v -> {
-                listener.deleteProject(position);
-                notifyItemRemoved(position);
-                listProject.remove(position);
+                try{
+                    listener.deleteProject(holder.getLayoutPosition());
+                   verifyRemove(holder);
+                }catch(ArrayIndexOutOfBoundsException e){
+                    notifyDataSetChanged();
+                }
+
             });
 
         } else {
             holder.setInvisibleIcons();
+        }
+    }
+
+    private void verifyRemove(@NonNull AdapterProject.MyViewHolder holder) {
+        if (listProject.size() - 1 == holder.getLayoutPosition()) {
+            listProject.remove(holder.getLayoutPosition());
+            notifyDataSetChanged();
+            holder.loadFilds(listProject.get(listProject.size() - 1));
+        } else {
+            listProject.remove(holder.getLayoutPosition());
+            notifyItemRemoved(holder.getLayoutPosition());
         }
     }
 
@@ -77,6 +95,9 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
         TextView textRenameProject;
         ImageView imageDeleteProject;
         View viewBarProject;
+        ActivityModel model;
+        ConstraintLayout constraintProject;
+
 
 
         public void showIconActions() {
@@ -97,11 +118,16 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
             textRenameProject = itemView.findViewById(R.id.text_view_rename_project);
             imageDeleteProject = itemView.findViewById(R.id.image_view_delete_project);
             viewBarProject = itemView.findViewById(R.id.view_bar_project);
+            constraintProject = itemView.findViewById(R.id.constraint_project);
         }
 
         public void loadFilds(ActivityModel activityModel) {
-
             textActivityName.setText(activityModel.getName());
+            model = activityModel;
+            if(listProject.get(listProject.size() - 1).getId() == model.getId())
+                constraintProject.setPadding(0,0,0,100);
+            else
+                constraintProject.setPadding(0,0,0,0);
         }
     }
 }

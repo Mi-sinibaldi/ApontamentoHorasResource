@@ -2,13 +2,10 @@ package resource.estagio.workload.ui.admin.client;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -26,9 +23,9 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
+import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.ProjectFragment;
-
 
 public class ClientFragment extends Fragment implements ClientContract.View {
 
@@ -72,7 +69,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         presenter.getCustomers(true);
 
         loadListernersClick();
-
     }
 
     private void loadListernersClick() {
@@ -83,12 +79,15 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         buttonSaveClient.setOnClickListener(v -> {
             if (customerModelsDelete.size() > 0)
                 for (CustomerModel model : customerModelsDelete) presenter.deleteCustomer(model);
-             else
-                 presenter.getCustomers(true);
-             customerModelsDelete = new ArrayList<>();
+            else
+                presenter.getCustomers(true);
+            customerModelsDelete = new ArrayList<>();
         });
 
-        textViewCancelClient.setOnClickListener(v -> presenter.getCustomers(true));
+        textViewCancelClient.setOnClickListener(v -> {
+            presenter.getCustomers(true);
+            customerModelsDelete = new ArrayList<>();
+        });
     }
 
     private void loadUI() {
@@ -106,8 +105,8 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         customerModelsDelete = new ArrayList<>();
         adapterInterface = new AdapterClient.AdapterInterface() {
             @Override
-            public void removeClient(View v, int position) {
-                customerModelsDelete.add(customerModels.get(position));
+            public void removeClient(View v, int position, CustomerModel model) {
+                customerModelsDelete.add(model);
             }
 
             @Override
@@ -122,10 +121,13 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         bundle.putSerializable(CUSTOMER, customerModels.get(position));
         ProjectFragment fragment = new ProjectFragment(activityView);
         fragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_admin, fragment).addToBackStack(null).commit();
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_admin, fragment)
+                .addToBackStack(null)
+                .commit();
     }
-
 
     @Override
     public void setRecyclerClient(List<CustomerModel> customerModels, boolean status) {
@@ -133,7 +135,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         this.customerModels = customerModels;
         showAdapterRecycler(status);
     }
-
 
     @Override
     public void showAdapterRecycler(boolean status) {
@@ -148,7 +149,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         textViewCancelClient.setVisibility(status ? View.INVISIBLE : View.VISIBLE);
         buttonSaveClient.setVisibility(status ? View.INVISIBLE : View.VISIBLE);
     }
-
 
     @Override
     public void showProgressClient(final boolean show) {
@@ -167,22 +167,8 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     }
 
     @Override
-    public void showToast(String value, boolean status) {
-        Dialog dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(status ? R.layout.activity_check : R.layout.acativity_dialog_error);
-        dialog.setCancelable(false);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        dialog.show();
-
-        TextView text = dialog.findViewById(status ? R.id.textDialog : R.id.text_dialog_error);
-        text.setText(value);
-        Button buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
-        buttonConfirmCheck.setOnClickListener(v -> {
-            dialog.dismiss();
-
-        });
+    public void showDialog(String value, boolean status) {
+        DialogApp.showDialogConfirm(value, status, getActivity());
     }
 
     @Override
@@ -190,5 +176,9 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         presenter.getCustomers(true);
     }
 
+    @Override
+    public void showToast(String error) {
+        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+    }
 
 }

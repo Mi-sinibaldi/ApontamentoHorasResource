@@ -9,7 +9,8 @@ import resource.estagio.workload.data.remote.model.CustomerModel;
 
 public class PointContract {
 
-    interface View{
+    interface View {
+
         void notification(String message);
 
         Context getContext();
@@ -45,6 +46,7 @@ public class PointContract {
 
         void setPoint(String date, String hour, String customerName, int customerId,
                       String projectName, int projectId, String demandNumber, String reason);
+
         void getCustumers();
 
         void getActivities(int id);

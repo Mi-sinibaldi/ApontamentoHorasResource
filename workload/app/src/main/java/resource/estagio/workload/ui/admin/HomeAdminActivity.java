@@ -1,22 +1,22 @@
 package resource.estagio.workload.ui.admin;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.infra.App;
+import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.employee.EmployeeFragment;
+import resource.estagio.workload.ui.login.LoginActivity;
 
 public class HomeAdminActivity extends AppCompatActivity implements HomeAdminContract.View {
 
@@ -25,67 +25,55 @@ public class HomeAdminActivity extends AppCompatActivity implements HomeAdminCon
     private long backPressedTime;
     private Toast backToast;
     private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_admin);
         presenter = new HomeAdminPresenter(this);
         navigation = findViewById(R.id.bottom_navigation_admin);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_admin, new EmployeeFragment(this)).commit();
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                presenter.identifyItemClicked(menuItem);
-                return true;
-            }
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_admin, new EmployeeFragment(this))
+                .commit();
+        navigation.setOnNavigationItemSelectedListener(menuItem -> {
+            presenter.identifyItemClicked(menuItem);
+            return true;
         });
     }
 
     @Override
     public void showFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().
-                replace(R.id.frame_admin, fragment).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_admin, fragment)
+                .commit();
     }
 
     @Override
     public void showDialogChooser() {
-        dialog = new Dialog( this, R.style.CustomAlertDialog );
-        dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
-        dialog.setContentView( R.layout.activity_dialog_chooser );
-        dialog.setCancelable( false );
-        dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN );
-        dialog.show();
+        dialog = DialogApp.createDialog(this, R.layout.activity_dialog_chooser);
 
-        Button buttonChosserYes = dialog.findViewById( R.id.button_dialog_chooser_yes );
-        Button buttonChosserNo = dialog.findViewById( R.id.buttton_dialog_chooser_no );
+        Button buttonChosserYes = dialog.findViewById(R.id.button_dialog_chooser_yes);
+        Button buttonChosserNo = dialog.findViewById(R.id.buttton_dialog_chooser_no);
 
-        buttonChosserYes.setOnClickListener( v -> {
-            finishAffinity();
+        buttonChosserYes.setOnClickListener(v -> {
+            App.getPref().clear();
+            Intent intent = new Intent(HomeAdminActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
 
-        } );
-        buttonChosserNo.setOnClickListener( v -> dialog.dismiss() );
+        });
+        buttonChosserNo.setOnClickListener(v -> dialog.dismiss());
     }
 
     @Override
     public void enableNavigation(boolean key) {
-        for (int i = 0; i < navigation.getMenu().size(); i++){
+        for (int i = 0; i < navigation.getMenu().size(); i++) {
             navigation.getMenu().getItem(i).setEnabled(!key);
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (backPressedTime + 20000 > System.currentTimeMillis()) {
-            backToast.cancel();
-            super.onBackPressed();
-            return;
-        } else {
-            backToast = Toast.makeText( getBaseContext(),
-                    "Pressione novamente para sair", Toast.LENGTH_SHORT );
-            backToast.show();
-        }
-        backPressedTime = System.currentTimeMillis();
-    }
 }

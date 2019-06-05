@@ -2,6 +2,7 @@ package resource.estagio.workload.data.repository;
 
 import java.util.List;
 
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.EmployeeAPI;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.domain.employee.EmployeeContract;
@@ -14,38 +15,40 @@ import retrofit2.Response;
 
 public class EmployeeRepository extends Repository implements EmployeeContract.IRepository {
 
+    public static final int UNAUTHORIDEZ = 401;
 
     @Override
     public void getWorkList(int month, int year, BaseCallback<List<TimeEntryModel>> onResult) {
-        super.data.restApi(EmployeeAPI.class).getWorkList(month, year, "bearer " + App.getUser().getAccessToken())
+        super.data.restApi(EmployeeAPI.class).getWorkList(month, year, ConstantApp.BEARER + App.getUser().getAccessToken())
                 .enqueue(new Callback<List<TimeEntryModel>>() {
                     @Override
                     public void onResponse(Call<List<TimeEntryModel>>
                                                    call, Response<List<TimeEntryModel>> response) {
-                        if (!response.isSuccessful()) {
-                            onResult.onUnsuccessful("Não foi possivel carregar a lista!");
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
                             return;
                         }
 
-                        if (response.code() == 401) {
-                            onResult.onUnsuccessful(
-                                    "Acesso negado\nEntre com um usuario valido!");
+                        if (!response.isSuccessful() || response.body()==null) {
+                            onResult.onUnsuccessful(ConstantApp.UNLOADED_LIST);
                             return;
                         }
+
                         onResult.onSuccessful(response.body());
                     }
 
                     @Override
                     public void onFailure(Call<List<TimeEntryModel>> call, Throwable t) {
-                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
+                        onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
                     }
                 });
     }
 
+
     @Override
     public void postEntry(TimeEntryModel timeEntryModel, String token, BaseCallback<Void> onResult) {
         super.data.restApi(EmployeeAPI.class)
-                .postEntry(timeEntryModel, "bearer " + token)
+                .postEntry(timeEntryModel, ConstantApp.BEARER + token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
@@ -57,7 +60,7 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                        onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
                     }
                 });
     }

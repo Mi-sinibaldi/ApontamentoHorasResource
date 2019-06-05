@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,7 +54,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private EditText usernameView;
     private EditText passwordView;
     private View progressView;
-    //private View loginFormView;
     private Button signInButton;
     private TextView text_view_lacamento_login;
     private Switch switchSavePassword;
@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -97,6 +98,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         progressView = findViewById(R.id.login_progress);
         signInButton = findViewById(R.id.sign_in_button);
         text_view_lacamento_login = findViewById(R.id.text_view_lacamento_login);
+
     }
 
     private void setActionSwitchSavePassword(boolean isChecked) {
@@ -145,14 +147,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         // the progress spinner.
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-//        loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-//        loginFormView.animate().setDuration(shortAnimTime).alpha(
-//                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-//            }
-//        });
+        signInButton.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        signInButton.animate().setDuration(shortAnimTime).alpha(
+                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                signInButton.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+            }
+        });
 
         progressView.setVisibility(show ? View.VISIBLE : View.GONE);
         progressView.animate().setDuration(shortAnimTime).alpha(

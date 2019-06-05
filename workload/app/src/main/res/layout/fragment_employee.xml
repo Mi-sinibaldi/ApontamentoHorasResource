@@ -9,12 +9,10 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout3"
-        android:layout_width="410dp"
-        android:layout_height="229dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerview_employee"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -31,7 +29,7 @@
 
         <TextView
             android:id="@+id/text_employee"
-            android:layout_width="183dp"
+            android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/open_sans_bold"
@@ -60,17 +58,17 @@
 
         <EditText
             android:id="@+id/edit_text_employee"
-            android:layout_width="331dp"
+            android:layout_width="0dp"
             android:layout_height="39dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="8dp"
-            android:maxLines="1"
-            android:hint="@string/pesquisar"
-            android:paddingLeft="37dp"
-            android:layout_marginBottom="8dp"
-            android:textCursorDrawable="@drawable/color_cusor"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/seach_employee"
+            android:hint="@string/pesquisar"
+            android:maxLines="1"
+            android:paddingLeft="37dp"
+            android:textCursorDrawable="@drawable/color_cusor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,12 +89,10 @@
         android:id="@+id/recyclerview_employee"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 

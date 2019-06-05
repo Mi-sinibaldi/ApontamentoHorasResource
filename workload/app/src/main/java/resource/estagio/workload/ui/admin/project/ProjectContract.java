@@ -10,11 +10,7 @@ public class ProjectContract {
 
     interface View {
 
-        void showToast(int message);
-
-        void showError(int error);
-
-        void showError(String error);
+        void showToast(String message, boolean status);
 
         void showProgress(boolean result);
 
@@ -26,7 +22,7 @@ public class ProjectContract {
 
         void reloadList();
 
-        Context getContext();
+        Context getActivity();
     }
 
     interface Presenter {

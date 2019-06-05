@@ -21,7 +21,7 @@
             android:layout_marginStart="37dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="37dp"
-            android:backgroundTint="#4050D5"
+            android:backgroundTint="@color/colorWhite"
             android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,9 +31,9 @@
                 android:id="@+id/edit_text_demand_number_project"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#4050D5"
+                android:backgroundTint="@color/colorWhite"
                 android:ems="10"
-                android:foregroundTint="#4050D5"
+                android:foregroundTint="@color/colorWhite"
                 android:gravity="start|top"
                 android:hint="Numero de Demanda"
                 android:inputType="numberSigned"
@@ -123,7 +123,7 @@
             android:layout_marginStart="37dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="37dp"
-            android:backgroundTint="#4050D5"
+            android:backgroundTint="@color/colorWhite"
             android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,9 +133,9 @@
                 android:id="@+id/edit_text_name_project"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#4050D5"
+                android:backgroundTint="@color/colorWhite"
                 android:ems="10"
-                android:foregroundTint="#4050D5"
+                android:foregroundTint="@color/colorWhite"
                 android:gravity="start|top"
                 android:hint="Nome"
                 android:inputType="textMultiLine"
@@ -153,7 +153,7 @@
             android:layout_marginEnd="37dp"
             android:layout_marginBottom="37dp"
             android:background="@drawable/button_custom_radius"
-            android:text="@string/adicionar"
+            android:text="Salvar"
             android:textColor="#4050D5"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -161,7 +161,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner_type_activity_project" />
 
-
+        <ProgressBar
+            android:id="@+id/progress_save_add_project"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/button_project_confirm"
+            app:layout_constraintEnd_toEndOf="@+id/button_project_confirm"
+            app:layout_constraintStart_toStartOf="@+id/button_project_confirm"
+            app:layout_constraintTop_toTopOf="@+id/button_project_confirm" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

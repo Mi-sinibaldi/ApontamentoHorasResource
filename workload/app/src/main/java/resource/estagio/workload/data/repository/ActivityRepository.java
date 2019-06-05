@@ -2,7 +2,7 @@ package resource.estagio.workload.data.repository;
 
 import java.util.List;
 
-import resource.estagio.workload.R;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.ActivityAPI;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
@@ -16,23 +16,30 @@ import retrofit2.Response;
 
 public class ActivityRepository extends Repository implements ProjectContract.IRepository {
 
+    public static final int UNAUTHORIDEZ = 401;
     @Override
     public void getActivity(int id, String token, BaseCallback<List<ActivityModel>> onResult) {
         super.data.restApi(ActivityAPI.class)
-                .getActivity(id, "bearer " + token)
+                .getActivity(id, ConstantApp.BEARER + token)
                 .enqueue(new Callback<List<ActivityModel>>() {
                     @Override
                     public void onResponse(Call<List<ActivityModel>>
                                                    call, Response<List<ActivityModel>> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful() && response.body() != null)
                             onResult.onSuccessful(response.body());
+                        else if(response.body() == null)
+                            onResult.onUnsuccessful(ConstantApp.UNLOADED_LIST);
                         else
                             onResult.onUnsuccessful(response.message());
                     }
 
                     @Override
                     public void onFailure(Call<List<ActivityModel>> call, Throwable t) {
-                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
+                        onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
                     }
                 });
 
@@ -41,10 +48,14 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
     @Override
     public void getActivityType(String token, BaseCallback<List<ActivityTypeModel>> onResult) {
         super.data.restApi(ActivityAPI.class)
-                .getActivityType("bearer " + token)
+                .getActivityType(ConstantApp.BEARER + token)
                 .enqueue(new Callback<List<ActivityTypeModel>>() {
                     @Override
                     public void onResponse(Call<List<ActivityTypeModel>> call, Response<List<ActivityTypeModel>> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful() && response.body() != null)
                             onResult.onSuccessful(response.body());
                         else
@@ -53,7 +64,7 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
 
                     @Override
                     public void onFailure(Call<List<ActivityTypeModel>> call, Throwable t) {
-                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
+                        onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
                     }
                 });
     }
@@ -64,19 +75,23 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
                 project.getDemandNumber(), project.getActivityTypeModel().getId(),
                 project.getCustomer().getId(), project.getCustomer().getName());
         super.data.restApi(ActivityAPI.class)
-                .insertProject(activityModel, "bearer " + token)
+                .insertProject(activityModel, ConstantApp.BEARER + token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful())
-                            onResult.onSuccessful("Projeto inserido com sucesso.");
+                            onResult.onSuccessful(ConstantApp.PROJECT_SEND_SUCCESS);
                         else
-                            onResult.onUnsuccessful("Erro ao cadastrar o projeto .");
+                            onResult.onUnsuccessful(ConstantApp.ERROR_ADD_PROJECT);
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        onResult.onUnsuccessful("Verifique sua conexão com a internet");
+                        onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
                     }
                 });
 
@@ -88,40 +103,48 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
                 project.getActivityTypeModel().getId(), project.getCustomer().getId(),
                 project.getCustomer().getName());
         super.data.restApi(ActivityAPI.class)
-                .updateProject(activityModel, "bearer " + token)
+                .updateProject(activityModel, ConstantApp.BEARER + token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful())
-                            onResult.onSuccessful("Projeto atualizado com sucesso.");
+                            onResult.onSuccessful(ConstantApp.PROJECT_UPDATE_SUCCESS);
                         else
-                            onResult.onUnsuccessful("Erro ao atualizar o projeto.");
+                            onResult.onUnsuccessful(ConstantApp.ERROR_UPDATE_PROJECT);
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                        onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
                     }
                 });
 
     }
 
     @Override
-    public void deleteProject(long id, String token, BaseCallback<String> onResult) {
+    public void deleteProject(long id, String name, String token, BaseCallback<String> onResult) {
         super.data.restApi(ActivityAPI.class)
-                .deleteProject(id, "bearer " + token)
+                .deleteProject(id, ConstantApp.BEARER + token)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful())
-                            onResult.onSuccessful(String.valueOf(R.string.project_deleted_successfully));
+                            onResult.onSuccessful(name+ConstantApp.DELETE_IS_SUCCESS);
                         else
-                            onResult.onUnsuccessful(String.valueOf(R.string.project_not_deleted));
+                            onResult.onUnsuccessful(name+ConstantApp.DELETE_PROJECT_SUCCESS);
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        onResult.onUnsuccessful(t.getMessage());
+                        onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
                     }
                 });
 
