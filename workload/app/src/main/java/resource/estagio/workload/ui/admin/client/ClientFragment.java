@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -166,13 +167,18 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     }
 
     @Override
-    public void showToast(String value, boolean status) {
+    public void showDialog(String value, boolean status) {
         DialogApp.showDialogConfirm(value, status, getActivity());
     }
 
     @Override
     public void refleshAdapter() {
         presenter.getCustomers(true);
+    }
+
+    @Override
+    public void showToast(String error) {
+        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
     }
 
 }
