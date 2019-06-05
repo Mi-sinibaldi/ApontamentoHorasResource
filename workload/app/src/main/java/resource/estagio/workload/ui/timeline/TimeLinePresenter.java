@@ -6,13 +6,15 @@ import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.data.repository.EmployeeRepository;
 import resource.estagio.workload.domain.employee.EmployeeDomain;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.infra.ConstantApp;
+import resource.estagio.workload.ui.DialogApp;
 
 public class TimeLinePresenter implements TimeLineContract.Presenter {
 
 
 
     private TimeLineContract.View view;
-    private long hours = 0;
+    private long hours;
 
     public TimeLinePresenter(TimeLineContract.View view) {
         this.view = view;
@@ -35,12 +37,18 @@ public class TimeLinePresenter implements TimeLineContract.Presenter {
 
             @Override
             public void onUnsuccessful(String error) {
-                view.showErrorMessage("Erro\n"+error);
                 view.dialog(false);
+                if(errorConnection(error)) return;
+                view.showErrorMessage("Erro\n"+error);
             }
         });
+    }
 
-
-
+    private boolean errorConnection(String error) {
+        if (error.equals(ConstantApp.CONNECTION_INTERNET)) {
+            DialogApp.showDialogConnection(view.getActivity());
+            return true;
+        }
+        return false;
     }
 }
