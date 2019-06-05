@@ -21,4 +21,16 @@
     <string name="colaboradores">Colaboradores</string>
     <string name="lista_de_colaboradores_cadastrados">Lista de colaboradores cadastrados.</string>
     <string name="pesquisar">Pesquisar</string>
+    <string name="choose_one_day">Escolha o dia</string>
+    <string name="press_again_to_exit">Pressione novamente para sair</string>
+    <string name="success">Sucesso</string>
+    <string name="saved_login">login salvo</string>
+    <string name="login">Login</string>
+    <string name="press_the_fingerprint_reader">Pressione o leitor</string>
+    <string name="fill_the_fields">Preencha os campos</string>
+    <string name="fingerprint_authentication_permission_not_enable">Permissão de autenticação de impressão digital não ativada</string>
+    <string name="register_at_least_one_fingerprint_in_settings">Registre pelo menos uma impressão digital nas configurações</string>
+    <string name="lock_screen_security_not_enabled_in_settings">Segurança da tela de bloqueio não ativada nas configurações</string>
+    <string name="clear_preferences">Preferências limpas</string>
+    <string name="hello">Olá, </string>
 </resources>

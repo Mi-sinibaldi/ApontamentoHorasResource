@@ -21,6 +21,7 @@ import java.util.List;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.client.ClientFragment;
@@ -60,7 +61,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         presenter = new ProjectPresenter(this);
 
         Bundle arguments = getArguments();
-        customer = (CustomerModel) arguments.getSerializable("customer");
+        customer = (CustomerModel) arguments.getSerializable(ConstantApp.CUSTOMER);
         loadUI();
         loadListenerAdapter();
         setCustomerName();
@@ -80,7 +81,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
             @Override
             public void renameProject(int position) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("project", activityModels.get(position));
+                bundle.putSerializable(ConstantApp.PROJECT, activityModels.get(position));
                 AddProjectFragment fragment = new AddProjectFragment(customer.toDomain(),
                         activityView);
                 fragment.setArguments(bundle);
@@ -130,7 +131,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
 
         buttonNewProject.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putSerializable("add_project", null);
+            bundle.putSerializable(ConstantApp.ADD_PROJECT, null);
             AddProjectFragment fragment = new AddProjectFragment(customer.toDomain(),
                     activityView);
             fragment.setArguments(bundle);

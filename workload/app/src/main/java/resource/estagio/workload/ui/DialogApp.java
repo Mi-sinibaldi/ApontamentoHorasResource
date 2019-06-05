@@ -11,34 +11,34 @@ import resource.estagio.workload.R;
 
 public class DialogApp {
 
-    public static void showDialogConfirm(String message, boolean status, Context context){
+    public static void showDialogConfirm(String message, boolean status, Context context) {
 
-        Dialog dialog = createDialog(context,
+        Dialog dialog = createDialog (context,
                 status ? R.layout.activity_check : R.layout.acativity_dialog_error);
 
-        TextView text = dialog.findViewById(status ? R.id.textDialog : R.id.text_dialog_error);
-        text.setText(message);
-        Button buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
-        buttonConfirmCheck.setOnClickListener(v -> {
-            dialog.dismiss();
+        TextView text = dialog.findViewById (status ? R.id.textDialog : R.id.text_dialog_error);
+        text.setText (message);
+        Button buttonConfirmCheck = dialog.findViewById (R.id.button_dialog_error);
+        buttonConfirmCheck.setOnClickListener (v -> {
+            dialog.dismiss ();
         });
     }
 
     public static Dialog createDialog(Context context, int layout) {
-        Dialog dialog = new Dialog(context, R.style.CustomAlertDialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(layout);
-        dialog.setCancelable(false);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
+        Dialog dialog = new Dialog (context, R.style.CustomAlertDialog);
+        dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog.setContentView (layout);
+        dialog.setCancelable (false);
+        dialog.getWindow ().setSoftInputMode (WindowManager.LayoutParams.
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        dialog.show();
+        dialog.show ();
         return dialog;
     }
 
     public static void showDialogConnection(Context context) {
-        Dialog dialog = createDialog(context, R.layout.activity_dialog_connection);
-        Button buttonConnection = dialog.findViewById( R.id.button_dialog_connection);
-        buttonConnection.setOnClickListener( v -> dialog.dismiss() );
+        Dialog dialog = createDialog (context, R.layout.activity_dialog_connection);
+        Button buttonConnection = dialog.findViewById (R.id.button_dialog_connection);
+        buttonConnection.setOnClickListener (v -> dialog.dismiss ());
     }
 
 }

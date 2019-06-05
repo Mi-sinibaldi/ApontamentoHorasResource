@@ -11,8 +11,6 @@ import resource.estagio.workload.ui.DialogApp;
 
 public class TimeLinePresenter implements TimeLineContract.Presenter {
 
-
-
     private TimeLineContract.View view;
     private long hours;
 

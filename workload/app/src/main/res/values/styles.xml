@@ -34,11 +34,11 @@
     </style>
 
     <style name="StyledEditTextDialogCustomer">
-        <item name="colorControlNormal">@color/colorLogin</item> // Cor padrão da linha
-        <item name="android:colorAccent" tools:targetApi="lollipop">@color/colorLogin</item>
-        <item name="colorControlActivated">@color/colorLogin</item> // Cor linha e texto quando recebe foco
-        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorLogin</item>
-        <item name="android:colorControlHighlight" tools:targetApi="lollipop">@color/colorLogin</item>
+        <item name="colorControlNormal">@color/colorSwitch</item> // Cor padrão da linha
+        <item name="android:colorAccent" tools:targetApi="lollipop">@color/colorSwitch</item>
+        <item name="colorControlActivated">@color/colorSwitch</item> // Cor linha e texto quando recebe foco
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorSwitch</item>
+        <item name="android:colorControlHighlight" tools:targetApi="lollipop">@color/colorSwitch</item>
     </style>
 
     <style name="StyledTilEditTextThemeFalse">

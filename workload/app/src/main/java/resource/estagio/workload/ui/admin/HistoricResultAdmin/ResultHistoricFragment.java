@@ -39,11 +39,9 @@ public class ResultHistoricFragment extends Fragment implements ResultHistoricCo
     private String textMonth = "";
     private Calendar calendar;
 
-
     public ResultHistoricFragment(HomeAdminContract.View view) {
         viewHome = view;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

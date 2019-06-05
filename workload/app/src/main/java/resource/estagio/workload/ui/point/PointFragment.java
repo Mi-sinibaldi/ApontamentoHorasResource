@@ -128,7 +128,7 @@ public class PointFragment extends Fragment implements PointContract.View,
                 c.get(Calendar.DAY_OF_MONTH));
         editTextDatePoint.setOnClickListener(v -> {
             DialogFragment datePicker = new DateDialog(this);
-            datePicker.show(getChildFragmentManager(), "Escolha o dia");
+            datePicker.show(getChildFragmentManager(), getActivity().getString(R.string.choose_one_day));
         });
     }
 

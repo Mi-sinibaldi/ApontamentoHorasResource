@@ -13,6 +13,7 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.infra.ConstantApp;
 
 public class AdapterTimeline extends RecyclerView.Adapter<AdapterTimeline.MyViewHolder> {
 
@@ -43,14 +44,14 @@ public class AdapterTimeline extends RecyclerView.Adapter<AdapterTimeline.MyView
             holder.activityName.setText(model.getActivityName());
             holder.customerName.setText(model.getCustomerName());
             holder.date.setText(model.getDate().substring(0, 5));
-            holder.hours.setText(model.getHours() + " Horas");
+            holder.hours.setText(model.getHours() + ConstantApp.HOURS);
             holder.reason.setText(model.getReason());
             holder.line.setVisibility(View.INVISIBLE);
         } else {
             holder.activityName.setText(model.getActivityName());
             holder.customerName.setText(model.getCustomerName());
             holder.date.setText(model.getDate().substring(0, 5));
-            holder.hours.setText(model.getHours() + " Horas");
+            holder.hours.setText(model.getHours() + ConstantApp.HOURS);
             holder.reason.setText(model.getReason());
             holder.line.setVisibility(View.VISIBLE);
         }

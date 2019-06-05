@@ -24,6 +24,7 @@ import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
 public class AddProjectPresenter implements AddProjectContract.Presenter {
 
+
     private AddProjectContract.View view;
     private HomeAdminContract.View activityView;
     private ActivityTypeModel activityTypeModel;
@@ -122,7 +123,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
         Button buttonConfirmCheck = dialog.findViewById(R.id.button_dialog_error);
         buttonConfirmCheck.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putSerializable("customer", new CustomerModel(customer.getId(), customer.getName()));
+            bundle.putSerializable(ConstantApp.CUSTOMER, new CustomerModel(customer.getId(), customer.getName()));
             ProjectFragment fragment = new ProjectFragment(activityView);
             fragment.setArguments(bundle);
             view.getActivity()

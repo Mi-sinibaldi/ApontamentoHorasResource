@@ -22,6 +22,7 @@ import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
 import resource.estagio.workload.domain.Customer;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 
 public class AddProjectFragment extends Fragment implements AddProjectContract.View {
@@ -52,8 +53,8 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
 
         loadUI();
 
-        if (getArguments().getSerializable("project") != null) {
-            project = (ActivityModel) getArguments().getSerializable("project");
+        if (getArguments().getSerializable(ConstantApp.PROJECT) != null) {
+            project = (ActivityModel) getArguments().getSerializable(ConstantApp.PROJECT);
             nameProject.setText(project.getName());
             demandNumber.setText(project.getDemandNumber());
         }

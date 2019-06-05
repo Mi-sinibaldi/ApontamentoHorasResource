@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
         } else {
             backToast = Toast.makeText(getBaseContext(),
-                    "Pressione novamente para sair", Toast.LENGTH_SHORT);
+                    getString(R.string.press_again_to_exit), Toast.LENGTH_SHORT);
             backToast.show();
         }
         backPresssedTime = System.currentTimeMillis();

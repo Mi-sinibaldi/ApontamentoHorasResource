@@ -25,6 +25,8 @@ import resource.estagio.workload.ui.home.HomeContract;
 import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
 
 public class TimelineFragment extends Fragment implements TimeLineContract.View {
+
+    public static final String MMM = "MMM";
     private TextView textViewMonth;
     private TextView textViewYear;
     private ImageView imageViewMonthLeft;
@@ -47,112 +49,110 @@ public class TimelineFragment extends Fragment implements TimeLineContract.View 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_timeline, container, false);
+        view = inflater.inflate (R.layout.fragment_timeline, container, false);
 
-        loadUI();
-        setTextDate();
-        final int thisMonth = calendar.get(Calendar.MONTH);
-        actionArrowsButtons(thisMonth);
-        actioSwipeRefresh(this);
+        loadUI ();
+        setTextDate ();
+        final int thisMonth = calendar.get (Calendar.MONTH);
+        actionArrowsButtons (thisMonth);
+        actioSwipeRefresh (this);
 
         return view;
     }
 
     private void actionArrowsButtons(int thisMonth) {
-        imageViewMonthLeft.setOnClickListener(v -> {
+        imageViewMonthLeft.setOnClickListener (v -> {
 
             if (month >= thisMonth - 2) {
-                calendar.add(Calendar.MONTH, -1);
-                setTextDate();
-                imageViewMonthLeft.setVisibility(View.VISIBLE);
-                imageViewMonthRight.setVisibility(View.VISIBLE);
+                calendar.add (Calendar.MONTH, -1);
+                setTextDate ();
+                imageViewMonthLeft.setVisibility (View.VISIBLE);
+                imageViewMonthRight.setVisibility (View.VISIBLE);
             } else {
-                imageViewMonthLeft.setVisibility(View.INVISIBLE);
+                imageViewMonthLeft.setVisibility (View.INVISIBLE);
             }
             if (month == thisMonth - 6) {
-                imageViewMonthLeft.setVisibility(View.INVISIBLE);
+                imageViewMonthLeft.setVisibility (View.INVISIBLE);
             }
         });
 
-
-        imageViewMonthRight.setOnClickListener(v -> {
+        imageViewMonthRight.setOnClickListener (v -> {
 
             if (month <= thisMonth) {
-                calendar.add(Calendar.MONTH, +1);
-                setTextDate();
-                imageViewMonthRight.setVisibility(View.VISIBLE);
-                imageViewMonthLeft.setVisibility(View.VISIBLE);
+                calendar.add (Calendar.MONTH, +1);
+                setTextDate ();
+                imageViewMonthRight.setVisibility (View.VISIBLE);
+                imageViewMonthLeft.setVisibility (View.VISIBLE);
             } else {
-                imageViewMonthRight.setVisibility(View.INVISIBLE);
+                imageViewMonthRight.setVisibility (View.INVISIBLE);
             }
             if (month == thisMonth + 1) {
-                imageViewMonthRight.setVisibility(View.INVISIBLE);
+                imageViewMonthRight.setVisibility (View.INVISIBLE);
             }
         });
     }
 
 
     private void actioSwipeRefresh(TimeLineContract.View view) {
-        recyclerViewTimeline.setVisibility(View.GONE);
+        recyclerViewTimeline.setVisibility (View.GONE);
 
-        swipeRefreshTimeline.setOnRefreshListener(() -> {
-            presenter = new TimeLinePresenter(view);
-            presenter.getTimeline(month, year);
+        swipeRefreshTimeline.setOnRefreshListener (() -> {
+            presenter = new TimeLinePresenter (view);
+            presenter.getTimeline (month, year);
         });
     }
 
 
     @SuppressLint("SimpleDateFormat")
     private void setTextDate() {
-        swipeRefreshTimeline = view.findViewById(R.id.swipe_Refresh_timeline);
-        textViewMonth.setText(new SimpleDateFormat("MMM").format(calendar.getTime()));
-        textViewYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
+        swipeRefreshTimeline = view.findViewById (R.id.swipe_Refresh_timeline);
+        textViewMonth.setText (new SimpleDateFormat (MMM).format (calendar.getTime ()));
+        textViewYear.setText (String.valueOf (calendar.get (Calendar.YEAR)));
 
-        month = calendar.get(Calendar.MONTH) + 1;
-        year = calendar.get(Calendar.YEAR);
+        month = calendar.get (Calendar.MONTH) + 1;
+        year = calendar.get (Calendar.YEAR);
 
-        presenter.getTimeline(month, year);
+        presenter.getTimeline (month, year);
     }
 
-
     private void loadUI() {
-        calendar = Calendar.getInstance();
-        presenter = new TimeLinePresenter(this);
-        recyclerViewTimeline = view.findViewById(R.id.id_recyclerview_timeline);
-        textViewMonth = view.findViewById(R.id.text_view_month_timeline);
-        textViewYear = view.findViewById(R.id.text_view_year_timeline);
-        imageViewMonthLeft = view.findViewById(R.id.image_view_month_left_timeline);
-        imageViewMonthRight = view.findViewById(R.id.image_view_month_right_timeline);
-        imageViewMonthRight.setVisibility(View.INVISIBLE);
+        calendar = Calendar.getInstance ();
+        presenter = new TimeLinePresenter (this);
+        recyclerViewTimeline = view.findViewById (R.id.id_recyclerview_timeline);
+        textViewMonth = view.findViewById (R.id.text_view_month_timeline);
+        textViewYear = view.findViewById (R.id.text_view_year_timeline);
+        imageViewMonthLeft = view.findViewById (R.id.image_view_month_left_timeline);
+        imageViewMonthRight = view.findViewById (R.id.image_view_month_right_timeline);
+        imageViewMonthRight.setVisibility (View.INVISIBLE);
     }
 
 
     @Override
     public void showRecycler(boolean Key) {
-        recyclerViewTimeline.setVisibility(Key ? View.INVISIBLE : View.VISIBLE);
-        swipeRefreshTimeline.setRefreshing(Key);
-        viewHome.enableNavigation(Key);
+        recyclerViewTimeline.setVisibility (Key ? View.INVISIBLE : View.VISIBLE);
+        swipeRefreshTimeline.setRefreshing (Key);
+        viewHome.enableNavigation (Key);
     }
 
 
     @Override
     public void showListTimeline(List<TimeEntryModel> list) {
         listWorkLoad = list;
-        configAdapter();
+        configAdapter ();
     }
 
     @Override
     public void showMessage(String message, boolean status) {
-        DialogApp.showDialogConfirm(message, status, getActivity());
+        DialogApp.showDialogConfirm (message, status, getActivity ());
     }
 
 
     private void configAdapter() {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerViewTimeline.setLayoutManager(layoutManager);
-        recyclerViewTimeline.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager (getContext ());
+        recyclerViewTimeline.setLayoutManager (layoutManager);
+        recyclerViewTimeline.setHasFixedSize (true);
 
-        adapterTimeline = new AdapterTimeline(listWorkLoad);
-        recyclerViewTimeline.setAdapter(adapterTimeline);
+        adapterTimeline = new AdapterTimeline (listWorkLoad);
+        recyclerViewTimeline.setAdapter (adapterTimeline);
     }
 }

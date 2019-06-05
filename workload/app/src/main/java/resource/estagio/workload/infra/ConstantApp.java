@@ -41,6 +41,7 @@ public class ConstantApp {
     public static final String INSERT_REASON = "Coloque um motivo";
     public static final String INSERT_HOURS = "Coloque suas horas";
     public static final String LIST_IS_NULL = "Lista vazia";
+    public static final String HOURS = " Horas";
 
     // constantes do Result e Historic Fragment
     public static final String TITLE_RESULT_MAIN_FRAGMENT = "Resultado";
@@ -50,4 +51,11 @@ public class ConstantApp {
 
     //constantes tela Settings
     public static String DIALOG_MESSAGE_CLEAN_SETTINGS = "Deseja realmente limpar as credenciais salvas?";
+
+    //constantes serializable
+    public static final String CUSTOMER = "customer";
+    public static final String PROJECT = "project";
+    public static final String ADD_PROJECT = "add_project";
+
+
 }

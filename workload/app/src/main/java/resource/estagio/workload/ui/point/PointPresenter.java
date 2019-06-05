@@ -15,7 +15,6 @@ import resource.estagio.workload.ui.DialogApp;
 
 public class PointPresenter implements PointContract.Presenter {
 
-
     private PointContract.View view;
 
     public PointPresenter(PointContract.View view) {
@@ -26,56 +25,56 @@ public class PointPresenter implements PointContract.Presenter {
     public void setPoint(String date, String hour, String customerName, int customerId,
                          String projectName, int projectId, String demandNumber, String reason) {
 
-        if (validateFilds(reason, hour)) return;
+        if (validateFilds (reason, hour)) return;
 
-        view.showProgressAdd(true);
+        view.showProgressAdd (true);
 
         try {
-            EmployeeDomain employee = new EmployeeDomain(projectId, projectName,
-                    customerId, customerName, demandNumber, Integer.parseInt(hour), date, reason);
-            employee.irepository = new EmployeeRepository();
+            EmployeeDomain employee = new EmployeeDomain (projectId, projectName,
+                    customerId, customerName, demandNumber, Integer.parseInt (hour), date, reason);
+            employee.irepository = new EmployeeRepository ();
 
-            employee.postEntry(App.getUser().getAccessToken(), new BaseCallback<Void>() {
+            employee.postEntry (App.getUser ().getAccessToken (), new BaseCallback<Void> () {
                 @Override
                 public void onSuccessful(Void value) {
-                    view.showDialog();
-                    view.showProgressAdd(false);
-                    view.setClearFields();
-                    view.enabledNavigation(false);
+                    view.showDialog ();
+                    view.showProgressAdd (false);
+                    view.setClearFields ();
+                    view.enabledNavigation (false);
                 }
 
                 @Override
                 public void onUnsuccessful(String error) {
-                    view.showProgressAdd(false);
-                    view.enabledNavigation(false);
-                    if(errorConnection(error)) return;
-                    view.notification(error);
+                    view.showProgressAdd (false);
+                    view.enabledNavigation (false);
+                    if (errorConnection (error)) return;
+                    view.notification (error);
                 }
             });
         } catch (NumberFormatException e) {
-            view.notification(ConstantApp.NUMBER_HOURS_IS_NULL);
-            view.showProgressAdd(false);
-            view.enabledNavigation(false);
+            view.notification (ConstantApp.NUMBER_HOURS_IS_NULL);
+            view.showProgressAdd (false);
+            view.enabledNavigation (false);
         } catch (Exception e) {
-            view.showProgressAdd(false);
-            view.enabledNavigation(false);
-            view.notification(e.getMessage());
+            view.showProgressAdd (false);
+            view.enabledNavigation (false);
+            view.notification (e.getMessage ());
         }
     }
 
     private boolean validateFilds(String reason, String hour) {
         boolean error = false;
-        if (reason.isEmpty()) {
-            view.setErrorReasonField(ConstantApp.INSERT_REASON);
+        if (reason.isEmpty ()) {
+            view.setErrorReasonField (ConstantApp.INSERT_REASON);
             error = true;
         }
         try {
-            if (Integer.parseInt(hour) == 0) {
-                view.setErrorHourField(ConstantApp.INSERT_HOURS);
+            if (Integer.parseInt (hour) == 0) {
+                view.setErrorHourField (ConstantApp.INSERT_HOURS);
                 error = true;
             }
         } catch (NumberFormatException e) {
-            view.setErrorHourField(ConstantApp.INSERT_HOURS);
+            view.setErrorHourField (ConstantApp.INSERT_HOURS);
             error = true;
         }
         return error;
@@ -83,56 +82,55 @@ public class PointPresenter implements PointContract.Presenter {
 
     @Override
     public void getCustumers() {
-        view.showProgressCustomer(true);
-        view.enabledNavigation(true);
-        CustomerRepository repository = new CustomerRepository();
-        repository.getCustomers(App.getUser().getAccessToken(), new BaseCallback<List<CustomerModel>>() {
+        view.showProgressCustomer (true);
+        view.enabledNavigation (true);
+        CustomerRepository repository = new CustomerRepository ();
+        repository.getCustomers (App.getUser ().getAccessToken (), new BaseCallback<List<CustomerModel>> () {
             @Override
             public void onSuccessful(List<CustomerModel> value) {
-                view.loadSpinnerCustomer(value);
-                view.showProgressCustomer(false);
-
+                view.loadSpinnerCustomer (value);
+                view.showProgressCustomer (false);
             }
 
             @Override
             public void onUnsuccessful(String error) {
-                view.showProgressCustomer(false);
-                view.enabledNavigation(false);
-                if(errorConnection(error)) return;
-                view.notification(error);
+                view.showProgressCustomer (false);
+                view.enabledNavigation (false);
+                if (errorConnection (error)) return;
+                view.notification (error);
             }
         });
     }
 
     @Override
     public void getActivities(int id) {
-        view.showProgressProject(true);
-        ActivityRepository repository = new ActivityRepository();
-        repository.getActivity(id, App.getUser().getAccessToken(), new BaseCallback<List<ActivityModel>>() {
+        view.showProgressProject (true);
+        ActivityRepository repository = new ActivityRepository ();
+        repository.getActivity (id, App.getUser ().getAccessToken (), new BaseCallback<List<ActivityModel>> () {
             @Override
             public void onSuccessful(List<ActivityModel> value) {
-                view.showProgressProject(false);
-                view.enabledNavigation(false);
-                if (value.isEmpty()) {
-                    view.disableSpinnerActivity();
-                    view.notification(ConstantApp.LIST_IS_NULL);
+                view.showProgressProject (false);
+                view.enabledNavigation (false);
+                if (value.isEmpty ()) {
+                    view.disableSpinnerActivity ();
+                    view.notification (ConstantApp.LIST_IS_NULL);
                 } else
-                    view.loadSpinnerActivity(value);
+                    view.loadSpinnerActivity (value);
             }
 
             @Override
             public void onUnsuccessful(String error) {
-                view.enabledNavigation(false);
-                view.showProgressProject(false);
-                if(errorConnection(error)) return;
+                view.enabledNavigation (false);
+                view.showProgressProject (false);
+                if (errorConnection (error)) return;
             }
         });
     }
 
     private boolean errorConnection(String error) {
-        if (error.equals(ConstantApp.CONNECTION_INTERNET)) {
-            DialogApp.showDialogConnection(view.getActivity());
-            view.disableSpinnerActivity();
+        if (error.equals (ConstantApp.CONNECTION_INTERNET)) {
+            DialogApp.showDialogConnection (view.getActivity ());
+            view.disableSpinnerActivity ();
             return true;
         }
         return false;
