@@ -39,7 +39,7 @@ public class ClientPresenter implements ClientContract.Presenter {
                     public void onUnsuccessful(String error) {
                         view.showProgressClient(false);
                         if (errorConnection(error)) return;
-                        view.showToast(error, false);
+                        view.showDialog(error, false);
                     }
                 });
     }
@@ -54,7 +54,7 @@ public class ClientPresenter implements ClientContract.Presenter {
                 @Override
                 public void onSuccessful(String value) {
                     view.showProgressClient(false);
-                    view.showToast(value, true);
+                    view.showDialog(value, true);
                     view.refleshAdapter();
                 }
 
@@ -62,12 +62,12 @@ public class ClientPresenter implements ClientContract.Presenter {
                 public void onUnsuccessful(String error) {
                     view.showProgressClient(false);
                     if (errorConnection(error)) return;
-                    view.showToast(error, false);
+                    view.showDialog(error, false);
                 }
             });
             getCustomers(true);
         } catch (Exception e) {
-            view.showToast(e.getMessage(), false);
+            view.showDialog(e.getMessage(), false);
         }
     }
 
@@ -94,21 +94,22 @@ public class ClientPresenter implements ClientContract.Presenter {
                 customer.postCustomer(App.getUser().getAccessToken(), new BaseCallback<String>() {
                     @Override
                     public void onSuccessful(String value) {
-                        view.showToast(value, true);
+                        view.showDialog(value, true);
                         view.refleshAdapter();
+                        dialog.dismiss();
                     }
 
                     @Override
                     public void onUnsuccessful(String error) {
                         if (errorConnection(error)) return;
-                        view.showToast(error, false);
+                        view.showDialog(error, false);
+                        dialog.dismiss();
                     }
                 });
             } catch (Exception e) {
-                view.showToast(e.getMessage(), false);
+                view.showToast(e.getMessage());
                 e.printStackTrace();
             }
-            dialog.dismiss();
         });
     }
 
