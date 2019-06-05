@@ -24,13 +24,13 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
                     @Override
                     public void onResponse(Call<List<TimeEntryModel>>
                                                    call, Response<List<TimeEntryModel>> response) {
-                        if (!response.isSuccessful() || response.body()==null) {
-                            onResult.onUnsuccessful(ConstantApp.UNLOADED_LIST);
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
                             return;
                         }
 
-                        if (response.code() == UNAUTHORIDEZ) {
-                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                        if (!response.isSuccessful() || response.body()==null) {
+                            onResult.onUnsuccessful(ConstantApp.UNLOADED_LIST);
                             return;
                         }
 
