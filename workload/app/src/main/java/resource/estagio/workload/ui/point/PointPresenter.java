@@ -22,6 +22,7 @@ public class PointPresenter implements PointContract.Presenter {
     @Override
     public void setPoint(String date, String hour, String customerName, int customerId,
                          String projectName, int projectId, String demandNumber, String reason) {
+
         if (validateFilds(reason, hour)) return;
 
         view.showProgressAdd(true);
@@ -95,8 +96,6 @@ public class PointPresenter implements PointContract.Presenter {
                 view.enabledNavigation(false);
             }
         });
-
-
     }
 
     @Override

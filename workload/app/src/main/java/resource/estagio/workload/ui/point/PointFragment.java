@@ -13,11 +13,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -74,7 +74,6 @@ public class PointFragment extends Fragment implements PointContract.View,
     private TextInputLayout inputLayoutHourPoint;
     private TextInputLayout inputLayoutReasonPoint;
 
-
     // Construtor Vazio
     public PointFragment(HomeContract.View view) {
         this.viewHome = view;
@@ -111,7 +110,6 @@ public class PointFragment extends Fragment implements PointContract.View,
             dialog.dismiss();
 //            getActivity().finish();
         });
-
     }
 
     private void loadDateHourSave() {
@@ -138,9 +136,7 @@ public class PointFragment extends Fragment implements PointContract.View,
         progressAddPoint = view.findViewById(R.id.progress_add_point);
         inputLayoutHourPoint = view.findViewById(R.id.input_layout_hour_point);
         inputLayoutReasonPoint = view.findViewById(R.id.input_layout_name_project);
-
     }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -148,7 +144,6 @@ public class PointFragment extends Fragment implements PointContract.View,
         // Inflate the layout for this fragment
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return inflater.inflate(R.layout.fragment_point, null);
-
     }
 
     @Override
@@ -187,10 +182,8 @@ public class PointFragment extends Fragment implements PointContract.View,
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-
 
     }
 
@@ -214,7 +207,6 @@ public class PointFragment extends Fragment implements PointContract.View,
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
@@ -241,7 +233,6 @@ public class PointFragment extends Fragment implements PointContract.View,
                 progressCustomerPoint.setVisibility(show ? View.VISIBLE : View.GONE);
             }
         });
-
     }
 
     @Override
@@ -257,8 +248,6 @@ public class PointFragment extends Fragment implements PointContract.View,
                 progressProjectPoint.setVisibility(show ? View.VISIBLE : View.GONE);
             }
         });
-
-
     }
 
     @Override
@@ -284,7 +273,6 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     @Override
     public void setErrorHourField(String message) {
-
         setErrorMessage(editTextHourPoint, inputLayoutHourPoint, message);
     }
 
@@ -295,12 +283,10 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     @Override
     public void showProsseEmployee() {
-
     }
 
     @Override
     public void setErrorProjectField(String message) {
-
     }
 
     @Override
