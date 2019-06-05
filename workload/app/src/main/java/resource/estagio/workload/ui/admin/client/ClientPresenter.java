@@ -1,8 +1,6 @@
 package resource.estagio.workload.ui.admin.client;
 
 import android.app.Dialog;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputLayout;
