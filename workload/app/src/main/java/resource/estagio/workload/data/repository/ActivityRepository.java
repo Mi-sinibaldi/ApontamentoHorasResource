@@ -16,6 +16,7 @@ import retrofit2.Response;
 
 public class ActivityRepository extends Repository implements ProjectContract.IRepository {
 
+    public static final int UNAUTHORIDEZ = 401;
     @Override
     public void getActivity(int id, String token, BaseCallback<List<ActivityModel>> onResult) {
         super.data.restApi(ActivityAPI.class)
@@ -24,6 +25,10 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
                     @Override
                     public void onResponse(Call<List<ActivityModel>>
                                                    call, Response<List<ActivityModel>> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful() && response.body() != null)
                             onResult.onSuccessful(response.body());
                         else if(response.body() == null)
@@ -47,6 +52,10 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
                 .enqueue(new Callback<List<ActivityTypeModel>>() {
                     @Override
                     public void onResponse(Call<List<ActivityTypeModel>> call, Response<List<ActivityTypeModel>> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful() && response.body() != null)
                             onResult.onSuccessful(response.body());
                         else
@@ -70,6 +79,10 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful())
                             onResult.onSuccessful(ConstantApp.PROJECT_SEND_SUCCESS);
                         else
@@ -94,6 +107,10 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful())
                             onResult.onSuccessful(ConstantApp.PROJECT_UPDATE_SUCCESS);
                         else
@@ -115,6 +132,10 @@ public class ActivityRepository extends Repository implements ProjectContract.IR
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful())
                             onResult.onSuccessful(name+ConstantApp.DELETE_IS_SUCCESS);
                         else

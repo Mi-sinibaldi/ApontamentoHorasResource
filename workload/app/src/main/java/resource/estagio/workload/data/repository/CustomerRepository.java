@@ -16,6 +16,7 @@ import retrofit2.Response;
 public class CustomerRepository extends Repository implements CustomerContract.IRepository {
 
     public static final int ISR = 500;
+    public static final int UNAUTHORIDEZ = 401;
 
     @Override
     public void getCustomers(String token, BaseCallback<List<CustomerModel>> onResult) {
@@ -25,6 +26,10 @@ public class CustomerRepository extends Repository implements CustomerContract.I
                     @Override
                     public void onResponse(Call<List<CustomerModel>> call,
                                            Response<List<CustomerModel>> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful() && response.body() != null)
                             onResult.onSuccessful(response.body());
                         else if (response.body() == null)
@@ -47,6 +52,10 @@ public class CustomerRepository extends Repository implements CustomerContract.I
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful())
                             onResult.onSuccessful(customerName+ ConstantApp.DELETE_IS_SUCCESS);
                         else if(response.code()== ISR)
@@ -70,6 +79,10 @@ public class CustomerRepository extends Repository implements CustomerContract.I
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
                         if (response.isSuccessful())
                             onResult.onSuccessful(ConstantApp.CUSTOMER_ADD_SUCCESS);
                         else
