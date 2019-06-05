@@ -2,18 +2,14 @@ package resource.estagio.workload.ui.admin.client;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +25,6 @@ import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.ProjectFragment;
-
 
 public class ClientFragment extends Fragment implements ClientContract.View {
 
@@ -73,7 +68,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         presenter.getCustomers(true);
 
         loadListernersClick();
-
     }
 
     private void loadListernersClick() {
@@ -84,9 +78,9 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         buttonSaveClient.setOnClickListener(v -> {
             if (customerModelsDelete.size() > 0)
                 for (CustomerModel model : customerModelsDelete) presenter.deleteCustomer(model);
-             else
-                 presenter.getCustomers(true);
-             customerModelsDelete = new ArrayList<>();
+            else
+                presenter.getCustomers(true);
+            customerModelsDelete = new ArrayList<>();
         });
 
         textViewCancelClient.setOnClickListener(v -> {
@@ -126,10 +120,13 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         bundle.putSerializable(CUSTOMER, customerModels.get(position));
         ProjectFragment fragment = new ProjectFragment(activityView);
         fragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_admin, fragment).addToBackStack(null).commit();
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_admin, fragment)
+                .addToBackStack(null)
+                .commit();
     }
-
 
     @Override
     public void setRecyclerClient(List<CustomerModel> customerModels, boolean status) {
@@ -137,7 +134,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         this.customerModels = customerModels;
         showAdapterRecycler(status);
     }
-
 
     @Override
     public void showAdapterRecycler(boolean status) {
@@ -152,7 +148,6 @@ public class ClientFragment extends Fragment implements ClientContract.View {
         textViewCancelClient.setVisibility(status ? View.INVISIBLE : View.VISIBLE);
         buttonSaveClient.setVisibility(status ? View.INVISIBLE : View.VISIBLE);
     }
-
 
     @Override
     public void showProgressClient(final boolean show) {
@@ -179,6 +174,5 @@ public class ClientFragment extends Fragment implements ClientContract.View {
     public void refleshAdapter() {
         presenter.getCustomers(true);
     }
-
 
 }

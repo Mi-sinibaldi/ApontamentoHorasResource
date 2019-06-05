@@ -1,6 +1,5 @@
 package resource.estagio.workload.ui.admin.client;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +14,11 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
-import resource.estagio.workload.domain.Customer;
 
-public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHolder>{
+public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHolder> {
 
     private List<CustomerModel> list;
-
     private AdapterInterface listener;
-
     private boolean setStatusList;
 
     public AdapterClient(List<CustomerModel> list, boolean status, AdapterInterface listener) {
@@ -36,8 +32,8 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View listView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_adapter_client,parent,false);
-      return new MyViewHolder(listView);
+                .inflate(R.layout.card_adapter_client, parent, false);
+        return new MyViewHolder(listView);
     }
 
     @Override
@@ -46,34 +42,29 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
         holder.setItens(customerModel);
         getClickAdapter(holder, position);
         setPaddingButton(holder);
-
-
     }
 
     private void setPaddingButton(@NonNull MyViewHolder holder) {
-        if(list.size() - 1 == holder.getLayoutPosition())
-            holder.constraintClient.setPadding(0,0,0,100);
+        if (list.size() - 1 == holder.getLayoutPosition())
+            holder.constraintClient.setPadding(0, 0, 0, 100);
         else
-            holder.constraintClient.setPadding(0,0,0,0);
+            holder.constraintClient.setPadding(0, 0, 0, 0);
     }
 
     private void getClickAdapter(@NonNull MyViewHolder holder, int position) {
-        if(setStatusList) {
+        if (setStatusList) {
             holder.buttonCardClient.setOnClickListener(v -> listener.goToProject(v, position));
             holder.setIconClient();
-        }else
+        } else
             deleteCustomer(holder, position);
-
     }
-
-
 
     private void deleteCustomer(@NonNull MyViewHolder holder, int position) {
         holder.imageViewDeleteClient.setOnClickListener(v -> {
-            try{
+            try {
                 listener.removeClient(v, position, list.get(holder.getLayoutPosition()));
                 verifyRemove(holder);
-            }catch (ArrayIndexOutOfBoundsException e){
+            } catch (ArrayIndexOutOfBoundsException e) {
                 notifyDataSetChanged();
             }
         });
@@ -93,7 +84,7 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
 
     @Override
     public int getItemCount() {
-        if( list == null)
+        if (list == null)
             return 0;
         else
             return list.size();
@@ -104,6 +95,7 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
 
         void goToProject(View v, int position);
     }
+
     class MyViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout constraintClient;
         ConstraintLayout buttonCardClient;
@@ -121,7 +113,7 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
             imageViewDeleteClient = itemView.findViewById(R.id.image_view_delete_client);
         }
 
-       void setIconRemove() {
+        void setIconRemove() {
             imageViewDeleteClient.setVisibility(View.VISIBLE);
             imageViewIconClientAdapter.setVisibility(View.INVISIBLE);
         }
@@ -134,13 +126,10 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
         public void setItens(CustomerModel customerModel) {
             textViewClientAdapter.setText(customerModel.getName());
             model = customerModel;
-            if(list.get(list.size() - 1).getId() == model.getId())
-                constraintClient.setPadding(0,0,0,100);
+            if (list.get(list.size() - 1).getId() == model.getId())
+                constraintClient.setPadding(0, 0, 0, 100);
             else
-                constraintClient.setPadding(0,0,0,0);
-
+                constraintClient.setPadding(0, 0, 0, 0);
         }
     }
 }
-
-
