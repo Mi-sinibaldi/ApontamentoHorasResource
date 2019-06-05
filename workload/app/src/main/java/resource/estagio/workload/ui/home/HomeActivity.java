@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
@@ -43,7 +42,6 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
             presenter.identifyItemClicked(menuItem);
             return true;
         });
-
     }
 
     @Override
@@ -68,40 +66,39 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
     @Override
     public void showFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_layout_home, fragment).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_layout_home, fragment)
+                .commit();
     }
-
-
-
 
     @Override
     public void dialog(boolean key) {
 
-        for (int i = 0; i < navigation.getMenu().size(); i++){
+        for (int i = 0; i < navigation.getMenu().size(); i++) {
             navigation.getMenu().getItem(i).setEnabled(!key);
         }
     }
 
     @Override
     public void showDialogChooser() {
-        dialog = new Dialog( this, R.style.CustomAlertDialog );
-        dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
-        dialog.setContentView( R.layout.activity_dialog_chooser );
-        dialog.setCancelable( false );
-        dialog.getWindow().setSoftInputMode( WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN );
+        dialog = new Dialog(this, R.style.CustomAlertDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_dialog_chooser);
+        dialog.setCancelable(false);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         dialog.show();
 
-        Button buttonChosserYes = dialog.findViewById( R.id.button_dialog_chooser_yes );
-        Button buttonChosserNo = dialog.findViewById( R.id.buttton_dialog_chooser_no );
+        Button buttonChosserYes = dialog.findViewById(R.id.button_dialog_chooser_yes);
+        Button buttonChosserNo = dialog.findViewById(R.id.buttton_dialog_chooser_no);
 
-        buttonChosserYes.setOnClickListener( v -> {
+        buttonChosserYes.setOnClickListener(v -> {
             App.getPref().clear();
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
-        } );
-        buttonChosserNo.setOnClickListener( v -> dialog.dismiss() );
+        });
+        buttonChosserNo.setOnClickListener(v -> dialog.dismiss());
     }
 }

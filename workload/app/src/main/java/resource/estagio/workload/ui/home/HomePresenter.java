@@ -4,15 +4,12 @@ import android.view.MenuItem;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.ui.SettingsFragment;
-import resource.estagio.workload.ui.employee.EmployeeFragment;
-import resource.estagio.workload.ui.login.LoginActivity;
 import resource.estagio.workload.ui.point.PointFragment;
 import resource.estagio.workload.ui.timeline.TimelineFragment;
 
 public class HomePresenter implements HomeContract.Presenter {
 
     private HomeContract.View view;
-
 
     public HomePresenter(HomeContract.View view) {
         this.view = view;
