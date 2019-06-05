@@ -6,12 +6,12 @@ import androidx.fragment.app.Fragment;
 
 public class HomeAdminContract {
 
-    interface Presenter{
+    interface Presenter {
 
         void identifyItemClicked(MenuItem menuItem);
     }
 
-    public interface View{
+    public interface View {
 
         void showFragment(Fragment fragment);
 

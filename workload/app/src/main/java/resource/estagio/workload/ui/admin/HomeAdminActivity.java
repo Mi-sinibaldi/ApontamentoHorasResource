@@ -25,6 +25,7 @@ public class HomeAdminActivity extends AppCompatActivity implements HomeAdminCon
     private long backPressedTime;
     private Toast backToast;
     private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -32,40 +33,45 @@ public class HomeAdminActivity extends AppCompatActivity implements HomeAdminCon
         setContentView(R.layout.activity_home_admin);
         presenter = new HomeAdminPresenter(this);
         navigation = findViewById(R.id.bottom_navigation_admin);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_admin, new EmployeeFragment(this)).commit();
-        navigation.setOnNavigationItemSelectedListener( menuItem -> {
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_admin, new EmployeeFragment(this))
+                .commit();
+        navigation.setOnNavigationItemSelectedListener(menuItem -> {
             presenter.identifyItemClicked(menuItem);
             return true;
-        } );
+        });
     }
 
     @Override
     public void showFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().
-                replace(R.id.frame_admin, fragment).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_admin, fragment)
+                .commit();
     }
 
     @Override
     public void showDialogChooser() {
         dialog = DialogApp.createDialog(this, R.layout.activity_dialog_chooser);
 
-        Button buttonChosserYes = dialog.findViewById( R.id.button_dialog_chooser_yes );
-        Button buttonChosserNo = dialog.findViewById( R.id.buttton_dialog_chooser_no );
+        Button buttonChosserYes = dialog.findViewById(R.id.button_dialog_chooser_yes);
+        Button buttonChosserNo = dialog.findViewById(R.id.buttton_dialog_chooser_no);
 
-        buttonChosserYes.setOnClickListener( v -> {
+        buttonChosserYes.setOnClickListener(v -> {
             App.getPref().clear();
             Intent intent = new Intent(HomeAdminActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
 
-        } );
-        buttonChosserNo.setOnClickListener( v -> dialog.dismiss() );
+        });
+        buttonChosserNo.setOnClickListener(v -> dialog.dismiss());
     }
 
     @Override
     public void enableNavigation(boolean key) {
-        for (int i = 0; i < navigation.getMenu().size(); i++){
+        for (int i = 0; i < navigation.getMenu().size(); i++) {
             navigation.getMenu().getItem(i).setEnabled(!key);
         }
     }
