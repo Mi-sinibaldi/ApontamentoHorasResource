@@ -10,7 +10,7 @@ public class HomeContract {
 
         void showFragment(Fragment fragment);
 
-        void dialog(boolean key);
+        void enableNavigation(boolean key);
 
         void showDialogChooser();
     }

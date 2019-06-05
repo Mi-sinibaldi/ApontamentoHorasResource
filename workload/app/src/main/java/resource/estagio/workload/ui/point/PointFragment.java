@@ -224,6 +224,7 @@ public class PointFragment extends Fragment implements PointContract.View,
     public void showProgressCustomer(final boolean show) {
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
+        buttonPointConfirm.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
         spinnerCustomerPoint.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
         progressCustomerPoint.setVisibility(show ? View.VISIBLE : View.GONE);
         progressCustomerPoint.animate().setDuration(shortAnimTime).alpha(
@@ -239,6 +240,7 @@ public class PointFragment extends Fragment implements PointContract.View,
     public void showProgressProject(final boolean show) {
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
+        buttonPointConfirm.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
         spinnerProjectPoint.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
         progressProjectPoint.setVisibility(show ? View.VISIBLE : View.GONE);
         progressProjectPoint.animate().setDuration(shortAnimTime).alpha(
@@ -291,7 +293,7 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     @Override
     public void enabledNavigation(boolean key) {
-        viewHome.dialog(key);
+        viewHome.enableNavigation(key);
     }
 
     @SuppressLint("ResourceAsColor")
