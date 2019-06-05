@@ -306,7 +306,7 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     @Override
     public void enabledNavigation(boolean key) {
-        viewHome.dialog(key);
+        viewHome.enableNavigation(key);
     }
 
     @SuppressLint("ResourceAsColor")

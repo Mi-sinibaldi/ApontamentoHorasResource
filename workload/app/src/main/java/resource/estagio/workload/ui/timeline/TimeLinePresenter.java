@@ -23,7 +23,7 @@ public class TimeLinePresenter implements TimeLineContract.Presenter {
     @Override
     public void getTimeline(int month, int year) {
         hours = 0;
-        view.dialog(true);
+        view.showRecycler(true);
         EmployeeDomain employeeDomain = new EmployeeDomain();
         employeeDomain.irepository = new EmployeeRepository();
 
@@ -31,15 +31,14 @@ public class TimeLinePresenter implements TimeLineContract.Presenter {
             @Override
             public void onSuccessful(List<TimeEntryModel> value) {
                 view.showListTimeline(value);
-                view.showSucessMessage("Sucesso");
-                view.dialog(false);
+                view.showRecycler(false);
             }
 
             @Override
             public void onUnsuccessful(String error) {
-                view.dialog(false);
+                view.showRecycler(false);
                 if(errorConnection(error)) return;
-                view.showErrorMessage("Erro\n"+error);
+                view.showMessage(error, false);
             }
         });
     }
