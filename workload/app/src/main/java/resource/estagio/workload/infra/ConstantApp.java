@@ -37,6 +37,10 @@ public class ConstantApp {
 
     // Constantes do UI
     public static final String REGISTER_NOT_FOUND = "Nenhum registro encontrado!";
+    public static final String NUMBER_HOURS_IS_NULL = "Numero de horas esta vazia";
+    public static final String INSERT_REASON = "Coloque um motivo";
+    public static final String INSERT_HOURS = "Coloque suas horas";
+    public static final String LIST_IS_NULL = "Lista vazia";
 
     // constantes do Result e Historic Fragment
     public static final String TITLE_RESULT_MAIN_FRAGMENT = "Resultado";
