@@ -12,6 +12,13 @@
         <item name="android:windowBackground">@drawable/dialog_corner</item>
     </style>
 
+    <style name="CalendarTheme" parent="Theme.MaterialComponents.Light.Dialog" >
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+
+    </style>
+
     <style name="StyledTilEditTextTheme">
         <item name="colorControlNormal">#ffffff</item> // Cor padrão da linha
         <item name="android:colorAccent" tools:targetApi="lollipop">#ffffff</item>
