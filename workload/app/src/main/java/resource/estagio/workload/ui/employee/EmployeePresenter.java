@@ -29,15 +29,13 @@ public class EmployeePresenter implements EmployeeContract.Presenter {
                 filterList.add(colaborador);
             }
         }
-        if (filterList == null){
+        if (filterList == null) {
             adapterEmployee.filterAdapter(employee);
             view.adapterResult(adapterEmployee);
-        }
-        else {
+        } else {
             adapterEmployee.filterAdapter(filterList);
             view.adapterResult(adapterEmployee);
         }
-
     }
 
     @Override
@@ -87,8 +85,6 @@ public class EmployeePresenter implements EmployeeContract.Presenter {
         adapterEmployee = new AdapterEmployee(employee);
 
         view.adapterResult(adapterEmployee);
-
     }
-
 
 }

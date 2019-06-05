@@ -1,6 +1,5 @@
 package resource.estagio.workload.ui.employee.adapterEmployee;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.EmployeeModel;
 
-
-public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyViewHolder> implements View.OnClickListener {
+public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyViewHolder>
+        implements View.OnClickListener {
 
     private List<EmployeeModel> listEmployee;
     private int sizeList;
@@ -42,13 +41,10 @@ public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyView
         holder.nome.setText(model.getNome());
         holder.re.setText(model.getRe());
 
-
         if(sizeList == holder.getLayoutPosition())
             holder.constraintEmployee.setPadding(0,0,0,100);
         else
             holder.constraintEmployee.setPadding(0,0,0,0);
-
-
     }
 
     @Override
@@ -62,11 +58,9 @@ public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyView
     }
     @Override
     public void onClick(View v) {
-
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-
         Button nome;
         Button re;
         ConstraintLayout constraintEmployee;

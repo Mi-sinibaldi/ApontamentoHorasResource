@@ -10,9 +10,9 @@ public class EmployeeContract {
     }
 
     public interface Presenter {
+
         void filter(String nome);
 
         void createCollaborator();
-
     }
 }

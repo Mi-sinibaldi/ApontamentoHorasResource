@@ -11,11 +11,14 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricFragment;
@@ -34,13 +37,10 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
     private HomeAdminContract.View viewHome;
     private EmployeeContract.Presenter presenter;
 
-
     public EmployeeFragment(HomeAdminContract.View view) {
         viewHome = view;
         presenter = new EmployeePresenter(this);
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,12 +55,10 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         editTextEmployee.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
@@ -69,9 +67,9 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
 
             }
         });
+
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return view;
-
     }
 
     private void clickRecycler() {
@@ -82,7 +80,8 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                getFragmentManager().beginTransaction()
+                                getFragmentManager()
+                                        .beginTransaction()
                                         .replace(R.id.frame_admin, new ResultHistoricFragment(viewHome))
                                         .addToBackStack(null)
                                         .commit();
@@ -102,14 +101,12 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         );
     }
 
-
     private void loadUI() {
         buttonNameEmployee = view.findViewById(R.id.button_name_employee);
         buttonReEmployee = view.findViewById(R.id.button_re_employee);
         recyclerViewEmployee = view.findViewById(R.id.recyclerview_employee);
         editTextEmployee = view.findViewById(R.id.edit_text_employee);
         presenter = new EmployeePresenter(this);
-
     }
 
     @Override
