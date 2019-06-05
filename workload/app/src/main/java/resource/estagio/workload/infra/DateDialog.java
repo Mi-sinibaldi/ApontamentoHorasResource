@@ -26,7 +26,7 @@ public class DateDialog extends DialogFragment {
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
-                android.R.style.Theme_Material_Light_Dialog
+                R.style.CalendarTheme
                 , listener, year, month, day);
 
         datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
