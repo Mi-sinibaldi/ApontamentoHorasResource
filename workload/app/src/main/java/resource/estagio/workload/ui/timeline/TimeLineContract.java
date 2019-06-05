@@ -14,12 +14,11 @@ public class TimeLineContract {
     }
     public interface View{
 
-        void dialog(boolean Key);
+        void showRecycler(boolean Key);
         void showListTimeline(List<TimeEntryModel> list);
-        void allHours(Long hours);
-        void showErrorMessage(String text);
-        void showSucessMessage(String text);
 
         Context getActivity();
+
+        void showMessage(String error, boolean status);
     }
 }

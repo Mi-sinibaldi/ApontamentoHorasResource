@@ -73,7 +73,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     }
 
     @Override
-    public void dialog(boolean key) {
+    public void enableNavigation(boolean key) {
 
         for (int i = 0; i < navigation.getMenu().size(); i++) {
             navigation.getMenu().getItem(i).setEnabled(!key);
