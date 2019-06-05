@@ -22,6 +22,7 @@ import java.util.Objects;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.infra.App;
+import resource.estagio.workload.infra.ConstantApp;
 
 
 public class SettingsFragment extends Fragment {
@@ -72,7 +73,7 @@ public class SettingsFragment extends Fragment {
         dialog.setContentView(R.layout.activity_dialog_chooser);
         dialog.setCancelable(false);
         TextView text = dialog.findViewById(R.id.text_view_subtitle_project);
-        text.setText("Deseja realmente limpar as credenciais salvas?");
+        text.setText(ConstantApp.DIALOG_MESSAGE_CLEAN_SETTINGS);
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         dialog.show();
