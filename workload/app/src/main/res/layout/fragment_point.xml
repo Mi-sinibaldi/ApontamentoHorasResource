@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/swipe_refresh_point"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:id="@+id/swipe_refresh_point"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_height="match_parent"
+    <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:fillViewport="true">
 
 
@@ -44,9 +41,9 @@
                 android:layout_marginStart="37dp"
                 android:layout_marginTop="19dp"
                 android:layout_marginEnd="37dp"
-                android:text="@string/lan_amento"
+                android:text="@string/entry"
                 android:textColor="@color/colorWhite"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,11 +54,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="37dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="37dp"
-                android:text="@string/apontamento_de_horas_em_projeto"
+                android:text="@string/pointing_hours_project"
                 android:textColor="@color/colorWhite"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_title_point" />
@@ -73,7 +70,7 @@
                 android:layout_marginStart="37dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="37dp"
-                android:text="@string/cliente"
+                android:text="@string/customer"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -111,9 +108,9 @@
                 android:layout_marginStart="37dp"
                 android:layout_marginTop="37dp"
                 android:layout_marginEnd="37dp"
-                android:text="@string/projeto"
+                android:text="@string/project"
                 android:textColor="@color/colorWhite"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -141,6 +138,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/spinner_project_point"
                 app:layout_constraintStart_toStartOf="@+id/spinner_project_point"
                 app:layout_constraintTop_toTopOf="@+id/spinner_project_point" />
+
             <TextView
                 android:id="@+id/text_view_date_point"
                 android:layout_width="0dp"
@@ -176,9 +174,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="35dp"
+                app:hintAnimationEnabled="false"
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:hintAnimationEnabled="false"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/text_vew_invisible_point"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_hour_point">
@@ -194,7 +192,6 @@
                     android:theme="@style/StyledTilEditTextTheme"
                     tools:layout_editor_absoluteY="11dp" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <TextView
@@ -219,7 +216,7 @@
                 android:layout_marginStart="37dp"
                 android:layout_marginTop="37dp"
                 android:layout_marginEnd="37dp"
-                android:backgroundTint="#4050D5"
+                android:backgroundTint="@color/colorPrimary"
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -229,16 +226,16 @@
                     android:id="@+id/edit_text_name_project"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#4050D5"
-                    android:foregroundTint="#4050D5"
-                    android:ems="10"
                     android:background="@null"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:ems="10"
+                    android:foregroundTint="@color/colorPrimary"
                     android:gravity="start|top"
                     android:hint="Motivo"
-                    android:theme="@style/StyledLineEditTextTheme"
                     android:inputType="textMultiLine"
                     android:textColor="@color/colorWhite"
                     android:textColorHint="@color/colorWhiteTransparent"
+                    android:theme="@style/StyledLineEditTextTheme"
                     tools:targetApi="lollipop" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -252,8 +249,8 @@
                 android:layout_marginEnd="37dp"
                 android:layout_marginBottom="37dp"
                 android:background="@drawable/button_custom_radius"
-                android:text="@string/adicionar"
-                android:textColor="#4050D5"
+                android:text="@string/add"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -271,6 +268,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/button_project_confirm"
                 app:layout_constraintStart_toStartOf="@+id/button_project_confirm"
                 app:layout_constraintTop_toTopOf="@+id/button_project_confirm" />
+
             <TextView
                 android:id="@+id/text_vew_invisible_point"
                 android:layout_width="53dp"

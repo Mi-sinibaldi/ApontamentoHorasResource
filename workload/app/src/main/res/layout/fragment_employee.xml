@@ -31,23 +31,27 @@
             android:id="@+id/text_employee"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
+            android:layout_marginStart="37dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="37dp"
             android:fontFamily="@font/open_sans_bold"
-            android:text="@string/colaboradores"
+            android:text="@string/contributors"
             android:textColor="@color/colorWhite"
             android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/text_view_desc"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/text_view_desc"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_view_resource" />
 
         <TextView
             android:id="@+id/text_view_desc"
             android:layout_width="wrap_content"
             android:layout_height="17dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/open_sans"
-            android:text="@string/lista_de_colaboradores_cadastrados"
+            android:text="@string/list_contributors_register"
             android:textColor="@color/colorWhite"
             android:textSize="12dp"
             android:textStyle="normal"
@@ -65,7 +69,7 @@
             android:layout_marginEnd="35dp"
             android:layout_marginBottom="25dp"
             android:background="@drawable/seach_employee"
-            android:hint="@string/pesquisar"
+            android:hint="@string/search"
             android:maxLines="1"
             android:paddingLeft="37dp"
             android:textCursorDrawable="@drawable/color_cusor"
@@ -95,9 +99,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
-
-
-    
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
