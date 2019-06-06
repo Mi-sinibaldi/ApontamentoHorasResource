@@ -64,7 +64,7 @@
     <string name="result">Resultado</string>
     <string name="historic">Histórico</string>
     <string name="settings">Configurações</string>
-    <string name="enable_or_disable_touch">habilitar ou desabilitar Touch ID</string>
+    <string name="enable_or_disable_touch">Habilitar ou desabilitar Touch ID</string>
     <string name="clear_saved_credentials">Limpar credenciais salvas</string>
     <string name="notes_history">Histórico de Apontamentos</string>
 </resources>
