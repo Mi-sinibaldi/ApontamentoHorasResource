@@ -15,7 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import resource.estagio.workload.R;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.ui.DialogApp;
-import resource.estagio.workload.ui.employee.EmployeeFragment;
+import resource.estagio.workload.ui.admin.employee.EmployeeFragment;
 import resource.estagio.workload.ui.login.LoginActivity;
 
 public class HomeAdminActivity extends AppCompatActivity implements HomeAdminContract.View {

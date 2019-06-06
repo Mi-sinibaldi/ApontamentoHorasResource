@@ -17,7 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import resource.estagio.workload.R;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.ui.login.LoginActivity;
-import resource.estagio.workload.ui.point.PointFragment;
+import resource.estagio.workload.ui.home.point.PointFragment;
 
 public class HomeActivity extends AppCompatActivity implements HomeContract.View {
 

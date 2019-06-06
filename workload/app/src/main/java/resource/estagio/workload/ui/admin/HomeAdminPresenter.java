@@ -5,7 +5,7 @@ import android.view.MenuItem;
 import resource.estagio.workload.R;
 import resource.estagio.workload.ui.SettingsFragment;
 import resource.estagio.workload.ui.admin.client.ClientFragment;
-import resource.estagio.workload.ui.employee.EmployeeFragment;
+import resource.estagio.workload.ui.admin.employee.EmployeeFragment;
 
 public class HomeAdminPresenter implements HomeAdminContract.Presenter {
     private HomeAdminContract.View view;

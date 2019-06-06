@@ -1,6 +1,6 @@
-package resource.estagio.workload.ui.employee;
+package resource.estagio.workload.ui.admin.employee;
 
-import resource.estagio.workload.ui.employee.adapterEmployee.AdapterEmployee;
+import resource.estagio.workload.ui.admin.employee.adapterEmployee.AdapterEmployee;
 
 public class EmployeeContract {
 

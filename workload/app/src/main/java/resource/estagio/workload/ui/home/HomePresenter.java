@@ -4,8 +4,8 @@ import android.view.MenuItem;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.ui.SettingsFragment;
-import resource.estagio.workload.ui.point.PointFragment;
-import resource.estagio.workload.ui.timeline.TimelineFragment;
+import resource.estagio.workload.ui.home.point.PointFragment;
+import resource.estagio.workload.ui.home.timeline.TimelineFragment;
 
 public class HomePresenter implements HomeContract.Presenter {
 

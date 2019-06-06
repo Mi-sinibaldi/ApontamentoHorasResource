@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.timeline;
+package resource.estagio.workload.ui.home.timeline;
 
 import android.content.Context;
 

@@ -1,11 +1,11 @@
-package resource.estagio.workload.ui.employee;
+package resource.estagio.workload.ui.admin.employee;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 import resource.estagio.workload.data.remote.model.EmployeeModel;
-import resource.estagio.workload.ui.employee.adapterEmployee.AdapterEmployee;
+import resource.estagio.workload.ui.admin.employee.adapterEmployee.AdapterEmployee;
 
 public class EmployeePresenter implements EmployeeContract.Presenter {
 

@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.employee;
+package resource.estagio.workload.ui.admin.employee;
 
 
 import android.os.Bundle;
@@ -21,10 +21,10 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
-import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricFragment;
+import resource.estagio.workload.ui.admin.historicResult.ResultHistoricFragment;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
-import resource.estagio.workload.ui.employee.adapterEmployee.AdapterEmployee;
-import resource.estagio.workload.ui.employee.adapterEmployee.RecyclerItemClickListener;
+import resource.estagio.workload.ui.admin.employee.adapterEmployee.AdapterEmployee;
+import resource.estagio.workload.ui.admin.employee.adapterEmployee.RecyclerItemClickListener;
 
 public class EmployeeFragment extends Fragment implements EmployeeContract.View {
 

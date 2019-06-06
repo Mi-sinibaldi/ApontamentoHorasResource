@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.point;
+package resource.estagio.workload.ui.home.point;
 
 import android.content.Context;
 

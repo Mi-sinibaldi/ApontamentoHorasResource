@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.timeline;
+package resource.estagio.workload.ui.admin.HistoricResultAdmin.historic;
 
 import java.util.List;
 
@@ -8,20 +8,22 @@ import resource.estagio.workload.domain.employee.EmployeeDomain;
 import resource.estagio.workload.infra.BaseCallback;
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.DialogApp;
+import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricContract;
+import resource.estagio.workload.ui.timeline.TimeLineContract;
 
-public class TimeLinePresenter implements TimeLineContract.Presenter {
+public class HistoricFragmentPresenter implements ResultHistoricContract.historicPresenter {
 
-    private TimeLineContract.View view;
-    private long hours;
+    private ResultHistoricContract.historicView view;
+    private long hours = 0;
 
-    public TimeLinePresenter(TimeLineContract.View view) {
+    public HistoricFragmentPresenter(ResultHistoricContract.historicView view) {
         this.view = view;
     }
 
     @Override
     public void getTimeline(int month, int year) {
         hours = 0;
-        view.showRecycler(true);
+        view.dialog(true);
         EmployeeDomain employeeDomain = new EmployeeDomain();
         employeeDomain.irepository = new EmployeeRepository();
 
@@ -29,14 +31,14 @@ public class TimeLinePresenter implements TimeLineContract.Presenter {
             @Override
             public void onSuccessful(List<TimeEntryModel> value) {
                 view.showListTimeline(value);
-                view.showRecycler(false);
+                view.dialog(false);
             }
 
             @Override
             public void onUnsuccessful(String error) {
-                view.showRecycler(false);
+                view.dialog(false);
                 if(errorConnection(error)) return;
-                view.showMessage(error, false);
+                view.showErrorMessage(error);
             }
         });
     }

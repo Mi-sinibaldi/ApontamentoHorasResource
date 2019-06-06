@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.point;
+package resource.estagio.workload.ui.home.point;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -44,8 +44,6 @@ import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
 import resource.estagio.workload.ui.home.HomeContract;
-import resource.estagio.workload.ui.timeline.TimeLineContract;
-import resource.estagio.workload.ui.timeline.TimeLinePresenter;
 
 public class PointFragment extends Fragment implements PointContract.View,
         DatePickerDialog.OnDateSetListener {
