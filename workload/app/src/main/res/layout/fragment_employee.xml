@@ -71,6 +71,7 @@
             android:background="@drawable/seach_employee"
             android:hint="@string/search"
             android:maxLines="1"
+            android:textColor="@color/colorText"
             android:paddingLeft="37dp"
             android:textCursorDrawable="@drawable/color_cusor"
             app:layout_constraintBottom_toBottomOf="parent"
