@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin.result;
+package resource.estagio.workload.ui.admin.historicResult.result;
 
 
 import android.app.Dialog;
@@ -20,8 +20,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricContract;
-import resource.estagio.workload.ui.admin.HistoricResultAdmin.adapter.AdapterListResult;
+import resource.estagio.workload.ui.admin.historicResult.ResultHistoricContract;
+import resource.estagio.workload.ui.admin.historicResult.adapter.AdapterListResult;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 
 

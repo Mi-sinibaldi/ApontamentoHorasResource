@@ -1,11 +1,10 @@
-package resource.estagio.workload.ui.timeline;
+package resource.estagio.workload.ui.home.timeline;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +21,7 @@ import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.home.HomeContract;
-import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
+import resource.estagio.workload.ui.home.timeline.adapterTimeLine.AdapterTimeline;
 
 public class TimelineFragment extends Fragment implements TimeLineContract.View {
 

@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin.historic;
+package resource.estagio.workload.ui.admin.historicResult.historic;
 
 
 import android.app.Dialog;
@@ -23,9 +23,9 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
-import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricContract;
+import resource.estagio.workload.ui.admin.historicResult.ResultHistoricContract;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
-import resource.estagio.workload.ui.timeline.adapterTimeLine.AdapterTimeline;
+import resource.estagio.workload.ui.home.timeline.adapterTimeLine.AdapterTimeline;
 
 
 public class HistoricFragment extends Fragment implements ResultHistoricContract.historicView,

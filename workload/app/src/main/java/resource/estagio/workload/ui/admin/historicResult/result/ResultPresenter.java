@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin.result;
+package resource.estagio.workload.ui.admin.historicResult.result;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +14,7 @@ import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.DialogApp;
-import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricContract;
+import resource.estagio.workload.ui.admin.historicResult.ResultHistoricContract;
 
 public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 

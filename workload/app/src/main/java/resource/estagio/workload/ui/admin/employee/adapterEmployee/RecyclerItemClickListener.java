@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.employee.adapterEmployee;
+package resource.estagio.workload.ui.admin.employee.adapterEmployee;
 
 import android.content.Context;
 import android.view.GestureDetector;

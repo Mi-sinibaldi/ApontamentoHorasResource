@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.employee.adapterEmployee;
+package resource.estagio.workload.ui.admin.employee.adapterEmployee;
 
 import android.view.LayoutInflater;
 import android.view.View;

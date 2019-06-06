@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin.adapter;
+package resource.estagio.workload.ui.admin.historicResult.adapter;
 
 import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.ui.admin.HistoricResultAdmin.result.newListResultAdmin;
+import resource.estagio.workload.ui.admin.historicResult.result.newListResultAdmin;
 
 public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.MyViewHolder> {
 

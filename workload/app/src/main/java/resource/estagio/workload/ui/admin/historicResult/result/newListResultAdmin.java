@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin.result;
+package resource.estagio.workload.ui.admin.historicResult.result;
 
 public class newListResultAdmin {
 

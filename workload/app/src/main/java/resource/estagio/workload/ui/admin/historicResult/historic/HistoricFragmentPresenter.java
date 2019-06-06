@@ -1,4 +1,4 @@
-package resource.estagio.workload.ui.admin.HistoricResultAdmin.historic;
+package resource.estagio.workload.ui.admin.historicResult.historic;
 
 import java.util.List;
 
@@ -8,8 +8,7 @@ import resource.estagio.workload.domain.employee.EmployeeDomain;
 import resource.estagio.workload.infra.BaseCallback;
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.DialogApp;
-import resource.estagio.workload.ui.admin.HistoricResultAdmin.ResultHistoricContract;
-import resource.estagio.workload.ui.timeline.TimeLineContract;
+import resource.estagio.workload.ui.admin.historicResult.ResultHistoricContract;
 
 public class HistoricFragmentPresenter implements ResultHistoricContract.historicPresenter {
 
