@@ -129,7 +129,7 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
 
         dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.acativity_dialog_error);
+        dialog.setContentView(R.layout.activity_dialog_error);
         dialog.setCancelable(false);
 
         textDialogError = dialog.findViewById(R.id.text_dialog_error);

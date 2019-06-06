@@ -14,7 +14,7 @@ public class DialogApp {
     public static void showDialogConfirm(String message, boolean status, Context context) {
 
         Dialog dialog = createDialog (context,
-                status ? R.layout.activity_check : R.layout.acativity_dialog_error);
+                status ? R.layout.activity_check : R.layout.activity_dialog_error);
 
         TextView text = dialog.findViewById (status ? R.id.textDialog : R.id.text_dialog_error);
         text.setText (message);

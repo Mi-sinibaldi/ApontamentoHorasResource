@@ -165,7 +165,7 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     private void showDialogError(String text) {
         dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.acativity_dialog_error);
+        dialog.setContentView(R.layout.activity_dialog_error);
         dialog.setCancelable(false);
 
         textDialogError = dialog.findViewById(R.id.text_dialog_error);
