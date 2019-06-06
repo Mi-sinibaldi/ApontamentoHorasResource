@@ -29,7 +29,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/cliente"
+            android:text="@string/customer"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/button_card_client"

@@ -1,5 +1,6 @@
 package resource.estagio.workload.ui.admin.HistoricResultAdmin.adapter;
 
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,11 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
         holder.hours.setText(hours);
         holder.Allhours.setText(allHours + ":00");
 
+        if(sizeList == holder.getLayoutPosition())
+            holder.constraintAdapterResult.setPadding(0,0,0,100);
+        else
+            holder.constraintAdapterResult.setPadding(0,0,0,0);
+
     }
 
     @Override
@@ -81,6 +87,7 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
         CardView cardViewAllHours;
         CardView cardViewAllProjects;
         TextView texAllHoursProjects;
+        ConstraintLayout constraintAdapterResult;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -91,6 +98,7 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
 
             cardViewAllHours = itemView.findViewById(R.id.cardView_AllHours);
             cardViewAllProjects = itemView.findViewById(R.id.cardView_all_projects);
+            constraintAdapterResult = itemView.findViewById(R.id.constraint_adapter_result);
             texAllHoursProjects = itemView.findViewById(R.id.textView5_all_hours_result);
 
         }

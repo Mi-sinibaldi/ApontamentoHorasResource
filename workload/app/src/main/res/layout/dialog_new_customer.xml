@@ -13,7 +13,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_coner"
-        android:text="Salvar"
+        android:text="@string/save"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +29,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/button_corner_white"
-        android:text="Cancelar"
+        android:text="@string/cancel"
         android:textColor="@color/colorSwitch"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/button_save_customer"
@@ -43,7 +43,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Cadastro de novo cliente"
+        android:text="@string/new_customer_registration"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/cliente"
+            android:hint="@string/customer"
             android:theme="@style/StyledEditTextDialogCustomer" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

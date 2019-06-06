@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorLogin"
     tools:context=".ui.admin.client.ClientFragment">
-
-<android.support.constraint.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorLogin">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout4"
@@ -42,7 +38,8 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="37dp"
             android:fontFamily="@font/open_sans_bold"
-            android:text="Clientes e Projetos"
+            android:text="@string/client_and_project"
+            android:textAlignment="textStart"
             android:textColor="@color/colorWhite"
             android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,13 +50,14 @@
             android:id="@+id/text_view_sub_title_client"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="37dp"
+            android:layout_marginStart="39dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="37dp"
             android:fontFamily="@font/open_sans_regular"
-            android:text="Cadastrar novos clientes e projetos."
+            android:text="@string/register_new_clients_projects"
+            android:textAlignment="textStart"
             android:textColor="@color/colorWhite"
-            android:textSize="12dp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.086"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +72,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="25dp"
-            android:text="Selecione um cliente para ver os projetos"
+            android:text="@string/select_client_to_see_the_projects"
             android:textColor="@color/colorWhite"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -103,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_add_black_24dp"
                 android:gravity="center"
-                android:text="Adicionar novo cliente"
+                android:text="@string/add_new_customer"
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -128,7 +126,7 @@
             android:layout_height="30dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/button_white_client"
-            android:text="Salvar"
+            android:text="@string/save"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorLogin"
             android:textSize="14sp"
@@ -145,10 +143,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="@color/colorLogin"
-            android:text="Cancelar"
+            android:text="@string/cancel"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorWhite"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/button_save_client"
@@ -158,26 +156,6 @@
 
     </android.support.constraint.ConstraintLayout>
 
-   <!--
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_clients_client"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </ScrollView>
-       -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_clients_client"
         android:layout_width="0dp"
@@ -206,5 +184,3 @@
 
 
 </android.support.constraint.ConstraintLayout>
-
-</FrameLayout>
