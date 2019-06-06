@@ -8,6 +8,7 @@
     <color name="colorLogin">#4050D5</color>
     <color name="colorSwitch">#00CED9</color>
     <color name="errorColor">#F44336</color>
+    <color name="colorText">#707070</color>
     <color name="colorButtonNameEmployee">#303A97</color>
     <color name="colorButtonBack">#FF6573E4</color>
 </resources>
