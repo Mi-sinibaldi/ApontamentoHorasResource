@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -38,7 +39,7 @@ public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         EmployeeModel model = listEmployee.get(position);
-        holder.nome.setText(model.getNome());
+        holder.nome.setText(model.getName());
         holder.re.setText(model.getRe());
 
         if(sizeList == holder.getLayoutPosition())
@@ -61,14 +62,14 @@ public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        Button nome;
-        Button re;
+        TextView nome;
+        TextView re;
         ConstraintLayout constraintEmployee;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            nome = itemView.findViewById(R.id.button_name_employee);
-            re = itemView.findViewById(R.id.button_re_employee);
+            nome = itemView.findViewById(R.id.text_name_employee);
+            re = itemView.findViewById(R.id.text_re_employee);
             constraintEmployee = itemView.findViewById(R.id.constraint_employee);
         }
     }

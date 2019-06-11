@@ -2,6 +2,7 @@ package resource.estagio.workload.data.remote;
 
 import java.util.List;
 
+import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -21,4 +22,8 @@ public interface EmployeeAPI {
     Call<Void> postEntry(
             @Body TimeEntryModel timeEntryModel,
             @Header("Authorization") String token);
+
+    @GET("employee/list")
+    Call<List<EmployeeModel>> listEmployee(
+            @Header("Authorization") String toke);
 }

@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import resource.estagio.workload.data.remote.model.EmployeeModel;
+import resource.estagio.workload.data.repository.EmployeeRepository;
+import resource.estagio.workload.infra.App;
+import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.infra.ConstantApp;
+import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.employee.adapterEmployee.AdapterEmployee;
 
 public class EmployeePresenter implements EmployeeContract.Presenter {
@@ -21,70 +26,54 @@ public class EmployeePresenter implements EmployeeContract.Presenter {
     @Override
     public void filter(String nome) {
         ArrayList<EmployeeModel> filterList = new ArrayList<>();
-
-        for (EmployeeModel colaborador : employee) {
-            if (colaborador.getNome().toLowerCase().contains(nome.toLowerCase())) {
-                filterList.add(colaborador);
-            } else if (colaborador.getRe().toLowerCase().contains(nome.toLowerCase())) {
-                filterList.add(colaborador);
+        if(adapterEmployee != null) {
+            for (EmployeeModel colaborador : employee) {
+                if (colaborador.getName().toLowerCase().contains(nome.toLowerCase())) {
+                    filterList.add(colaborador);
+                } else if (colaborador.getRe().toLowerCase().contains(nome.toLowerCase())) {
+                    filterList.add(colaborador);
+                }
             }
-        }
-        if (filterList == null) {
-            adapterEmployee.filterAdapter(employee);
-            view.adapterResult(adapterEmployee);
-        } else {
-            adapterEmployee.filterAdapter(filterList);
-            view.adapterResult(adapterEmployee);
+            if (filterList == null) {
+                adapterEmployee.filterAdapter(employee);
+                view.adapterResult(adapterEmployee);
+            } else {
+                adapterEmployee.filterAdapter(filterList);
+                view.adapterResult(adapterEmployee);
+            }
         }
     }
 
     @Override
-    public void createCollaborator() {
-        EmployeeModel employeeModel = new EmployeeModel("Michelle Sinibaldi", "re037933");
-        employee.add(employeeModel);
+    public void listEmployee() {
+        view.showProgress(true);
+        new EmployeeRepository().listEmployee(App.getUser().getAccessToken(),
+                new BaseCallback<List<EmployeeModel>>() {
+                    @Override
+                    public void onSuccessful(List<EmployeeModel> value) {
+                        employee = value;
+                        adapterEmployee = new AdapterEmployee(employee);
 
-        employeeModel = new EmployeeModel("Elivel Nascimento", "re037926");
-        employee.add(employeeModel);
+                        view.adapterResult(adapterEmployee);
+                        view.showProgress(false);
+                    }
 
-        employeeModel = new EmployeeModel("Gabriella Aleo", "re037929");
-        employee.add(employeeModel);
+                    @Override
+                    public void onUnsuccessful(String error) {
+                        view.showProgress(false);
+                        if(errorConnection(error)) return;
+                        view.showDialog(error,false);
+                    }
+                });
 
-        employeeModel = new EmployeeModel("Guilherme Matos", "re037954");
-        employee.add(employeeModel);
+    }
 
-        employeeModel = new EmployeeModel("Guilherme Sassa", "re024242");
-        employee.add(employeeModel);
-
-        employeeModel = new EmployeeModel("Gerson Junior", "re0379534");
-        employee.add(employeeModel);
-
-        employeeModel = new EmployeeModel("Catia Souza", "re0379545");
-        employee.add(employeeModel);
-
-        employeeModel = new EmployeeModel("Mateus Matos", "re0379523");
-        employee.add(employeeModel);
-
-        employeeModel = new EmployeeModel("Marcus Galdino", "re0379501");
-        employee.add(employeeModel);
-
-        employeeModel = new EmployeeModel("Igor Oliveira", "re036748");
-        employee.add(employeeModel);
-
-        employeeModel = new EmployeeModel("Andrey Little", "re036748");
-        employee.add(employeeModel);
-
-        employeeModel = new EmployeeModel("Gabriel Couto", "re036748");
-        employee.add(employeeModel);
-
-        employeeModel = new EmployeeModel("Lucas Balloon", "re036748");
-        employee.add(employeeModel);
-
-        employeeModel = new EmployeeModel("Paulo Henrique", "re032398");
-        employee.add(employeeModel);
-
-        adapterEmployee = new AdapterEmployee(employee);
-
-        view.adapterResult(adapterEmployee);
+    private boolean errorConnection(String error) {
+        if (error.equals(ConstantApp.CONNECTION_INTERNET)) {
+            DialogApp.showDialogConnection(view.getActivity());
+            return true;
+        }
+        return false;
     }
 
 }

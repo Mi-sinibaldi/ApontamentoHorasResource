@@ -120,18 +120,8 @@ public class ResultHistoricFragment extends Fragment implements ResultHistoricCo
 
     private void backToCustomers() {
 
-        imageViewBackCollaborator.setOnClickListener(v -> Objects.requireNonNull(getActivity())
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frame_admin, new EmployeeFragment(viewHome))
-                .commit());
-
         imageViewBackCollaborator.setOnClickListener(v -> {
-            Objects.requireNonNull(getActivity())
-                    .getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.frame_admin, new EmployeeFragment(viewHome))
-                    .commit();
+            getActivity().onBackPressed();
             viewHome.enableNavigation(false);
         });
     }

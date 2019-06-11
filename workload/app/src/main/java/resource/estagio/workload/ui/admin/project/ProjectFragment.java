@@ -146,11 +146,10 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
 
     private void backToCustomers() {
 
-        imageViewBackCustomers.setOnClickListener(v -> getActivity()
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frame_admin, new ClientFragment(activityView))
-                .commit());
+        imageViewBackCustomers.setOnClickListener(v -> {
+            getActivity().onBackPressed();
+            activityView.enableNavigation(false);
+        });
     }
 
     private void setCustomerName() {

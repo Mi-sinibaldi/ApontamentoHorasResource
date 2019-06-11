@@ -1,6 +1,8 @@
 package resource.estagio.workload.ui.admin.employee;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +13,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +25,7 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.historicResult.ResultHistoricFragment;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.employee.adapterEmployee.AdapterEmployee;
@@ -32,10 +37,9 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
     private RecyclerView recyclerViewEmployee;
     private List<TimeEntryModel> list = new ArrayList<>();
     private View view;
-    private Button buttonNameEmployee;
-    private Button buttonReEmployee;
     private HomeAdminContract.View viewHome;
     private EmployeeContract.Presenter presenter;
+    private ProgressBar progressBarEmployee;
 
     public EmployeeFragment(HomeAdminContract.View view) {
         viewHome = view;
@@ -49,24 +53,8 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         super.onCreateView(inflater, container, savedInstanceState);
         view = inflater.inflate(R.layout.fragment_employee, container, false);
         loadUI();
-        presenter.createCollaborator();
+        presenter.listEmployee();
         clickRecycler();
-
-        editTextEmployee.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                presenter.filter(s.toString().trim());
-
-            }
-        });
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return view;
@@ -101,11 +89,30 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         );
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        editTextEmployee.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                presenter.filter(s.toString().trim());
+
+            }
+        });
+    }
+
     private void loadUI() {
-        buttonNameEmployee = view.findViewById(R.id.button_name_employee);
-        buttonReEmployee = view.findViewById(R.id.button_re_employee);
         recyclerViewEmployee = view.findViewById(R.id.recyclerview_employee);
         editTextEmployee = view.findViewById(R.id.edit_text_employee);
+        progressBarEmployee = view.findViewById(R.id.progressBar_employee);
         presenter = new EmployeePresenter(this);
     }
 
@@ -115,6 +122,28 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         recyclerViewEmployee.setLayoutManager(layoutManager);
         recyclerViewEmployee.setHasFixedSize(true);
         recyclerViewEmployee.setAdapter(adapterEmployee);
+    }
+
+    @Override
+    public void showDialog(String message, boolean status) {
+        DialogApp.showDialogConfirm(message, status, getActivity());
+    }
+
+    @Override
+    public void showProgress(boolean b) {
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+        recyclerViewEmployee.setVisibility(b ? View.GONE : View.VISIBLE);
+        progressBarEmployee.setVisibility(b ? View.VISIBLE : View.GONE);
+        progressBarEmployee.animate().setDuration(shortAnimTime).alpha(
+                b ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressBarEmployee.setVisibility(b ? View.VISIBLE : View.GONE);
+            }
+        });
+
+        viewHome.enableNavigation(b);
     }
 }
 

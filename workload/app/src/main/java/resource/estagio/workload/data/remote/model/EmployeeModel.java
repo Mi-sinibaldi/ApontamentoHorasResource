@@ -1,28 +1,47 @@
 package resource.estagio.workload.data.remote.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class EmployeeModel {
 
-    private String nome;
+    private long id;
+    private String name;
+    @SerializedName("username")
     private String re;
+    private boolean isAdmin;
 
-    public EmployeeModel() {
-    }
 
-    public EmployeeModel(String nome, String re) {
-        this.nome = nome;
+    public EmployeeModel(String name, String re) {
+        this.name = name;
         this.re = re;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getRe() {
         return re;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public void setRe(String re) {
