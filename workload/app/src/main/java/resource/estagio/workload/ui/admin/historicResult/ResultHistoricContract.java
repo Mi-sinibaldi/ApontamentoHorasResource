@@ -4,13 +4,14 @@ import android.content.Context;
 
 import java.util.List;
 
+import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.ui.admin.historicResult.result.newListResultAdmin;
 
 public class ResultHistoricContract {
 
     public interface historicPresenter{
-        void getTimeline(int month, int year);
+        void getTimeline(int month, int year, EmployeeModel employeeModel);
 
 
     }
@@ -28,7 +29,7 @@ public class ResultHistoricContract {
 
     public interface ResultPresenter{
 
-        void getListResult(int month, int year);
+        void getListResult(int month, int year, EmployeeModel employeeModel);
 
     }
     public interface ResultView{

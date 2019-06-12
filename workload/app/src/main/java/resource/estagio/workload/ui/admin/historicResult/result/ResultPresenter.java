@@ -6,6 +6,7 @@ import java.util.List;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.CustomerModel;
+import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.data.repository.CustomerRepository;
 import resource.estagio.workload.data.repository.EmployeeRepository;
@@ -35,13 +36,13 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
     }
 
     @Override
-    public void getListResult(int month, int year) {
+    public void getListResult(int month, int year, EmployeeModel employeeModel) {
         hours = 0;
         view.dialog(true);
 
         EmployeeDomain employeeDomain = new EmployeeDomain();
         employeeDomain.irepository = new EmployeeRepository();
-        employeeDomain.getWorkList(month, year, new BaseCallback<List<TimeEntryModel>>() {
+        employeeDomain.getWorkListModel(month, year, employeeModel, new BaseCallback<List<TimeEntryModel>>() {
             @Override
             public void onSuccessful(List<TimeEntryModel> value) {
                 timeLineValue = value;

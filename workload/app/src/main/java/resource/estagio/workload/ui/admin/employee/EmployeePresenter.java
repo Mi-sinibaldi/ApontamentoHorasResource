@@ -1,6 +1,8 @@
 package resource.estagio.workload.ui.admin.employee;
 
 
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +54,7 @@ public class EmployeePresenter implements EmployeeContract.Presenter {
                     @Override
                     public void onSuccessful(List<EmployeeModel> value) {
                         employee = value;
-                        adapterEmployee = new AdapterEmployee(employee);
+                        setAdapterListerner();
 
                         view.adapterResult(adapterEmployee);
                         view.showProgress(false);
@@ -66,6 +68,11 @@ public class EmployeePresenter implements EmployeeContract.Presenter {
                     }
                 });
 
+    }
+
+    private void setAdapterListerner() {
+        adapterEmployee = new AdapterEmployee(employee, (v, position, model) ->
+                view.goToResult(model));
     }
 
     private boolean errorConnection(String error) {

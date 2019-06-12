@@ -2,6 +2,7 @@ package resource.estagio.workload.domain.employee;
 
 import java.util.List;
 
+import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.infra.BaseCallback;
@@ -156,6 +157,20 @@ public class EmployeeDomain {
 
     public void getWorkList(int month, int year, final BaseCallback<List<TimeEntryModel>> listener) {
         irepository.getWorkList(month, year, new BaseCallback<List<TimeEntryModel>>() {
+            @Override
+            public void onSuccessful(List<TimeEntryModel> value) {
+                listener.onSuccessful(value);
+            }
+
+            @Override
+            public void onUnsuccessful(String error) {
+                listener.onUnsuccessful(error);
+            }
+        });
+    }
+
+    public void getWorkListModel(int month, int year, EmployeeModel model, final BaseCallback<List<TimeEntryModel>> listener) {
+        irepository.getWorkListModel(month, year, (int) model.getId(), new BaseCallback<List<TimeEntryModel>>() {
             @Override
             public void onSuccessful(List<TimeEntryModel> value) {
                 listener.onSuccessful(value);

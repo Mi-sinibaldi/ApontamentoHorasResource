@@ -16,14 +16,15 @@ import java.util.List;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.EmployeeModel;
 
-public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyViewHolder>
-        implements View.OnClickListener {
+public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyViewHolder> {
 
     private List<EmployeeModel> listEmployee;
     private int sizeList;
+    private AdapterEmployeeInterface listerner;
 
-    public AdapterEmployee(List<EmployeeModel> listEmployee) {
+    public AdapterEmployee(List<EmployeeModel> listEmployee, AdapterEmployeeInterface listerner) {
         this.listEmployee = listEmployee;
+        this.listerner = listerner;
         Collections.reverse(listEmployee);
         sizeList = listEmployee.size() - 1;
     }
@@ -42,10 +43,13 @@ public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyView
         holder.nome.setText(model.getName());
         holder.re.setText(model.getRe());
 
-        if(sizeList == holder.getLayoutPosition())
-            holder.constraintEmployee.setPadding(0,0,0,100);
+        if (sizeList == holder.getLayoutPosition())
+            holder.constraintEmployee.setPadding(0, 0, 0, 100);
         else
-            holder.constraintEmployee.setPadding(0,0,0,0);
+            holder.constraintEmployee.setPadding(0, 0, 0, 0);
+
+        holder.constraintEmployee.setOnClickListener(v -> listerner.goToResult(v, position,
+                listEmployee.get(holder.getLayoutPosition())));
     }
 
     @Override
@@ -53,12 +57,14 @@ public class AdapterEmployee extends RecyclerView.Adapter<AdapterEmployee.MyView
         return listEmployee.size();
     }
 
-    public void filterAdapter(List<EmployeeModel> filterList){
+    public void filterAdapter(List<EmployeeModel> filterList) {
         listEmployee = filterList;
         notifyDataSetChanged();
     }
-    @Override
-    public void onClick(View v) {
+
+    public interface AdapterEmployeeInterface {
+
+        public void goToResult(View v, int position, EmployeeModel model);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

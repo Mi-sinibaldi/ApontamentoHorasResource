@@ -45,6 +45,33 @@ public class EmployeeRepository extends Repository implements EmployeeContract.I
                 });
     }
 
+    @Override
+    public void getWorkListModel(int month, int year, int idUsuario, BaseCallback<List<TimeEntryModel>> onResult) {
+        super.data.restApi(EmployeeAPI.class).getWorkListModel(month, year, idUsuario, ConstantApp.BEARER + App.getUser().getAccessToken())
+                .enqueue(new Callback<List<TimeEntryModel>>() {
+                    @Override
+                    public void onResponse(Call<List<TimeEntryModel>>
+                                                   call, Response<List<TimeEntryModel>> response) {
+                        if (response.code() == UNAUTHORIDEZ) {
+                            onResult.onUnsuccessful(ConstantApp.UNAUTHORIDED_USER);
+                            return;
+                        }
+
+                        if (!response.isSuccessful() || response.body() == null) {
+                            onResult.onUnsuccessful(ConstantApp.UNLOADED_LIST);
+                            return;
+                        }
+
+                        onResult.onSuccessful(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<TimeEntryModel>> call, Throwable t) {
+                        onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
+                    }
+                });
+    }
+
 
     @Override
     public void postEntry(TimeEntryModel timeEntryModel, String token, BaseCallback<Void> onResult) {
