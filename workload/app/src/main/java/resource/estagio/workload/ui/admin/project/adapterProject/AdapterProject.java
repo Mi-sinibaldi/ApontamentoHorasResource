@@ -104,12 +104,14 @@ public class AdapterProject extends RecyclerView.Adapter<AdapterProject.MyViewHo
             textRenameProject.setVisibility(View.VISIBLE);
             imageDeleteProject.setVisibility(View.VISIBLE);
             viewBarProject.setVisibility(View.VISIBLE);
+            textActivityName.setAlpha(0.7F);
         }
 
         public void setInvisibleIcons() {
             textRenameProject.setVisibility(View.INVISIBLE);
             imageDeleteProject.setVisibility(View.INVISIBLE);
             viewBarProject.setVisibility(View.INVISIBLE);
+            textActivityName.setAlpha(1);
         }
 
         public MyViewHolder(@NonNull View itemView) {

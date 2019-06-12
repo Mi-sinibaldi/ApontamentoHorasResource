@@ -121,7 +121,7 @@ public class ResultPresenter implements ResultHistoricContract.ResultPresenter {
 
 
         view.showListResult(newListResult);
-        view.showSucessMessage(view.getActivity ().getString(R.string.success));
+        view.showSucessMessage(ConstantApp.SUCCESS);
         view.dialog(false);
     }
 

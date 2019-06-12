@@ -4,6 +4,7 @@ public class ConstantApp {
 
     // Constantes do repository
     public static final String BEARER = "bearer ";
+    public static final String SUCCESS = "Sucesso";
     public static final String CONNECTION_INTERNET = "Verifique sua conexão com a internet";
     public static final String UNLOADED_LIST = "Não foi possivel carregar a lista!";
     public static final String PROJECT_SEND_SUCCESS = "Projeto inserido com sucesso.";

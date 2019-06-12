@@ -49,10 +49,11 @@ public class ResultHistoricFragment extends Fragment implements ResultHistoricCo
         view = inflater.inflate(R.layout.fragment_result_historic, container, false);
 
         loadUI();
+        verifyMonth();
         getArgumentsResult();
         actionTabSelected();
         backToCustomers();
-        //verifyMonth();
+
         return view;
     }
 
@@ -64,8 +65,9 @@ public class ResultHistoricFragment extends Fragment implements ResultHistoricCo
 
     private void verifyMonth() {
         if (textMonth.isEmpty()) {
-            textSubtitle.setText(ConstantApp.SUBTITLE_RESULT_MAIN_FRAGMENT +
-                    new SimpleDateFormat("MMM").format(calendar.getTime()));
+//            textSubtitle.setText(ConstantApp.SUBTITLE_RESULT_MAIN_FRAGMENT +
+//                    new SimpleDateFormat("MMM").format(calendar.getTime()));
+            textMonth=new SimpleDateFormat("MMM").format(calendar.getTime());
         }
     }
 
@@ -76,13 +78,14 @@ public class ResultHistoricFragment extends Fragment implements ResultHistoricCo
         textSubtitle.setText(employee.getRe());
         fragment = new ResultFragment(viewHome, month, year, employee);
         loadFragment(fragment);
-
+        tabLayout.getTabAt(0).setText("Resultado / "+textMonth.toUpperCase());
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
                         textTitle.setText(employee.getName());
+                        tabLayout.getTabAt(0).setText("Resultado / "+textMonth.toUpperCase());
                         //textSubtitle.setText(ConstantApp.SUBTITLE_RESULT_MAIN_FRAGMENT + textMonth);
                         textSubtitle.setText(employee.getRe());
                         fragment = new ResultFragment(viewHome, month, year, employee);

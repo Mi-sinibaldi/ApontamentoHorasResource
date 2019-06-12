@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ import resource.estagio.workload.ui.admin.HomeAdminContract;
 
 public class AddProjectFragment extends Fragment implements AddProjectContract.View {
 
-    View view;
+    private View view;
     private EditText nameProject;
     private EditText demandNumber;
     private Spinner spinnerProjectType;
@@ -37,6 +38,7 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
     private AddProjectContract.Presenter presenter;
     private ActivityModel project;
     private ProgressBar progressSaveAddProject;
+    private ImageView imageViewBack;
 
     public AddProjectFragment(Customer customer, HomeAdminContract.View activityView) {
         this.customer = customer;
@@ -47,21 +49,27 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_project, container, false);
 
         loadUI();
+        checkArgument();
+        presenter.loadSpinnerActivityType();
+        selectItemInSpinner();
+        actionSaveProject();
+        backToProject();
 
+        return view;
+    }
+
+    private void checkArgument() {
         if (getArguments().getSerializable(ConstantApp.PROJECT) != null) {
             project = (ActivityModel) getArguments().getSerializable(ConstantApp.PROJECT);
             nameProject.setText(project.getName());
             demandNumber.setText(project.getDemandNumber());
         }
+    }
 
-        presenter.loadSpinnerActivityType();
-        selectItemInSpinner();
-
+    private void actionSaveProject() {
         buttonProjectConfirm.setOnClickListener(v -> {
             if (project == null) {
                 presenter.addProject(nameProject.getText().toString(),
@@ -72,11 +80,11 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
             }
 
         });
-        return view;
     }
 
     private void loadUI() {
         nameProject = view.findViewById(R.id.edit_text_name_project);
+        imageViewBack = view.findViewById(R.id.image_view_back_add_project);
         demandNumber = view.findViewById(R.id.edit_text_demand_number_project);
         spinnerProjectType = view.findViewById(R.id.spinner_type_activity_project);
         buttonProjectConfirm = view.findViewById(R.id.button_project_confirm);
@@ -104,11 +112,16 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
 
     @Override
     public void spinnerListActivityType(List<ActivityTypeModel> value) {
+        try {
 
-        ArrayAdapter<ActivityTypeModel> activityTypeModelArrayAdapter = new ArrayAdapter<>(
-                getActivity(), android.R.layout.simple_spinner_dropdown_item, value);
-        activityTypeModelArrayAdapter.setDropDownViewResource(R.layout.spinner_custom_dropdown);
-        spinnerProjectType.setAdapter(activityTypeModelArrayAdapter);
+            ArrayAdapter<ActivityTypeModel> activityTypeModelArrayAdapter = new ArrayAdapter<>(
+                    getActivity(), android.R.layout.simple_spinner_dropdown_item, value);
+            activityTypeModelArrayAdapter.setDropDownViewResource(R.layout.spinner_custom_dropdown);
+            spinnerProjectType.setAdapter(activityTypeModelArrayAdapter);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -123,6 +136,14 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
             public void onAnimationEnd(Animator animation) {
                 progressSaveAddProject.setVisibility(show ? View.VISIBLE : View.GONE);
             }
+        });
+    }
+
+    private void backToProject() {
+
+        imageViewBack.setOnClickListener(v -> {
+            getActivity().onBackPressed();
+            activityView.enableNavigation(false);
         });
     }
 }

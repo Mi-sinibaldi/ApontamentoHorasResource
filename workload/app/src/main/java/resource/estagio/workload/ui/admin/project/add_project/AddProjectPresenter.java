@@ -46,7 +46,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
                     @Override
                     public void onUnsuccessful(String error) {
-                        if(errorConnection(error)) return;
+                        if (errorConnection(error)) return;
                         view.showToast(error);
                     }
                 });
@@ -76,7 +76,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
                 @Override
                 public void onUnsuccessful(String error) {
                     view.showProgressSave(false);
-                    if(errorConnection(error)) return;
+                    if (errorConnection(error)) return;
                     view.showToast(error);
                 }
             });
@@ -103,7 +103,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
                 @Override
                 public void onUnsuccessful(String error) {
                     view.showProgressSave(false);
-                    if(errorConnection(error)) return;
+                    if (errorConnection(error)) return;
                     view.showToast(error);
                 }
             });
@@ -135,6 +135,7 @@ public class AddProjectPresenter implements AddProjectContract.Presenter {
 
         });
     }
+
     private boolean errorConnection(String error) {
         if (error.equals(ConstantApp.CONNECTION_INTERNET)) {
             DialogApp.showDialogConnection(view.getActivity());

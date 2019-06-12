@@ -13,6 +13,17 @@
         android:background="#4050D5"
         tools:context=".ui.home.point.PointFragment">
 
+        <ImageView
+            android:id="@+id/image_view_back_add_project"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/shape_oval_back"
+            android:src="@drawable/ic_arrow_left_black_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout_demand_number_project"
@@ -49,24 +60,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="37dp"
-            android:layout_marginTop="41dp"
             android:layout_marginEnd="37dp"
             android:src="@mipmap/resource_white"
             android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_back_add_project"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/image_view_back_add_project" />
 
 
         <TextView
             android:id="@+id/text_view_title_point"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="37dp"
-            android:layout_marginTop="19dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="37dp"
-            android:text="@string/project"
+            android:text="@string/register_project"
             android:textColor="@color/colorWhite"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -75,25 +85,11 @@
             app:layout_constraintTop_toBottomOf="@+id/image_view_resource_point" />
 
         <TextView
-            android:id="@+id/text_view_subtitle_project"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="37dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="37dp"
-            android:text="@string/register_project"
-            android:textColor="@color/colorWhite"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_title_point" />
-
-        <TextView
             android:id="@+id/text_view_type_activity_project"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="37dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="37dp"
             android:text="@string/type_activity"
             android:textColor="@color/colorWhite"
@@ -107,6 +103,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="37dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="37dp"
             android:background="@drawable/spinner_custom"
             android:focusableInTouchMode="false"
@@ -121,13 +118,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="37dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="37dp"
             android:backgroundTint="@color/colorWhite"
             android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_subtitle_project">
+            app:layout_constraintTop_toBottomOf="@+id/text_view_title_point">
 
             <EditText
                 android:id="@+id/edit_text_name_project"

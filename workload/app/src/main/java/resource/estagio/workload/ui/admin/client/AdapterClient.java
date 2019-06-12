@@ -116,11 +116,13 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.MyViewHold
         void setIconRemove() {
             imageViewDeleteClient.setVisibility(View.VISIBLE);
             imageViewIconClientAdapter.setVisibility(View.INVISIBLE);
+            textViewClientAdapter.setAlpha(0.7F);
         }
 
         void setIconClient() {
             imageViewDeleteClient.setVisibility(View.INVISIBLE);
             imageViewIconClientAdapter.setVisibility(View.VISIBLE);
+            textViewClientAdapter.setAlpha(1);
         }
 
         public void setItens(CustomerModel customerModel) {
