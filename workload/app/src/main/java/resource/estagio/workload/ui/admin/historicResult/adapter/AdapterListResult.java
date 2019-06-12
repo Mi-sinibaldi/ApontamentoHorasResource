@@ -1,10 +1,12 @@
 package resource.estagio.workload.ui.admin.historicResult.adapter;
 
+import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -13,16 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.admin.historicResult.result.newListResultAdmin;
 
 public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.MyViewHolder> {
 
+
     private List<newListResultAdmin> listTimeline;
+    private Context context;
     private int sizeList;
 
-    public AdapterListResult(List<newListResultAdmin> listTimeline) {
+    public AdapterListResult(List<newListResultAdmin> listTimeline, Context context) {
         this.listTimeline = listTimeline;
         //Collections.reverse(listTimeline);
+        this.context = context;
         sizeList = listTimeline.size() - 1;
     }
 
@@ -49,6 +55,7 @@ public class AdapterListResult extends RecyclerView.Adapter<AdapterListResult.My
 
         if(model.getAllHours() == 0) {
             holder.cardViewAllProjects.setVisibility(View.GONE);
+            Toast.makeText(context, ConstantApp.LIST_IS_NULL, Toast.LENGTH_LONG).show();
         }
 
 

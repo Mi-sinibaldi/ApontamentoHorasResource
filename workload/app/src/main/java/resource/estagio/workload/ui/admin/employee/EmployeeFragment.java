@@ -26,6 +26,7 @@ import java.util.List;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.historicResult.ResultHistoricFragment;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
@@ -36,7 +37,6 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
 
     private EditText editTextEmployee;
     private RecyclerView recyclerViewEmployee;
-    private List<TimeEntryModel> list = new ArrayList<>();
     private View view;
     private HomeAdminContract.View viewHome;
     private EmployeeContract.Presenter presenter;
@@ -59,35 +59,6 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return view;
-    }
-
-    private void clickRecycler() {
-        recyclerViewEmployee.addOnItemTouchListener(
-                new RecyclerItemClickListener(
-                        getContext(),
-                        recyclerViewEmployee,
-                        new RecyclerItemClickListener.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(View view, int position) {
-                                getFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.frame_admin, new ResultHistoricFragment(viewHome))
-                                        .addToBackStack(null)
-                                        .commit();
-                            }
-
-                            @Override
-                            public void onLongItemClick(View view, int position) {
-
-                            }
-
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            }
-                        }
-
-                )
-        );
     }
 
     @Override
@@ -150,7 +121,7 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
     @Override
     public void goToResult(EmployeeModel model) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("result",model);
+        bundle.putSerializable(ConstantApp.RESULT, model);
         ResultHistoricFragment fragment = new ResultHistoricFragment(viewHome);
         fragment.setArguments(bundle);
         getFragmentManager()

@@ -59,7 +59,7 @@ public class ResultHistoricFragment extends Fragment implements ResultHistoricCo
 
     private void getArgumentsResult() {
         Bundle arguments = getArguments();
-        employee = (EmployeeModel) arguments.getSerializable("result");
+        employee = (EmployeeModel) arguments.getSerializable(ConstantApp.RESULT);
     }
 
     private void verifyMonth() {

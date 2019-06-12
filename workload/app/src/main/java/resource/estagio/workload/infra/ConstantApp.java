@@ -56,6 +56,8 @@ public class ConstantApp {
     public static final String CUSTOMER = "customer";
     public static final String PROJECT = "project";
     public static final String ADD_PROJECT = "add_project";
+    public static final String RESULT = "result";
+
 
 
 }

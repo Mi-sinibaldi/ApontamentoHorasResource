@@ -96,7 +96,7 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
         recyclerViewListResult.setLayoutManager(layoutManager);
         recyclerViewListResult.setHasFixedSize(true);
 
-        adapterListResult = new AdapterListResult(newlistResult);
+        adapterListResult = new AdapterListResult(newlistResult, getContext());
         recyclerViewListResult.setAdapter(adapterListResult);
 
     }
