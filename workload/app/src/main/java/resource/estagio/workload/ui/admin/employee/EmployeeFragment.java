@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.ui.DialogApp;
 import resource.estagio.workload.ui.admin.historicResult.ResultHistoricFragment;
@@ -54,7 +55,7 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         view = inflater.inflate(R.layout.fragment_employee, container, false);
         loadUI();
         presenter.listEmployee();
-        clickRecycler();
+        //clickRecycler();
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return view;
@@ -144,6 +145,19 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         });
 
         viewHome.enableNavigation(b);
+    }
+
+    @Override
+    public void goToResult(EmployeeModel model) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("result",model);
+        ResultHistoricFragment fragment = new ResultHistoricFragment(viewHome);
+        fragment.setArguments(bundle);
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_admin, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }
 

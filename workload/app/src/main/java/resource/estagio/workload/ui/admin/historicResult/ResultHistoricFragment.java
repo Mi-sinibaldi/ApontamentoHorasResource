@@ -16,14 +16,13 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Objects;
 
+import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.R;
 import resource.estagio.workload.ui.admin.historicResult.historic.HistoricFragment;
 import resource.estagio.workload.ui.admin.historicResult.result.ResultFragment;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
-import resource.estagio.workload.ui.admin.employee.EmployeeFragment;
 
 public class ResultHistoricFragment extends Fragment implements ResultHistoricContract.mainResult {
 
@@ -38,6 +37,7 @@ public class ResultHistoricFragment extends Fragment implements ResultHistoricCo
     private int year = 0;
     private String textMonth = "";
     private Calendar calendar;
+    private EmployeeModel employee;
 
     public ResultHistoricFragment(HomeAdminContract.View view) {
         viewHome = view;
@@ -49,11 +49,17 @@ public class ResultHistoricFragment extends Fragment implements ResultHistoricCo
         view = inflater.inflate(R.layout.fragment_result_historic, container, false);
 
         loadUI();
+        getArgumentsResult();
         actionTabSelected();
-        loadFragment(fragment);
         backToCustomers();
-        verifyMonth();
+        //verifyMonth();
         return view;
+    }
+
+
+    private void getArgumentsResult() {
+        Bundle arguments = getArguments();
+        employee = (EmployeeModel) arguments.getSerializable("result");
     }
 
     private void verifyMonth() {
@@ -65,20 +71,27 @@ public class ResultHistoricFragment extends Fragment implements ResultHistoricCo
 
     private void actionTabSelected() {
 
+        textTitle.setText(employee.getName());
+        //textSubtitle.setText(ConstantApp.SUBTITLE_RESULT_MAIN_FRAGMENT + textMonth);
+        textSubtitle.setText(employee.getRe());
+        fragment = new ResultFragment(viewHome, month, year, employee);
+        loadFragment(fragment);
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-                        textTitle.setText(ConstantApp.TITLE_RESULT_MAIN_FRAGMENT);
-                        textSubtitle.setText(ConstantApp.SUBTITLE_RESULT_MAIN_FRAGMENT + textMonth);
-                        fragment = new ResultFragment(viewHome, month, year);
+                        textTitle.setText(employee.getName());
+                        //textSubtitle.setText(ConstantApp.SUBTITLE_RESULT_MAIN_FRAGMENT + textMonth);
+                        textSubtitle.setText(employee.getRe());
+                        fragment = new ResultFragment(viewHome, month, year, employee);
                         break;
 
                     case 1:
-                        textTitle.setText(ConstantApp.TITLE_HISTORIC_MAIN_FRAGMENT);
-                        textSubtitle.setText(ConstantApp.SUBTITLE_HISTORIC_MAIN_FRAGMENT);
-                        fragment = new HistoricFragment(viewHome, mainResult);
+                        textTitle.setText(employee.getName());
+                        textSubtitle.setText(employee.getRe());
+                        fragment = new HistoricFragment(viewHome, mainResult, employee);
                         break;
                 }
                 loadFragment(fragment);
@@ -102,12 +115,10 @@ public class ResultHistoricFragment extends Fragment implements ResultHistoricCo
         calendar.get(Calendar.MONTH);
         textTitle = view.findViewById(R.id.textTitle);
         textSubtitle = view.findViewById(R.id.textSubtitle);
-        fragment = new ResultFragment(viewHome, month, year);
+        fragment = new ResultFragment(viewHome, month, year, employee);
         tabLayout = view.findViewById(R.id.tabLayout);
         tabLayout.setSelectedTabIndicator(0);
         imageViewBackCollaborator = view.findViewById(R.id.image_view_back_collaborator);
-        textTitle.setText(ConstantApp.TITLE_RESULT_MAIN_FRAGMENT);
-        textSubtitle.setText(ConstantApp.SUBTITLE_RESULT_MAIN_FRAGMENT + textMonth);
     }
 
     private void loadFragment(Fragment fragment) {

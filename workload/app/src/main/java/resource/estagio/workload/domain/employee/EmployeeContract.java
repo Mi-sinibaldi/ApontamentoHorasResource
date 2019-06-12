@@ -11,6 +11,8 @@ public class EmployeeContract {
     public interface IRepository{
         void getWorkList(int month, int year, BaseCallback<List<TimeEntryModel>> onResult);
 
+        void getWorkListModel(int month, int year, int idUsuario, BaseCallback<List<TimeEntryModel>> onResult);
+
         void postEntry(TimeEntryModel timeEntryModel, String token, BaseCallback<Void> onResult);
 
         void listEmployee(String token, BaseCallback<List<EmployeeModel>> onResult);

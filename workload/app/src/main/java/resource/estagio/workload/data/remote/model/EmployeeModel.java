@@ -2,7 +2,9 @@ package resource.estagio.workload.data.remote.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EmployeeModel {
+import java.io.Serializable;
+
+public class EmployeeModel implements Serializable {
 
     private long id;
     private String name;

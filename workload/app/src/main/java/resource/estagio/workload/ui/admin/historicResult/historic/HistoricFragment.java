@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.ui.admin.historicResult.ResultHistoricContract;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
@@ -47,12 +48,14 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
     private Dialog dialog;
     private HomeAdminContract.View viewHome;
     private SwipeRefreshLayout swipeRefreshHistoric;
+    private EmployeeModel employeeModel;
 
     private Button buttonError;
 
-    public HistoricFragment(HomeAdminContract.View view,ResultHistoricContract.mainResult mainResult) {
+    public HistoricFragment(HomeAdminContract.View view, ResultHistoricContract.mainResult mainResult, EmployeeModel employee) {
         this.viewHome = view;
         this.mainResult = mainResult;
+        this.employeeModel = employee;
     }
 
 
@@ -107,7 +110,7 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
 
         swipeRefreshHistoric.setOnRefreshListener(() -> {
             presenter = new HistoricFragmentPresenter(view);
-            presenter.getTimeline(month, year);
+            presenter.getTimeline(month, year, employeeModel);
         });
     }
 
@@ -130,7 +133,7 @@ public class HistoricFragment extends Fragment implements ResultHistoricContract
         textViewYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
         month = calendar.get(Calendar.MONTH) + 1;
         year = calendar.get(Calendar.YEAR);
-        presenter.getTimeline(month, year);
+        presenter.getTimeline(month, year, employeeModel);
         setDateResultFragment(month, year,textViewMonth.getText().toString());
     }
 

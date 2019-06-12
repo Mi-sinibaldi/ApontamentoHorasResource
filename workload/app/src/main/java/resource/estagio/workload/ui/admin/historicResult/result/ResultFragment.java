@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.ui.admin.historicResult.ResultHistoricContract;
 import resource.estagio.workload.ui.admin.historicResult.adapter.AdapterListResult;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
@@ -40,12 +41,14 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
     private int month;
     private int year;
     private Calendar calendar;
+    private EmployeeModel employeeModel;
 
 
-    public ResultFragment(HomeAdminContract.View viewHome, int m, int y) {
+    public ResultFragment(HomeAdminContract.View viewHome, int m, int y, EmployeeModel employee) {
         this.viewHome = viewHome;
         this.year = y;
         this.month = m;
+        this.employeeModel = employee;
     }
 
 
@@ -65,9 +68,9 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
         if (year == 0 || month == 0) {
             month = calendar.get(Calendar.MONTH) + 1;
             year = calendar.get(Calendar.YEAR);
-            presenter.getListResult(month, year);
+            presenter.getListResult(month, year, employeeModel);
         } else {
-            presenter.getListResult(month, year);
+            presenter.getListResult(month, year, employeeModel);
         }
     }
 
@@ -76,7 +79,7 @@ public class ResultFragment extends Fragment implements ResultHistoricContract.R
 
         swipe_Refresh_result.setOnRefreshListener(() -> {
             presenter = new ResultPresenter(view);
-            presenter.getListResult(month, year);
+            presenter.getListResult(month, year, employeeModel);
         });
     }
 

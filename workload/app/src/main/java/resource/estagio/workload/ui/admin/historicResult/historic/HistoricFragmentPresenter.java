@@ -2,6 +2,7 @@ package resource.estagio.workload.ui.admin.historicResult.historic;
 
 import java.util.List;
 
+import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.data.repository.EmployeeRepository;
 import resource.estagio.workload.domain.employee.EmployeeDomain;
@@ -20,13 +21,13 @@ public class HistoricFragmentPresenter implements ResultHistoricContract.histori
     }
 
     @Override
-    public void getTimeline(int month, int year) {
+    public void getTimeline(int month, int year, EmployeeModel employeeModel) {
         hours = 0;
         view.dialog(true);
         EmployeeDomain employeeDomain = new EmployeeDomain();
         employeeDomain.irepository = new EmployeeRepository();
 
-        employeeDomain.getWorkList(month, year, new BaseCallback<List<TimeEntryModel>>() {
+        employeeDomain.getWorkListModel(month, year, employeeModel, new BaseCallback<List<TimeEntryModel>>() {
             @Override
             public void onSuccessful(List<TimeEntryModel> value) {
                 view.showListTimeline(value);
@@ -36,7 +37,7 @@ public class HistoricFragmentPresenter implements ResultHistoricContract.histori
             @Override
             public void onUnsuccessful(String error) {
                 view.dialog(false);
-                if(errorConnection(error)) return;
+                if (errorConnection(error)) return;
                 view.showErrorMessage(error);
             }
         });
