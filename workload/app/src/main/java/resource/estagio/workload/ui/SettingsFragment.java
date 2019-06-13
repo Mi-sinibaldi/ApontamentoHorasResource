@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class SettingsFragment extends Fragment {
     private Button buttonChosserYes;
     private Button buttonChosserNo;
     private Dialog dialog;
+    private ImageView imageViewExitAdmin;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -44,9 +46,10 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate (R.layout.fragment_settings, container, false);
 
         loadUi (view);
-        haveFingerPrint ();
+        haveFingerPrint();
         initSwitch ();
         actionSwitch ();
+        imageViewExitAdmin.setOnClickListener (v -> DialogApp.showExitDialog(getActivity()));
         buttonClearPrefSettings.setOnClickListener (v -> showDialogChooser ());
 
         return view;
@@ -63,6 +66,8 @@ public class SettingsFragment extends Fragment {
         buttonClearPrefSettings = view.findViewById (R.id.buttonClearPrefSettings);
         textNameUserSettings = view.findViewById (R.id.textView_name_user_settings);
         textNameUserSettings.setText (getString(R.string.hello) + App.getUser ().getName ());
+        imageViewExitAdmin=view.findViewById (R.id.image_view_exit_admin);
+        imageViewExitAdmin.setVisibility(App.getUser().isAdmin()? View.VISIBLE : View.GONE);
     }
 
     private void showDialogChooser() {

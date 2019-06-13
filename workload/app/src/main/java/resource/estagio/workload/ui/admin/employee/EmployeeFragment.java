@@ -28,6 +28,7 @@ import resource.estagio.workload.data.remote.model.EmployeeModel;
 import resource.estagio.workload.data.remote.model.TimeEntryModel;
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.DialogApp;
+import resource.estagio.workload.ui.HomeDefault;
 import resource.estagio.workload.ui.admin.historicResult.ResultHistoricFragment;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.employee.adapterEmployee.AdapterEmployee;
@@ -41,6 +42,7 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
     private HomeAdminContract.View viewHome;
     private EmployeeContract.Presenter presenter;
     private ProgressBar progressBarEmployee;
+    private int shortAnimTime;
 
     public EmployeeFragment(HomeAdminContract.View view) {
         viewHome = view;
@@ -86,6 +88,8 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         editTextEmployee = view.findViewById(R.id.edit_text_employee);
         progressBarEmployee = view.findViewById(R.id.progressBar_employee);
         presenter = new EmployeePresenter(this);
+        shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
     }
 
     @Override
@@ -103,8 +107,6 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
 
     @Override
     public void showProgress(boolean b) {
-        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
         recyclerViewEmployee.setVisibility(b ? View.GONE : View.VISIBLE);
         progressBarEmployee.setVisibility(b ? View.VISIBLE : View.GONE);
         progressBarEmployee.animate().setDuration(shortAnimTime).alpha(

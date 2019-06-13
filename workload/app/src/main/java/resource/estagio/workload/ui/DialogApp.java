@@ -1,13 +1,17 @@
 package resource.estagio.workload.ui;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import resource.estagio.workload.R;
+import resource.estagio.workload.infra.App;
+import resource.estagio.workload.ui.login.LoginActivity;
 
 public class DialogApp {
 
@@ -24,6 +28,8 @@ public class DialogApp {
         });
     }
 
+
+
     public static Dialog createDialog(Context context, int layout) {
         Dialog dialog = new Dialog (context, R.style.CustomAlertDialog);
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
@@ -31,7 +37,7 @@ public class DialogApp {
         dialog.setCancelable (false);
         dialog.getWindow ().setSoftInputMode (WindowManager.LayoutParams.
                 SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        dialog.show ();
+        dialog.show();
         return dialog;
     }
 
@@ -41,4 +47,19 @@ public class DialogApp {
         buttonConnection.setOnClickListener (v -> dialog.dismiss ());
     }
 
+    public static void showExitDialog(Activity activity) {
+
+        Dialog dialog = createDialog (activity, R.layout.activity_dialog_chooser );
+        Button buttonChosserYes = dialog.findViewById(R.id.button_dialog_chooser_yes);
+        Button buttonChosserNo = dialog.findViewById(R.id.buttton_dialog_chooser_no);
+
+        buttonChosserYes.setOnClickListener(v -> {
+            App.getPref().clear();
+            Intent intent = new Intent(activity, LoginActivity.class);
+            dialog.dismiss();
+            activity.startActivity(intent);
+            activity.finish();
+        });
+        buttonChosserNo.setOnClickListener(v -> dialog.dismiss());
+    }
 }

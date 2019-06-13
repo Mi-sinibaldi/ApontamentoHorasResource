@@ -1,22 +1,13 @@
 package resource.estagio.workload.ui.admin;
 
-import android.view.MenuItem;
-
-import androidx.fragment.app.Fragment;
+import resource.estagio.workload.ui.HomeDefault;
 
 public class HomeAdminContract {
 
-    interface Presenter {
-
-        void identifyItemClicked(MenuItem menuItem);
+    interface Presenter extends HomeDefault.Presenter {
     }
 
-    public interface View {
+    public interface View extends HomeDefault.View {
 
-        void showFragment(Fragment fragment);
-
-        void showDialogChooser();
-
-        void enableNavigation(boolean key);
     }
 }

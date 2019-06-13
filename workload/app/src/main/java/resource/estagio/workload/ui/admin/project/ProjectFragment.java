@@ -23,6 +23,7 @@ import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.DialogApp;
+import resource.estagio.workload.ui.HomeDefault;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.client.ClientFragment;
 import resource.estagio.workload.ui.admin.project.adapterProject.AdapterProject;
@@ -47,6 +48,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
     private AdapterProject.AdapterProjectInterface listener;
     private List<ActivityModel> activityModels;
     private List<ActivityModel> activityModelsDelete;
+    private int shortAnimTime;
 
     public ProjectFragment(HomeAdminContract.View activityView) {
         this.activityView = activityView;
@@ -167,6 +169,7 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
         buttonSaveProject = view.findViewById(R.id.button_save_project);
         textViewCancelProject = view.findViewById(R.id.text_view_cancel_project);
         textViewInsideProject = view.findViewById(R.id.text_view_inside_project);
+        shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
     }
 
     @Override
@@ -189,8 +192,6 @@ public class ProjectFragment extends Fragment implements ProjectContract.View {
 
     @Override
     public void showProgress(boolean result) {
-
-        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
         recyclerProject.setVisibility(result ? View.GONE : View.VISIBLE);
         progressBarProjectAdmin.setVisibility(result ? View.VISIBLE : View.GONE);

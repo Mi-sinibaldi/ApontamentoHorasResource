@@ -43,6 +43,8 @@ import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.infra.DateDialog;
 import resource.estagio.workload.infra.InputFilterMinMax;
+import resource.estagio.workload.ui.HomeDefault;
+import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.home.HomeContract;
 
 public class PointFragment extends Fragment implements PointContract.View,
@@ -52,7 +54,7 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     private PointContract.Presenter presenter;
 
-    private HomeContract.View viewHome;
+    private HomeDefault.View viewHome;
     private View view;
     private EditText editTextDatePoint;
     private EditText editTextHourPoint;
@@ -78,9 +80,10 @@ public class PointFragment extends Fragment implements PointContract.View,
     private TextInputLayout inputLayoutReasonPoint;
 
     // Construtor Vazio
-    public PointFragment(HomeContract.View view) {
-        this.viewHome = view;
+    public PointFragment(HomeDefault.View view) {
+            this.viewHome = view;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -304,6 +307,7 @@ public class PointFragment extends Fragment implements PointContract.View,
 
     @Override
     public void enabledNavigation(boolean key) {
+
         viewHome.enableNavigation(key);
     }
 

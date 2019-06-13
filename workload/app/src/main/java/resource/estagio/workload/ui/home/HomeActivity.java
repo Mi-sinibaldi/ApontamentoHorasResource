@@ -1,5 +1,6 @@
 package resource.estagio.workload.ui.home;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,17 +17,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import resource.estagio.workload.R;
 import resource.estagio.workload.infra.App;
+import resource.estagio.workload.ui.HomeDefault;
 import resource.estagio.workload.ui.login.LoginActivity;
 import resource.estagio.workload.ui.home.point.PointFragment;
 
-public class HomeActivity extends AppCompatActivity implements HomeContract.View {
+public class HomeActivity extends AppCompatActivity implements HomeContract.View{
 
     private FrameLayout frameLayoutHome;
     private long backPresssedTime;
     private Toast backToast;
     private BottomNavigationView navigation;
     private HomeContract.Presenter presenter;
-    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,25 +81,9 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
         }
     }
 
+
     @Override
-    public void showDialogChooser() {
-        dialog = new Dialog(this, R.style.CustomAlertDialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.activity_dialog_chooser);
-        dialog.setCancelable(false);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.
-                SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        dialog.show();
-
-        Button buttonChosserYes = dialog.findViewById(R.id.button_dialog_chooser_yes);
-        Button buttonChosserNo = dialog.findViewById(R.id.buttton_dialog_chooser_no);
-
-        buttonChosserYes.setOnClickListener(v -> {
-            App.getPref().clear();
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        });
-        buttonChosserNo.setOnClickListener(v -> dialog.dismiss());
+    public Activity getActivity() {
+        return this;
     }
 }

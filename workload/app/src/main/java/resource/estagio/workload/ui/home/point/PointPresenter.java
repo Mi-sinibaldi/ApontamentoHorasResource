@@ -113,7 +113,7 @@ public class PointPresenter implements PointContract.Presenter {
                 view.enabledNavigation (false);
                 if (value.isEmpty ()) {
                     view.disableSpinnerActivity ();
-                    view.notification (ConstantApp.LIST_IS_NULL);
+                    view.notification (ConstantApp.CUSTOMER_WITHOUT_PROJECT);
                 } else
                     view.loadSpinnerActivity (value);
             }

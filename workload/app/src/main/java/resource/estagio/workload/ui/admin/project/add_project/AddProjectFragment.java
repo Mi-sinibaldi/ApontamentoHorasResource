@@ -24,6 +24,7 @@ import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
 import resource.estagio.workload.domain.Customer;
 import resource.estagio.workload.infra.ConstantApp;
+import resource.estagio.workload.ui.HomeDefault;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 
 public class AddProjectFragment extends Fragment implements AddProjectContract.View {
