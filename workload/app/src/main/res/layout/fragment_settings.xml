@@ -84,4 +84,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_title_point" />
+
+    <ImageView
+        android:id="@+id/image_view_exit_admin"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/shape_oval_back"
+        android:src="@mipmap/ic_exit_admin"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
