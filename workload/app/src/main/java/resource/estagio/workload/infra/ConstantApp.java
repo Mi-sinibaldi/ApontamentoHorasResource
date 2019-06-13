@@ -26,9 +26,9 @@ public class ConstantApp {
     public static final String REPOSITORY_NULL = "Repositorio vazio!";
     public static final String DEMAND_NUMBER_REQUIRED = "Número de demanda requerido é nulo ou vazio";
     public static final String ACTIVITY_TYPE_REQUIRED = "Tipo de atividade requerida é nula";
-    public static final String CUSTOMER_IS_NULL = "Cliente requerido é nulo";
-    public static final String USERNAME_IS_REQUIRED = "Nome de usuário requerido é nulo ou vazio";
-    public static final String PASSWORD_IS_REQUIRED = "Senha requerida é nula ou vazia";
+    public static final String CUSTOMER_IS_NULL = "Cliente não pode ser vazio";
+    public static final String USERNAME_IS_REQUIRED = "Preencha o campo login";
+    public static final String PASSWORD_IS_REQUIRED = "Preencha o campo senha";
     public static final String PASSWORD_MIN_FOUR = "A senha precisa ter no mínimo 4 caracteres";
     public static final String CUSTOMER_WITHOUT_PROJECT = "Cliente sem Projeto";
     public static final String CUSTOMER_NOT_FOUND = "Cliente não encontrado";
@@ -38,7 +38,7 @@ public class ConstantApp {
 
     // Constantes do UI
     public static final String REGISTER_NOT_FOUND = "Nenhum registro encontrado!";
-    public static final String NUMBER_HOURS_IS_NULL = "Numero de horas esta vazia";
+    public static final String NUMBER_HOURS_IS_NULL = "Numero não pode ser vazio";
     public static final String INSERT_REASON = "Coloque um motivo";
     public static final String INSERT_HOURS = "Coloque suas horas";
     public static final String LIST_IS_NULL = "Lista vazia";

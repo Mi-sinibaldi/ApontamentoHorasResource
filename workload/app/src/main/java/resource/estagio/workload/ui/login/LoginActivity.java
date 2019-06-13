@@ -206,7 +206,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         //saveLoginSharedPref.saveLogin(user.getName(),passwordView.getText().toString());
         saveLoginSharedPref.saveLogin (usernameView.getText ().toString (),
                 passwordView.getText ().toString ());
-        Toast.makeText (LoginActivity.this, getString (R.string.saved_login), Toast.LENGTH_SHORT).show ();
+        //Toast.makeText (LoginActivity.this, getString (R.string.saved_login), Toast.LENGTH_SHORT).show ();
     }
 
     public void verifyLogin() {
