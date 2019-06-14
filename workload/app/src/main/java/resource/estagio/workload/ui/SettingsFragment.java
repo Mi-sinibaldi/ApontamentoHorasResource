@@ -46,10 +46,10 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate (R.layout.fragment_settings, container, false);
 
         loadUi (view);
-        haveFingerPrint();
+        haveFingerPrint ();
         initSwitch ();
         actionSwitch ();
-        imageViewExitAdmin.setOnClickListener (v -> DialogApp.showExitDialog(getActivity()));
+        imageViewExitAdmin.setOnClickListener (v -> DialogApp.showExitDialog (getActivity ()));
         buttonClearPrefSettings.setOnClickListener (v -> showDialogChooser ());
 
         return view;
@@ -65,9 +65,9 @@ public class SettingsFragment extends Fragment {
         switchFingerPrint = view.findViewById (R.id.switchFingerPrint);
         buttonClearPrefSettings = view.findViewById (R.id.buttonClearPrefSettings);
         textNameUserSettings = view.findViewById (R.id.textView_name_user_settings);
-        textNameUserSettings.setText (getString(R.string.hello) + App.getUser ().getName ());
-        imageViewExitAdmin=view.findViewById (R.id.image_view_exit_admin);
-        imageViewExitAdmin.setVisibility(App.getUser().isAdmin()? View.VISIBLE : View.GONE);
+        textNameUserSettings.setText (getString (R.string.hello) + App.getUser ().getName ());
+        imageViewExitAdmin = view.findViewById (R.id.image_view_exit_admin);
+        imageViewExitAdmin.setVisibility (App.getUser ().isAdmin () ? View.VISIBLE : View.GONE);
     }
 
     private void showDialogChooser() {
@@ -85,10 +85,10 @@ public class SettingsFragment extends Fragment {
         buttonChosserNo = dialog.findViewById (R.id.buttton_dialog_chooser_no);
 
         buttonChosserYes.setOnClickListener (v -> {
-            App.getPref().clear();
-            initSwitch();
+            App.getPref ().clear ();
+            initSwitch ();
             switchFingerPrint.setChecked (false);
-            dialog.dismiss();
+            dialog.dismiss ();
 
             Toast.makeText (getActivity (), getString (R.string.clear_preferences), Toast.LENGTH_SHORT).show ();
         });

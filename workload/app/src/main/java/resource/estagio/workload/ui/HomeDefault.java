@@ -5,7 +5,7 @@ import android.view.MenuItem;
 import androidx.fragment.app.Fragment;
 
 
-public class HomeDefault  {
+public class HomeDefault {
 
     public interface Presenter {
 

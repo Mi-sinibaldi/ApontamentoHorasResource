@@ -3,15 +3,12 @@ package resource.estagio.workload.ui.admin;
 import android.view.MenuItem;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.ui.HomeDefault;
 import resource.estagio.workload.ui.SettingsFragment;
 import resource.estagio.workload.ui.admin.client.ClientFragment;
 import resource.estagio.workload.ui.admin.employee.EmployeeFragment;
-import resource.estagio.workload.ui.home.HomeActivity;
-import resource.estagio.workload.ui.home.HomeContract;
 import resource.estagio.workload.ui.home.point.PointFragment;
 
-public class HomeAdminPresenter implements HomeAdminContract.Presenter{
+public class HomeAdminPresenter implements HomeAdminContract.Presenter {
     private HomeAdminContract.View view;
 
     public HomeAdminPresenter(HomeAdminContract.View view) {
@@ -20,20 +17,19 @@ public class HomeAdminPresenter implements HomeAdminContract.Presenter{
 
     @Override
     public void identifyItemClicked(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
+        switch (menuItem.getItemId ()) {
             case R.id.ic_employee_admin:
-                view.showFragment(new EmployeeFragment(view));
+                view.showFragment (new EmployeeFragment (view));
                 break;
             case R.id.ic_appointments_admin:
-                view.showFragment (new PointFragment(view));
+                view.showFragment (new PointFragment (view));
                 break;
             case R.id.ic_customer_admin:
-                view.showFragment(new ClientFragment(view));
+                view.showFragment (new ClientFragment (view));
                 break;
             case R.id.ic_config_admin:
-                view.showFragment(new SettingsFragment());
+                view.showFragment (new SettingsFragment ());
                 break;
-
         }
     }
 }
