@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
-import resource.estagio.workload.domain.Customer;
+import resource.estagio.workload.domain.customer.Customer;
 
 public class CustomerModel implements Serializable {
 

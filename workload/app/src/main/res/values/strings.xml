@@ -67,4 +67,5 @@
     <string name="enable_or_disable_touch">Habilitar ou desabilitar Touch ID</string>
     <string name="clear_saved_credentials">Limpar credenciais salvas</string>
     <string name="notes_history">Histórico de Apontamentos</string>
+    <string name="edit">Editar</string>
 </resources>

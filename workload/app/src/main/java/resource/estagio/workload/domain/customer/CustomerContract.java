@@ -1,4 +1,4 @@
-package resource.estagio.workload.domain;
+package resource.estagio.workload.domain.customer;
 
 import java.util.List;
 

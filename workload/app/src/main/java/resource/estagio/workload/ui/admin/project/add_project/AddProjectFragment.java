@@ -22,9 +22,8 @@ import java.util.List;
 import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
-import resource.estagio.workload.domain.Customer;
+import resource.estagio.workload.domain.customer.Customer;
 import resource.estagio.workload.infra.ConstantApp;
-import resource.estagio.workload.ui.HomeDefault;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 
 public class AddProjectFragment extends Fragment implements AddProjectContract.View {
@@ -116,7 +115,7 @@ public class AddProjectFragment extends Fragment implements AddProjectContract.V
         try {
 
             ArrayAdapter<ActivityTypeModel> activityTypeModelArrayAdapter = new ArrayAdapter<>(
-                    getActivity(), android.R.layout.simple_spinner_dropdown_item, value);
+                    getActivity(), android.R.layout.simple_spinner_item, value);
             activityTypeModelArrayAdapter.setDropDownViewResource(R.layout.spinner_custom_dropdown);
             spinnerProjectType.setAdapter(activityTypeModelArrayAdapter);
         } catch (NullPointerException e) {

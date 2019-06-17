@@ -2,8 +2,8 @@ package resource.estagio.workload.data.repository;
 
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.model.LoginModel;
-import resource.estagio.workload.domain.User;
-import resource.estagio.workload.domain.UserContract;
+import resource.estagio.workload.domain.user.User;
+import resource.estagio.workload.domain.user.UserContract;
 import resource.estagio.workload.infra.BaseCallback;
 import resource.estagio.workload.infra.Repository;
 import resource.estagio.workload.infra.mock.FakeRestClient;

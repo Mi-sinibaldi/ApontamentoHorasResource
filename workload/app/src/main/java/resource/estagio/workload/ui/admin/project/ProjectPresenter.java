@@ -5,7 +5,7 @@ import java.util.List;
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.model.ActivityModel;
 import resource.estagio.workload.data.repository.ActivityRepository;
-import resource.estagio.workload.domain.Project;
+import resource.estagio.workload.domain.project.Project;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
 import resource.estagio.workload.ui.DialogApp;

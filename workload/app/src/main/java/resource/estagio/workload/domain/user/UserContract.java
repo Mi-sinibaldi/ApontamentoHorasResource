@@ -1,4 +1,4 @@
-package resource.estagio.workload.domain;
+package resource.estagio.workload.domain.user;
 
 import resource.estagio.workload.infra.BaseCallback;
 
