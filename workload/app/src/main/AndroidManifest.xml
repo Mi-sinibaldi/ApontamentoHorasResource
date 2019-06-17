@@ -12,7 +12,7 @@
     <application
         android:name=".infra.App"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo"
         android:screenOrientation="portrait"
