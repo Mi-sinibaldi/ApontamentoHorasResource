@@ -3,18 +3,23 @@ package resource.estagio.workload.ui.admin.employee;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,10 +62,20 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         view = inflater.inflate(R.layout.fragment_employee, container, false);
         loadUI();
         presenter.listEmployee();
-        //clickRecycler();
+        hideKeyboard();
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return view;
+    }
+
+    private void hideKeyboard() {
+        editTextEmployee.setOnEditorActionListener((textView, id, event) -> {
+            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE))
+                        .hideSoftInputFromWindow(editTextEmployee.getWindowToken(), 0);
+            }
+            return true;
+        });
     }
 
     @Override
@@ -78,7 +93,6 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
             @Override
             public void afterTextChanged(Editable s) {
                 presenter.filter(s.toString().trim());
-
             }
         });
     }
@@ -89,7 +103,6 @@ public class EmployeeFragment extends Fragment implements EmployeeContract.View 
         progressBarEmployee = view.findViewById(R.id.progressBar_employee);
         presenter = new EmployeePresenter(this);
         shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
     }
 
     @Override
