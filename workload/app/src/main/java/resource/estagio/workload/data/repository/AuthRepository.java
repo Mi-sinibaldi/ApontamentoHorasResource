@@ -42,15 +42,17 @@ public class AuthRepository extends Repository implements UserContract.IReposito
 //                .enqueue(new Callback<LoginModel>() {
 //                    @Override
 //                    public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
-//                        if (response.isSuccessful() && response.body() != null)
+//                       if (response.isSuccessful() && response.body() != null)
 //                            onResult.onSuccessful(response.body().toDomain());
+//                        else if (response.code() == 400)
+//                            onResult.onUnsuccessful(ConstantApp.USERNAME_OR_PASSWORD_INVALID);
 //                        else
 //                            onResult.onUnsuccessful(response.message());
 //                    }
 //
 //                    @Override
 //                    public void onFailure(Call<LoginModel> call, Throwable t) {
-//                        onResult.onUnsuccessful(t.getMessage());
+//                         onResult.onUnsuccessful(ConstantApp.CONNECTION_INTERNET);
 //                    }
 //                });
 //    }
