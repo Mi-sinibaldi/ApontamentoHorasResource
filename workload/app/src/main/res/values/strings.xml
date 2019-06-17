@@ -32,7 +32,6 @@
     <string name="register_at_least_one_fingerprint_in_settings">Registre pelo menos uma impressão digital nas configurações</string>
     <string name="lock_screen_security_not_enabled_in_settings">Segurança da tela de bloqueio não ativada nas configurações</string>
     <string name="clear_preferences">Preferências limpas</string>
-    <string name="hello">Olá, </string>
     <string name="point_success">Apontamento feito com sucesso</string>
     <string name="want_sign_out_of_your_account">Tem certeza que deseja sair da sua conta?</string>
     <string name="check_your_connection">Verifique sua conexão</string>

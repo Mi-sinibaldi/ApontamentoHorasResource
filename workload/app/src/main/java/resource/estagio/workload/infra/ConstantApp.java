@@ -49,6 +49,7 @@ public class ConstantApp {
     public static final String TITLE_HISTORIC_MAIN_FRAGMENT = "Histórico";
     public static final String SUBTITLE_RESULT_MAIN_FRAGMENT = "Resultado dos Apontamentos do mês: ";
     public static final String SUBTITLE_HISTORIC_MAIN_FRAGMENT = "Histórico de Apontamentos";
+    public static final String HELLO = "Olá, ";
 
     //constantes tela Settings
     public static String DIALOG_MESSAGE_CLEAN_SETTINGS = "Deseja realmente limpar as credenciais salvas?";

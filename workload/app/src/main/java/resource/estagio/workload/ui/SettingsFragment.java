@@ -65,7 +65,7 @@ public class SettingsFragment extends Fragment {
         switchFingerPrint = view.findViewById (R.id.switchFingerPrint);
         buttonClearPrefSettings = view.findViewById (R.id.buttonClearPrefSettings);
         textNameUserSettings = view.findViewById (R.id.textView_name_user_settings);
-        textNameUserSettings.setText (getString (R.string.hello) + App.getUser ().getName ());
+        textNameUserSettings.setText (ConstantApp.HELLO + App.getUser ().getName ());
         imageViewExitAdmin = view.findViewById (R.id.image_view_exit_admin);
         imageViewExitAdmin.setVisibility (App.getUser ().isAdmin () ? View.VISIBLE : View.GONE);
     }
