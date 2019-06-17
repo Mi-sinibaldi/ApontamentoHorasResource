@@ -17,6 +17,8 @@ public class LoginContract {
         void navigateToHomeByFingerPrint();
 
         Context getContext();
+
+        Context getActivity();
     }
 
     public interface Presenter {

@@ -202,6 +202,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         return this;
     }
 
+    @Override
+    public Context getActivity() {
+        return this;
+    }
+
     public void saveLogin() {
         //saveLoginSharedPref.saveLogin(user.getName(),passwordView.getText().toString());
         saveLoginSharedPref.saveLogin (usernameView.getText ().toString (),

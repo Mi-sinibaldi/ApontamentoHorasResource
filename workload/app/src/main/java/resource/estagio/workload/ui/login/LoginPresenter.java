@@ -10,7 +10,9 @@ import resource.estagio.workload.data.repository.AuthRepository;
 import resource.estagio.workload.domain.user.User;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
+import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.infra.FingerprintHandler;
+import resource.estagio.workload.ui.DialogApp;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
@@ -38,6 +40,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                 @Override
                 public void onUnsuccessful(String error) {
                     view.showProgress(false);
+                    if (errorConnection (error)) return;
                     view.showError(error);
                 }
             });
@@ -68,5 +71,13 @@ public class LoginPresenter implements LoginContract.Presenter {
         helper.presenter = this;
         helper.startAuthentication(fingerprintManager, cryptoObject);
 
+    }
+
+    private boolean errorConnection(String error) {
+        if (error.equals (ConstantApp.CONNECTION_INTERNET)) {
+            DialogApp.showDialogConnection (view.getActivity ());
+            return true;
+        }
+        return false;
     }
 }
