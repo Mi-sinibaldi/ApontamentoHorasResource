@@ -2,7 +2,7 @@ package resource.estagio.workload.data.remote.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import resource.estagio.workload.domain.User;
+import resource.estagio.workload.domain.user.User;
 
 public class LoginModel {
     @SerializedName("access_token")

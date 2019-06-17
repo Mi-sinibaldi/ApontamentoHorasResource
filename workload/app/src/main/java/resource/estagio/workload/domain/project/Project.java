@@ -1,5 +1,6 @@
-package resource.estagio.workload.domain;
+package resource.estagio.workload.domain.project;
 
+import resource.estagio.workload.domain.customer.Customer;
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
 import resource.estagio.workload.data.repository.ActivityRepository;
@@ -19,8 +20,8 @@ public class Project {
                    ActivityTypeModel activityTypeModel, Customer customer) {
 
         this.id = id;
-        this.nameProject = nameProject;
-        this.demandNumber = demandNumber;
+        this.nameProject = nameProject.trim();
+        this.demandNumber = demandNumber.trim();
         this.activityTypeModel = activityTypeModel;
         this.customer = customer;
         this.repository = new ActivityRepository();
@@ -28,7 +29,7 @@ public class Project {
 
     public Project(int id, String nameProject) {
         this.id = id;
-        this.nameProject = nameProject;
+        this.nameProject = nameProject.trim();
     }
 
     public int getId() {
@@ -53,21 +54,17 @@ public class Project {
 
     public void insertProject(BaseCallback<String> onResult) throws Exception {
 
-        if (nameProject.isEmpty() || nameProject == null) {
+        if (repository == null) throw new Exception(ConstantApp.REPOSITORY_NULL);
+
+        if (nameProject.isEmpty() || nameProject == null)
             throw new Exception(ConstantApp.NAME_IS_REQUIRED);
-        }
-        if (demandNumber.isEmpty() || demandNumber == null) {
+
+        if (demandNumber.isEmpty() || demandNumber == null)
             throw new Exception(ConstantApp.DEMAND_NUMBER_REQUIRED);
-        }
-        if (activityTypeModel == null) {
-            throw new Exception(ConstantApp.ACTIVITY_TYPE_REQUIRED);
-        }
-        if (customer == null) {
-            throw new Exception(ConstantApp.CUSTOMER_IS_NULL);
-        }
-        if (repository == null) {
-            throw new Exception(ConstantApp.REPOSITORY_NULL);
-        }
+
+        if (activityTypeModel == null) throw new Exception(ConstantApp.ACTIVITY_TYPE_REQUIRED);
+
+        if (customer == null) throw new Exception(ConstantApp.CUSTOMER_IS_NULL);
 
         repository.insertProject(this, App.getUser().getAccessToken(), new BaseCallback<String>() {
             @Override
@@ -83,16 +80,18 @@ public class Project {
     }
 
     public void updateProject(BaseCallback<String> onResult) throws Exception{
-        if(nameProject.isEmpty() || nameProject == null)
+
+        if (repository == null) throw new Exception(ConstantApp.REPOSITORY_NULL);
+
+        if (nameProject.isEmpty() || nameProject == null)
             throw new Exception(ConstantApp.NAME_IS_REQUIRED);
-        if(demandNumber.isEmpty() || demandNumber == null)
+
+        if (demandNumber.isEmpty() || demandNumber == null)
             throw new Exception(ConstantApp.DEMAND_NUMBER_REQUIRED);
-        if(activityTypeModel== null)
-            throw new Exception(ConstantApp.ACTIVITY_TYPE_REQUIRED);
-        if(customer == null)
-            throw new Exception(ConstantApp.CUSTOMER_IS_NULL);
-        if(repository == null)
-            throw new Exception(ConstantApp.REPOSITORY_NULL);
+
+        if (activityTypeModel == null) throw new Exception(ConstantApp.ACTIVITY_TYPE_REQUIRED);
+
+        if (customer == null) throw new Exception(ConstantApp.CUSTOMER_IS_NULL);
 
         repository.updateProject(this, App.getUser().getAccessToken(), new BaseCallback<String>() {
             @Override
@@ -109,16 +108,11 @@ public class Project {
     }
     public void deleteActivity(String token, BaseCallback<String> onResult) throws Exception {
 
-        if (repository == null) {
-            throw new Exception(ConstantApp.REPOSITORY_NULL);
-        }
-        if (id == 0) {
-            throw new Exception(ConstantApp.ID_IS_REQUIRED);
-        }
+        if (repository == null) throw new Exception(ConstantApp.REPOSITORY_NULL);
 
-        if (nameProject == null) {
-            throw new Exception(ConstantApp.NAME_IS_REQUIRED);
-        }
+        if (id == 0) throw new Exception(ConstantApp.ID_IS_REQUIRED);
+
+        if (nameProject == null) throw new Exception(ConstantApp.NAME_IS_REQUIRED);
 
         repository.deleteProject(id, nameProject, token, new BaseCallback<String>() {
             @Override

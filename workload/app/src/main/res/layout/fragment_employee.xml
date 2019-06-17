@@ -20,16 +20,17 @@
             android:id="@+id/image_view_resource"
             android:layout_width="99dp"
             android:layout_height="11dp"
-            android:layout_marginTop="48dp"
-            android:src="@drawable/logo_resource"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="41dp"
+            android:src="@mipmap/resource_white"
             app:layout_constraintEnd_toEndOf="@+id/text_employee"
-            app:layout_constraintHorizontal_bias="0.023"
-            app:layout_constraintStart_toStartOf="@+id/text_employee"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_employee"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="34dp"
             android:layout_marginStart="37dp"
             android:layout_marginTop="20dp"
@@ -46,18 +47,19 @@
 
         <TextView
             android:id="@+id/text_view_desc"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="17dp"
-            android:layout_marginStart="3dp"
+            android:layout_marginStart="37dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="37dp"
             android:fontFamily="@font/open_sans"
             android:text="@string/list_contributors_register"
             android:textColor="@color/colorWhite"
             android:textSize="12dp"
             android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="@+id/edit_text_employee"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.007"
-            app:layout_constraintStart_toStartOf="@+id/edit_text_employee"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_employee" />
 
         <EditText

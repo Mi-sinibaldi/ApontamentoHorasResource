@@ -4,7 +4,7 @@ import android.app.Application;
 
 import androidx.room.Room;
 
-import resource.estagio.workload.domain.User;
+import resource.estagio.workload.domain.user.User;
 
 public class App extends Application {
     private static App instance;

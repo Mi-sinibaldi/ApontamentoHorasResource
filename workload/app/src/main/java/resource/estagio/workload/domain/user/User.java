@@ -1,4 +1,4 @@
-package resource.estagio.workload.domain;
+package resource.estagio.workload.domain.user;
 
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.infra.BaseCallback;
@@ -16,8 +16,8 @@ public class User {
     private boolean isAdmin;
 
     public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+        this.username = username.trim();
+        this.password = password.trim();
     }
 
     public User(String accessToken, long id, String name, boolean isAdmin) {
@@ -45,18 +45,16 @@ public class User {
 
     public void login(final BaseCallback<User> listener) throws Exception {
 
-        if (repository == null) {
-            throw new Exception(ConstantApp.REPOSITORY_NULL);
-        }
-        if (username == null || username.isEmpty()) {
+        if (repository == null) throw new Exception(ConstantApp.REPOSITORY_NULL);
+
+        if (username == null || username.isEmpty())
             throw new Exception(ConstantApp.USERNAME_IS_REQUIRED);
-        }
-        if (password == null || password.isEmpty()) {
+
+        if (password == null || password.isEmpty())
             throw new Exception(ConstantApp.PASSWORD_IS_REQUIRED);
-        }
-        if (password.length() < 4) {
-            throw new Exception(ConstantApp.PASSWORD_MIN_FOUR);
-        }
+
+        if (password.length() < 4) throw new Exception(ConstantApp.PASSWORD_MIN_FOUR);
+
         repository.login(username, password, new BaseCallback<User>() {
             @Override
             public void onSuccessful(User user) {

@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import java.util.List;
 
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
-import resource.estagio.workload.domain.Customer;
+import resource.estagio.workload.domain.customer.Customer;
 
 public class AddProjectContract {
 

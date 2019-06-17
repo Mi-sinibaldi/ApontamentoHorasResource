@@ -49,10 +49,8 @@
                 android:hint="@string/demand_number"
                 android:inputType="numberSigned"
                 android:textColor="@color/colorWhite"
-                android:textColorHighlight="@color/colorWhite"
                 android:textColorHint="@color/colorWhiteTransparent"
-                android:textColorLink="@color/colorWhite"
-                android:textCursorDrawable="@color/colorWhite" />
+                tools:targetApi="lollipop" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView

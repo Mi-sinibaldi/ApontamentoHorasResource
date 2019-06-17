@@ -21,10 +21,10 @@ public class ConstantApp {
     public static final String UNAUTHORIDED_USER = "Acesso negado. Entre com um usuario valido!";
 
     // Constantes do domain
-    public static final String NAME_IS_REQUIRED = "Nome não pode ser vazio!";
+    public static final String NAME_IS_REQUIRED = "Nome requirido";
     public static final String ID_IS_REQUIRED = "Id não pode ser menor que zero!";
     public static final String REPOSITORY_NULL = "Repositorio vazio!";
-    public static final String DEMAND_NUMBER_REQUIRED = "Número de demanda requerido é nulo ou vazio";
+    public static final String DEMAND_NUMBER_REQUIRED = "Número de demanda requerido";
     public static final String ACTIVITY_TYPE_REQUIRED = "Tipo de atividade requerida é nula";
     public static final String CUSTOMER_IS_NULL = "Cliente não pode ser vazio";
     public static final String USERNAME_IS_REQUIRED = "Preencha o campo login";

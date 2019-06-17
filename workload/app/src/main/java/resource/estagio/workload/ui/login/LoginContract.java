@@ -3,7 +3,7 @@ package resource.estagio.workload.ui.login;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 
-import resource.estagio.workload.domain.User;
+import resource.estagio.workload.domain.user.User;
 
 public class LoginContract {
 

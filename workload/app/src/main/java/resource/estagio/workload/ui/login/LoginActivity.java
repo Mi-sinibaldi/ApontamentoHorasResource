@@ -43,7 +43,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
 import resource.estagio.workload.R;
-import resource.estagio.workload.domain.User;
+import resource.estagio.workload.domain.user.User;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.SaveLoginSharedPref;
 import resource.estagio.workload.ui.admin.HomeAdminActivity;

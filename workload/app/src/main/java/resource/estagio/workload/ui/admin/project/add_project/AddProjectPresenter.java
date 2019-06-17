@@ -13,13 +13,12 @@ import resource.estagio.workload.R;
 import resource.estagio.workload.data.remote.model.ActivityTypeModel;
 import resource.estagio.workload.data.remote.model.CustomerModel;
 import resource.estagio.workload.data.repository.ActivityRepository;
-import resource.estagio.workload.domain.Customer;
-import resource.estagio.workload.domain.Project;
+import resource.estagio.workload.domain.customer.Customer;
+import resource.estagio.workload.domain.project.Project;
 import resource.estagio.workload.infra.App;
 import resource.estagio.workload.infra.BaseCallback;
 import resource.estagio.workload.infra.ConstantApp;
 import resource.estagio.workload.ui.DialogApp;
-import resource.estagio.workload.ui.HomeDefault;
 import resource.estagio.workload.ui.admin.HomeAdminContract;
 import resource.estagio.workload.ui.admin.project.ProjectFragment;
 
